@@ -6,8 +6,8 @@ TEAMPLATE_DEBUG = DEBUG
 
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'cah_django',
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': 'cah_django.db',
 		'USER': '',
 		'PASSWORD': '',
 		'HOST': 'localhost',
