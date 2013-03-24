@@ -4,6 +4,8 @@
 local_settings.py
 .Python
 
+*.db
+
 bin/
 lib/
 include/
