@@ -11,6 +11,8 @@ Steps to run:
 
 3. 'pip install -r requirements/local.txt'
 
-4. cd src && python manage.py runserver --settings=cah.settings.local
+4. export CAH_KEY=[some crypto-ish key of your choosing]
 
-5. share and enjoy.
+5. cd src && python manage.py runserver --settings=cah.settings.local
+
+6. share and enjoy.
