@@ -4,7 +4,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from cards.views import PlayerView
+from cards.views import PlayerView, GameView, LobbyView
 
 urlpatterns = patterns('',
     # Examples:
@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^$', PlayerView.as_view(), name="player-view",),
+    url(r'^$', LobbyView.as_view(), name="lobby-view",),
+    url(r'^game/', GameView.as_view(), name="game-view"),
+    url(r'^player/', PlayerView.as_view(), name="player-view"),
     url(r'^admin/', include(admin.site.urls)),
 )

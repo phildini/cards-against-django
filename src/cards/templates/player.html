@@ -1,12 +1,12 @@
-This is not that card game. You know the one we mean.
+<p>This is not that card game. You know the one we mean.</p>
 
-You are {{ player_name }}
+<p>You are {{ player_name }}. Your session says you are {{ name_from_session }}</p>
 
-<ul>
-  {% for card, ctext in cards %}
-    <li>{{ ctext }}</li>
-  {% endfor %}
-</ul>
+{% if is_card_czar %}
+<p>congrats! you are the card czar!</p>
+{% endif %}
+
+<p>You selected {{ selected }}. </p>
 
 <form action="/" method="post">
 	{% csrf_token %}
