@@ -1,12 +1,14 @@
 Hello world!
 
+
 <ul>
-  {% for card, ctext in cards.items %}
+  {% for card, ctext in cards %}
     <li>{{ ctext }}</li>
   {% endfor %}
 </ul>
 
-<form action="/contact/" method="post">{% csrf_token %}
-	{{ form.card_selection }}
+<form action="/" method="post">
+	{% csrf_token %}
+	{{ form.as_p }} 
 <input type="submit" value="Submit" />
 </form>
