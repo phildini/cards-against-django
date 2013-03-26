@@ -22,19 +22,19 @@ except ImportError:
         json = None
 
 if json is None:
-    
+
     def dump_json(x, indent=None):
         """dumb not safe!
         Works for the purposes of this specific script as quotes never
         appear in data set.
-        
+
         Parameter indent ignored"""
         if indent:
             result = pprint.pformat(x, indent)
         else:
             result = repr(x).replace("'", '"')
         return result
-    
+
     def load_json(x):
         """dumb not safe! Works for the purposes of this specific script"""
         x = x.replace('\r', '')
@@ -65,38 +65,38 @@ class CardsParser(object):
         blank_marker_in_file = '__________'
         card_seperator = '<>'
         existing_cards = existing_cards or []
-        
+
         data = file_obj.read()  # yup all of it at once
-        
+
         # there are some non-ascii characters (e.g. TradeMark symbol)
         data = data.decode('utf-8')
         data = data[len(skip_start):]
-        
+
         if look_for_blanks:
             """Black cards ask questions which will have:
                 * 0 blank markers
                 * 1 blank markers
                 * 2 blank markers
                 * 3 blank markers - NOTE no *.txt files have this
-            
+
             0 blank markers is a question, from a game play perspective
             this is the same as 1 blank marker.
             """
             data = data.replace(blank_marker_in_file, self.blank)
-        
+
         card_list = data.split(card_seperator)
-        
+
         # Remove duplicates
         result = existing_cards[:]  # copy the existing list but do not modify it
         for card in card_list:
             if card not in result:
                 result.append(card)
-        
+
         if sort_cards:
             result.sort()
-        
+
         return result
-    
+
     def loadfile(self, filename=None, black=False):
         filename = os.path.join(data_dir, filename)
         f = open(filename, 'rb')
@@ -111,32 +111,32 @@ class CardsParser(object):
 class Game(object):
     def __init__(self, white_cards=None, black_cards=None):
         self.setup(white_cards, black_cards)  # kinda bad form
-        
+
     def setup(self, white_cards=None, black_cards=None):
         # Question cards
         self.white_cards = white_cards or []
-        
+
         # Answer cards
         self.black_cards = black_cards or []
-        
+
         self.blank = DEFAULT_BLANK_MARKER
-        
+
         self.white_deck = range(len(self.white_cards))
         self.black_deck = range(len(self.black_cards))
-        
+
         self.black_deck_used = []
         self.white_deck_used = []
-    
+
     def shuffle(self):
         """Uses built in random, it may be better to plugin a better
         random init routine and/also consider using
         https://pypi.python.org/pypi/shuffle/
-        
+
         Also take a look at http://code.google.com/p/gcge/
         """
         random.shuffle(self.white_deck)
         random.shuffle(self.black_deck)
-    
+
     def sim_round(self):
         """Debug simulate a round/turn.
         """
@@ -166,12 +166,12 @@ class Game(object):
         else:
             for card_num in answers:
                 print self.white_cards[card_num]
-        
+
         # not sure we really need discard decks...
         self.black_deck_used.append(black_card)
         for card_num in answers:
             self.white_deck_used.append(card_num)
-    
+
     def load(self, filename):
         model = {}
         f = open(filename, 'rb')
@@ -180,7 +180,7 @@ class Game(object):
         model = load_json(data)
         self.setup(white_cards=model['white_cards'], black_cards=model['black_cards'])
         self.blank = model['blank']
-    
+
     def save(self, filename):
         model = {}
         model['white_cards'] = self.white_cards
@@ -196,7 +196,7 @@ class Game(object):
 def doit():
     """
     cp = CardsParser()
-    
+
     print 'white_cards'
     filename = 'wcards.txt'
     print filename
@@ -216,13 +216,13 @@ def doit():
     filename = 'bcards2.txt'
     print filename
     cp.loadfile(filename, black=True)
-    
+
     # NOTE: "__________ + __________ = __________?" should be added
     # NOTE Deal additional 3 is not documented
-    
+
     for card in cp.black_cards:
         print card.count(cp.blank), repr(card)
-    
+
     filename = os.path.join(data_dir, 'data.json')
     g = Game(cp.white_cards, cp.black_cards)
     g.save(filename)
@@ -244,9 +244,9 @@ def doit():
 def main(argv=None):
     if argv is None:
         argv = sys.argv
-    
+
     doit()
-    
+
     return 0
 
 
