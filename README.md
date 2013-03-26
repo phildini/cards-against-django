@@ -7,7 +7,10 @@ Steps to run:
 
 1. clone the repo
 
-2. in the repo dir, 'virtualenv .'
+2. in the repo dir:
+
+        virtualenv .
+        . bin/activate
 
 3. 'pip install -r requirements/local.txt'
 
