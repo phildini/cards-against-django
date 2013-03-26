@@ -1,4 +1,7 @@
-# Create your views here.
+# -*- coding: us-ascii -*-
+# vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
+#
+
 import json
 import os
 from django.conf import settings

@@ -1,3 +1,7 @@
+# -*- coding: us-ascii -*-
+# vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
+#
+
 from django import forms
 from django.forms.widgets import RadioSelect
 

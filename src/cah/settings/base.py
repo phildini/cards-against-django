@@ -1,4 +1,8 @@
 # Django settings for cah project.
+# -*- coding: us-ascii -*-
+# vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
+#
+
 import os
 from unipath import Path
 
