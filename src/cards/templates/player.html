@@ -1,14 +1,18 @@
 <p>This is not that card game. You know the one we mean.</p>
 
-<p>You are {{ player_name }}. Your session says you are {{ name_from_session }}</p>
+<p>You are {{ player_name }}.</p>
+
+<p>{{ black_card }}</p>
 
 {% if is_card_czar %}
 <p>congrats! you are the card czar!</p>
 {% endif %}
 
-<p>You selected {{ selected }}. </p>
+{% if submission %}
+<p>{{ submission }} </p>
+{% endif %}
 
-<form action="/" method="post">
+<form action="{{ action }}" method="post">
 	{% csrf_token %}
 	{{ form.as_p }} 
 <input type="submit" value="Submit" />

@@ -37,6 +37,8 @@ from django.core.cache import cache
 from forms import PlayerForm
 from game import Game
 
+DEFAULT_BLANK_MARKER = u"\uFFFD"  # u'_'
+
 # Grab data from the cards json and set global, unaltered decks.
 with open(os.path.join(settings.PROJECT_ROOT, 'data/data.json')) as data:
     cards = json.loads(data.read())
@@ -65,12 +67,10 @@ class PlayerView(FormView):
         else:
             try:
                 self.game_data = cache.get('games').get(self.game_name)
-                print "I got it!"
             except AttributeError:
                 self.game_data = self.create_game(self.game_name)
 
         # Attempt to pull player from cache, if not create.
-        # import pdb; pdb.set_trace()
         if not self.request.session.get('player_name'):
             self.player_data = self.create_player(self.player_name)
             self.game_data['players'][self.player_name] = self.player_data
@@ -87,6 +87,8 @@ class PlayerView(FormView):
             self.player_data['hand'] = [
                 self.game_data['white_deck'].pop() for x in xrange(10)
             ]
+        if not self.game_data['current_black_card']:
+            self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
 
         self.write_player()
         return super(PlayerView, self).dispatch(request, *args, **kwargs)
@@ -97,9 +99,12 @@ class PlayerView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(PlayerView, self).get_context_data(**kwargs)
-
+        black_card = black_cards[self.game_data['current_black_card']]
+        num_blanks = black_card.count(DEFAULT_BLANK_MARKER)
+        context['black_card'] = black_card.replace(DEFAULT_BLANK_MARKER, '______')
         context['player_name'] = self.player_name
-        context['submission'] = self.player_data['submission']
+        context['submission'] = white_cards[self.player_data['submission']]
+        context['action'] = reverse('player-view')
         return context
 
     def get_form_kwargs(self):
@@ -110,7 +115,7 @@ class PlayerView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        self.player['selected'] = form.cleaned_data['card_selection']
+        self.player_data['submission'] = int(form.cleaned_data['card_selection'])
         self.write_player()
         print form.cleaned_data['card_selection']
         return super(PlayerView, self).form_valid(form)
@@ -121,13 +126,13 @@ class PlayerView(FormView):
         self.game_data['players'][self.player_name] = self.player_data
         games_dict = cache.get('games')
         try:
-        	games_dict[self.game_name] = self.game_data
+            games_dict[self.game_name] = self.game_data
         except TypeError:
-        	games_dict = {self.game_name: self.game_data}
+            games_dict = {self.game_name: self.game_data}
         cache.set('games', games_dict)
 
     def create_game(self, game_name):
-
+        print "New Game called"
         """Create shuffled decks
         uses built in random, it may be better to plug-in a better
         random init routine and/also consider using
@@ -135,7 +140,6 @@ class PlayerView(FormView):
 
         Also take a look at http://code.google.com/p/gcge/
         """
-        # FIXME this is getting called each and every view of /player
         shuffled_white = range(len(white_cards))
         random.shuffle(shuffled_white)
         shuffled_black = range(len(black_cards))
@@ -154,7 +158,7 @@ class PlayerView(FormView):
         }
 
     def create_player(self, player_name):
-
+        print "new player called"
         # Basic data obj for player. Eventually, this will be saved in cache.
         return {
             'hand': [],
