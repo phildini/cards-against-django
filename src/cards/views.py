@@ -10,7 +10,6 @@
 #             player1: {
 #                 hand: [...],
 #                 wins: int,
-#                 is_card_czar = bool,
 #                 submitted = current submitted card,
 #             },
 #             player2 {...},
@@ -96,7 +95,6 @@ class PlayerView(FormView):
     def get_context_data(self, **kwargs):
         context = super(PlayerView, self).get_context_data(**kwargs)
 
-        # self.is_card_czar = context['is_card_czar'] = self.player['is_card_czar'] == 1
         context['player_name'] = self.player_name
         context['submission'] = self.player_data['submission']
         return context
@@ -144,7 +142,6 @@ class PlayerView(FormView):
         return {
             'hand': [],
             'wins': 0,
-            'is_card_czar': False,
             'submission': 0,
         }
 
