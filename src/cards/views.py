@@ -15,10 +15,10 @@
 #             player2 {...},
 #             ...
 #         },
-#         current_black_card = '',
+#         current_black_card = None|int,
 #         submissions = [list of player submissions for the round],
 #         round: int,
-#         card_czar = 'player1',
+#         card_czar = 'player1',  # int index into 'players'
 #         black_deck = [],
 #         white_deck = [],
 #     },
@@ -102,7 +102,7 @@ class PlayerView(FormView):
     def get_form_kwargs(self):
         kwargs = super(PlayerView, self).get_form_kwargs()
         kwargs['cards'] = tuple(
-            (card, card) for card in self.player_data['hand']
+            (card, white_cards[card]) for card in self.player_data['hand']
         )
         return kwargs
 
@@ -118,16 +118,23 @@ class PlayerView(FormView):
 
     def create_game(self, game_name):
 
-        # Create shuffled decks
-        shuffled_white = white_cards
+        """Create shuffled decks
+        uses built in random, it may be better to plug-in a better
+        random init routine and/also consider using
+        https://pypi.python.org/pypi/shuffle/
+
+        Also take a look at http://code.google.com/p/gcge/
+        """
+        # FIXME this is getting called each and every view of /player
+        shuffled_white = range(len(white_cards))
         random.shuffle(shuffled_white)
-        shuffled_black = black_cards
+        shuffled_black = range(len(black_cards))
         random.shuffle(shuffled_black)
 
         # Basic data object for a game. Eventually, this will be saved in cache.
         return {
             'players': {},
-            'current_black_card': 0,
+            'current_black_card': None,  # get a new one my shuffled_black.pop()
             'submissions': [],
             'round': 0,
             'card_czar': '',
