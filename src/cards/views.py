@@ -64,28 +64,31 @@ class PlayerView(FormView):
             self.request.session['game_name'] = self.game_name
         else:
             try:
-                self.game_data = cache.get('games').get(game_name)
+                self.game_data = cache.get('games').get(self.game_name)
+                print "I got it!"
             except AttributeError:
                 self.game_data = self.create_game(self.game_name)
 
         # Attempt to pull player from cache, if not create.
+        # import pdb; pdb.set_trace()
         if not self.request.session.get('player_name'):
             self.player_data = self.create_player(self.player_name)
             self.game_data['players'][self.player_name] = self.player_data
         else:
             self.player_data = self.game_data.get('players')
             if self.player_data:
-                self.player_data = self.game_data.get('players').get('player_name')
+                self.player_data = self.player_data.get(self.player_name)
             else:
                 self.player_data = self.create_player(self.player_name)
                 self.game_data['players'][self.player_name] = self.player_data
-
         # Deal hand if player doesn't have one.
+        print self.player_data
         if not self.player_data['hand']:
             self.player_data['hand'] = [
                 self.game_data['white_deck'].pop() for x in xrange(10)
             ]
 
+        self.write_player()
         return super(PlayerView, self).dispatch(request, *args, **kwargs)
 
 
@@ -108,13 +111,20 @@ class PlayerView(FormView):
 
     def form_valid(self, form):
         self.player['selected'] = form.cleaned_data['card_selection']
-        # self.write_player()
+        self.write_player()
         print form.cleaned_data['card_selection']
         return super(PlayerView, self).form_valid(form)
 
     def write_player(self):
-        with open(os.path.join(settings.PROJECT_ROOT, 'player.json'), 'w') as data:
-            data.write(json.dumps(self.player))
+        self.request.session['player_name'] = self.player_name
+        self.request.session['game_name'] = self.game_name
+        self.game_data['players'][self.player_name] = self.player_data
+        games_dict = cache.get('games')
+        try:
+        	games_dict[self.game_name] = self.game_data
+        except TypeError:
+        	games_dict = {self.game_name: self.game_data}
+        cache.set('games', games_dict)
 
     def create_game(self, game_name):
 
