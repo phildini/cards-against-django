@@ -103,19 +103,23 @@ class PlayerView(FormView):
         num_blanks = black_card.count(DEFAULT_BLANK_MARKER)
         context['black_card'] = black_card.replace(DEFAULT_BLANK_MARKER, '______')
         context['player_name'] = self.player_name
-        context['submission'] = white_cards[self.player_data['submission']]
+        if self.player_data.get('submission'):
+            context['submission'] = white_cards[self.player_data['submission']]
         context['action'] = reverse('player-view')
         return context
 
     def get_form_kwargs(self):
         kwargs = super(PlayerView, self).get_form_kwargs()
+        kwargs['blanks'] = 1
         kwargs['cards'] = tuple(
             (card, white_cards[card]) for card in self.player_data['hand']
         )
         return kwargs
 
     def form_valid(self, form):
-        self.player_data['submission'] = int(form.cleaned_data['card_selection'])
+        submission = int(form.cleaned_data['card_selection'][0])
+        self.player_data['submission'] = submission
+        self.player_data['hand'].remove(submission)
         self.write_player()
         print form.cleaned_data['card_selection']
         return super(PlayerView, self).form_valid(form)
@@ -163,7 +167,6 @@ class PlayerView(FormView):
         return {
             'hand': [],
             'wins': 0,
-            'submission': 0,
         }
 
 class LobbyView(TemplateView):

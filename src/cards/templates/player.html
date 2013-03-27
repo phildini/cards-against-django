@@ -12,6 +12,7 @@
 <p>{{ submission }} </p>
 {% endif %}
 
+
 <form action="{{ action }}" method="post">
 	{% csrf_token %}
 	{{ form.as_p }} 
