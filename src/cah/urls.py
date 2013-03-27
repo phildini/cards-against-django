@@ -8,7 +8,11 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from cards.views import PlayerView, GameView, LobbyView
+from cards.views import (
+    PlayerView,
+    # GameView,
+    LobbyView,
+)
 
 urlpatterns = patterns('',
     # Examples:
@@ -20,7 +24,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
-    url(r'^game/', GameView.as_view(), name="game-view"),
+    # url(r'^game/', GameView.as_view(), name="game-view"),
     url(r'^player/', PlayerView.as_view(), name="player-view"),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -64,7 +64,10 @@ class PlayerView(FormView):
             self.game_data = self.create_game(self.game_name)
             self.request.session['game_name'] = self.game_name
         else:
-            self.game_data = cache.get('games').get(game_name)
+            try:
+                self.game_data = cache.get('games').get(game_name)
+            except AttributeError:
+                self.game_data = self.create_game(self.game_name)
 
         # Attempt to pull player from cache, if not create.
         if not self.request.session.get('player_name'):
