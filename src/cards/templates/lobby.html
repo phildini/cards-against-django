@@ -1,1 +1,11 @@
 Welcome to that game. You know the one I mean.
+
+{% if game_in_progress %}
+</p>It looks like you're already part of {{ game_in_progress }}</p>
+{% endif %}
+
+<form action="/" method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+<input type="submit" value="Join a game" />
+</form>

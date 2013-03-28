@@ -34,7 +34,7 @@ from django.conf import settings
 from django.views.generic import FormView, TemplateView
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
-from forms import PlayerForm
+from forms import PlayerForm, GameForm
 from game import Game
 
 
@@ -102,9 +102,9 @@ class PlayerView(FormView):
     def get_success_url(self):
         return reverse('player-view')
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, *args, **kwargs):
 
-        context = super(PlayerView, self).get_context_data(**kwargs)
+        context = super(PlayerView, self).get_context_data(*args, **kwargs)
 
         self.black_card = black_cards[self.game_data['current_black_card']]
         num_blanks = self.black_card.count(blank_marker)
@@ -198,6 +198,40 @@ class PlayerView(FormView):
             'wins': 0,
         }
 
-class LobbyView(TemplateView):
+class LobbyView(FormView):
 
     template_name = 'lobby.html'
+    form_class = GameForm
+
+    def __init__(self, *args, **kwargs):
+        self.game_list = cache.get('games')
+
+    # def dispatch(self, request, *args, **kwargs):
+        # return super(PlayerView, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('player-view')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LobbyView, self).get_context_data(*args, **kwargs)
+
+        self.game_in_progress = self.request.session.get('game_name')
+        if self.game_in_progress and self.game_list and self.game_list.get(self.game_in_progress):
+            context['game_in_progress'] = self.game_in_progress
+
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(LobbyView, self).get_form_kwargs()
+        if self.game_list:
+            kwargs['game_list'] = [(game, game) for game in self.game_list.keys()]
+        return kwargs
+
+    def form_valid(self, form):
+        game = form.cleaned_data['new_game'] or form.cleaned_data['game_list']
+        self.request.session['game_name'] = game
+        return super(LobbyView, self).form_valid(form)
+
+
+
+
