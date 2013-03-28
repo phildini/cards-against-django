@@ -105,6 +105,20 @@ class PlayerView(FormView):
         context['player_name'] = self.player_name
         if self.player_data.get('submission'):
             context['submission'] = white_cards[self.player_data['submission']]
+            single_card = white_cards[self.player_data['submission']]  # FIXME I need to work out what this is...
+            # single white card replacement
+            if num_blanks == 0:
+                filled_in_question = black_card + single_card  # FIXME newline prettyness
+            elif num_blanks == 1:
+                filled_in_question = black_card.replace(blank_marker, single_card)  # FIXME different style for plugged in value
+            elif num_blanks == 2:
+                raise NotImplemented('%d count blanks' % num_blanks)
+            elif num_blanks == 2:
+                raise NotImplemented('%d count blanks' % num_blanks)
+            else:
+                raise NotImplemented('%d count blanks' % num_blanks)
+            context['filled_in_question'] = filled_in_question
+
         context['action'] = reverse('player-view')
         return context
 
