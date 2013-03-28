@@ -37,13 +37,13 @@ from django.core.cache import cache
 from forms import PlayerForm
 from game import Game
 
-DEFAULT_BLANK_MARKER = u"\uFFFD"  # u'_'
 
 # Grab data from the cards json and set global, unaltered decks.
 with open(os.path.join(settings.PROJECT_ROOT, 'data/data.json')) as data:
     cards = json.loads(data.read())
     black_cards = cards['black_cards']
     white_cards = cards['white_cards']
+    blank_marker = cards['blank']
 
 class PlayerView(FormView):
 
@@ -100,8 +100,8 @@ class PlayerView(FormView):
     def get_context_data(self, **kwargs):
         context = super(PlayerView, self).get_context_data(**kwargs)
         black_card = black_cards[self.game_data['current_black_card']]
-        num_blanks = black_card.count(DEFAULT_BLANK_MARKER)
-        context['black_card'] = black_card.replace(DEFAULT_BLANK_MARKER, '______')
+        num_blanks = black_card.count(blank_marker)
+        context['black_card'] = black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
         if self.player_data.get('submission'):
             context['submission'] = white_cards[self.player_data['submission']]
