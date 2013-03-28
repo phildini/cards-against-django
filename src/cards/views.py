@@ -45,6 +45,7 @@ with open(os.path.join(settings.PROJECT_ROOT, 'data/data.json')) as data:
     white_cards = cards['white_cards']
     blank_marker = cards['blank']
 
+
 class PlayerView(FormView):
 
     template_name = 'player.html'
@@ -81,12 +82,16 @@ class PlayerView(FormView):
             else:
                 self.player_data = self.create_player(self.player_name)
                 self.game_data['players'][self.player_name] = self.player_data
+
         # Deal hand if player doesn't have one.
         print self.player_data
         if not self.player_data['hand']:
             self.player_data['hand'] = [
                 self.game_data['white_deck'].pop() for x in xrange(10)
             ]
+
+        # Deal black card if game doesn't have one.
+        # FIXME: Game setup. 
         if not self.game_data['current_black_card']:
             self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
 
@@ -98,25 +103,32 @@ class PlayerView(FormView):
         return reverse('player-view')
 
     def get_context_data(self, **kwargs):
+
         context = super(PlayerView, self).get_context_data(**kwargs)
-        black_card = black_cards[self.game_data['current_black_card']]
-        num_blanks = black_card.count(blank_marker)
-        context['black_card'] = black_card.replace(blank_marker, '______')
+
+        self.black_card = black_cards[self.game_data['current_black_card']]
+        num_blanks = self.black_card.count(blank_marker)
+        context['black_card'] = self.black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
-        if self.player_data.get('submission'):
-            context['submission'] = white_cards[self.player_data['submission']]
-            single_card = white_cards[self.player_data['submission']]  # FIXME I need to work out what this is...
+
+        # Display filled-in answer if player has submitted.
+        if self.player_data.get('submitted'):
+
+            # Replacing the blank marker with %s lets us do cool stuff below
+            black_string = self.black_card.replace(blank_marker, '%s') 
+            context['submission'] = [white_cards[card] for card in self.player_data['submitted']]
+
+            # For some reason, need to pull get the strings out first, then strip the period.
+            answer_strings = [white_cards[card] for card in self.player_data['submitted']]
+            answer_list = tuple([answer.rstrip('.') for answer in answer_strings])
+
             # single white card replacement
             if num_blanks == 0:
-                filled_in_question = black_card + single_card  # FIXME newline prettyness
-            elif num_blanks == 1:
-                filled_in_question = black_card.replace(blank_marker, single_card)  # FIXME different style for plugged in value
-            elif num_blanks == 2:
-                raise NotImplemented('%d count blanks' % num_blanks)
-            elif num_blanks == 2:
-                raise NotImplemented('%d count blanks' % num_blanks)
+                filled_in_question = '%s %s' % (self.black_card, self.player_data['submitted'][0])  # FIXME newline prettyness
+            # More than one white card.
             else:
-                raise NotImplemented('%d count blanks' % num_blanks)
+                filled_in_question = black_string % answer_list
+
             context['filled_in_question'] = filled_in_question
 
         context['action'] = reverse('player-view')
@@ -124,16 +136,19 @@ class PlayerView(FormView):
 
     def get_form_kwargs(self):
         kwargs = super(PlayerView, self).get_form_kwargs()
-        kwargs['blanks'] = 1
+        kwargs['blanks'] = black_cards[self.game_data['current_black_card']].count(blank_marker) or 1
         kwargs['cards'] = tuple(
             (card, white_cards[card]) for card in self.player_data['hand']
         )
         return kwargs
 
     def form_valid(self, form):
-        submission = int(form.cleaned_data['card_selection'][0])
-        self.player_data['submission'] = submission
-        self.player_data['hand'].remove(submission)
+        submitted = form.cleaned_data['card_selection']
+
+        # The form returns unicode strings. We want ints in our list.
+        self.player_data['submitted'] = [int(card) for card in submitted]
+        for card in submitted:
+            self.player_data['hand'].remove(int(card))
         self.write_player()
         print form.cleaned_data['card_selection']
         return super(PlayerView, self).form_valid(form)
