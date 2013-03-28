@@ -26,6 +26,11 @@
 #     ...
 # }
 
+# Contract between LobbyView and PlayerView:
+#
+# LobbyView will give PlayerView a named player and a game stored in cache.
+# PlayerView will return to LobbyView any request that does not have those things.
+
 import os
 import json
 import random
@@ -33,6 +38,7 @@ import random
 from django.conf import settings
 from django.views.generic import FormView, TemplateView
 from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from django.core.cache import cache
 from forms import PlayerForm, GameForm
 from game import Game
@@ -51,37 +57,24 @@ class PlayerView(FormView):
     template_name = 'player.html'
     form_class = PlayerForm
 
-    # Currently placeholders. Evnetually, will get from player.
-    game_name = 'game1'
-    player_name = 'player1'
-
     def __init__(self, *args, **kwargs):
         super(PlayerView, self).__init__(*args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
 
-        # Setup for game and player
-        # Attempt to pull game from cache based on cookie. If not, create game.
-        if not self.request.session.get('game_name'):
-            self.game_data = self.create_game(self.game_name)
-            self.request.session['game_name'] = self.game_name
-        else:
-            try:
-                self.game_data = cache.get('games').get(self.game_name)
-            except AttributeError:
-                self.game_data = self.create_game(self.game_name)
+        # Setup for game and player        
+        if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
+            return redirect(reverse('lobby-view'))
 
-        # Attempt to pull player from cache, if not create.
-        if not self.request.session.get('player_name'):
-            self.player_data = self.create_player(self.player_name)
-            self.game_data['players'][self.player_name] = self.player_data
-        else:
-            self.player_data = self.game_data.get('players')
-            if self.player_data:
-                self.player_data = self.player_data.get(self.player_name)
-            else:
-                self.player_data = self.create_player(self.player_name)
-                self.game_data['players'][self.player_name] = self.player_data
+        self.game_name = self.request.session.get('game_name')
+        self.player_name = self.request.session.get('player_name')
+
+        try:
+            self.game_data = cache.get('games').get(self.game_name)
+        except AttributeError:
+            return redirect(reverse('lobby-view'))
+        
+        self.player_data = self.game_data['players'].get(self.player_name)
 
         # Deal hand if player doesn't have one.
         print self.player_data
@@ -116,7 +109,9 @@ class PlayerView(FormView):
 
             # Replacing the blank marker with %s lets us do cool stuff below
             black_string = self.black_card.replace(blank_marker, '%s') 
-            context['submission'] = [white_cards[card] for card in self.player_data['submitted']]
+            context['submission'] = [
+                white_cards[int(card)] for card in self.player_data['submitted']
+            ]
 
             # For some reason, need to pull get the strings out first, then strip the period.
             answer_strings = [white_cards[card] for card in self.player_data['submitted']]
@@ -164,40 +159,6 @@ class PlayerView(FormView):
             games_dict = {self.game_name: self.game_data}
         cache.set('games', games_dict)
 
-    def create_game(self, game_name):
-        print "New Game called"
-        """Create shuffled decks
-        uses built in random, it may be better to plug-in a better
-        random init routine and/also consider using
-        https://pypi.python.org/pypi/shuffle/
-
-        Also take a look at http://code.google.com/p/gcge/
-        """
-        shuffled_white = range(len(white_cards))
-        random.shuffle(shuffled_white)
-        shuffled_black = range(len(black_cards))
-        random.shuffle(shuffled_black)
-
-        # Basic data object for a game. Eventually, this will be saved in cache.
-        return {
-            'players': {},
-            'current_black_card': None,  # get a new one my shuffled_black.pop()
-            'submissions': [],
-            'round': 0,
-            'card_czar': '',
-            'white_deck': shuffled_white,
-            'black_deck': shuffled_black,
-            'mode': 'submitting',
-        }
-
-    def create_player(self, player_name):
-        print "new player called"
-        # Basic data obj for player. Eventually, this will be saved in cache.
-        return {
-            'hand': [],
-            'wins': 0,
-        }
-
 class LobbyView(FormView):
 
     template_name = 'lobby.html'
@@ -228,10 +189,60 @@ class LobbyView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        game = form.cleaned_data['new_game'] or form.cleaned_data['game_list']
-        self.request.session['game_name'] = game
+        player_name = form.cleaned_data['player_name']
+        if form.cleaned_data['new_game']:
+            game_name = form.cleaned_data['new_game']
+            new_game = self.create_game()
+            new_game['players'][player_name] = self.create_player()
+            if cache.get('games'):
+                games = cache.get('games')
+                games[form.cleaned_data['new_game']] = new_game
+            else:
+                games = {game_name: new_game}
+            cache.set('games', games)
+        else:
+            game_name = form.cleaned_data.get('game_list')
+            games = cache.get('games')
+            if not games[game_name]['players'].get(player_name):
+                games[game_name]['players'][player_name] = self.create_player()
+            cache.set('games', games)
+
+        self.request.session['game_name'] = game_name
+        self.request.session['player_name'] = player_name
+
         return super(LobbyView, self).form_valid(form)
 
+    def create_game(self):
+        print "New Game called"
+        """Create shuffled decks
+        uses built in random, it may be better to plug-in a better
+        random init routine and/also consider using
+        https://pypi.python.org/pypi/shuffle/
 
+        Also take a look at http://code.google.com/p/gcge/
+        """
+        shuffled_white = range(len(white_cards))
+        random.shuffle(shuffled_white)
+        shuffled_black = range(len(black_cards))
+        random.shuffle(shuffled_black)
 
+        # Basic data object for a game. Eventually, this will be saved in cache.
+        return {
+            'players': {},
+            'current_black_card': None,  # get a new one my shuffled_black.pop()
+            'submissions': [],
+            'round': 0,
+            'card_czar': '',
+            'white_deck': shuffled_white,
+            'black_deck': shuffled_black,
+            'mode': 'submitting',
+        }
+
+    def create_player(self):
+        print "new player called"
+        # Basic data obj for player. Eventually, this will be saved in cache.
+        return {
+            'hand': [],
+            'wins': 0,
+        }
 
