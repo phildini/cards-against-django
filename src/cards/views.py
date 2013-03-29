@@ -108,7 +108,8 @@ class PlayerView(FormView):
         if self.player_data.get('submitted'):
 
             # Replacing the blank marker with %s lets us do cool stuff below
-            black_string = self.black_card.replace(blank_marker, '%s') 
+            black_string = self.black_card.replace('%', '%%') 
+            black_string = black_string.replace(blank_marker, '%s') 
             context['submission'] = [
                 white_cards[int(card)] for card in self.player_data['submitted']
             ]
