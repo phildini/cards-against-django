@@ -65,7 +65,6 @@ class PlayerView(FormView):
     def dispatch(self, request, *args, **kwargs):
 
         # Setup for game and player
-        import pdb; pdb.set_trace()
         log.logger.debug('%r', self.request.session)
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
             return redirect(reverse('lobby-view'))
@@ -77,7 +76,8 @@ class PlayerView(FormView):
             self.game_data = cache.get('games').get(self.game_name)
         except AttributeError:
             return redirect(reverse('lobby-view'))
-
+        if not self.game_data:
+            return redirect(reverse('lobby-view'))
         self.player_data = self.game_data['players'].get(self.player_name)
 
         # Deal hand if player doesn't have one.
@@ -124,7 +124,7 @@ class PlayerView(FormView):
 
             # single white card replacement
             if num_blanks == 0:
-                filled_in_question = '%s %s' % (self.black_card, self.player_data['submitted'][0])  # FIXME newline prettyness
+                filled_in_question = '%s %s' % (self.black_card, white_cards[self.player_data['submitted'][0]])  # FIXME newline prettyness
             # More than one white card.
             else:
                 filled_in_question = black_string % answer_list
