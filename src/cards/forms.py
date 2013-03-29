@@ -5,6 +5,7 @@
 from django import forms
 from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
 from django.core.exceptions import ValidationError
+import random
 
 
 class PlayerForm(forms.Form):
@@ -32,8 +33,8 @@ class PlayerForm(forms.Form):
 
 class GameForm(forms.Form):
 
-    new_game = forms.CharField(max_length=140, required=False)
-    player_name = forms.CharField(max_length=100)
+    new_game = forms.CharField(initial=random.choice(['cat', 'dog', 'bird']), max_length=140, required=False)
+    player_name = forms.CharField(initial=random.choice(['phil', 'chris', 'nicholle']),max_length=100)
 
     def __init__(self, *args, **kwargs):
         try:
@@ -45,7 +46,7 @@ class GameForm(forms.Form):
             self.fields['game_list'] = forms.ChoiceField(
                     widget=RadioSelect,
                     required=False,
-                    choices=game_list,
+                    choices=self.game_list,
             )
 
     def clean(self):
