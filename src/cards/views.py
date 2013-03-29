@@ -198,24 +198,16 @@ class LobbyView(FormView):
     def form_valid(self, form):
         self.player_id = self.request.session.get('player_id')
         player_name = form.cleaned_data['player_name']
-        if cache.get('players'):
-            players = cache.get('players')
-            if players.get(self.player_id):
-                players[self.player_id]['name'] = player_name
-            else:
-                players[self.player_id] = {'name': player_name}
-        else:
-            players = {self.player_id:{'name':player_name}}
+        players = cache.get('players', {})
+        player = players.get(self.player_id, {})
+        player['name'] = player_name
         cache.set('players', players)
         if form.cleaned_data['new_game']:
             game_name = form.cleaned_data['new_game']
             new_game = self.create_game()
             new_game['players'][player_name] = self.create_player()
-            if cache.get('games'):
-                games = cache.get('games')
-                games[form.cleaned_data['new_game']] = new_game
-            else:
-                games = {game_name: new_game}
+            games = cache.get('games', {})
+            games[form.cleaned_data['new_game']] = new_game
             cache.set('games', games)
         else:
             game_name = form.cleaned_data.get('game_list')
