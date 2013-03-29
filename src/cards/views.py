@@ -34,6 +34,7 @@
 import os
 import json
 import random
+import hashlib
 
 from django.conf import settings
 from django.views.generic import FormView, TemplateView
@@ -55,6 +56,13 @@ with open(os.path.join(settings.PROJECT_ROOT, 'data/data.json')) as data:
     blank_marker = cards['blank']
 
 
+def gravatar_robohash_url(email, size=50):
+    """Generate url for RoboHash image  (gravatar first then robohash)"""
+    text_to_hash = hashlib.md5(email.lower()).hexdigest()
+    robohash_url = "http://robohash.org/%s?size=%dx%d&gravatar=hashed" % (text_to_hash, size, size)
+    return robohash_url
+
+
 class PlayerView(FormView):
 
     template_name = 'player.html'
@@ -72,6 +80,7 @@ class PlayerView(FormView):
         
         self.game_name = self.request.session.get('game_name')
         self.player_name = self.request.session.get('player_name')
+        self.player_avatar = self.request.session.get('player_avatar')
 
         try:
             self.game_data = cache.get('games').get(self.game_name)
@@ -108,6 +117,7 @@ class PlayerView(FormView):
         num_blanks = self.black_card.count(blank_marker)
         context['black_card'] = self.black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
+        context['player_avatar'] = self.player_avatar
         context['game_name'] = self.game_name
 
         # Display filled-in answer if player has submitted.
@@ -218,6 +228,7 @@ class LobbyView(FormView):
 
         self.request.session['game_name'] = game_name  # TODO check these should be removed, looks like we still rely on cookie contents for user/game name
         self.request.session['player_name'] = player_name
+        self.request.session['player_avatar'] = gravatar_robohash_url(player_name)  # FIXME TODO remove this from cookie too
 
         return super(LobbyView, self).form_valid(form)
 
