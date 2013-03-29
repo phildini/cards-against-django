@@ -107,6 +107,7 @@ class PlayerView(FormView):
         num_blanks = self.black_card.count(blank_marker)
         context['black_card'] = self.black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
+        context['game_name'] = self.game_name
 
         # Display filled-in answer if player has submitted.
         if self.player_data.get('submitted'):
