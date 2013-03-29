@@ -44,6 +44,7 @@ from forms import PlayerForm, GameForm
 from game import Game
 from pprint import pprint
 import log
+import uuid
 
 
 # Grab data from the cards json and set global, unaltered decks.
@@ -181,10 +182,10 @@ class LobbyView(FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
-
-        self.game_in_progress = self.request.session.get('game_name')
-        if self.game_in_progress and self.game_list and self.game_list.get(self.game_in_progress):
-            context['game_in_progress'] = self.game_in_progress
+        self.player_id = self.request.session.get('player_id')
+        if not self.player_id:
+            self.player_id = uuid.uuid1()
+            self.request.session['player_id'] = self.player_id
 
         return context
 
@@ -195,7 +196,17 @@ class LobbyView(FormView):
         return kwargs
 
     def form_valid(self, form):
+        self.player_id = self.request.session.get('player_id')
         player_name = form.cleaned_data['player_name']
+        if cache.get('players'):
+            players = cache.get('players')
+            if players.get(self.player_id):
+                players[self.player_id]['name'] = player_name
+            else:
+                players[self.player_id] = {'name': player_name}
+        else:
+            players = {self.player_id:{'name':player_name}}
+        cache.set('players', players)
         if form.cleaned_data['new_game']:
             game_name = form.cleaned_data['new_game']
             new_game = self.create_game()
