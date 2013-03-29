@@ -69,7 +69,7 @@ class PlayerView(FormView):
         log.logger.debug('%r', self.request.session)
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
             return redirect(reverse('lobby-view'))
-
+        
         self.game_name = self.request.session.get('game_name')
         self.player_name = self.request.session.get('player_name')
 
@@ -216,7 +216,7 @@ class LobbyView(FormView):
                 games[game_name]['players'][player_name] = self.create_player()
             cache.set('games', games)
 
-        self.request.session['game_name'] = game_name
+        self.request.session['game_name'] = game_name  # TODO check these should be removed, looks like we still rely on cookie contents for user/game name
         self.request.session['player_name'] = player_name
 
         return super(LobbyView, self).form_valid(form)
