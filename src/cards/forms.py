@@ -33,8 +33,8 @@ class PlayerForm(forms.Form):
 
 class GameForm(forms.Form):
 
-    new_game = forms.CharField(initial=random.choice(['cat', 'dog', 'bird']), max_length=140, required=False)
-    player_name = forms.CharField(initial=random.choice(['phil', 'chris', 'nicholle']),max_length=100)
+    new_game = forms.CharField(max_length=140, required=False)
+    player_name = forms.CharField(max_length=100)
 
     def __init__(self, *args, **kwargs):
         try:
@@ -42,12 +42,16 @@ class GameForm(forms.Form):
         except KeyError:
             self.game_list = []
         super(GameForm, self).__init__(*args, **kwargs)
+        self.fields["player_name"].initial = random.choice(['phil', 'chris', 'nicholle'])  # DEBUG
         if self.game_list:
+            self.fields["new_game"].initial = None
             self.fields['game_list'] = forms.ChoiceField(
                     widget=RadioSelect,
                     required=False,
                     choices=self.game_list,
             )
+        else:
+            self.fields["new_game"].initial = random.choice(['cat', 'dog', 'bird'])  # DEBUG
 
     def clean(self):
         if self.cleaned_data.get('new_game') and self.cleaned_data.get('game_list'):
