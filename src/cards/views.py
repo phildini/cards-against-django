@@ -43,6 +43,7 @@ from django.core.cache import cache
 from forms import PlayerForm, GameForm
 from game import Game
 from pprint import pprint
+import log
 
 
 # Grab data from the cards json and set global, unaltered decks.
@@ -64,6 +65,8 @@ class PlayerView(FormView):
     def dispatch(self, request, *args, **kwargs):
 
         # Setup for game and player
+        import pdb; pdb.set_trace()
+        log.logger.debug('%r', self.request.session)
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
             return redirect(reverse('lobby-view'))
 
@@ -78,7 +81,7 @@ class PlayerView(FormView):
         self.player_data = self.game_data['players'].get(self.player_name)
 
         # Deal hand if player doesn't have one.
-        print self.player_data
+        log.logger.debug('%r', self.player_data)
         if not self.player_data['hand']:
             self.player_data['hand'] = [
                 self.game_data['white_deck'].pop() for x in xrange(10)
@@ -147,7 +150,7 @@ class PlayerView(FormView):
         for card in self.player_data['submitted']:
             self.player_data['hand'].remove(card)
         self.write_player()
-        print form.cleaned_data['card_selection']
+        log.logger.debug('%r', form.cleaned_data['card_selection']) 
         return super(PlayerView, self).form_valid(form)
 
     def write_player(self):
@@ -215,7 +218,7 @@ class LobbyView(FormView):
         return super(LobbyView, self).form_valid(form)
 
     def create_game(self):
-        print "New Game called"
+        log.logger.debug("New Game called")
         """Create shuffled decks
         uses built in random, it may be better to plug-in a better
         random init routine and/also consider using
@@ -241,7 +244,7 @@ class LobbyView(FormView):
         }
 
     def create_player(self):
-        print "new player called"
+        log.logger.debug("new player called")
         # Basic data obj for player. Eventually, this will be saved in cache.
         return {
             'hand': [],
