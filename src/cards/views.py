@@ -42,6 +42,7 @@ from django.shortcuts import redirect
 from django.core.cache import cache
 from forms import PlayerForm, GameForm
 from game import Game
+from pprint import pprint
 
 
 # Grab data from the cards json and set global, unaltered decks.
@@ -87,7 +88,7 @@ class PlayerView(FormView):
         # FIXME: Game setup.
         if not self.game_data['current_black_card']:
             self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
-
+        pprint(self.game_data['players'])
         self.write_player()
         return super(PlayerView, self).dispatch(request, *args, **kwargs)
 
@@ -143,8 +144,8 @@ class PlayerView(FormView):
 
         # The form returns unicode strings. We want ints in our list.
         self.player_data['submitted'] = [int(card) for card in submitted]
-        for card in submitted:
-            self.player_data['hand'].remove(int(card))
+        for card in self.player_data['submitted']:
+            self.player_data['hand'].remove(card)
         self.write_player()
         print form.cleaned_data['card_selection']
         return super(PlayerView, self).form_valid(form)

@@ -12,9 +12,10 @@
 <p>{{ filled_in_question }} </p>
 {% endif %}
 
-
+{% if not submission %}
 <form action="{{ action }}" method="post">
 	{% csrf_token %}
 	{{ form.as_p }} 
 <input type="submit" value="Submit" />
 </form>
+{% endif %}
