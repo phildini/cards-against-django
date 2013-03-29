@@ -12,10 +12,17 @@ Steps to run:
         virtualenv .
         . bin/activate
 
-3. 'pip install -r requirements/local.txt'
+3. install dependencies:
 
-4. export CAH_KEY=[some crypto-ish key of your choosing]
+        pip install -r requirements/local.txt
 
-5. cd src && python manage.py runserver --settings=cah.settings.local
+4. set secure key:
+
+        export CAH_KEY=[some crypto-ish key of your choosing]
+
+5. start test/debug server:
+
+        cd src
+        python manage.py runserver --settings=cah.settings.local 0.0.0.0:8000
 
 6. share and enjoy.
