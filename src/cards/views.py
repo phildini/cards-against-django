@@ -62,7 +62,7 @@ class PlayerView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
 
-        # Setup for game and player        
+        # Setup for game and player
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
             return redirect(reverse('lobby-view'))
 
@@ -73,7 +73,7 @@ class PlayerView(FormView):
             self.game_data = cache.get('games').get(self.game_name)
         except AttributeError:
             return redirect(reverse('lobby-view'))
-        
+
         self.player_data = self.game_data['players'].get(self.player_name)
 
         # Deal hand if player doesn't have one.
@@ -84,7 +84,7 @@ class PlayerView(FormView):
             ]
 
         # Deal black card if game doesn't have one.
-        # FIXME: Game setup. 
+        # FIXME: Game setup.
         if not self.game_data['current_black_card']:
             self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
 
@@ -108,8 +108,8 @@ class PlayerView(FormView):
         if self.player_data.get('submitted'):
 
             # Replacing the blank marker with %s lets us do cool stuff below
-            black_string = self.black_card.replace('%', '%%') 
-            black_string = black_string.replace(blank_marker, '%s') 
+            black_string = self.black_card.replace('%', '%%')
+            black_string = black_string.replace(blank_marker, '%s')
             context['submission'] = [
                 white_cards[int(card)] for card in self.player_data['submitted']
             ]
@@ -246,4 +246,3 @@ class LobbyView(FormView):
             'hand': [],
             'wins': 0,
         }
-
