@@ -75,7 +75,7 @@ class PlayerView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         # Setup for game and player
-        log.logger.debug('%r', self.request.session)
+        # log.logger.debug('%r', self.request.session)
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
             return redirect(reverse('lobby-view'))
         
@@ -92,11 +92,11 @@ class PlayerView(FormView):
             return redirect(reverse('lobby-view'))
         self.is_card_czar = self.game_data['card_czar'] == self.player_id
 
-        log.logger.debug(self.game_data)
-        log.logger.debug(self.player_name)
+        # log.logger.debug(self.game_data)
+        # log.logger.debug(self.player_name)
         self.player_data = self.game_data['players'].get(self.player_name)
         # Deal hand if player doesn't have one.
-        log.logger.debug('%r', self.player_data)
+        # log.logger.debug('%r', self.player_data)
         if not self.player_data['hand']:
             self.player_data['hand'] = [
                 self.game_data['white_deck'].pop() for x in xrange(10)
@@ -129,8 +129,8 @@ class PlayerView(FormView):
         context['show_form'] = self.can_show_form()
         # Display filled-in answer if player has submitted.
         if self.game_data['submissions'] and not self.is_card_czar:
-            player_submissions = self.game_data['submissions'][self.player_id]
-            context['filled_in_question'] = self.replace_blanks(player_submissions, html=True)
+            player_submission = self.game_data['submissions'].get(self.player_id)
+            context['filled_in_question'] = self.replace_blanks(player_submission, html=True)
         context['action'] = reverse('player-view')
         return context
 
@@ -139,6 +139,7 @@ class PlayerView(FormView):
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
             kwargs['cards'] = [(player_id, self.replace_blanks(self.game_data['submissions'][player_id])) for player_id in self.game_data['submissions']]
+            log.logger.debug(kwargs['cards'])
         else:
             kwargs['blanks'] = black_cards[self.game_data['current_black_card']].count(blank_marker) or 1
             kwargs['cards'] = tuple(
@@ -152,9 +153,10 @@ class PlayerView(FormView):
             log.logger.debug(self.game_data)
             players = cache.get('players')
             winner = form.cleaned_data['card_selection']
+            log.logger.debug(winner)
             winner_name = players[uuid.UUID(winner)].get('name')
-            self.game_data['players'][winner_name]['wins'] += 1
-            self.game_data['last_round_winner'] = winner_name
+            self.reset(winner_name, uuid.UUID(winner))
+            
         else:
             submitted = form.cleaned_data['card_selection']
             # The form returns unicode strings. We want ints in our list.
@@ -163,6 +165,7 @@ class PlayerView(FormView):
                 self.player_data['hand'].remove(card)
             log.logger.debug('%r', form.cleaned_data['card_selection'])
         self.write_state()
+        log.logger.debug(cache.get('games'))
         return super(PlayerView, self).form_valid(form)
 
     def write_state(self):
@@ -215,6 +218,16 @@ class PlayerView(FormView):
                 card_text = card_text.replace(blank_marker, white_text, 1)
         return card_text
 
+    def reset(self, winner=None, winner_id=None):
+        self.game_data['submissions'] = {}
+        self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
+        self.game_data['players'][winner]['wins'] += 1
+        self.game_data['card_czar'] = winner_id
+        num_blanks = black_cards[self.game_data['current_black_card']].count(blank_marker)
+        self.game_data['round'] += 1
+        self.game_data['last_round_winner'] = winner
+        # TODO: Deal Cards 
+
 
 class LobbyView(FormView):
 
@@ -233,6 +246,7 @@ class LobbyView(FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
         self.player_id = self.request.session.get('player_id', uuid.uuid1())
+        self.request.session['player_id'] = self.player_id
         return context
 
     def get_form_kwargs(self):
