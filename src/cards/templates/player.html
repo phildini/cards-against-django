@@ -11,11 +11,9 @@
 <p>congrats! you are the card czar!</p>
 {% endif %}
 
-{% if submission %}
-<p>{{ filled_in_question }} </p>
-{% endif %}
+<p>{{ filled_in_question|safe}} </p>
 
-{% if not submission %}
+{% if show_form %}
 <form action="{{ action }}" method="post">
 	{% csrf_token %}
 	{{ form.as_p }} 

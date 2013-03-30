@@ -16,7 +16,7 @@
 #             ...
 #         },
 #         current_black_card = None|int,
-#         submissions = [list of player submissions for the round],
+#         submissions = [dict of player submissions for the round],
 #         round: int,
 #         card_czar = 'player1',  # int index into 'players'
 #         black_deck = [],
@@ -35,6 +35,7 @@ import os
 import json
 import random
 import hashlib
+import cgi
 
 from django.conf import settings
 from django.views.generic import FormView, TemplateView
@@ -81,6 +82,7 @@ class PlayerView(FormView):
         self.game_name = self.request.session.get('game_name')
         self.player_name = self.request.session.get('player_name')
         self.player_avatar = self.request.session.get('player_avatar')
+        self.player_id = self.request.session.get('player_id')
 
         try:
             self.game_data = cache.get('games').get(self.game_name)
@@ -88,8 +90,9 @@ class PlayerView(FormView):
             return redirect(reverse('lobby-view'))
         if not self.game_data:
             return redirect(reverse('lobby-view'))
+        log.logger.debug(self.game_data)
+        log.logger.debug(self.player_name)
         self.player_data = self.game_data['players'].get(self.player_name)
-
         # Deal hand if player doesn't have one.
         log.logger.debug('%r', self.player_data)
         if not self.player_data['hand']:
@@ -102,7 +105,7 @@ class PlayerView(FormView):
         if not self.game_data['current_black_card']:
             self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
         pprint(self.game_data['players'])
-        self.write_player()
+        self.write_state()
         return super(PlayerView, self).dispatch(request, *args, **kwargs)
 
 
@@ -119,30 +122,11 @@ class PlayerView(FormView):
         context['player_name'] = self.player_name
         context['player_avatar'] = self.player_avatar
         context['game_name'] = self.game_name
-
+        context['show_form'] = self.can_show_form()
         # Display filled-in answer if player has submitted.
-        if self.player_data.get('submitted'):
-
-            # Replacing the blank marker with %s lets us do cool stuff below
-            black_string = self.black_card.replace('%', '%%')
-            black_string = black_string.replace(blank_marker, '%s')
-            context['submission'] = [
-                white_cards[int(card)] for card in self.player_data['submitted']
-            ]
-
-            # For some reason, need to pull get the strings out first, then strip the period.
-            answer_strings = [white_cards[card] for card in self.player_data['submitted']]
-            answer_list = tuple([answer.rstrip('.') for answer in answer_strings])
-
-            # single white card replacement
-            if num_blanks == 0:
-                filled_in_question = '%s %s' % (self.black_card, white_cards[self.player_data['submitted'][0]])  # FIXME newline prettyness
-            # More than one white card.
-            else:
-                filled_in_question = black_string % answer_list
-
-            context['filled_in_question'] = filled_in_question
-
+        if self.game_data['submissions']:
+            player_submissions = self.game_data['submissions'][self.player_id]
+            context['filled_in_question'] = self.replace_blanks(player_submissions, html=True)
         context['action'] = reverse('player-view')
         return context
 
@@ -158,23 +142,63 @@ class PlayerView(FormView):
         submitted = form.cleaned_data['card_selection']
 
         # The form returns unicode strings. We want ints in our list.
-        self.player_data['submitted'] = [int(card) for card in submitted]
-        for card in self.player_data['submitted']:
+        self.game_data['submissions'][self.player_id] = [int(card) for card in submitted]
+        for card in self.game_data['submissions'][self.player_id]:
             self.player_data['hand'].remove(card)
-        self.write_player()
+        self.write_state()
         log.logger.debug('%r', form.cleaned_data['card_selection']) 
         return super(PlayerView, self).form_valid(form)
 
-    def write_player(self):
+    def write_state(self):
         self.request.session['player_name'] = self.player_name
         self.request.session['game_name'] = self.game_name
         self.game_data['players'][self.player_name] = self.player_data
         games_dict = cache.get('games')
-        try:
-            games_dict[self.game_name] = self.game_data
-        except TypeError:
-            games_dict = {self.game_name: self.game_data}
+        games_dict[self.game_name] = self.game_data
         cache.set('games', games_dict)
+
+    def can_show_form(self):
+        flag = False
+        # import pdb; pdb.set_trace()
+        if self.game_data['card_czar'] == self.player_id:
+            if not self.game_data['submissions']:
+                flag = False
+            elif len(self.game_data['submissions']) == len(self.game_data['players']) - 1:
+                flag = True
+            else:
+                flag = False
+        else:
+            if self.player_id in self.game_data['submissions']:
+                flag = False
+            else:
+                flag = True
+        return flag
+
+    def replace_blanks(self, white_card_num_list, html=False):
+        card_text = self.black_card
+        if html:
+            card_text = cgi.escape(card_text)
+        num_blanks = self.black_card.count(blank_marker)
+        # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
+        if num_blanks == 0:
+            card_num = white_card_num_list[0]
+            white_text = white_cards[card_num]
+            if html:
+                white_text = '<strong>' + cgi.escape(white_text) + '</strong>'
+            card_text = card_text + ' ' + white_text
+        else:
+            for card_num in white_card_num_list:
+                white_text = white_cards[card_num]
+                white_text = white_text.rstrip('.')
+                """We can't change the case of the first letter in case
+                it is a real name :-( We'd need to consult a word list,
+                to make that decision which is way too much effort at
+                the moment."""
+                if html:
+                    white_text = '<strong>' + cgi.escape(white_text) + '</strong>'
+                card_text = card_text.replace(blank_marker, white_text, 1)
+        return card_text
+
 
 class LobbyView(FormView):
 
@@ -216,6 +240,7 @@ class LobbyView(FormView):
             game_name = form.cleaned_data['new_game']
             new_game = self.create_game()
             new_game['players'][player_name] = self.create_player()
+            new_game['card_czar'] = self.player_id
             games = cache.get('games', {})
             games[form.cleaned_data['new_game']] = new_game
             cache.set('games', games)
@@ -250,7 +275,7 @@ class LobbyView(FormView):
         return {
             'players': {},
             'current_black_card': None,  # get a new one my shuffled_black.pop()
-            'submissions': [],
+            'submissions': {},
             'round': 0,
             'card_czar': '',
             'white_deck': shuffled_white,
