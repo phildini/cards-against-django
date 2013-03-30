@@ -221,7 +221,7 @@ class Game(object):
                 to make that decision which is way too much effort at
                 the moment."""
                 if html:
-                    white_text = '<span>' + cgi.escape(white_text) + '</span>'
+                    white_text = '<strong>' + cgi.escape(white_text) + '</strong>'
                 card_text = card_text.replace(self.blank, white_text, 1)
         return card_text
 

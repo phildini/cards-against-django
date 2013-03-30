@@ -30,6 +30,7 @@
 #
 # LobbyView will give PlayerView a named player and a game stored in cache.
 # PlayerView will return to LobbyView any request that does not have those things.
+# On the cache, 'players' will hav a mapping of ids to players.
 
 import os
 import json
@@ -119,7 +120,7 @@ class PlayerView(FormView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
-
+        context['last_round_winner'] = self.game_data.get('last_round_winner', '')
         num_blanks = self.black_card.count(blank_marker)
         context['black_card'] = self.black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
@@ -146,14 +147,22 @@ class PlayerView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        submitted = form.cleaned_data['card_selection']
-
-        # The form returns unicode strings. We want ints in our list.
-        self.game_data['submissions'][self.player_id] = [int(card) for card in submitted]
-        for card in self.game_data['submissions'][self.player_id]:
-            self.player_data['hand'].remove(card)
+        if self.is_card_czar:
+            log.logger.debug('player_id %r', self.player_id)
+            log.logger.debug(self.game_data)
+            players = cache.get('players')
+            winner = form.cleaned_data['card_selection']
+            winner_name = players[uuid.UUID(winner)].get('name')
+            self.game_data['players'][winner_name]['wins'] += 1
+            self.game_data['last_round_winner'] = winner_name
+        else:
+            submitted = form.cleaned_data['card_selection']
+            # The form returns unicode strings. We want ints in our list.
+            self.game_data['submissions'][self.player_id] = [int(card) for card in submitted]
+            for card in self.game_data['submissions'][self.player_id]:
+                self.player_data['hand'].remove(card)
+            log.logger.debug('%r', form.cleaned_data['card_selection'])
         self.write_state()
-        log.logger.debug('%r', form.cleaned_data['card_selection']) 
         return super(PlayerView, self).form_valid(form)
 
     def write_state(self):
@@ -223,11 +232,7 @@ class LobbyView(FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
-        self.player_id = self.request.session.get('player_id')
-        if not self.player_id:
-            self.player_id = uuid.uuid1()
-            self.request.session['player_id'] = self.player_id
-
+        self.player_id = self.request.session.get('player_id', uuid.uuid1())
         return context
 
     def get_form_kwargs(self):
@@ -239,10 +244,8 @@ class LobbyView(FormView):
     def form_valid(self, form):
         self.player_id = self.request.session.get('player_id')
         player_name = form.cleaned_data['player_name']
-        players = cache.get('players', {})
-        player = players.get(self.player_id, {})
-        player['name'] = player_name
-        cache.set('players', players)
+        
+        # Set the game properties in the cache
         if form.cleaned_data['new_game']:
             game_name = form.cleaned_data['new_game']
             new_game = self.create_game()
@@ -250,14 +253,22 @@ class LobbyView(FormView):
             new_game['card_czar'] = self.player_id
             games = cache.get('games', {})
             games[form.cleaned_data['new_game']] = new_game
-            cache.set('games', games)
         else:
             game_name = form.cleaned_data.get('game_list')
             games = cache.get('games')
             if not games[game_name]['players'].get(player_name):
                 games[game_name]['players'][player_name] = self.create_player()
-            cache.set('games', games)
+        cache.set('games', games)
 
+        # Set the player properties in the cache
+        players = cache.get('players', {})
+        player = players.get(self.player_id, {})
+        player['name'] = player_name
+        player['game'] = game_name
+        players[self.player_id] = player
+        cache.set('players', players)
+
+        log.logger.debug(cache.get('players'))
         self.request.session['game_name'] = game_name  # TODO check these should be removed, looks like we still rely on cookie contents for user/game name
         self.request.session['player_name'] = player_name
         self.request.session['player_avatar'] = gravatar_robohash_url(player_name)  # FIXME TODO remove this from cookie too
