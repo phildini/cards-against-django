@@ -220,13 +220,19 @@ class PlayerView(FormView):
 
     def reset(self, winner=None, winner_id=None):
         self.game_data['submissions'] = {}
+        num_blanks = black_cards[self.game_data['current_black_card']].count(blank_marker)
         self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
         self.game_data['players'][winner]['wins'] += 1
         self.game_data['card_czar'] = winner_id
-        num_blanks = black_cards[self.game_data['current_black_card']].count(blank_marker)
         self.game_data['round'] += 1
         self.game_data['last_round_winner'] = winner
-        # TODO: Deal Cards 
+        
+        if num_blanks == 0:
+            num_blanks = 1
+        for _ in xrange(num_blanks):
+            for player_name in self.game_data['players']:
+                if player_name != self.player_name:
+                    self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
 
 
 class LobbyView(FormView):
