@@ -42,7 +42,7 @@ from django.views.generic import FormView, TemplateView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
-from forms import PlayerForm, GameForm
+from forms import PlayerForm, GameForm, CzarForm
 from game import Game
 from pprint import pprint
 import log
@@ -73,7 +73,6 @@ class PlayerView(FormView):
         super(PlayerView, self).__init__(*args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
-
         # Setup for game and player
         log.logger.debug('%r', self.request.session)
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
@@ -90,6 +89,8 @@ class PlayerView(FormView):
             return redirect(reverse('lobby-view'))
         if not self.game_data:
             return redirect(reverse('lobby-view'))
+        self.is_card_czar = self.game_data['card_czar'] == self.player_id
+
         log.logger.debug(self.game_data)
         log.logger.debug(self.player_name)
         self.player_data = self.game_data['players'].get(self.player_name)
@@ -106,6 +107,9 @@ class PlayerView(FormView):
             self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
         pprint(self.game_data['players'])
         self.write_state()
+
+        if self.is_card_czar:
+            self.form_class = CzarForm
         return super(PlayerView, self).dispatch(request, *args, **kwargs)
 
 
@@ -116,7 +120,6 @@ class PlayerView(FormView):
 
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
 
-        self.black_card = black_cards[self.game_data['current_black_card']]
         num_blanks = self.black_card.count(blank_marker)
         context['black_card'] = self.black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
@@ -124,18 +127,22 @@ class PlayerView(FormView):
         context['game_name'] = self.game_name
         context['show_form'] = self.can_show_form()
         # Display filled-in answer if player has submitted.
-        if self.game_data['submissions']:
+        if self.game_data['submissions'] and not self.is_card_czar:
             player_submissions = self.game_data['submissions'][self.player_id]
             context['filled_in_question'] = self.replace_blanks(player_submissions, html=True)
         context['action'] = reverse('player-view')
         return context
 
     def get_form_kwargs(self):
+        self.black_card = black_cards[self.game_data['current_black_card']]
         kwargs = super(PlayerView, self).get_form_kwargs()
-        kwargs['blanks'] = black_cards[self.game_data['current_black_card']].count(blank_marker) or 1
-        kwargs['cards'] = tuple(
-            (card, white_cards[card]) for card in self.player_data['hand']
-        )
+        if self.is_card_czar:
+            kwargs['cards'] = [(player_id, self.replace_blanks(self.game_data['submissions'][player_id])) for player_id in self.game_data['submissions']]
+        else:
+            kwargs['blanks'] = black_cards[self.game_data['current_black_card']].count(blank_marker) or 1
+            kwargs['cards'] = tuple(
+                (card, white_cards[card]) for card in self.player_data['hand']
+            )
         return kwargs
 
     def form_valid(self, form):

@@ -30,6 +30,18 @@ class PlayerForm(forms.Form):
 
         return self.cleaned_data
 
+class CzarForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        cards = kwargs.pop('cards', ())
+        super(CzarForm, self).__init__(*args, **kwargs)
+        self.fields['card_selection'] = forms.ChoiceField(
+            widget=RadioSelect,
+            required = True,
+            choices = cards,
+        )
+
+
 
 class GameForm(forms.Form):
 
