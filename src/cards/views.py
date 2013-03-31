@@ -266,7 +266,7 @@ class LobbyView(FormView):
         self.player_id = self.request.session.get('player_id')
         player_name = form.cleaned_data['player_name']
         
-        existing_game = False
+        existing_game = True
         # Set the game properties in the cache
         game_name = form.cleaned_data['new_game']
         games = cache.get('games', {})
