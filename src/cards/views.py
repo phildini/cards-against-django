@@ -91,6 +91,7 @@ class PlayerView(FormView):
         if not self.game_data:
             return redirect(reverse('lobby-view'))
         self.is_card_czar = self.game_data['card_czar'] == self.player_id
+        log.logger.debug('id %r name %r game %r', self.player_id, self.game_name, self.game_name)
 
         # log.logger.debug(self.game_data)
         # log.logger.debug(self.player_name)
@@ -265,17 +266,23 @@ class LobbyView(FormView):
         self.player_id = self.request.session.get('player_id')
         player_name = form.cleaned_data['player_name']
         
+        existing_game = False
         # Set the game properties in the cache
-        if form.cleaned_data['new_game']:
-            game_name = form.cleaned_data['new_game']
-            new_game = self.create_game()
-            new_game['players'][player_name] = self.create_player()
-            new_game['card_czar'] = self.player_id
-            games = cache.get('games', {})
-            games[form.cleaned_data['new_game']] = new_game
-        else:
-            game_name = form.cleaned_data.get('game_list')
-            games = cache.get('games')
+        game_name = form.cleaned_data['new_game']
+        games = cache.get('games', {})
+        if game_name:
+            # Attempting to create a new game
+            existing_game = games.get(game_name)
+            if not existing_game:
+                # really a new game
+                new_game = self.create_game()
+                new_game['players'][player_name] = self.create_player()
+                new_game['card_czar'] = self.player_id
+                games[form.cleaned_data['new_game']] = new_game
+        if existing_game:
+            if not game_name:
+                game_name = form.cleaned_data.get('game_list')
+            log.logger.debug('existing_game %r', (game_name, player_name,))
             if not games[game_name]['players'].get(player_name):
                 games[game_name]['players'][player_name] = self.create_player()
         cache.set('games', games)
