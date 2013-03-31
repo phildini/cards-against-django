@@ -91,7 +91,7 @@ class PlayerView(FormView):
         if not self.game_data:
             return redirect(reverse('lobby-view'))
         self.is_card_czar = self.game_data['card_czar'] == self.player_id
-        log.logger.debug('id %r name %r game %r', self.player_id, self.game_name, self.game_name)
+        log.logger.debug('id %r name %r game %r', self.player_id, self.player_name, self.game_name)
 
         # log.logger.debug(self.game_data)
         # log.logger.debug(self.player_name)
@@ -285,6 +285,9 @@ class LobbyView(FormView):
             log.logger.debug('existing_game %r', (game_name, player_name,))
             if not games[game_name]['players'].get(player_name):
                 games[game_name]['players'][player_name] = self.create_player()
+            else:
+                # FIXME
+                raise NotImplementedError('joining with player names alreaady in same game causes problems')
         cache.set('games', games)
 
         # Set the player properties in the cache
