@@ -21,11 +21,7 @@
     {% if show_form %}
     <form action="{{ action }}" method="post">
     	{% csrf_token %}
-        {% for field in form %}
-        {% for choice in field.choices %}
-    	<div class="btn">{{ choice }}</div>
-        {% endfor %}
-        {% endfor %}
+    	{{ form.as_p }} 
     <input type="submit" value="Submit" />
     </form>
     {% endif %}
