@@ -30,3 +30,6 @@ CACHES = {
         'LOCATION': 'unique-snowflake'
     }
 }
+STATIC_ROOT= ''
+STATIC_URL = '/static/'
+STATICFILES_DIRS = ()

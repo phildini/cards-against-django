@@ -104,7 +104,7 @@ class PlayerView(FormView):
 
         # Deal black card if game doesn't have one.
         # FIXME: Game setup.
-        if not self.game_data['current_black_card']:
+        if self.game_data['current_black_card'] is None:
             self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
         pprint(self.game_data['players'])
         self.write_state()
