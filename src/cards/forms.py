@@ -3,7 +3,7 @@
 #
 
 from django import forms
-from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
+from django.forms.widgets import RadioSelect, CheckboxSelectMultiple,Select
 from django.core.exceptions import ValidationError
 import random
 

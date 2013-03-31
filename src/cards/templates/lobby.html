@@ -1,12 +1,7 @@
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+{% extends "base.html" %}
 
-<body>
-    <div class="container">
+{% block content %}
+<div class="container"
     <h1>Welcome to that game. You know the one I mean.</h1>
 
     {% if game_in_progress %}
@@ -17,7 +12,5 @@
     	{% csrf_token %}
     	{{ form.as_p }}
     <input type="submit" value="Join a game" />
-</form>
 </div>
-</body>
-</html>
+{% endblock %}

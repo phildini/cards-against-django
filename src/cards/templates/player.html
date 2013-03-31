@@ -1,30 +1,35 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+{% extends "base.html" %}
 
-<p>This is not that card game. You know the one we mean.</p>
+{% block content %}
+<div class="container">
+    <p>This is not that card game. You know the one we mean.</p>
 
-<p> You are in Game: {{ game_name }} </p>
+    <p> You are in Game: {{ game_name }} </p>
 
-<p>You are {{ player_name }}.</p>
-<img src="{{ player_avatar }}" alt="Player avatar">
+    <p>You are {{ player_name }}. <img src="{{ player_avatar }}" alt="Player avatar"></p>
 
-<p>{{ black_card }}</p>
 
-{% if is_card_czar %}
-<p>congrats! you are the card czar!</p>
-{% endif %}
+    <div class="btn btn-inverse card">
+    <p class="text_left">{{ black_card }}</p>
+    </div>
+    {% if is_card_czar %}
+    <p>congrats! you are the card czar!</p>
+    {% endif %}
 
-<p>{{ filled_in_question|safe}} </p>
+    <p>{{ filled_in_question|safe}} </p>
 
-{% if show_form %}
-<form action="{{ action }}" method="post">
-	{% csrf_token %}
-	{{ form.as_p }} 
-<input type="submit" value="Submit" />
-</form>
-{% endif %}
+    {% if show_form %}
+    <form action="{{ action }}" method="post">
+    	{% csrf_token %}
+        {% for field in form %}
+        {% for choice in field.choices %}
+    	<div class="btn">{{ choice }}</div>
+        {% endfor %}
+        {% endfor %}
+    <input type="submit" value="Submit" />
+    </form>
+    {% endif %}
 
-<p>Last round winner was: {{ last_round_winner }}</p>
+    <p>Last round winner was: {{ last_round_winner }}</p>
+</div>
+{% endblock %}

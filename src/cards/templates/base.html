@@ -1,0 +1,17 @@
+<html>
+    <title> {% block title %} This is totally not that game. {% endblock title %}</title>
+    <head>
+        {% block stylsheets %}
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}main.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block content %}
+            Hello!
+        {% endblock content%}
+    </body>
+</html>
