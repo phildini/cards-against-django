@@ -9,7 +9,7 @@ Steps to run:
 
 2. in the repo dir:
 
-        virtualenv .
+        virtualenv .  # one time setup
         . bin/activate
 
 3. install dependencies:
@@ -18,7 +18,7 @@ Steps to run:
 
 4. set secure key:
 
-        export CAH_KEY=[some crypto-ish key of your choosing]
+        export CAH_KEY='[some crypto-ish key of your choosing]'
 
 5. start test/debug server:
 
