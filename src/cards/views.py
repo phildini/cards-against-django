@@ -79,10 +79,22 @@ class PlayerView(FormView):
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
             return redirect(reverse('lobby-view'))
         
+        self.player_id = self.request.session.get('player_id')
+        
+        players = cache.get('players', {})
+        player = players.get(self.player_id, {})
+        if not player:
+            # del maybe overkill...
+            del self.request.session['player_id']
+            if self.request.session.get('player_name'):
+                del self.request.session['player_name']
+            if self.request.session.get('game_name'):
+                del self.request.session['game_name']
+            return redirect(reverse('lobby-view'))
+        
         self.game_name = self.request.session.get('game_name')
         self.player_name = self.request.session.get('player_name')
         self.player_avatar = self.request.session.get('player_avatar')
-        self.player_id = self.request.session.get('player_id')
 
         try:
             self.game_data = cache.get('games').get(self.game_name)
@@ -252,8 +264,16 @@ class LobbyView(FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
-        self.player_id = self.request.session.get('player_id', uuid.uuid1())
-        self.request.session['player_id'] = self.player_id
+        self.player_id = self.request.session.get('player_id')
+        if not self.player_id:
+            self.player_id = uuid.uuid1()
+            self.request.session['player_id'] = self.player_id
+            # del maybe overkill...
+            if self.request.session.get('player_name'):
+                del self.request.session['player_name']
+            if self.request.session.get('game_name'):
+                del self.request.session['game_name']
+
         return context
 
     def get_form_kwargs(self):
