@@ -36,7 +36,6 @@ import os
 import json
 import random
 import hashlib
-import cgi
 
 from django.conf import settings
 from django.views.generic import FormView, TemplateView
@@ -137,7 +136,7 @@ class PlayerView(FormView):
         # Display filled-in answer if player has submitted.
         if self.game_data['submissions'] and not self.is_card_czar:
             player_submission = self.game_data['submissions'].get(self.player_id)
-            context['filled_in_question'] = self.replace_blanks(player_submission, html=True)
+            context['filled_in_question'] = self.replace_blanks(player_submission)
         context['action'] = reverse('player-view')
         return context
 
@@ -197,17 +196,14 @@ class PlayerView(FormView):
                 flag = True
         return flag
 
-    def replace_blanks(self, white_card_num_list, html=False):
+    def replace_blanks(self, white_card_num_list):
         card_text = self.black_card
-        if html:
-            card_text = cgi.escape(card_text)
         num_blanks = self.black_card.count(blank_marker)
         # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
         if num_blanks == 0:
             card_num = white_card_num_list[0]
             white_text = white_cards[card_num]
-            if html:
-                white_text = '<strong>' + cgi.escape(white_text) + '</strong>'
+            white_text = '<strong>' + white_text + '</strong>'
             card_text = card_text + ' ' + white_text
         else:
             for card_num in white_card_num_list:
@@ -217,8 +213,7 @@ class PlayerView(FormView):
                 it is a real name :-( We'd need to consult a word list,
                 to make that decision which is way too much effort at
                 the moment."""
-                if html:
-                    white_text = '<strong>' + cgi.escape(white_text) + '</strong>'
+                white_text = '<strong>' + white_text + '</strong>'
                 card_text = card_text.replace(blank_marker, white_text, 1)
         return card_text
 
