@@ -244,6 +244,7 @@ class PlayerView(FormView):
             shuffled_black = range(len(black_cards))
             random.shuffle(shuffled_black)
             self.game_data['black_deck'] = shuffled_black
+        return black_card
 
 
 
