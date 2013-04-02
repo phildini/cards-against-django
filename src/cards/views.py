@@ -36,6 +36,7 @@ import os
 import json
 import random
 import hashlib
+import urllib
 
 from django.conf import settings
 from django.views.generic import FormView, TemplateView
@@ -62,6 +63,21 @@ def gravatar_robohash_url(email, size=50):
     text_to_hash = hashlib.md5(email.lower()).hexdigest()
     robohash_url = "http://robohash.org/%s?size=%dx%d&gravatar=hashed" % (text_to_hash, size, size)
     return robohash_url
+
+def gravatar_url(email, size=50, default='monsterid'):
+    """Generate url for Gravatar image
+    email - email address
+    default = default_image_url or default hash type
+    """
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+    if default:
+        gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+    else:
+        gravatar_url += urllib.urlencode({'s':str(size)})
+    return gravatar_url
+
+avatar_url = gravatar_robohash_url
+avatar_url = gravatar_url
 
 
 class PlayerView(FormView):
@@ -92,7 +108,6 @@ class PlayerView(FormView):
         
         self.game_name = self.request.session.get('game_name')
         self.player_name = self.request.session.get('player_name')
-        self.player_avatar = self.request.session.get('player_avatar')
 
         try:
             self.game_data = cache.get('games').get(self.game_name)
@@ -130,7 +145,7 @@ class PlayerView(FormView):
         num_blanks = self.black_card.count(blank_marker)
         context['black_card'] = self.black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
-        context['player_avatar'] = self.player_avatar
+        context['player_avatar'] = self.game_data['players'][self.player_name]['player_avatar']
         context['game_name'] = self.game_name
         context['show_form'] = self.can_show_form()
         # Display filled-in answer if player has submitted.
@@ -291,7 +306,7 @@ class LobbyView(FormView):
             if not existing_game:
                 # really a new game
                 new_game = self.create_game()
-                new_game['players'][player_name] = self.create_player()
+                new_game['players'][player_name] = self.create_player(player_name)
                 new_game['card_czar'] = self.player_id
                 games[form.cleaned_data['new_game']] = new_game
         if existing_game:
@@ -299,7 +314,7 @@ class LobbyView(FormView):
                 game_name = form.cleaned_data.get('game_list')
             log.logger.debug('existing_game %r', (game_name, player_name,))
             if not games[game_name]['players'].get(player_name):
-                games[game_name]['players'][player_name] = self.create_player()
+                games[game_name]['players'][player_name] = self.create_player(player_name)
             else:
                 # FIXME
                 raise NotImplementedError('joining with player names alreaady in same game causes problems')
@@ -316,7 +331,6 @@ class LobbyView(FormView):
         log.logger.debug(cache.get('players'))
         self.request.session['game_name'] = game_name  # TODO check these should be removed, looks like we still rely on cookie contents for user/game name
         self.request.session['player_name'] = player_name
-        self.request.session['player_avatar'] = gravatar_robohash_url(player_name)  # FIXME TODO remove this from cookie too
 
         return super(LobbyView, self).form_valid(form)
 
@@ -346,10 +360,11 @@ class LobbyView(FormView):
             'mode': 'submitting',
         }
 
-    def create_player(self):
+    def create_player(self, player_name):
         log.logger.debug("new player called")
         # Basic data obj for player. Eventually, this will be saved in cache.
         return {
             'hand': [],
             'wins': 0,
+            'player_avatar': avatar_url(player_name),
         }
