@@ -75,7 +75,6 @@ class PlayerView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         # Setup for game and player
-        # log.logger.debug('%r', self.request.session)
         if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
             return redirect(reverse('lobby-view'))
         
@@ -105,21 +104,16 @@ class PlayerView(FormView):
         self.is_card_czar = self.game_data['card_czar'] == self.player_id
         log.logger.debug('id %r name %r game %r', self.player_id, self.player_name, self.game_name)
 
-        # log.logger.debug(self.game_data)
-        # log.logger.debug(self.player_name)
         self.player_data = self.game_data['players'].get(self.player_name)
         # Deal hand if player doesn't have one.
-        # log.logger.debug('%r', self.player_data)
         if not self.player_data['hand']:
             self.player_data['hand'] = [
                 self.game_data['white_deck'].pop() for x in xrange(10)
             ]
 
         # Deal black card if game doesn't have one.
-        # FIXME: Game setup.
         if self.game_data['current_black_card'] is None:
-            self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
-        pprint(self.game_data['players'])
+            self.game_data['current_black_card'] = self.deal_black_card()
         self.write_state()
 
         if self.is_card_czar:
@@ -152,7 +146,6 @@ class PlayerView(FormView):
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
             kwargs['cards'] = [(player_id, self.replace_blanks(self.game_data['submissions'][player_id])) for player_id in self.game_data['submissions']]
-            log.logger.debug(kwargs['cards'])
         else:
             kwargs['blanks'] = black_cards[self.game_data['current_black_card']].count(blank_marker) or 1
             kwargs['cards'] = tuple(
@@ -162,8 +155,6 @@ class PlayerView(FormView):
 
     def form_valid(self, form):
         if self.is_card_czar:
-            log.logger.debug('player_id %r', self.player_id)
-            log.logger.debug(self.game_data)
             players = cache.get('players')
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
@@ -234,7 +225,7 @@ class PlayerView(FormView):
     def reset(self, winner=None, winner_id=None):
         self.game_data['submissions'] = {}
         num_blanks = black_cards[self.game_data['current_black_card']].count(blank_marker)
-        self.game_data['current_black_card'] = self.game_data['black_deck'].pop()
+        self.game_data['current_black_card'] = self.deal_black_card()
         self.game_data['players'][winner]['wins'] += 1
         self.game_data['card_czar'] = winner_id
         self.game_data['round'] += 1
@@ -246,6 +237,14 @@ class PlayerView(FormView):
             for player_name in self.game_data['players']:
                 if player_name != self.player_name:
                     self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
+
+    def deal_black_card(self):
+        black_card = self.game_data['black_deck'].pop()
+        if len(self.game_data['black_deck']) == 0:
+            shuffled_black = range(len(black_cards))
+            random.shuffle(shuffled_black)
+            self.game_data['black_deck'] = shuffled_black
+
 
 
 class LobbyView(FormView):
