@@ -141,7 +141,10 @@ class PlayerView(FormView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
-        context['last_round_winner'] = self.game_data.get('last_round_winner', '')
+        last_round_winner = self.game_data.get('last_round_winner', '')
+        context['last_round_winner'] = last_round_winner
+        if last_round_winner:
+            context['last_round_winner_avatar'] = self.game_data['players'][last_round_winner]['player_avatar']
         num_blanks = self.black_card.count(blank_marker)
         context['black_card'] = self.black_card.replace(blank_marker, '______')
         context['player_name'] = self.player_name
