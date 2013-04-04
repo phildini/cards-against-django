@@ -7,6 +7,10 @@
             <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
             <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}main.css">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+            {% if not show_form %}
+            <meta http-equiv="refresh" content="1;url=">
+            {% endif %}
         {% endblock %}
     </head>
 
