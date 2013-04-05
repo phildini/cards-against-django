@@ -90,24 +90,16 @@ class PlayerView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         # Setup for game and player
-        if not self.request.session.get('game_name') or not self.request.session.get('player_name'):
-            return redirect(reverse('lobby-view'))
         
         self.player_id = self.request.session.get('player_id')
         
         players = cache.get('players', {})
         player = players.get(self.player_id, {})
         if not player:
-            # del maybe overkill...
-            del self.request.session['player_id']
-            if self.request.session.get('player_name'):
-                del self.request.session['player_name']
-            if self.request.session.get('game_name'):
-                del self.request.session['game_name']
             return redirect(reverse('lobby-view'))
         
-        self.game_name = self.request.session.get('game_name')
-        self.player_name = self.request.session.get('player_name')
+        self.game_name = player['game']
+        self.player_name = player['name']
 
         try:
             self.game_data = cache.get('games').get(self.game_name)
@@ -191,8 +183,6 @@ class PlayerView(FormView):
         return super(PlayerView, self).form_valid(form)
 
     def write_state(self):
-        self.request.session['player_name'] = self.player_name
-        self.request.session['game_name'] = self.game_name
         self.game_data['players'][self.player_name] = self.player_data
         games_dict = cache.get('games')
         games_dict[self.game_name] = self.game_data
@@ -283,11 +273,6 @@ class LobbyView(FormView):
         if not self.player_id:
             self.player_id = uuid.uuid1()
             self.request.session['player_id'] = self.player_id
-            # del maybe overkill...
-            if self.request.session.get('player_name'):
-                del self.request.session['player_name']
-            if self.request.session.get('game_name'):
-                del self.request.session['game_name']
 
         return context
 
@@ -334,8 +319,6 @@ class LobbyView(FormView):
         cache.set('players', players)
 
         log.logger.debug(cache.get('players'))
-        self.request.session['game_name'] = game_name  # TODO check these should be removed, looks like we still rely on cookie contents for user/game name
-        self.request.session['player_name'] = player_name
 
         return super(LobbyView, self).form_valid(form)
 
