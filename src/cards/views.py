@@ -277,6 +277,7 @@ class LobbyView(FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
+        context['show_form'] = True
         self.player_id = self.request.session.get('player_id')
         if not self.player_id:
             self.player_id = uuid.uuid1()
