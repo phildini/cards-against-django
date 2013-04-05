@@ -141,6 +141,7 @@ class PlayerView(FormView):
     def get_context_data(self, *args, **kwargs):
 
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
+        context['players'] = self.game_data['players']
         last_round_winner = self.game_data.get('last_round_winner', '')
         context['last_round_winner'] = last_round_winner
         if last_round_winner:

@@ -29,6 +29,15 @@
     {% if last_round_winner %}
     <p>Last round winner was: <img src="{{ last_round_winner_avatar }}" alt="Player avatar"> {{ last_round_winner }}</p>
     {% endif %}
+    
+    <h4>stats</h4>
+    <!--
+        TODO move into a stats/winners url (also use a table)
+    -->
+
+    {% for player, player_details in players.items %}
+      <img src="{{ player_details.player_avatar }}" alt="Player avatar"> {{ player }} {{ player_details.wins }} </br>
+    {% endfor %}
 
 </div>
 {% endblock %}
