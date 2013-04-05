@@ -93,13 +93,13 @@ class PlayerView(FormView):
         
         self.player_id = self.request.session.get('player_id')
         
-        players = cache.get('players', {})
-        player = players.get(self.player_id, {})
-        if not player:
+        session_ids = cache.get('session_ids', {})
+        session_details = session_ids.get(self.player_id, {})
+        if not session_details:
             return redirect(reverse('lobby-view'))
         
-        self.game_name = player['game']
-        self.player_name = player['name']
+        self.game_name = session_details['game']
+        self.player_name = session_details['name']
 
         try:
             self.game_data = cache.get('games').get(self.game_name)
@@ -165,10 +165,10 @@ class PlayerView(FormView):
 
     def form_valid(self, form):
         if self.is_card_czar:
-            players = cache.get('players')
+            session_ids = cache.get('session_ids')
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
-            winner_name = players[uuid.UUID(winner)].get('name')
+            winner_name = session_ids[uuid.UUID(winner)].get('name')
             self.reset(winner_name, uuid.UUID(winner))
             
         else:
@@ -311,14 +311,12 @@ class LobbyView(FormView):
         cache.set('games', games)
 
         # Set the player properties in the cache
-        players = cache.get('players', {})
-        player = players.get(self.player_id, {})
-        player['name'] = player_name
-        player['game'] = game_name
-        players[self.player_id] = player
-        cache.set('players', players)
-
-        log.logger.debug(cache.get('players'))
+        session_ids = cache.get('session_ids', {})
+        session_details = session_ids.get(self.player_id, {})
+        session_details['name'] = player_name
+        session_details['game'] = game_name
+        session_ids[self.player_id] = session_details
+        cache.set('session_ids', session_ids)
 
         return super(LobbyView, self).form_valid(form)
 
