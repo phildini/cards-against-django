@@ -259,6 +259,7 @@ class LobbyView(FormView):
 
     def __init__(self, *args, **kwargs):
         self.game_list = cache.get('games')
+        self.player_counter = cache.get('player_counter', 0)  # this doesn't really count players, it counts number of lobby views
 
     # def dispatch(self, request, *args, **kwargs):
         # return super(PlayerView, self).dispatch(request, *args, **kwargs)
@@ -273,6 +274,9 @@ class LobbyView(FormView):
         if not self.player_id:
             self.player_id = uuid.uuid1()
             self.request.session['player_id'] = self.player_id
+        self.player_counter = cache.get('player_counter', 0) + 1
+        cache.set('player_counter', self.player_counter)
+        context['player_counter'] = self.player_counter
 
         return context
 
@@ -280,6 +284,7 @@ class LobbyView(FormView):
         kwargs = super(LobbyView, self).get_form_kwargs()
         if self.game_list:
             kwargs['game_list'] = [(game, game) for game in self.game_list.keys()]
+        kwargs['player_counter'] = self.player_counter
         return kwargs
 
     def form_valid(self, form):

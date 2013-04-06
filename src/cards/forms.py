@@ -56,8 +56,9 @@ class GameForm(forms.Form):
             self.game_list = kwargs.pop('game_list')
         except KeyError:
             self.game_list = []
+        self.player_counter = kwargs.pop('player_counter')
         super(GameForm, self).__init__(*args, **kwargs)
-        self.fields["player_name"].initial = random.choice(['phil', 'chris', 'nicholle'])  # DEBUG
+        self.fields["player_name"].initial = 'Player %d' % self.player_counter
         if self.game_list:
             self.fields["new_game"].initial = None
             self.fields['game_list'] = forms.ChoiceField(
