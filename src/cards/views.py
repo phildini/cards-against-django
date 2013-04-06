@@ -150,12 +150,13 @@ class PlayerView(FormView):
         return context
 
     def get_form_kwargs(self):
-        self.black_card = black_cards[self.game_data['current_black_card']]
+        black_card_text = black_cards[self.game_data['current_black_card']]['text']
+        self.black_card = black_card_text
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
             kwargs['cards'] = [(player_id, self.replace_blanks(self.game_data['submissions'][player_id])) for player_id in self.game_data['submissions']]
         else:
-            kwargs['blanks'] = black_cards[self.game_data['current_black_card']].count(blank_marker) or 1
+            kwargs['blanks'] = black_card_text.count(blank_marker) or 1
             kwargs['cards'] = tuple(
                 (card, white_cards[card]) for card in self.player_data['hand']
             )
@@ -205,7 +206,7 @@ class PlayerView(FormView):
 
     def replace_blanks(self, white_card_num_list):
         card_text = self.black_card
-        num_blanks = self.black_card.count(blank_marker)
+        num_blanks = card_text.count(blank_marker)
         # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
         if num_blanks == 0:
             card_num = white_card_num_list[0]
@@ -226,7 +227,7 @@ class PlayerView(FormView):
 
     def reset(self, winner=None, winner_id=None):
         self.game_data['submissions'] = {}
-        num_blanks = black_cards[self.game_data['current_black_card']].count(blank_marker)
+        num_blanks = black_cards[self.game_data['current_black_card']]['text'].count(blank_marker)
         self.game_data['current_black_card'] = self.deal_black_card()
         self.game_data['players'][winner]['wins'] += 1
         self.game_data['card_czar'] = winner_id
