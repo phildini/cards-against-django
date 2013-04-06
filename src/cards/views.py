@@ -119,6 +119,7 @@ class PlayerView(FormView):
 
         # Deal black card if game doesn't have one.
         if self.game_data['current_black_card'] is None:
+            # FIXME call reset, do not manually deal black card here; what if the black card is a "draw 3, pick 2" card.
             self.game_data['current_black_card'] = self.deal_black_card()
         self.write_state()
 
@@ -226,6 +227,8 @@ class PlayerView(FormView):
         return card_text
 
     def reset(self, winner=None, winner_id=None):
+        """NOTE this does not reset a game, it resets the cards on the table ready for the next round
+        """
         self.game_data['submissions'] = {}
         pick = black_cards[self.game_data['current_black_card']]['pick']
         self.game_data['current_black_card'] = self.deal_black_card()
@@ -234,10 +237,22 @@ class PlayerView(FormView):
         self.game_data['round'] += 1
         self.game_data['last_round_winner'] = winner
         
+        # replace used white cards
         for _ in xrange(pick):
             for player_name in self.game_data['players']:
+                # check we are not the card czar
                 if player_name != self.player_name:
                     self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
+        
+        # check if we draw additional cards based on black card
+        # NOTE anyone who joins after this point will not be given the extra draw cards
+        white_card_draw = black_cards[self.game_data['current_black_card']]['draw']
+        for _ in xrange(white_card_draw):
+            for player_name in self.game_data['players']:
+                # check we are not the card czar
+                if player_name != self.player_name:
+                    self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
+    
 
     def deal_black_card(self):
         black_card = self.game_data['black_deck'].pop()
