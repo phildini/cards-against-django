@@ -289,6 +289,7 @@ class LobbyView(FormView):
         self.player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', self.player_counter)
         context['player_counter'] = self.player_counter
+        log.logger.debug('self.player_id uuid %r', self.player_id)
 
         return context
 
