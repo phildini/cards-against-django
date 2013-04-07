@@ -26,7 +26,6 @@ Steps to run:
 
 5. start test/debug server:
 
-        cd src
         python manage.py runserver --settings=cah.settings.local 0.0.0.0:8000
 
 6. share and enjoy.
