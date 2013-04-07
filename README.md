@@ -16,6 +16,10 @@ Steps to run:
 
         pip install -r requirements/local.txt
 
+    Optional dependencies:
+    
+        easy_install django-debug-toolbar
+
 4. set secure key:
 
         export CAH_KEY='[some crypto-ish key of your choosing]'
