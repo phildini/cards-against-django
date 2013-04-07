@@ -11,6 +11,8 @@ DATABASES = {
         }
 }
 
+STATIC_URL = 'http://philipjohnjames.com/applesanon/static/'
+
 INSTALLED_APPS += (
     'gunicorn',
 )
