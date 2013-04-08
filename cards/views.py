@@ -39,13 +39,12 @@ import hashlib
 import urllib
 
 from django.conf import settings
-from django.views.generic import FormView, TemplateView
+from django.utils.safestring import mark_safe
+from django.views.generic import FormView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
 from forms import PlayerForm, GameForm, CzarForm
-from game import Game
-from pprint import pprint
 import log
 import uuid
 
@@ -154,11 +153,13 @@ class PlayerView(FormView):
         self.black_card = black_card_text
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
-            kwargs['cards'] = [(player_id, self.replace_blanks(self.game_data['submissions'][player_id])) for player_id in self.game_data['submissions']]
+            kwargs['cards'] = [
+                (player_id, mark_safe(self.replace_blanks(self.game_data['submissions'][player_id]))) for player_id in self.game_data['submissions']
+            ]
         else:
             kwargs['blanks'] = black_cards[self.game_data['current_black_card']]['pick']
             kwargs['cards'] = tuple(
-                (card, white_cards[card]) for card in self.player_data['hand']
+                (card, mark_safe(white_cards[card])) for card in self.player_data['hand']
             )
         return kwargs
 
