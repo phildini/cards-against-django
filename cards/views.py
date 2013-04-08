@@ -71,9 +71,9 @@ def gravatar_url(email, size=50, default='monsterid'):
     """
     gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
     if default:
-        gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+        gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
     else:
-        gravatar_url += urllib.urlencode({'s':str(size)})
+        gravatar_url += urllib.urlencode({'s': str(size)})
     return gravatar_url
 
 avatar_url = gravatar_robohash_url
@@ -90,14 +90,14 @@ class PlayerView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         # Setup for game and player
-        
+
         self.player_id = self.request.session.get('player_id')
-        
+
         session_ids = cache.get('session_ids', {})
         session_details = session_ids.get(self.player_id, {})
         if not session_details:
             return redirect(reverse('lobby-view'))
-        
+
         self.game_name = session_details['game']
         self.player_name = session_details['name']
 
@@ -126,7 +126,6 @@ class PlayerView(FormView):
         if self.is_card_czar:
             self.form_class = CzarForm
         return super(PlayerView, self).dispatch(request, *args, **kwargs)
-
 
     def get_success_url(self):
         return reverse('player-view')
@@ -170,7 +169,7 @@ class PlayerView(FormView):
             log.logger.debug(winner)
             winner_name = session_ids[uuid.UUID(winner)].get('name')
             self.reset(winner_name, uuid.UUID(winner))
-            
+
         else:
             submitted = form.cleaned_data['card_selection']
             # The form returns unicode strings. We want ints in our list.
@@ -236,14 +235,14 @@ class PlayerView(FormView):
         self.game_data['card_czar'] = winner_id
         self.game_data['round'] += 1
         self.game_data['last_round_winner'] = winner
-        
+
         # replace used white cards
         for _ in xrange(pick):
             for player_name in self.game_data['players']:
                 # check we are not the card czar
                 if player_name != self.player_name:
                     self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
-        
+
         # check if we draw additional cards based on black card
         # NOTE anyone who joins after this point will not be given the extra draw cards
         white_card_draw = black_cards[self.game_data['current_black_card']]['draw']
@@ -252,7 +251,6 @@ class PlayerView(FormView):
                 # check we are not the card czar
                 if player_name != self.player_name:
                     self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
-    
 
     def deal_black_card(self):
         black_card = self.game_data['black_deck'].pop()
@@ -261,7 +259,6 @@ class PlayerView(FormView):
             random.shuffle(shuffled_black)
             self.game_data['black_deck'] = shuffled_black
         return black_card
-
 
 
 class LobbyView(FormView):
@@ -303,7 +300,7 @@ class LobbyView(FormView):
     def form_valid(self, form):
         self.player_id = self.request.session.get('player_id')
         player_name = form.cleaned_data['player_name']
-        
+
         existing_game = True
         # Set the game properties in the cache
         game_name = form.cleaned_data['new_game']

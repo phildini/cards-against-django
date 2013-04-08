@@ -19,11 +19,15 @@
     <p>{{ filled_in_question|safe}} </p>
 
     {% if show_form %}
+    {% autoescape off %}
     <form action="{{ action }}" method="post">
     	{% csrf_token %}
-    	{{ form.as_p }} 
+    	{% for field in form %}
+            {{ field }}
+        {% endfor %}
     <input type="submit" value="Submit" />
     </form>
+    {% endautoescape %}
     {% endif %}
 
     {% if last_round_winner %}
