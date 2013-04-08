@@ -3,7 +3,9 @@
 #
 
 from django import forms
-from django.forms.widgets import RadioSelect, CheckboxSelectMultiple,Select
+from django.forms.widgets import (
+    RadioSelect,
+)
 from django.core.exceptions import ValidationError
 import random
 
@@ -16,10 +18,10 @@ class PlayerForm(forms.Form):
         super(PlayerForm, self).__init__(*args, **kwargs)
         for blank in xrange(blanks):
             self.fields['card_selection%d' % (blank,)] = forms.ChoiceField(
-            widget=RadioSelect,
-            required=True,
-            choices=cards,
-        )
+                widget=RadioSelect,
+                required=True,
+                choices=cards,
+            )
         self.blanks = blanks
 
     def clean(self):
@@ -28,10 +30,12 @@ class PlayerForm(forms.Form):
             field_name = 'card_selection%d' % (blank,)
             if self.cleaned_data.get(field_name) in answers:
                 raise ValidationError("You can't use the same answer twice")
-            else: answers.append(self.cleaned_data.get(field_name))
+            else:
+                answers.append(self.cleaned_data.get(field_name))
 
         self.cleaned_data['card_selection'] = answers
         return self.cleaned_data
+
 
 class CzarForm(forms.Form):
 
@@ -40,10 +44,9 @@ class CzarForm(forms.Form):
         super(CzarForm, self).__init__(*args, **kwargs)
         self.fields['card_selection'] = forms.ChoiceField(
             widget=RadioSelect,
-            required = True,
-            choices = cards,
+            required=True,
+            choices=cards,
         )
-
 
 
 class GameForm(forms.Form):
@@ -62,9 +65,9 @@ class GameForm(forms.Form):
         if self.game_list:
             self.fields["new_game"].initial = None
             self.fields['game_list'] = forms.ChoiceField(
-                    widget=RadioSelect,
-                    required=False,
-                    choices=self.game_list,
+                widget=RadioSelect,
+                required=False,
+                choices=self.game_list,
             )
         else:
             self.fields["new_game"].initial = random.choice(['cat', 'dog', 'bird'])  # DEBUG
