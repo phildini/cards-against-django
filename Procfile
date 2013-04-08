@@ -1,1 +1,1 @@
-web: gunicorn cah.wsgi
+web: newrelic-admin run-program gunicorn cah.wsgi
