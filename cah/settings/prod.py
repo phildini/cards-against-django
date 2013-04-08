@@ -14,7 +14,7 @@ DATABASES = {
         }
 }
 
-ALLOWED_HOSTS = ['*.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 STATIC_URL = 'http://philipjohnjames.com/applesanon/static/'
 
