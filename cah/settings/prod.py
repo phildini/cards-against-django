@@ -21,3 +21,11 @@ STATIC_URL = 'http://philipjohnjames.com/applesanon/static/'
 INSTALLED_APPS += (
     'gunicorn',
 )
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 3600,
+    }
+}

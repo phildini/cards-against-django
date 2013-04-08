@@ -27,7 +27,8 @@ INTERNAL_IPS = ('127.0.0.1',)
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake'
+        'LOCATION': 'unique-snowflake',
+        'TIMOUT': 3600,
     }
 }
 STATIC_ROOT= ''
