@@ -48,11 +48,11 @@ from forms import PlayerForm, GameForm, CzarForm
 import log
 import uuid
 
+from models import BlackCard
 
 # Grab data from the cards json and set global, unaltered decks.
 with open(os.path.join(settings.PROJECT_ROOT, 'data/data.json')) as data:
     cards = json.loads(data.read())
-    black_cards = cards['black_cards']
     white_cards = cards['white_cards']
 BLANK_MARKER = u"\uFFFD"
 
@@ -149,7 +149,9 @@ class PlayerView(FormView):
         return context
 
     def get_form_kwargs(self):
-        black_card_text = black_cards[self.game_data['current_black_card']]['text']
+        black_card_id = self.game_data['current_black_card']
+        temp_black_card = BlackCard.objects.get(id=black_card_id)
+        black_card_text = temp_black_card.text
         self.black_card = black_card_text
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
@@ -157,7 +159,7 @@ class PlayerView(FormView):
                 (player_id, mark_safe(self.replace_blanks(self.game_data['submissions'][player_id]))) for player_id in self.game_data['submissions']
             ]
         else:
-            kwargs['blanks'] = black_cards[self.game_data['current_black_card']]['pick']
+            kwargs['blanks'] = temp_black_card.pick
             kwargs['cards'] = tuple(
                 (card, mark_safe(white_cards[card])) for card in self.player_data['hand']
             )
@@ -230,7 +232,10 @@ class PlayerView(FormView):
         """NOTE this does not reset a game, it resets the cards on the table ready for the next round
         """
         self.game_data['submissions'] = {}
-        pick = black_cards[self.game_data['current_black_card']]['pick']
+        
+        black_card_id = self.game_data['current_black_card']
+        temp_black_card = BlackCard.objects.get(id=black_card_id)
+        pick = temp_black_card.pick
         self.game_data['current_black_card'] = self.deal_black_card()
         self.game_data['players'][winner]['wins'] += 1
         self.game_data['card_czar'] = winner_id
@@ -246,7 +251,7 @@ class PlayerView(FormView):
 
         # check if we draw additional cards based on black card
         # NOTE anyone who joins after this point will not be given the extra draw cards
-        white_card_draw = black_cards[self.game_data['current_black_card']]['draw']
+        white_card_draw = temp_black_card.draw
         for _ in xrange(white_card_draw):
             for player_name in self.game_data['players']:
                 # check we are not the card czar
@@ -255,10 +260,14 @@ class PlayerView(FormView):
 
     def deal_black_card(self):
         black_card = self.game_data['black_deck'].pop()
+        """
+        # FIXME card re-use. This mechanism won't work with cards in database
+        # we need to keep track of used cards (especially if only a subset of cards are used)
         if len(self.game_data['black_deck']) == 0:
             shuffled_black = range(len(black_cards))
             random.shuffle(shuffled_black)
             self.game_data['black_deck'] = shuffled_black
+        """
         return black_card
 
 
@@ -347,7 +356,7 @@ class LobbyView(FormView):
         """
         shuffled_white = range(len(white_cards))
         random.shuffle(shuffled_white)
-        shuffled_black = range(len(black_cards))
+        shuffled_black = [b.id for b in BlackCard.objects.all()]
         random.shuffle(shuffled_black)
 
         # Basic data object for a game. Eventually, this will be saved in cache.
