@@ -54,7 +54,7 @@ with open(os.path.join(settings.PROJECT_ROOT, 'data/data.json')) as data:
     cards = json.loads(data.read())
     black_cards = cards['black_cards']
     white_cards = cards['white_cards']
-    blank_marker = cards['blank']
+BLANK_MARKER = u"\uFFFD"
 
 
 def gravatar_robohash_url(email, size=50):
@@ -136,7 +136,7 @@ class PlayerView(FormView):
         context['last_round_winner'] = last_round_winner
         if last_round_winner:
             context['last_round_winner_avatar'] = self.game_data['players'][last_round_winner]['player_avatar']
-        context['black_card'] = self.black_card.replace(blank_marker, '______')
+        context['black_card'] = self.black_card.replace(BLANK_MARKER, '______')
         context['player_name'] = self.player_name
         context['player_avatar'] = self.game_data['players'][self.player_name]['player_avatar']
         context['game_name'] = self.game_name
@@ -207,7 +207,7 @@ class PlayerView(FormView):
 
     def replace_blanks(self, white_card_num_list):
         card_text = self.black_card
-        num_blanks = card_text.count(blank_marker)
+        num_blanks = card_text.count(BLANK_MARKER)
         # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
         if num_blanks == 0:
             card_num = white_card_num_list[0]
@@ -223,7 +223,7 @@ class PlayerView(FormView):
                 to make that decision which is way too much effort at
                 the moment."""
                 white_text = '<strong>' + white_text + '</strong>'
-                card_text = card_text.replace(blank_marker, white_text, 1)
+                card_text = card_text.replace(BLANK_MARKER, white_text, 1)
         return card_text
 
     def reset(self, winner=None, winner_id=None):
