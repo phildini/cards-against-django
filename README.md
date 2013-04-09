@@ -24,8 +24,19 @@ Steps to run:
 
         export CAH_KEY='[some crypto-ish key of your choosing]'
 
-5. start test/debug server:
+5. one time database setup:
+
+        python manage.py syncdb --settings=cah.settings.local
+
+6. start test/debug server:
 
         python manage.py runserver --settings=cah.settings.local 0.0.0.0:8000
 
-6. share and enjoy.
+7. share and enjoy.
+
+Sample manage shell:
+
+    $ python manage.py shell --settings=cah.settings.local
+    
+        import cards
+        cards.models.BlackCard.objects.get(id=1)
