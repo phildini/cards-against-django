@@ -1,14 +1,14 @@
-
-from django.db import models
+from django.db.models import get_models, get_app
 from django.contrib import admin
+from django.contrib.admin.sites import AlreadyRegistered
 
-from cards.models import (
-    Game,
-    WhiteCard,
-    BlackCard,
-)
+def autoregister(*app_list):
+    for app_name in app_list:
+        app_models = get_app(app_name)
+        for model in get_models(app_models):
+            try:
+                admin.site.register(model)
+            except AlreadyRegistered:
+                pass
 
-# Explicit > implicit.
-admin.site.register(Game)
-admin.site.register(WhiteCard)
-admin.site.register(BlackCard)
+autoregister('cards')
