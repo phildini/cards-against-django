@@ -48,12 +48,9 @@ from forms import PlayerForm, GameForm, CzarForm
 import log
 import uuid
 
-from models import BlackCard
+from models import BlackCard, WhiteCard
 
-# Grab data from the cards json and set global, unaltered decks.
-with open(os.path.join(settings.PROJECT_ROOT, 'data/data.json')) as data:
-    cards = json.loads(data.read())
-    white_cards = cards['white_cards']
+
 BLANK_MARKER = u"\uFFFD"
 
 
@@ -161,7 +158,8 @@ class PlayerView(FormView):
         else:
             kwargs['blanks'] = temp_black_card.pick
             kwargs['cards'] = tuple(
-                (card, mark_safe(white_cards[card])) for card in self.player_data['hand']
+            
+                (card, mark_safe(WhiteCard.objects.get(id=card).text)) for card in self.player_data['hand']
             )
         return kwargs
 
@@ -213,12 +211,12 @@ class PlayerView(FormView):
         # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
         if num_blanks == 0:
             card_num = white_card_num_list[0]
-            white_text = white_cards[card_num]
+            white_text = WhiteCard.objects.get(id=card_num).text
             white_text = '<strong>' + white_text + '</strong>'
             card_text = card_text + ' ' + white_text
         else:
             for card_num in white_card_num_list:
-                white_text = white_cards[card_num]
+                white_text = WhiteCard.objects.get(id=card_num).text
                 white_text = white_text.rstrip('.')
                 """We can't change the case of the first letter in case
                 it is a real name :-( We'd need to consult a word list,
@@ -354,7 +352,7 @@ class LobbyView(FormView):
 
         Also take a look at http://code.google.com/p/gcge/
         """
-        shuffled_white = range(len(white_cards))
+        shuffled_white = [w.id for w in WhiteCard.objects.all()]
         random.shuffle(shuffled_white)
         shuffled_black = [b.id for b in BlackCard.objects.all()]
         random.shuffle(shuffled_black)
