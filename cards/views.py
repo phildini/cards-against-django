@@ -48,7 +48,7 @@ from forms import PlayerForm, GameForm, CzarForm
 import log
 import uuid
 
-from models import BlackCard, WhiteCard
+from models import BlackCard, WhiteCard, Game
 
 
 BLANK_MARKER = u"\uFFFD"
@@ -98,13 +98,15 @@ class PlayerView(FormView):
         self.player_name = session_details['name']
 
         try:
-            self.game_data = cache.get('games').get(self.game_name)
-        except AttributeError:
+            self.game_dbobj = Game.objects.get(name=self.game_name)  # FIXME his name is horrible
+            self.game_data = self.game_dbobj.gamedata
+        except Game.DoesNotExist:
             return redirect(reverse('lobby-view'))
         if not self.game_data:
             return redirect(reverse('lobby-view'))
         self.is_card_czar = self.game_data['card_czar'] == self.player_id
         log.logger.debug('id %r name %r game %r', self.player_id, self.player_name, self.game_name)
+        log.logger.debug('self.game_data %r', self.game_data)
 
         self.player_data = self.game_data['players'].get(self.player_name)
         # Deal hand if player doesn't have one.
@@ -169,8 +171,8 @@ class PlayerView(FormView):
             session_ids = cache.get('session_ids')
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
-            winner_name = session_ids[uuid.UUID(winner)].get('name')
-            self.reset(winner_name, uuid.UUID(winner))
+            winner_name = session_ids[winner].get('name')
+            self.reset(winner_name, winner)
 
         else:
             submitted = form.cleaned_data['card_selection']
@@ -180,14 +182,11 @@ class PlayerView(FormView):
                 self.player_data['hand'].remove(card)
             log.logger.debug('%r', form.cleaned_data['card_selection'])
         self.write_state()
-        log.logger.debug(cache.get('games'))
         return super(PlayerView, self).form_valid(form)
 
     def write_state(self):
         self.game_data['players'][self.player_name] = self.player_data
-        games_dict = cache.get('games')
-        games_dict[self.game_name] = self.game_data
-        cache.set('games', games_dict)
+        self.game_dbobj.save()
 
     def can_show_form(self):
         flag = False
@@ -276,7 +275,7 @@ class LobbyView(FormView):
     form_class = GameForm
 
     def __init__(self, *args, **kwargs):
-        self.game_list = cache.get('games')
+        self.game_list = [(game.name, game.name) for game in Game.objects.all()]  # FIXME this is terrible
         self.player_counter = cache.get('player_counter', 0)  # this doesn't really count players, it counts number of lobby views
 
     # def dispatch(self, request, *args, **kwargs):
@@ -289,8 +288,12 @@ class LobbyView(FormView):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
         context['show_form'] = True
         self.player_id = self.request.session.get('player_id')
+        if isinstance(self.player_id, uuid.UUID):
+            # temp hack, to use strings for uuid incase cookie still around from old version
+            self.player_id = str(self.player_id)
+            self.request.session['player_id'] = self.player_id
         if not self.player_id:
-            self.player_id = uuid.uuid1()
+            self.player_id = str(uuid.uuid1())
             self.request.session['player_id'] = self.player_id
         self.player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', self.player_counter)
@@ -302,7 +305,7 @@ class LobbyView(FormView):
     def get_form_kwargs(self):
         kwargs = super(LobbyView, self).get_form_kwargs()
         if self.game_list:
-            kwargs['game_list'] = [(game, game) for game in self.game_list.keys()]
+            kwargs['game_list'] = self.game_list
         kwargs['player_counter'] = self.player_counter
         return kwargs
 
@@ -313,26 +316,34 @@ class LobbyView(FormView):
         existing_game = True
         # Set the game properties in the cache
         game_name = form.cleaned_data['new_game']
-        games = cache.get('games', {})
         if game_name:
             # Attempting to create a new game
-            existing_game = games.get(game_name)
+            try:
+                # see if already exists
+                existing_game = Game.objects.get(name=game_name)
+            except Game.DoesNotExist:
+                existing_game = None
             if not existing_game:
                 # really a new game
                 new_game = self.create_game()
                 new_game['players'][player_name] = self.create_player(player_name)
                 new_game['card_czar'] = self.player_id
-                games[form.cleaned_data['new_game']] = new_game
+                tmp_game = Game(name=form.cleaned_data['new_game'])
+                tmp_game.gamedata = new_game
+                tmp_game.save()
         if existing_game:
             if not game_name:
                 game_name = form.cleaned_data.get('game_list')
+            existing_game = Game.objects.get(name=game_name)  # existing_game maybe a bool
             log.logger.debug('existing_game %r', (game_name, player_name,))
-            if not games[game_name]['players'].get(player_name):
-                games[game_name]['players'][player_name] = self.create_player(player_name)
+            log.logger.debug('existing_game.gamedata %r', (existing_game.gamedata,))
+            log.logger.debug('existing_game.gamedata players %r', (existing_game.gamedata['players'],))
+            if not existing_game.gamedata['players'].get(player_name):
+                existing_game.gamedata['players'][player_name] = self.create_player(player_name)
             else:
                 # FIXME
                 raise NotImplementedError('joining with player names alreaady in same game causes problems')
-        cache.set('games', games)
+            existing_game.save()
 
         # Set the player properties in the cache
         session_ids = cache.get('session_ids', {})

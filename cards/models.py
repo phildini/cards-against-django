@@ -4,12 +4,21 @@
 
 from django.db import models
 
+from jsonfield import JSONField
+
+
 # Create your models here.
 
 class Game(models.Model):
 
-    name = models.CharField(max_length = 140)
+    name = models.CharField(max_length = 140)  # FIXME pk
     game_state = models.CharField(max_length = 140)
+    
+    gamedata = JSONField()
+
+    def __unicode__(self):
+        # FIXME add game start time, include num players and rounds in display name
+        return self.name
 
 
 class BlackCard(models.Model):

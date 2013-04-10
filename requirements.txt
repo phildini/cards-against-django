@@ -8,3 +8,5 @@ psycopg2==2.4.6
 wsgiref==0.1.2
 newrelic==1.10.2.38
 dj-database-url==0.2.1
+jsonfield==0.9.13
+
