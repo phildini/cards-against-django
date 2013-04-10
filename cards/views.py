@@ -32,13 +32,10 @@
 # PlayerView will return to LobbyView any request that does not have those things.
 # On the cache, 'players' will hav a mapping of ids to players.
 
-import os
-import json
 import random
 import hashlib
 import urllib
 
-from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse
@@ -161,7 +158,7 @@ class PlayerView(FormView):
             kwargs['blanks'] = temp_black_card.pick
             # FIXME many singleton selects here, also only need one column
             kwargs['cards'] = tuple(
-            
+
                 (card, mark_safe(WhiteCard.objects.get(id=card).text)) for card in self.player_data['hand']
             )
         return kwargs
@@ -230,7 +227,7 @@ class PlayerView(FormView):
         """NOTE this does not reset a game, it resets the cards on the table ready for the next round
         """
         self.game_data['submissions'] = {}
-        
+
         black_card_id = self.game_data['current_black_card']
         temp_black_card = BlackCard.objects.get(id=black_card_id)
         pick = temp_black_card.pick
