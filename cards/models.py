@@ -11,7 +11,7 @@ from jsonfield import JSONField
 
 class Game(models.Model):
 
-    name = models.CharField(max_length = 140)  # FIXME pk
+    name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
     game_state = models.CharField(max_length = 140)
     
     gamedata = JSONField()
