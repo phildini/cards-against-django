@@ -8,6 +8,7 @@ from django.forms.widgets import (
 )
 from django.core.exceptions import ValidationError
 import random
+from cards.models import Game
 
 
 class PlayerForm(forms.Form):
@@ -76,5 +77,10 @@ class GameForm(forms.Form):
         if self.cleaned_data.get('new_game') and self.cleaned_data.get('game_list'):
             raise ValidationError("You can't create a new game and join an existing one. Them's the rules.")
         if self.cleaned_data.get('new_game') in self.game_list:
-            raise ValidationError("You can't creat a game with the same name as an existing one. Them's the rules.")
+            raise ValidationError("You can't create a game with the same name as an existing one. Them's the rules.")
+        if self.cleaned_data.get('game_list'):
+            game = Game.objects.get(name=self.cleaned_data.get('game_list'))
+            players = game.gamedata['players']
+            if self.cleaned_data.get('player_name') in players.keys():
+                raise ValidationError("This player name already exists in that game.")
         return self.cleaned_data
