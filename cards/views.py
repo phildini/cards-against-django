@@ -157,6 +157,7 @@ class PlayerView(FormView):
             ]
         else:
             kwargs['blanks'] = temp_black_card.pick
+            # FIXME many singleton selects here, also only need one column
             kwargs['cards'] = tuple(
             
                 (card, mark_safe(WhiteCard.objects.get(id=card).text)) for card in self.player_data['hand']
@@ -352,6 +353,7 @@ class LobbyView(FormView):
 
         Also take a look at http://code.google.com/p/gcge/
         """
+        # FIXME only need id attributes
         shuffled_white = [w.id for w in WhiteCard.objects.all()]
         random.shuffle(shuffled_white)
         shuffled_black = [b.id for b in BlackCard.objects.all()]
