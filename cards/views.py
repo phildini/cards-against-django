@@ -214,6 +214,7 @@ class PlayerView(FormView):
             card_text = card_text + ' ' + white_text
         else:
             for card_num in white_card_num_list:
+                # FIXME many singleton selects
                 white_text = WhiteCard.objects.get(id=card_num).text
                 white_text = white_text.rstrip('.')
                 """We can't change the case of the first letter in case
@@ -362,10 +363,9 @@ class LobbyView(FormView):
 
         Also take a look at http://code.google.com/p/gcge/
         """
-        # FIXME only need id attributes
-        shuffled_white = [w.id for w in WhiteCard.objects.all()]
+        shuffled_white = [x[0] for x in WhiteCard.objects.values_list('id')]
         random.shuffle(shuffled_white)
-        shuffled_black = [b.id for b in BlackCard.objects.all()]
+        shuffled_black = [x[0] for x in BlackCard.objects.values_list('id')]
         random.shuffle(shuffled_black)
 
         # Basic data object for a game. Eventually, this will be saved in cache.
@@ -393,6 +393,8 @@ class LobbyView(FormView):
 def game_view(request, game_num):
     game = Game.objects.get(id=game_num)
     # FIXME handle DoesNotExist gracefully
+    
+    # TODO unnormalize black card text, shove into game object
     black_card_id = game.gamedata['current_black_card']
     black_card = BlackCard.objects.get(id=black_card_id)
 
