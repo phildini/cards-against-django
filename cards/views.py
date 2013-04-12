@@ -147,9 +147,11 @@ class PlayerView(FormView):
         self.black_card = black_card_text
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
-            kwargs['cards'] = [
+            czar_selection_options = [
                 (player_id, mark_safe(self.replace_blanks(self.game_data['submissions'][player_id]))) for player_id in self.game_data['submissions']
             ]
+            random.shuffle(czar_selection_options)
+            kwargs['cards'] = czar_selection_options
         else:
             kwargs['blanks'] = temp_black_card.pick
             # FIXME many singleton selects here, also only need one column
