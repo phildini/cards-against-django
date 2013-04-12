@@ -35,16 +35,17 @@
 import random
 import hashlib
 import urllib
+import log
+import uuid
 
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
-from forms import PlayerForm, GameForm, CzarForm
-import log
-import uuid
+from django.shortcuts import render_to_response
 
+from forms import PlayerForm, GameForm, CzarForm
 from models import BlackCard, WhiteCard, Game
 
 
@@ -387,3 +388,17 @@ class LobbyView(FormView):
             'wins': 0,
             'player_avatar': avatar_url(player_name),
         }
+
+# FIXME we probably want a Class here like the other views
+def game_view(request, game_num):
+    game = Game.objects.get(id=game_num)
+    # FIXME handle DoesNotExist gracefully
+    black_card_id = game.gamedata['current_black_card']
+    black_card = BlackCard.objects.get(id=black_card_id)
+
+    d = {}
+    d['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
+    d['game'] = game
+    d['black_card'] = black_card.text.replace(BLANK_MARKER, '______')
+    d['card_czar_name'] = game.gamedata['card_czar']
+    return render_to_response("game_view.html", d)

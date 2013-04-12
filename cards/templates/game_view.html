@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <p>Game ({{game.id}}): {{game.name}}.</p>
+
+    <h3>Current card</h3>
+    
+    {% comment %}
+    <!--  FIXME css not working here -->
+    {% endcomment %}
+    <div class="btn btn-inverse card">
+    <p class="text_left">{{ black_card|safe }}</p>
+    </div>
+    
+    
+    {% comment %}
+    <!--  TODO card_czar_name not yet available, we have uuid -->
+    <p>{{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
+    {% endcomment %}
+    
+    <h3>Current standings<h3>
+
+    <table>
+        <tr>
+            <th>Player</th>
+            <th>Wins</th>
+        </tr>
+        
+        {% for player, player_details in game.gamedata.players.items %}
+        <tr>
+            <td>
+                {% comment %}
+                <!--  TODO  css for player name/card div/container. Also sort order (on wins then playername) needs to be added -->
+                {% endcomment %}
+                <img src="{{ player_details.player_avatar }}" alt="Player avatar"></br> {{ player }}
+            </td>
+            <td>
+                {{ player_details.wins }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    {% comment %}
+    <!--  TODO previous winning cards (filled in) -->
+    {% endcomment %}
+
+</div>
+{% endblock %}
