@@ -122,6 +122,7 @@ class PlayerView(FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
+        context['game'] = self.game_dbobj
         context['players'] = self.game_data['players']
         last_round_winner = self.game_data.get('last_round_winner', '')
         context['last_round_winner'] = last_round_winner
@@ -367,7 +368,7 @@ class LobbyView(FormView):
             'players': {},
             'current_black_card': None,  # get a new one my shuffled_black.pop()
             'submissions': {},
-            'round': 0,
+            'round': 1,  # FIXME reset() which is next round should be called at start of each round, when that is done this should be zero
             'card_czar': '',
             'white_deck': shuffled_white,
             'black_deck': shuffled_black,
