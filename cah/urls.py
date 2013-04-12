@@ -10,9 +10,8 @@ admin.autodiscover()
 
 from cards.views import (
     PlayerView,
-    # GameView,
+    GameView,
     LobbyView,
-    game_view,
 )
 
 urlpatterns = patterns('',
@@ -25,8 +24,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
-    # url(r'^game/', GameView.as_view(), name="game-view"),
     url(r'^player/', PlayerView.as_view(), name="player-view"),
-    url(r'^game/(\d+)/$', game_view),
+    url(r'^game/(?P<pk>\d+)/$', GameView.as_view(), name="game-view"),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -33,11 +33,10 @@ import log
 import uuid
 
 from django.utils.safestring import mark_safe
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
-from django.shortcuts import render_to_response
 
 from forms import PlayerForm, GameForm, CzarForm
 from models import BlackCard, WhiteCard, Game
@@ -386,18 +385,19 @@ class LobbyView(FormView):
             'player_avatar': avatar_url(player_name),
         }
 
-# FIXME we probably want a Class here like the other views
-def game_view(request, game_num):
-    game = Game.objects.get(id=game_num)
-    # FIXME handle DoesNotExist gracefully
-    
-    # TODO unnormalize black card text, shove into game object
-    black_card_id = game.gamedata['current_black_card']
-    black_card = BlackCard.objects.get(id=black_card_id)
 
-    d = {}
-    d['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
-    d['game'] = game
-    d['black_card'] = black_card.text.replace(BLANK_MARKER, '______')
-    d['card_czar_name'] = game.gamedata['card_czar']
-    return render_to_response("game_view.html", d)
+class GameView(DetailView):
+
+    model = Game
+    template_name = 'game_view.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(GameView, self).get_context_data(*args, **kwargs)
+        black_card_id = self.get_object().gamedata['current_black_card']
+        black_card = BlackCard.objects.get(id=black_card_id)
+        context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
+        context['game'] = self.get_object()
+        context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')
+        context['card_czar_name'] = self.get_object().gamedata['card_czar']
+
+        return context

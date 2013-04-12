@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from jsonfield import JSONField
 from model_utils.models import TimeStampedModel
 
-# Create your models here.
 
 class Game(TimeStampedModel):
 
