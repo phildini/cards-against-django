@@ -2,10 +2,7 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
-# Vision for data structure to be stored in cache:
-
-# games: {
-#     game1: {
+# Game.gamedata: {
 #         players: {
 #             player1: {
 #                 hand: [...],
@@ -18,13 +15,10 @@
 #         current_black_card = None|int,
 #         submissions = [dict of player submissions for the round],
 #         round: int,
-#         card_czar = 'player1',  # int index into 'players'
+#         card_czar = NOTE this is currently a UUID # 'player1',  # int index into 'players'
 #         black_deck = [],
 #         white_deck = [],
-#     },
-#     game2 {...},
-#     ...
-# }
+#     }
 
 # Contract between LobbyView and PlayerView:
 #

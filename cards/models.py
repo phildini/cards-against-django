@@ -14,7 +14,7 @@ class Game(models.Model):
     name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
     game_state = models.CharField(max_length = 140)
     
-    gamedata = JSONField()
+    gamedata = JSONField()  # See view doc comments
 
     def __unicode__(self):
         # FIXME add game start time, include num players and rounds in display name
