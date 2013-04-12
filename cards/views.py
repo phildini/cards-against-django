@@ -13,9 +13,9 @@
 #             ...
 #         },
 #         current_black_card = None|int,
-#         submissions = [dict of player submissions for the round],
-#         round: int,
-#         card_czar = NOTE this is currently a UUID # 'player1',  # int index into 'players'
+#         submissions = {dict of player str UUID: [list of card numbers]}
+#         round: int,  round number where round 0 is the first round
+#         card_czar = NOTE this is currently a str of a UUID # 'player1',  # int index into 'players'
 #         black_deck = [],
 #         white_deck = [],
 #     }
