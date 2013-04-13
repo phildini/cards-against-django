@@ -287,7 +287,9 @@ class GameView(DetailView):
             card czar (show waiting for players OR select winner)
             white card player (select card(s) OR waiting for other white card players OR all submitted white cards)
         """
-        context['card_czar_name'] = game.gamedata['card_czar']
+        card_czar_name = game.gamedata['card_czar']
+        context['card_czar_name'] = card_czar_name
+        context['card_czar_avatar'] = game.gamedata['players'][card_czar_name]['player_avatar']
 
         return context
 
