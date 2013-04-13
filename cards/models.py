@@ -84,7 +84,6 @@ class Game(TimeStampedModel):
                 if player_name != czar_name:
                     self.gamedata['players'][player_name]['hand'].append(self.gamedata['white_deck'].pop())
 
-
     def create_game(self):
         log.logger.debug("New Game called")
         """Create shuffled decks
@@ -142,6 +141,7 @@ class Player(TimeStampedModel):
 
 
 BLANK_MARKER = u"\uFFFD"
+
 
 class BlackCard(models.Model):
     text = models.CharField(max_length=255)

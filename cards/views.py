@@ -96,7 +96,7 @@ class PlayerView(FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
         context['game'] = self.game_dbobj
-        
+
         # FIXME additional db IO :-( TODO cache in game?
         black_card_id = self.game_data['current_black_card']
         temp_black_card = BlackCard.objects.get(id=black_card_id)
@@ -264,8 +264,6 @@ class LobbyView(FormView):
         cache.set('session_ids', session_ids)
 
         return super(LobbyView, self).form_valid(form)
-
-
 
 
 class GameView(DetailView):
