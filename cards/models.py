@@ -41,6 +41,18 @@ class Game(TimeStampedModel):
         # FIXME add game start time, include num players and rounds in display name
         return self.name
 
+    def deal_black_card(self):
+        black_card = self.gamedata['black_deck'].pop()
+        """
+        # FIXME card re-use. This mechanism won't work with cards in database
+        # we need to keep track of used cards (especially if only a subset of cards are used)
+        if len(self.gamedata['black_deck']) == 0:
+            shuffled_black = range(len(black_cards))
+            random.shuffle(shuffled_black)
+            self.gamedata['black_deck'] = shuffled_black
+        """
+        return black_card
+
     def create_game(self):
         log.logger.debug("New Game called")
         """Create shuffled decks

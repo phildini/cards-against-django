@@ -85,7 +85,7 @@ class PlayerView(FormView):
         # Deal black card if game doesn't have one.
         if self.game_data['current_black_card'] is None:
             # FIXME call reset, do not manually deal black card here; what if the black card is a "draw 3, pick 2" card.
-            self.game_data['current_black_card'] = self.deal_black_card()
+            self.game_data['current_black_card'] = self.game_dbobj.deal_black_card()
         self.write_state()
 
         if self.is_card_czar:
@@ -205,7 +205,7 @@ class PlayerView(FormView):
         black_card_id = self.game_data['current_black_card']
         temp_black_card = BlackCard.objects.get(id=black_card_id)
         pick = temp_black_card.pick
-        self.game_data['current_black_card'] = self.deal_black_card()
+        self.game_data['current_black_card'] = self.game_dbobj.deal_black_card()
         self.game_data['players'][winner]['wins'] += 1
         self.game_data['card_czar'] = winner_id
         self.game_data['round'] += 1
@@ -226,18 +226,6 @@ class PlayerView(FormView):
                 # check we are not the card czar
                 if player_name != self.player_name:
                     self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
-
-    def deal_black_card(self):
-        black_card = self.game_data['black_deck'].pop()
-        """
-        # FIXME card re-use. This mechanism won't work with cards in database
-        # we need to keep track of used cards (especially if only a subset of cards are used)
-        if len(self.game_data['black_deck']) == 0:
-            shuffled_black = range(len(black_cards))
-            random.shuffle(shuffled_black)
-            self.game_data['black_deck'] = shuffled_black
-        """
-        return black_card
 
 
 class LobbyView(FormView):
