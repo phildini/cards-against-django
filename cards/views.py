@@ -82,7 +82,7 @@ class PlayerView(FormView):
 
         # Deal black card if game doesn't have one.
         if self.game_data['current_black_card'] is None:
-            # FIXME call reset, do not manually deal black card here; what if the black card is a "draw 3, pick 2" card.
+            # FIXME call start_new_round, do not manually deal black card here; what if the black card is a "draw 3, pick 2" card.
             self.game_data['current_black_card'] = self.game_dbobj.deal_black_card()
         self.write_state()
 
@@ -96,7 +96,7 @@ class PlayerView(FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
         context['game'] = self.game_dbobj
-        
+
         # FIXME additional db IO :-( TODO cache in game?
         black_card_id = self.game_data['current_black_card']
         temp_black_card = BlackCard.objects.get(id=black_card_id)
@@ -145,7 +145,7 @@ class PlayerView(FormView):
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
             winner_name = session_ids[winner].get('name')
-            self.game_dbobj.reset(self.player_name, winner_name, winner)
+            self.game_dbobj.start_new_round(self.player_name, winner_name, winner)
 
         else:
             submitted = form.cleaned_data['card_selection']
@@ -264,8 +264,6 @@ class LobbyView(FormView):
         cache.set('session_ids', session_ids)
 
         return super(LobbyView, self).form_valid(form)
-
-
 
 
 class GameView(DetailView):
