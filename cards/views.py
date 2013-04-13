@@ -114,11 +114,8 @@ class PlayerView(FormView):
             kwargs['cards'] = czar_selection_options
         else:
             kwargs['blanks'] = temp_black_card.pick
-            # FIXME many singleton selects here, also only need one column
-            kwargs['cards'] = tuple(
-
-                (card, mark_safe(WhiteCard.objects.get(id=card).text)) for card in self.player_data['hand']
-            )
+            cards = [(card_id, mark_safe(card_text)) for card_id, card_text in WhiteCard.objects.filter(id__in=self.player_data['hand']).values_list('id', 'text')]
+            kwargs['cards'] = cards
         return kwargs
 
     def form_valid(self, form):
