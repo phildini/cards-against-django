@@ -27,9 +27,6 @@
 # On the cache, 'players' will hav a mapping of ids to players.
 
 import random
-import hashlib
-import urllib
-import log
 import uuid
 
 from django.utils.safestring import mark_safe
@@ -41,30 +38,9 @@ from django.core.cache import cache
 from forms import PlayerForm, GameForm, CzarForm
 from models import BlackCard, WhiteCard, Game
 
+import log
 
 BLANK_MARKER = u"\uFFFD"
-
-
-def gravatar_robohash_url(email, size=50):
-    """Generate url for RoboHash image  (gravatar first then robohash)"""
-    text_to_hash = hashlib.md5(email.lower()).hexdigest()
-    robohash_url = "http://robohash.org/%s?size=%dx%d&gravatar=hashed" % (text_to_hash, size, size)
-    return robohash_url
-
-def gravatar_url(email, size=50, default='monsterid'):
-    """Generate url for Gravatar image
-    email - email address
-    default = default_image_url or default hash type
-    """
-    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
-    if default:
-        gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
-    else:
-        gravatar_url += urllib.urlencode({'s': str(size)})
-    return gravatar_url
-
-avatar_url = gravatar_robohash_url
-avatar_url = gravatar_url
 
 
 class PlayerView(FormView):
@@ -320,10 +296,10 @@ class LobbyView(FormView):
                 existing_game = None
             if not existing_game:
                 # really a new game
-                new_game = self.create_game()
-                new_game['players'][player_name] = self.create_player(player_name)
-                new_game['card_czar'] = self.player_id
                 tmp_game = Game(name=form.cleaned_data['new_game'])
+                new_game = tmp_game.create_game()
+                new_game['players'][player_name] = tmp_game.create_player(player_name)
+                new_game['card_czar'] = self.player_id
                 tmp_game.gamedata = new_game
                 tmp_game.save()
         if existing_game:
@@ -334,7 +310,7 @@ class LobbyView(FormView):
             log.logger.debug('existing_game.gamedata %r', (existing_game.gamedata,))
             log.logger.debug('existing_game.gamedata players %r', (existing_game.gamedata['players'],))
             if not existing_game.gamedata['players'].get(player_name):
-                existing_game.gamedata['players'][player_name] = self.create_player(player_name)
+                existing_game.gamedata['players'][player_name] = existing_game.create_player(player_name)
             else:
                 # FIXME
                 raise NotImplementedError('joining with player names alreaady in same game causes problems')
@@ -350,40 +326,7 @@ class LobbyView(FormView):
 
         return super(LobbyView, self).form_valid(form)
 
-    def create_game(self):
-        log.logger.debug("New Game called")
-        """Create shuffled decks
-        uses built in random, it may be better to plug-in a better
-        random init routine and/also consider using
-        https://pypi.python.org/pypi/shuffle/
 
-        Also take a look at http://code.google.com/p/gcge/
-        """
-        shuffled_white = [x[0] for x in WhiteCard.objects.values_list('id')]
-        random.shuffle(shuffled_white)
-        shuffled_black = [x[0] for x in BlackCard.objects.values_list('id')]
-        random.shuffle(shuffled_black)
-
-        # Basic data object for a game. Eventually, this will be saved in cache.
-        return {
-            'players': {},
-            'current_black_card': None,  # get a new one my shuffled_black.pop()
-            'submissions': {},
-            'round': 1,  # FIXME reset() which is next round should be called at start of each round, when that is done this should be zero
-            'card_czar': '',
-            'white_deck': shuffled_white,
-            'black_deck': shuffled_black,
-            'mode': 'submitting',
-        }
-
-    def create_player(self, player_name):
-        log.logger.debug("new player called")
-        # Basic data obj for player. Eventually, this will be saved in cache.
-        return {
-            'hand': [],
-            'wins': 0,
-            'player_avatar': avatar_url(player_name),
-        }
 
 
 class GameView(DetailView):

@@ -2,11 +2,32 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
+import random
+import hashlib
+import urllib
+
 from django.db import models
 from django.contrib.auth.models import User
 
 from jsonfield import JSONField
 from model_utils.models import TimeStampedModel
+
+import log
+
+
+def gravatar_url(email, size=50, default='monsterid'):
+    """Generate url for Gravatar image
+    email - email address
+    default = default_image_url or default hash type
+    """
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+    if default:
+        gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
+    else:
+        gravatar_url += urllib.urlencode({'s': str(size)})
+    return gravatar_url
+
+avatar_url = gravatar_url
 
 
 class Game(TimeStampedModel):
@@ -19,6 +40,42 @@ class Game(TimeStampedModel):
     def __unicode__(self):
         # FIXME add game start time, include num players and rounds in display name
         return self.name
+
+    def create_game(self):
+        log.logger.debug("New Game called")
+        """Create shuffled decks
+        uses built in random, it may be better to plug-in a better
+        random init routine and/also consider using
+        https://pypi.python.org/pypi/shuffle/
+
+        Also take a look at http://code.google.com/p/gcge/
+        """
+        shuffled_white = [x[0] for x in WhiteCard.objects.values_list('id')]
+        random.shuffle(shuffled_white)
+        shuffled_black = [x[0] for x in BlackCard.objects.values_list('id')]
+        random.shuffle(shuffled_black)
+
+        # Basic data object for a game. Eventually, this will be saved in cache.
+        return {
+            'players': {},
+            'current_black_card': None,  # get a new one my shuffled_black.pop()
+            'submissions': {},
+            'round': 1,  # FIXME reset() which is next round should be called at start of each round, when that is done this should be zero
+            'card_czar': '',
+            'white_deck': shuffled_white,
+            'black_deck': shuffled_black,
+            'mode': 'submitting',
+        }
+
+    # FIXME should be using a player object
+    def create_player(self, player_name):
+        log.logger.debug("new player called")
+        # Basic data obj for player. Eventually, this will be saved in cache.
+        return {
+            'hand': [],
+            'wins': 0,
+            'player_avatar': avatar_url(player_name),
+        }
 
 
 class Player(TimeStampedModel):
