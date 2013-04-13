@@ -299,10 +299,17 @@ def debug_join(request, pk):
     We want to support real user accounts but also anonymous, which is why
     this is a debug routine for now.
     """
-    assert(request.user.is_authenticated())
+    log.logger.debug('request.user %s', request.user)
     game = Game.objects.get(id=pk)
-    if request.user.email not in game.gamedata['players']:
+    if request.user.is_authenticated():
         player_name = request.user.email  # or perhaps use name and set avatar to email....
+    else:
+        # Assume AnonymousUser
+        # also assume the set a name earlier....
+        session_details = request.session['session_details']
+        existing_game_name = session_details['game']  # FIXME now use this and check it...
+        player_name = session_details['name']
+    if player_name not in game.gamedata['players']:
         game.gamedata['players'][player_name] = game.create_player(player_name)
         game.save()
     #redirect(reverse('game-view'))
