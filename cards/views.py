@@ -128,9 +128,8 @@ class PlayerView(FormView):
         else:
             submitted = form.cleaned_data['card_selection']
             # The form returns unicode strings. We want ints in our list.
-            self.game_data['submissions'][self.player_id] = [int(card) for card in submitted]
-            for card in self.game_data['submissions'][self.player_id]:
-                self.player_data['hand'].remove(card)
+            white_card_list = [int(card) for card in submitted]
+            self.game_dbobj.submit_white_cards(self.player_id, white_card_list)
             log.logger.debug('%r', form.cleaned_data['card_selection'])
         self.write_state()
         return super(PlayerView, self).form_valid(form)

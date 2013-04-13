@@ -72,6 +72,23 @@ class Game(TimeStampedModel):
         # FIXME add game start time, include num players and rounds in display name
         return self.name
 
+    def submit_white_cards(self, player_id, white_card_list):
+        """player_id is currently name, the index into submissions
+        white_card_list - list of white card ids
+        
+        TODO sanity checks
+            player is in game
+            player is not czar
+            player hasn't already submitted
+            player has cards
+        NOTE many of the above is handled in the form.
+        
+        Currently this is called after form validation.
+        """
+        self.gamedata['submissions'][player_id] = white_card_list
+        for card in white_card_list:
+            self.gamedata['players'][player_id]['hand'].remove(card)
+    
     def deal_black_card(self):
         black_card = self.gamedata['black_deck'].pop()
         """
