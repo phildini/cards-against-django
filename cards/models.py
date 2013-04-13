@@ -225,23 +225,22 @@ class BlackCard(models.Model):
     def replace_blanks(self, white_card_num_list):
         card_text = self.text
         num_blanks = card_text.count(BLANK_MARKER)
+        assert self.pick == len(white_card_num_list)
+        
+        for tmp_num in range(num_blanks + 1, (self.pick - num_blanks) + 1):
+            card_text = card_text + '</br> ' + BLANK_MARKER
+        
         # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
-        if num_blanks == 0:
-            card_num = white_card_num_list[0]
+        for card_num in white_card_num_list:
+            # FIXME many singleton selects
             white_text = WhiteCard.objects.get(id=card_num).text
+            white_text = white_text.rstrip('.')
+            """We can't change the case of the first letter in case
+            it is a real name :-( We'd need to consult a word list,
+            to make that decision which is way too much effort at
+            the moment."""
             white_text = '<strong>' + white_text + '</strong>'
-            card_text = card_text + ' ' + white_text
-        else:
-            for card_num in white_card_num_list:
-                # FIXME many singleton selects
-                white_text = WhiteCard.objects.get(id=card_num).text
-                white_text = white_text.rstrip('.')
-                """We can't change the case of the first letter in case
-                it is a real name :-( We'd need to consult a word list,
-                to make that decision which is way too much effort at
-                the moment."""
-                white_text = '<strong>' + white_text + '</strong>'
-                card_text = card_text.replace(BLANK_MARKER, white_text, 1)
+            card_text = card_text.replace(BLANK_MARKER, white_text, 1)
         return card_text
 
     def __unicode__(self):
