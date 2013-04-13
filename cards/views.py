@@ -2,24 +2,6 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
-# Game.gamedata: {
-#         players: {
-#             player1: {
-#                 hand: [...],
-#                 wins: int,
-#                 submitted = current submitted card,
-#             },
-#             player2 {...},
-#             ...
-#         },
-#         current_black_card = None|int,
-#         submissions = {dict of player str UUID: [list of card numbers]}
-#         round: int,  round number where round 0 is the first round
-#         card_czar = NOTE this is currently a str of a UUID # 'player1',  # int index into 'players'
-#         black_deck = [],
-#         white_deck = [],
-#     }
-
 # Contract between LobbyView and PlayerView:
 #
 # LobbyView will give PlayerView a named player and a game stored in cache.

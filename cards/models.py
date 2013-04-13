@@ -35,7 +35,27 @@ class Game(TimeStampedModel):
     name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
     game_state = models.CharField(max_length=140)
     is_active = models.BooleanField(default=True)
-    gamedata = JSONField()  # See view doc comments
+    gamedata = JSONField()
+    """gamedata  is a dict
+    {
+        players: {
+            player1: {
+                hand: [...],
+                wins: int,
+                submitted = current submitted card,
+            },
+            player2 {...},
+            ...
+        },
+        current_black_card = None|int,
+        submissions = {dict of player str UUID: [list of card numbers]}
+        round: int,  round number where round 0 is the first round
+        card_czar = NOTE this is currently a str of a UUID # 'player1',  # int index into 'players'
+        black_deck = [],
+        white_deck = [],
+    }
+
+    """
 
     def __unicode__(self):
         # FIXME add game start time, include num players and rounds in display name
