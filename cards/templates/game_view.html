@@ -31,11 +31,16 @@
     
     <p>game_state: {{game.game_state}}.</p>
     <p>
+        {% comment %}
+            <!-- NOTE There are some model/template magic string value dependencies here :-( -->
+        {% endcomment %}
         {% if game.game_state == 'submission' %}
             Waiting for players to submit white cards.
             {% comment %}
                 <!--  TODO dump card count, how many players are we waiting for? -->
             {% endcomment %}
+        {% elif game.game_state == 'selection' %}
+            Waiting for card czar to pick a winner.
         {% endif %}
     </p>
     

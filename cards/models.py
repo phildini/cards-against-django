@@ -88,6 +88,10 @@ class Game(TimeStampedModel):
         self.gamedata['submissions'][player_id] = white_card_list
         for card in white_card_list:
             self.gamedata['players'][player_id]['hand'].remove(card)
+        
+        if len(self.gamedata['submissions']) == len(self.gamedata['players']) - 1:
+            # this was the last player to submit, now we are waiting on the card czar to pick a winner
+            self.game_state = GAMESTATE_SELECTION
     
     def deal_black_card(self):
         black_card = self.gamedata['black_deck'].pop()
