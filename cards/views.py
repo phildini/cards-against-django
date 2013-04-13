@@ -276,7 +276,10 @@ class GameView(DetailView):
     def get_context_data(self, *args, **kwargs):
         session_details = self.request.session['session_details']  # hard fail for now on lookup failure, FIXME for observers
         context = super(GameView, self).get_context_data(*args, **kwargs)
+        log.logger.debug('session_details %r', session_details)
+        log.logger.debug('context%r', context)
         game = context['object']
+        log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
         #context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
@@ -293,8 +296,7 @@ class GameView(DetailView):
             player_name = self.request.user.email
         else:
             # Assume AnonymousUser
-            if session_details:
-                player_name = session_details['name']
+            player_name = session_details['name']
         if player_name and player_name not in game.gamedata['players']:
             player_name = None
         # at this point if player_name is None, they are an observer
@@ -302,6 +304,9 @@ class GameView(DetailView):
 
         is_card_czar = player_name == card_czar_name
         context['is_card_czar'] = is_card_czar
+        context['player_name'] = player_name
+        if player_name:
+            context['player_avatar'] = game.gamedata['players'][player_name]['player_avatar']
         
         """TODO determine if user is:
             observer - show current state of play

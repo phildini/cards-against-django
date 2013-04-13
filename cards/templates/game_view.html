@@ -7,6 +7,14 @@
     
     <p>Round {{game.gamedata.round}}.</p>
 
+    <p>
+    {% if player_name %}
+    You are {{player_name}}. <img src="{{player_avatar}}" alt="Player avatar">
+    {% else %}
+    You are an observer.
+    {% endif %}
+    </p>
+
     <h3>Current card</h3>
     
     {% comment %}
@@ -20,8 +28,9 @@
     {% if is_card_czar %}
     <p>Dude! You are the card czar!</p>
     {% endif %}
-
+    
     <p>game_state: {{game.game_state}}.</p>
+    
     
     <h3>Current standings<h3>
 
