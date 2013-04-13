@@ -45,12 +45,10 @@
     </p>
     
     {% if game.game_state == 'selection' %}
-    there shoud be stuff here
-    <br>
         {% comment %}
             <!--  TODO make me pretty -->
         {% endcomment %}
-        {% for tmp_text in game.gamedata.filled_in_texts %}
+        {% for _, tmp_text in game.gamedata.filled_in_texts %}
             <div class="btn btn-inverse card">
             <p class="text_left">{{tmp_text|safe}}</p>
             </div>

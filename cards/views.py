@@ -17,7 +17,7 @@ from django.shortcuts import redirect
 from django.core.cache import cache
 
 from forms import PlayerForm, GameForm, CzarForm
-from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION
+from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION
 
 import log
 
@@ -107,11 +107,11 @@ class PlayerView(FormView):
         self.black_card = black_card_text
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
-            czar_selection_options = [
-                (player_id, mark_safe(temp_black_card.replace_blanks(self.game_data['submissions'][player_id]))) for player_id in self.game_data['submissions']
-            ]
-            random.shuffle(czar_selection_options)
-            kwargs['cards'] = czar_selection_options
+            if self.game_dbobj.game_state == GAMESTATE_SELECTION:
+                czar_selection_options = [
+                    (player_id, mark_safe(filled_in_card)) for player_id, filled_in_card in self.game_dbobj.gamedata['filled_in_texts']
+                ]
+                kwargs['cards'] = czar_selection_options
         else:
             kwargs['blanks'] = temp_black_card.pick
             cards = [(card_id, mark_safe(card_text)) for card_id, card_text in WhiteCard.objects.filter(id__in=self.player_data['hand']).values_list('id', 'text')]

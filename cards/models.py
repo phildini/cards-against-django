@@ -64,7 +64,7 @@ class Game(TimeStampedModel):
         card_czar = NOTE this is currently a str of a player name # 'player1',  # int index into 'players'
         black_deck = [],
         white_deck = [],
-        filled_in_texts = None | [ of filled in black card texts]
+        filled_in_texts = None | [ (player name, filled in black card text), .... ]
     }
 
     """
@@ -101,7 +101,7 @@ class Game(TimeStampedModel):
             for player_name in self.gamedata['submissions']:
                 white_card_list = self.gamedata['submissions'][player_name]
                 tmp_text = temp_black_card.replace_blanks(white_card_list)
-                filled_in_texts.append(tmp_text)
+                filled_in_texts.append((player_name, tmp_text))
             random.shuffle(filled_in_texts)
             self.gamedata['filled_in_texts'] = filled_in_texts  # FIXME rename this
     
