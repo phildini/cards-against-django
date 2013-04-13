@@ -134,7 +134,7 @@ class PlayerView(FormView):
         context['show_form'] = self.can_show_form()
         # Display filled-in answer if player has submitted.
         if self.game_data['submissions'] and not self.is_card_czar:
-            player_submission = self.game_data['submissions'].get(self.player_id)
+            player_submission = self.game_data['submissions'][self.player_id]
             context['filled_in_question'] = self.replace_blanks(player_submission)
         context['action'] = reverse('player-view')
         return context
