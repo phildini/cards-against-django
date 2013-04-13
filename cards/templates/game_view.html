@@ -30,6 +30,14 @@
     {% endif %}
     
     <p>game_state: {{game.game_state}}.</p>
+    <p>
+        {% if game.game_state == 'submission' %}
+            Waiting for players to submit white cards.
+            {% comment %}
+                <!--  TODO dump card count, how many players are we waiting for? -->
+            {% endcomment %}
+        {% endif %}
+    </p>
     
     
     <h3>Current standings<h3>
