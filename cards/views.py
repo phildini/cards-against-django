@@ -393,11 +393,12 @@ class GameView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GameView, self).get_context_data(*args, **kwargs)
-        black_card_id = self.get_object().gamedata['current_black_card']
+        game = context['object']
+        black_card_id = game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
         context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
-        context['game'] = self.get_object()
+        context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')
-        context['card_czar_name'] = self.get_object().gamedata['card_czar']
+        context['card_czar_name'] = game.gamedata['card_czar']
 
         return context
