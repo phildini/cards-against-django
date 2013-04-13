@@ -53,8 +53,7 @@ class Game(TimeStampedModel):
         """
         return black_card
 
-    # FIXME rename
-    def reset(self, czar_name, winner=None, winner_id=None):
+    def start_new_round(self, czar_name, winner=None, winner_id=None):
         """NOTE this does not reset a game, it resets the cards on the table ready for the next round
         """
         self.gamedata['submissions'] = {}
@@ -103,7 +102,7 @@ class Game(TimeStampedModel):
             'players': {},
             'current_black_card': None,  # get a new one my shuffled_black.pop()
             'submissions': {},
-            'round': 1,  # FIXME reset() which is next round should be called at start of each round, when that is done this should be zero
+            'round': 1,  # FIXME start_new_round() which is next round should be called at start of each round, when that is done this should be zero
             'card_czar': '',
             'white_deck': shuffled_white,
             'black_deck': shuffled_black,
