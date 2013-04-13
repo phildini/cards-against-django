@@ -141,6 +141,8 @@ class Player(TimeStampedModel):
         return self.name
 
 
+BLANK_MARKER = u"\uFFFD"
+
 class BlackCard(models.Model):
     text = models.CharField(max_length=255)
     draw = models.SmallIntegerField(default=0)
@@ -149,6 +151,28 @@ class BlackCard(models.Model):
 
     class Meta:
         db_table = 'black_cards'
+
+    def replace_blanks(self, white_card_num_list):
+        card_text = self.text
+        num_blanks = card_text.count(BLANK_MARKER)
+        # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
+        if num_blanks == 0:
+            card_num = white_card_num_list[0]
+            white_text = WhiteCard.objects.get(id=card_num).text
+            white_text = '<strong>' + white_text + '</strong>'
+            card_text = card_text + ' ' + white_text
+        else:
+            for card_num in white_card_num_list:
+                # FIXME many singleton selects
+                white_text = WhiteCard.objects.get(id=card_num).text
+                white_text = white_text.rstrip('.')
+                """We can't change the case of the first letter in case
+                it is a real name :-( We'd need to consult a word list,
+                to make that decision which is way too much effort at
+                the moment."""
+                white_text = '<strong>' + white_text + '</strong>'
+                card_text = card_text.replace(BLANK_MARKER, white_text, 1)
+        return card_text
 
     def __unicode__(self):
         return self.text

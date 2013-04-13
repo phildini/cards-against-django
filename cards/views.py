@@ -36,11 +36,9 @@ from django.shortcuts import redirect
 from django.core.cache import cache
 
 from forms import PlayerForm, GameForm, CzarForm
-from models import BlackCard, WhiteCard, Game
+from models import BlackCard, WhiteCard, Game, BLANK_MARKER
 
 import log
-
-BLANK_MARKER = u"\uFFFD"
 
 
 class PlayerView(FormView):
@@ -98,12 +96,17 @@ class PlayerView(FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
         context['game'] = self.game_dbobj
+        
+        # FIXME additional db IO :-( TODO cache in game?
+        black_card_id = self.game_data['current_black_card']
+        temp_black_card = BlackCard.objects.get(id=black_card_id)
+
         context['players'] = self.game_data['players']
         last_round_winner = self.game_data.get('last_round_winner', '')
         context['last_round_winner'] = last_round_winner
         if last_round_winner:
             context['last_round_winner_avatar'] = self.game_data['players'][last_round_winner]['player_avatar']
-        context['black_card'] = self.black_card.replace(BLANK_MARKER, '______')
+        context['black_card'] = self.black_card.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
         context['player_name'] = self.player_name
         context['player_avatar'] = self.game_data['players'][self.player_name]['player_avatar']
         context['game_name'] = self.game_name
@@ -111,7 +114,7 @@ class PlayerView(FormView):
         # Display filled-in answer if player has submitted.
         if self.game_data['submissions'] and not self.is_card_czar:
             player_submission = self.game_data['submissions'][self.player_id]
-            context['filled_in_question'] = self.replace_blanks(player_submission)
+            context['filled_in_question'] = temp_black_card.replace_blanks(player_submission)
         context['action'] = reverse('player-view')
         return context
 
@@ -123,7 +126,7 @@ class PlayerView(FormView):
         kwargs = super(PlayerView, self).get_form_kwargs()
         if self.is_card_czar:
             czar_selection_options = [
-                (player_id, mark_safe(self.replace_blanks(self.game_data['submissions'][player_id]))) for player_id in self.game_data['submissions']
+                (player_id, mark_safe(temp_black_card.replace_blanks(self.game_data['submissions'][player_id]))) for player_id in self.game_data['submissions']
             ]
             random.shuffle(czar_selection_options)
             kwargs['cards'] = czar_selection_options
@@ -175,27 +178,6 @@ class PlayerView(FormView):
                 flag = True
         return flag
 
-    def replace_blanks(self, white_card_num_list):
-        card_text = self.black_card
-        num_blanks = card_text.count(BLANK_MARKER)
-        # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
-        if num_blanks == 0:
-            card_num = white_card_num_list[0]
-            white_text = WhiteCard.objects.get(id=card_num).text
-            white_text = '<strong>' + white_text + '</strong>'
-            card_text = card_text + ' ' + white_text
-        else:
-            for card_num in white_card_num_list:
-                # FIXME many singleton selects
-                white_text = WhiteCard.objects.get(id=card_num).text
-                white_text = white_text.rstrip('.')
-                """We can't change the case of the first letter in case
-                it is a real name :-( We'd need to consult a word list,
-                to make that decision which is way too much effort at
-                the moment."""
-                white_text = '<strong>' + white_text + '</strong>'
-                card_text = card_text.replace(BLANK_MARKER, white_text, 1)
-        return card_text
 
 class LobbyView(FormView):
 
@@ -298,7 +280,7 @@ class GameView(DetailView):
         black_card = BlackCard.objects.get(id=black_card_id)
         context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
         context['game'] = game
-        context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')
+        context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
         context['card_czar_name'] = game.gamedata['card_czar']
 
         return context
