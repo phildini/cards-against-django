@@ -4,9 +4,8 @@
 
 # Contract between LobbyView and PlayerView:
 #
-# LobbyView will give PlayerView a named player and a game stored in cache.
+# LobbyView will give PlayerView a named player and a game stored in database.
 # PlayerView will return to LobbyView any request that does not have those things.
-# On the cache, 'players' will hav a mapping of ids to players.
 
 import random
 import uuid
@@ -34,15 +33,16 @@ class PlayerView(FormView):
     def dispatch(self, request, *args, **kwargs):
         # Setup for game and player
 
-        self.player_id = self.request.session.get('player_id')
-
-        session_ids = cache.get('session_ids', {})
-        session_details = session_ids.get(self.player_id, {})
+        session_details = self.request.session.get('session_details', {})  # FIXME
+        # FIXME if not a dict, make it a dict (upgrade content)
+        log.logger.debug('session_details %r', session_details)
         if not session_details:
             return redirect(reverse('lobby-view'))
 
-        self.game_name = session_details['game']
+        # TODO Player model lookup
+        self.game_name = session_details['game']  # TODO start using game number id (not name)
         self.player_name = session_details['name']
+        self.player_id = self.player_name  # FIXME needless duplicatation that needs to be refactored, this may become player number
 
         try:
             self.game_dbobj = Game.objects.get(name=self.game_name)  # FIXME his name is horrible
@@ -79,7 +79,7 @@ class PlayerView(FormView):
         context = super(PlayerView, self).get_context_data(*args, **kwargs)
         context['game'] = self.game_dbobj
 
-        # FIXME additional db IO :-( TODO cache in game?
+        # FIXME additional db IO :-( TODO cache unnormalized data in game?
         black_card_id = self.game_data['current_black_card']
         temp_black_card = BlackCard.objects.get(id=black_card_id)
 
@@ -123,10 +123,9 @@ class PlayerView(FormView):
 
     def form_valid(self, form):
         if self.is_card_czar:
-            session_ids = cache.get('session_ids')
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
-            winner_name = session_ids[winner].get('name')
+            winner_name = winner
             self.game_dbobj.start_new_round(self.player_name, winner_name, winner)
 
         else:
@@ -178,19 +177,32 @@ class LobbyView(FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
-        context['show_form'] = True
-        self.player_id = self.request.session.get('player_id')
-        if isinstance(self.player_id, uuid.UUID):
-            # temp hack, to use strings for uuid incase cookie still around from old version
-            self.player_id = str(self.player_id)
-            self.request.session['player_id'] = self.player_id
-        if not self.player_id:
-            self.player_id = str(uuid.uuid1())
-            self.request.session['player_id'] = self.player_id
+        print 'DEBUG context', context
         self.player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', self.player_counter)
         context['player_counter'] = self.player_counter
-        log.logger.debug('self.player_id uuid %r', self.player_id)
+
+        context['show_form'] = True
+        
+        session_details = self.request.session.get('session_details', {})  # FIXME
+        # FIXME if not a dict, make it a dict (upgrade old content)
+        log.logger.debug('session_details %r', session_details)
+
+        self.player_id = session_details.get('name')
+        if isinstance(self.player_id, uuid.UUID):
+            # NOTE this "fixes" and upgrades session data for old clients
+            # we shouldn't have any of these in the wild so this code should be REMOVED
+            # This is here to help with initial internal testing
+            self.player_id = None
+            # TODO test do we need to explictly set the session entry (dict's don't tend to need this)
+        if not self.player_id:
+            # TODO this may become player number (not name)
+            
+            # For now we auto generate a name (setting username needs to be done in a form)
+            self.player_id = 'Auto Player %d' % self.player_counter  # this is currently a NOOP
+            session_details['name'] = self.player_id
+            self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
+        log.logger.debug('self.player_id %r', self.player_id)
 
         return context
 
@@ -202,11 +214,21 @@ class LobbyView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        self.player_id = self.request.session.get('player_id')
+        session_details = self.request.session.get('session_details', {})  # FIXME
+        # FIXME if not a dict, make it a dict (upgrade old content)
+        log.logger.debug('session_details %r', session_details)
+
+        """
+        if session_details:
+            # FIXME this will break new game creation.....
+            raise NotImplementedError('attempting to join a game when player is already in a game')
+        """
+
         player_name = form.cleaned_data['player_name']
+        self.player_id = player_name  # FIXME needless duplicatation that needs to be refactored, this may become player number
 
         existing_game = True
-        # Set the game properties in the cache
+        # Set the game properties in the database and session
         game_name = form.cleaned_data['new_game']
         if game_name:
             # Attempting to create a new game
@@ -237,13 +259,11 @@ class LobbyView(FormView):
                 raise NotImplementedError('joining with player names alreaady in same game causes problems')
             existing_game.save()
 
-        # Set the player properties in the cache
-        session_ids = cache.get('session_ids', {})
-        session_details = session_ids.get(self.player_id, {})
+        # Set the player session details
         session_details['name'] = player_name
         session_details['game'] = game_name
-        session_ids[self.player_id] = session_details
-        cache.set('session_ids', session_ids)
+        self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
+
 
         return super(LobbyView, self).form_valid(form)
 
