@@ -35,7 +35,8 @@ class Game(TimeStampedModel):
     name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
     game_state = models.CharField(max_length=140)
     is_active = models.BooleanField(default=True)
-    gamedata = JSONField()
+    
+    gamedata = JSONField()  # NOTE character export/import (and this includes Admin editing) screws up json payload....
     """gamedata  is a dict
     {
         players: {
