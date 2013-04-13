@@ -281,6 +281,29 @@ class GameView(DetailView):
         context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
+        
+        """TODO determine if user is:
+            observer - show current state of play
+            card czar (show waiting for players OR select winner)
+            white card player (select card(s) OR waiting for other white card players OR all submitted white cards)
+        """
         context['card_czar_name'] = game.gamedata['card_czar']
 
         return context
+
+
+def debug_join(request, pk):
+    """This is a temp function that expects a user already exists and is logged in,
+    then joins them to a game.
+    
+    We want to support real user accounts but also anonymous, which is why
+    this is a debug routine for now.
+    """
+    assert(request.user.is_authenticated())
+    game = Game.objects.get(id=pk)
+    if request.user.email not in game.gamedata['players']:
+        player_name = request.user.email  # or perhaps use name and set avatar to email....
+        game.gamedata['players'][player_name] = game.create_player(player_name)
+        game.save()
+    #redirect(reverse('game-view'))
+    return redirect('.')  # FIXME .. please! :-(

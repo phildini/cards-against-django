@@ -12,6 +12,7 @@ from cards.views import (
     PlayerView,
     GameView,
     LobbyView,
+    debug_join,
 )
 
 urlpatterns = patterns('',
@@ -26,5 +27,6 @@ urlpatterns = patterns('',
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
     url(r'^player/', PlayerView.as_view(), name="player-view"),
     url(r'^game/(?P<pk>\d+)/$', GameView.as_view(), name="game-view"),
+    url(r'^game/(?P<pk>\d+)/join$', debug_join),
     url(r'^admin/', include(admin.site.urls)),
 )
