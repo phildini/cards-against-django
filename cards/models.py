@@ -231,9 +231,8 @@ class BlackCard(models.Model):
             card_text = card_text + '</br> ' + BLANK_MARKER
         
         # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
-        for card_num in white_card_num_list:
-            # FIXME many singleton selects
-            white_text = WhiteCard.objects.get(id=card_num).text
+        white_card_text_list = WhiteCard.objects.filter(id__in=white_card_num_list).values_list('text')
+        for white_text, in white_card_text_list:
             white_text = white_text.rstrip('.')
             """We can't change the case of the first letter in case
             it is a real name :-( We'd need to consult a word list,
