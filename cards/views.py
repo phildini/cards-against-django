@@ -17,7 +17,7 @@ from django.shortcuts import redirect
 from django.core.cache import cache
 
 from forms import PlayerForm, GameForm, CzarForm
-from models import BlackCard, WhiteCard, Game, BLANK_MARKER
+from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION
 
 import log
 

@@ -30,10 +30,20 @@ def gravatar_url(email, size=50, default='monsterid'):
 avatar_url = gravatar_url
 
 
+GAMESTATE_SUBMISSION = 'submission'
+GAMESTATE_SELECTION = 'selection'
+GAMESTATE_TRANSITION = 'transition'
+
 class Game(TimeStampedModel):
 
     name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
     game_state = models.CharField(max_length=140)
+    """game states;
+        submission - waiting for white cards
+        selection - waiting for czar
+        transition - where new players get added into active list).
+    """
+    
     is_active = models.BooleanField(default=True)
     
     gamedata = JSONField()  # NOTE character export/import (and this includes Admin editing) screws up json payload....
@@ -103,6 +113,8 @@ class Game(TimeStampedModel):
                 # check we are not the card czar
                 if player_name != czar_name:
                     self.gamedata['players'][player_name]['hand'].append(self.gamedata['white_deck'].pop())
+        
+        self.game_state = GAMESTATE_SUBMISSION
 
     def create_game(self):
         log.logger.debug("New Game called")
@@ -117,6 +129,8 @@ class Game(TimeStampedModel):
         random.shuffle(shuffled_white)
         shuffled_black = [x[0] for x in BlackCard.objects.values_list('id')]
         random.shuffle(shuffled_black)
+
+        self.game_state = GAMESTATE_SUBMISSION  # FIXME remove this and make calls to start_new_round()
 
         # Basic data object for a game. Eventually, this will be saved in cache.
         return {
