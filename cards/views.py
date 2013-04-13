@@ -274,6 +274,7 @@ class GameView(DetailView):
     template_name = 'game_view.html'
 
     def get_context_data(self, *args, **kwargs):
+        session_details = self.request.session['session_details']  # hard fail for now on lookup failure, FIXME for observers
         context = super(GameView, self).get_context_data(*args, **kwargs)
         game = context['object']
         black_card_id = game.gamedata['current_black_card']
@@ -282,14 +283,30 @@ class GameView(DetailView):
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
         
+        card_czar_name = game.gamedata['card_czar']
+        context['card_czar_name'] = card_czar_name
+        context['card_czar_avatar'] = game.gamedata['players'][card_czar_name]['player_avatar']
+        
+        player_name = None
+        if self.request.user.is_authenticated():
+            player_name = self.request.user.email
+        else:
+            # Assume AnonymousUser
+            if session_details:
+                player_name = session_details['name']
+        if player_name and player_name not in game.gamedata['players']:
+            player_name = None
+        # at this point if player_name is None, they are an observer
+        # otherwise a (supposedly) active player
+
+        is_card_czar = player_name == card_czar_name
+        context['is_card_czar'] = is_card_czar
+        
         """TODO determine if user is:
             observer - show current state of play
             card czar (show waiting for players OR select winner)
             white card player (select card(s) OR waiting for other white card players OR all submitted white cards)
         """
-        card_czar_name = game.gamedata['card_czar']
-        context['card_czar_name'] = card_czar_name
-        context['card_czar_avatar'] = game.gamedata['players'][card_czar_name]['player_avatar']
 
         return context
 
