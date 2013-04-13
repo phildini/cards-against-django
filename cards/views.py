@@ -279,7 +279,8 @@ class GameView(DetailView):
         game = context['object']
         black_card_id = game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
-        context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
+        #context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
+        context['refresh_num_secs'] = 20  # something high for debugging
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
         

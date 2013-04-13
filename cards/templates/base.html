@@ -9,7 +9,11 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             
             {% if not show_form %}
-            <meta http-equiv="refresh" content="1;url=">
+                {% if refresh_num_secs %}
+                <meta http-equiv="refresh" content="{{refresh_num_secs}};url=">
+                {% else %}
+                <meta http-equiv="refresh" content="1;url=">
+                {% endif %}
             {% endif %}
         {% endblock %}
     </head>
