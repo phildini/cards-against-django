@@ -64,6 +64,7 @@ class Game(TimeStampedModel):
         card_czar = NOTE this is currently a str of a player name # 'player1',  # int index into 'players'
         black_deck = [],
         white_deck = [],
+        filled_in_texts = None | [ of filled in black card texts]
     }
 
     """
