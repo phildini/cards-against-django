@@ -53,6 +53,38 @@ class Game(TimeStampedModel):
         """
         return black_card
 
+    # FIXME rename
+    def reset(self, czar_name, winner=None, winner_id=None):
+        """NOTE this does not reset a game, it resets the cards on the table ready for the next round
+        """
+        self.gamedata['submissions'] = {}
+
+        black_card_id = self.gamedata['current_black_card']
+        temp_black_card = BlackCard.objects.get(id=black_card_id)
+        pick = temp_black_card.pick
+        self.gamedata['current_black_card'] = self.deal_black_card()
+        self.gamedata['players'][winner]['wins'] += 1
+        self.gamedata['card_czar'] = winner_id
+        self.gamedata['round'] += 1
+        self.gamedata['last_round_winner'] = winner
+
+        # replace used white cards
+        for _ in xrange(pick):
+            for player_name in self.gamedata['players']:
+                # check we are not the card czar
+                if player_name != czar_name:
+                    self.gamedata['players'][player_name]['hand'].append(self.gamedata['white_deck'].pop())
+
+        # check if we draw additional cards based on black card
+        # NOTE anyone who joins after this point will not be given the extra draw cards
+        white_card_draw = temp_black_card.draw
+        for _ in xrange(white_card_draw):
+            for player_name in self.gamedata['players']:
+                # check we are not the card czar
+                if player_name != czar_name:
+                    self.gamedata['players'][player_name]['hand'].append(self.gamedata['white_deck'].pop())
+
+
     def create_game(self):
         log.logger.debug("New Game called")
         """Create shuffled decks

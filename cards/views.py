@@ -142,7 +142,7 @@ class PlayerView(FormView):
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
             winner_name = session_ids[winner].get('name')
-            self.reset(winner_name, winner)
+            self.game_dbobj.reset(self.player_name, winner_name, winner)
 
         else:
             submitted = form.cleaned_data['card_selection']
@@ -196,37 +196,6 @@ class PlayerView(FormView):
                 white_text = '<strong>' + white_text + '</strong>'
                 card_text = card_text.replace(BLANK_MARKER, white_text, 1)
         return card_text
-
-    def reset(self, winner=None, winner_id=None):
-        """NOTE this does not reset a game, it resets the cards on the table ready for the next round
-        """
-        self.game_data['submissions'] = {}
-
-        black_card_id = self.game_data['current_black_card']
-        temp_black_card = BlackCard.objects.get(id=black_card_id)
-        pick = temp_black_card.pick
-        self.game_data['current_black_card'] = self.game_dbobj.deal_black_card()
-        self.game_data['players'][winner]['wins'] += 1
-        self.game_data['card_czar'] = winner_id
-        self.game_data['round'] += 1
-        self.game_data['last_round_winner'] = winner
-
-        # replace used white cards
-        for _ in xrange(pick):
-            for player_name in self.game_data['players']:
-                # check we are not the card czar
-                if player_name != self.player_name:
-                    self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
-
-        # check if we draw additional cards based on black card
-        # NOTE anyone who joins after this point will not be given the extra draw cards
-        white_card_draw = temp_black_card.draw
-        for _ in xrange(white_card_draw):
-            for player_name in self.game_data['players']:
-                # check we are not the card czar
-                if player_name != self.player_name:
-                    self.game_data['players'][player_name]['hand'].append(self.game_data['white_deck'].pop())
-
 
 class LobbyView(FormView):
 
