@@ -92,6 +92,17 @@ class Game(TimeStampedModel):
         if len(self.gamedata['submissions']) == len(self.gamedata['players']) - 1:
             # this was the last player to submit, now we are waiting on the card czar to pick a winner
             self.game_state = GAMESTATE_SELECTION
+            
+            # fill in black card blanks.... and cache in gamedata
+            black_card_id = self.gamedata['current_black_card']
+            temp_black_card = BlackCard.objects.get(id=black_card_id)
+            filled_in_texts = []
+            for player_name in self.gamedata['submissions']:
+                white_card_list = self.gamedata['submissions'][player_name]
+                tmp_text = temp_black_card.replace_blanks(white_card_list)
+                filled_in_texts.append(tmp_text)
+            random.shuffle(filled_in_texts)
+            self.gamedata['filled_in_texts'] = filled_in_texts  # FIXME rename this
     
     def deal_black_card(self):
         black_card = self.gamedata['black_deck'].pop()
@@ -134,6 +145,8 @@ class Game(TimeStampedModel):
                 # check we are not the card czar
                 if player_name != czar_name:
                     self.gamedata['players'][player_name]['hand'].append(self.gamedata['white_deck'].pop())
+                    
+        self.gamedata['filled_in_texts'] = None
         
         self.game_state = GAMESTATE_SUBMISSION
 
@@ -163,6 +176,7 @@ class Game(TimeStampedModel):
             'white_deck': shuffled_white,
             'black_deck': shuffled_black,
             'mode': 'submitting',
+            'filled_in_texts': None,
         }
 
     # FIXME should be using a player object
