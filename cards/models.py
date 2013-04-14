@@ -12,6 +12,10 @@ from django.contrib.auth.models import User
 from jsonfield import JSONField
 from model_utils.models import TimeStampedModel
 
+# this is so wrong....
+from django.utils.safestring import mark_safe
+from django.utils.html import escape
+
 import log
 
 
@@ -74,11 +78,13 @@ class Game(TimeStampedModel):
 
     def __unicode__(self):
         # FIXME add game start time?, include num players and rounds in display name
+        # FIXME font tag is a html 4.0 and in html 5 css should be used
+        # ....also this is so wrong....
         if self.is_active:
-            is_active = 'LIVE'
+            is_active = '<font color="green">LIVE</font>'
         else:
-            is_active = 'DEAD'
-        return '%s %s - %s' % (is_active, self.modified, self.name,)
+            is_active = '<font color="red">DEAD</font>'
+        return mark_safe('%s %s - %s' % (is_active, self.modified, self.name,))
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
