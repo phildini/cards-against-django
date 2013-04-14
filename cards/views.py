@@ -285,8 +285,12 @@ class GameView(FormView):
         if player_name and player_name not in game.gamedata['players']:
             player_name = None
         
+        card_czar_name = game.gamedata['card_czar']
+        is_card_czar = player_name == card_czar_name
+
         self.player_name = player_name
         self.game = game
+        self.is_card_czar = is_card_czar
         return super(GameView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -295,10 +299,12 @@ class GameView(FormView):
         log.logger.debug('session_details %r', session_details)
         log.logger.debug('context%r', context)
         game = self.game
+        player_name = self.player_name
+        
         log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
-        #context['show_form'] = True  # FIXME temp hack to avoid browser auto refresh
+        context['show_form'] = self.can_show_form()
         context['refresh_num_secs'] = 20  # something high for debugging
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
@@ -315,7 +321,7 @@ class GameView(FormView):
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
 
-        is_card_czar = player_name == card_czar_name
+        is_card_czar = player_name == card_czar_name  # NOTE dupe logic to above
         context['is_card_czar'] = is_card_czar
         context['player_name'] = player_name
         if player_name:
@@ -328,6 +334,67 @@ class GameView(FormView):
         """
 
         return context
+
+    def get_success_url(self):
+        return reverse('game-view', kwargs={'pk': self.game.id})
+
+    def form_valid(self, form):
+        game = self.game
+        player_name = self.player_name
+        is_card_czar = self.is_card_czar
+        
+        if is_card_czar:
+            winner = form.cleaned_data['card_selection']
+            log.logger.debug(winner)
+            winner = winner[0]  # for some reason we have a list
+            winner_name = winner
+            log.logger.debug('start new round %r %r %r', player_name, winner_name, winner)
+            game.start_new_round(player_name, winner_name, winner)
+        else:
+            submitted = form.cleaned_data['card_selection']
+            # The form returns unicode strings. We want ints in our list.
+            white_card_list = [int(card) for card in submitted]
+            game.submit_white_cards(player_name, white_card_list)
+            if game.gamedata['filled_in_texts']:
+                log.logger.debug('filled_in_texts %r', game.gamedata['filled_in_texts'])
+            log.logger.debug('%r', form.cleaned_data['card_selection'])
+        game.save()
+        return super(GameView, self).form_valid(form)
+
+    def get_form_kwargs(self):
+        game = self.game
+        player_name = self.player_name
+        is_card_czar = self.is_card_czar
+        
+        black_card_id = game.gamedata['current_black_card']
+        kwargs = super(GameView, self).get_form_kwargs()
+        if player_name:
+            # get_form_kwargs() is called all the time even when we don't intend to show form
+            # check above could be can_show_form()?
+            if is_card_czar:
+                if game.game_state == GAMESTATE_SELECTION:
+                    czar_selection_options = [
+                        (player_id, mark_safe(filled_in_card)) for player_id, filled_in_card in game.gamedata['filled_in_texts']
+                    ]
+                    kwargs['cards'] = czar_selection_options
+            else:
+                temp_black_card = BlackCard.objects.get(id=black_card_id)
+                kwargs['blanks'] = temp_black_card.pick
+                cards = [(card_id, mark_safe(card_text)) for card_id, card_text in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('id', 'text')]
+                kwargs['cards'] = cards
+        return kwargs
+    
+    # internal utiltity methods
+    
+    def can_show_form(self):
+        result = False
+        if self.player_name and not self.is_card_czar and self.game.game_state == GAMESTATE_SUBMISSION:
+            # show white card submission form
+            result = True
+        elif self.player_name and self.is_card_czar and self.game.game_state == GAMESTATE_SELECTION:
+            # show czar pick winner submission form
+            result = True
+        return result
 
 
 def debug_join(request, pk):

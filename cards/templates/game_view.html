@@ -57,6 +57,18 @@
         </br>
     {% endif %}
     
+    {% if show_form %}
+        <form action="{{ action }}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            {{field.label}}:
+                {{field|safe}}
+            </br>
+            {% endfor %}
+        <input type="submit" value="Submit" />
+        </form>
+    {% endif %}
+
     {% if player_name %}
     <h3>Your cards</h3>
     <ul>
