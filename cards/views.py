@@ -297,6 +297,10 @@ class GameView(DetailView):
             player_name = session_details['name']
         if player_name and player_name not in game.gamedata['players']:
             player_name = None
+        else:
+            white_cards_text_list = [mark_safe(card_text) for card_text, in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('text')]
+            context['white_cards_text_list'] = white_cards_text_list
+        
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
 
