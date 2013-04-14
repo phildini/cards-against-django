@@ -46,14 +46,13 @@
     
     {% if game.game_state == 'selection' %}
         {% comment %}
-            <!--  TODO make me pretty -->
+            <!--  TODO make me pretty (and then the same for white_cards_text_list) -->
             <!--  TODO haiku card could be prettier (possibly requires commas adding in replace_blanks) -->
         {% endcomment %}
         {% for _, tmp_text in game.gamedata.filled_in_texts %}
             <div class="btn btn-inverse card">
             {{tmp_text|safe}}
             </div>
-            </br>
         {% endfor %}
         </br>
     {% endif %}
