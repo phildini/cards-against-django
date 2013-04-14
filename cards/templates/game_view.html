@@ -59,18 +59,9 @@
     
     {% if player_name %}
     <h3>Your cards</h3>
-    {% for tmp_text in white_cards_text_list %}
-        <div class="btn card">
-        {{tmp_text|safe}}
-        </div>
-    {% endfor %}
-    {% endif %}
-
-    {% if player_name %}
-    <h3>Your cards</h3>
     <ul>
     {% for tmp_text in white_cards_text_list %}
-        <li>{{tmp_text|safe}}</li>
+        <li class="btn">{{tmp_text|safe}}</li>
         </br>
     {% endfor %}
     </ul>
