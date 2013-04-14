@@ -22,7 +22,8 @@ import log
 def gravatar_url(email, size=50, default='monsterid'):
     """Generate url for Gravatar image
     email - email address
-    default = default_image_url or default hash type
+    default = default_image_url or default hash type, for more default
+    options see http://en.gravatar.com/site/implement/images/
     """
     gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
     if default:
