@@ -292,6 +292,7 @@ class GameView(DetailView):
         player_name = None
         if self.request.user.is_authenticated():
             player_name = self.request.user.email
+            # if player is logged in AND has a session name, the session name is ignored
         else:
             # Assume AnonymousUser
             player_name = session_details['name']
