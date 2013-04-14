@@ -272,7 +272,21 @@ class GameView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
-        self.game = Game.objects.get(pk=kwargs['pk'])
+        game = Game.objects.get(pk=kwargs['pk'])
+        
+        player_name = None
+        session_details = self.request.session['session_details']  # hard fail for now on lookup failure, FIXME for observers
+        if self.request.user.is_authenticated():
+            player_name = self.request.user.email
+            # if player is logged in AND has a session username, the session username is ignored
+        else:
+            # Assume AnonymousUser
+            player_name = session_details['name']
+        if player_name and player_name not in game.gamedata['players']:
+            player_name = None
+        
+        self.player_name = player_name
+        self.game = game
         return super(GameView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -293,16 +307,8 @@ class GameView(FormView):
         context['card_czar_name'] = card_czar_name
         context['card_czar_avatar'] = game.gamedata['players'][card_czar_name]['player_avatar']
         
-        player_name = None
-        if self.request.user.is_authenticated():
-            player_name = self.request.user.email
-            # if player is logged in AND has a session username, the session username is ignored
-        else:
-            # Assume AnonymousUser
-            player_name = session_details['name']
-        if player_name and player_name not in game.gamedata['players']:
-            player_name = None
-        else:
+        player_name = self.player_name
+        if player_name:
             white_cards_text_list = [mark_safe(card_text) for card_text, in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('text')]
             context['white_cards_text_list'] = white_cards_text_list
         
