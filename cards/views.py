@@ -93,10 +93,9 @@ class PlayerView(FormView):
         context['player_avatar'] = self.game_data['players'][self.player_name]['player_avatar']
         context['game_name'] = self.game_name
         context['show_form'] = self.can_show_form()
-        # Display filled-in answer if player has submitted.
         if self.game_data['submissions'] and not self.is_card_czar:
-            player_submission = self.game_data['submissions'][self.player_id]
-            context['filled_in_question'] = temp_black_card.replace_blanks(player_submission)
+            # TODO show players white card hand (just like if were playing with real cards)
+            context['filled_in_question'] = 'waiting for other players or card czar'
         context['action'] = reverse('player-view')
         return context
 
