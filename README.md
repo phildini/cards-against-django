@@ -40,3 +40,8 @@ Sample manage shell:
     
         import cards
         cards.models.BlackCard.objects.get(id=1)
+        cards.models.WhiteCard.objects.all()
+        b = cards.models.BlackCard.objects.get(id=93)
+        b.replace_blanks((11, 94, 95))
+        b.replace_blanks((11, 94))
+
