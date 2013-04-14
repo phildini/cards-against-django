@@ -11,7 +11,7 @@ import random
 import uuid
 
 from django.utils.safestring import mark_safe
-from django.views.generic import FormView, DetailView
+from django.views.generic import FormView, UpdateView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
@@ -265,17 +265,22 @@ class LobbyView(FormView):
         return super(LobbyView, self).form_valid(form)
 
 
-class GameView(DetailView):
+class GameView(FormView):
 
-    model = Game
     template_name = 'game_view.html'
+    form_class = PlayerForm
+
+    def dispatch(self, request, *args, **kwargs):
+        log.logger.debug('%r %r', args, kwargs)
+        self.game = Game.objects.get(pk=kwargs['pk'])
+        return super(GameView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
         session_details = self.request.session['session_details']  # hard fail for now on lookup failure, FIXME for observers
         context = super(GameView, self).get_context_data(*args, **kwargs)
         log.logger.debug('session_details %r', session_details)
         log.logger.debug('context%r', context)
-        game = context['object']
+        game = self.game
         log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
