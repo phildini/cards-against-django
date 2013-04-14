@@ -50,20 +50,22 @@ class Game(TimeStampedModel):
     """gamedata  is a dict
     {
         players: {
+            # index here is the same as for submissions,
+            # also same as player_name in filled_in_texts tuples
+            # also same as card_czar
             player1: {
-                hand: [...],
+                hand: [ of card numbers ],
                 wins: int,
-                submitted = current submitted card,
             },
             player2 {...},
             ...
         },
         current_black_card = None|int,
         submissions = {dict of player name: [list of card numbers]}
-        round: int,  round number where round 0 is the first round
+        round: int,  # round number where round 1 is the first round
         card_czar = NOTE this is currently a str of a player name # 'player1',  # int index into 'players'
-        black_deck = [],
-        white_deck = [],
+        black_deck = [ of card black numbers ],
+        white_deck = [ of card white numbers ],
         filled_in_texts = None | [ (player name, filled in black card text), .... ]
     }
 
