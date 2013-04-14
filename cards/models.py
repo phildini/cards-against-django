@@ -34,6 +34,7 @@ GAMESTATE_SUBMISSION = 'submission'
 GAMESTATE_SELECTION = 'selection'
 GAMESTATE_TRANSITION = 'transition'
 
+
 class Game(TimeStampedModel):
 
     name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
@@ -72,8 +73,12 @@ class Game(TimeStampedModel):
     """
 
     def __unicode__(self):
-        # FIXME add game start time, include num players and rounds in display name
-        return self.name
+        # FIXME add game start time?, include num players and rounds in display name
+        if self.is_active:
+            is_active = 'LIVE'
+        else:
+            is_active = 'DEAD'
+        return '%s %s - %s' % (is_active, self.modified, self.name,)
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
