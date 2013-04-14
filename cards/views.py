@@ -317,10 +317,13 @@ class GameView(DetailView):
 
 def debug_join(request, pk):
     """This is a temp function that expects a user already exists and is logged in,
-    then joins them to a game.
+    then joins them to an existing game.
     
     We want to support real user accounts but also anonymous, which is why
     this is a debug routine for now.
+    
+    TODO password protection check on join.
+    TODO create a game (with no plaers, redirect to join game for game creator).
     """
     log.logger.debug('request.user %s', request.user)
     game = Game.objects.get(id=pk)
