@@ -7,11 +7,10 @@
 # LobbyView will give PlayerView a named player and a game stored in database.
 # PlayerView will return to LobbyView any request that does not have those things.
 
-import random
 import uuid
 
 from django.utils.safestring import mark_safe
-from django.views.generic import FormView, UpdateView
+from django.views.generic import FormView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
@@ -180,7 +179,7 @@ class LobbyView(FormView):
         context['player_counter'] = self.player_counter
 
         context['show_form'] = True
-        
+
         session_details = self.request.session.get('session_details', {})  # FIXME
         # FIXME if not a dict, make it a dict (upgrade old content)
         log.logger.debug('session_details %r', session_details)
@@ -194,7 +193,7 @@ class LobbyView(FormView):
             # TODO test do we need to explictly set the session entry (dict's don't tend to need this)
         if not self.player_id:
             # TODO this may become player number (not name)
-            
+
             # For now we auto generate a name (setting username needs to be done in a form)
             self.player_id = 'Auto Player %d' % self.player_counter  # this is currently a NOOP
             session_details['name'] = self.player_id
@@ -261,7 +260,6 @@ class LobbyView(FormView):
         session_details['game'] = game_name
         self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
 
-
         return super(LobbyView, self).form_valid(form)
 
 
@@ -273,7 +271,7 @@ class GameView(FormView):
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
         game = Game.objects.get(pk=kwargs['pk'])
-        
+
         player_name = None
         session_details = self.request.session['session_details']  # hard fail for now on lookup failure, FIXME for observers
         if self.request.user.is_authenticated():
@@ -284,7 +282,7 @@ class GameView(FormView):
             player_name = session_details['name']
         if player_name and player_name not in game.gamedata['players']:
             player_name = None
-        
+
         card_czar_name = game.gamedata['card_czar']
         is_card_czar = player_name == card_czar_name
 
@@ -300,7 +298,7 @@ class GameView(FormView):
         log.logger.debug('context%r', context)
         game = self.game
         player_name = self.player_name
-        
+
         log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
@@ -308,16 +306,16 @@ class GameView(FormView):
         context['refresh_num_secs'] = 20  # something high for debugging
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
-        
+
         card_czar_name = game.gamedata['card_czar']
         context['card_czar_name'] = card_czar_name
         context['card_czar_avatar'] = game.gamedata['players'][card_czar_name]['player_avatar']
-        
+
         player_name = self.player_name
         if player_name:
             white_cards_text_list = [mark_safe(card_text) for card_text, in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('text')]
             context['white_cards_text_list'] = white_cards_text_list
-        
+
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
 
@@ -326,7 +324,7 @@ class GameView(FormView):
         context['player_name'] = player_name
         if player_name:
             context['player_avatar'] = game.gamedata['players'][player_name]['player_avatar']
-        
+
         """TODO determine if user is:
             observer - show current state of play
             card czar (show waiting for players OR select winner)
@@ -342,7 +340,7 @@ class GameView(FormView):
         game = self.game
         player_name = self.player_name
         is_card_czar = self.is_card_czar
-        
+
         if is_card_czar:
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
@@ -365,7 +363,7 @@ class GameView(FormView):
         game = self.game
         player_name = self.player_name
         is_card_czar = self.is_card_czar
-        
+
         black_card_id = game.gamedata['current_black_card']
         kwargs = super(GameView, self).get_form_kwargs()
         if player_name:
@@ -383,9 +381,9 @@ class GameView(FormView):
                 cards = [(card_id, mark_safe(card_text)) for card_id, card_text in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('id', 'text')]
                 kwargs['cards'] = cards
         return kwargs
-    
+
     # internal utiltity methods
-    
+
     def can_show_form(self):
         result = False
         if self.player_name and not self.is_card_czar and self.game.game_state == GAMESTATE_SUBMISSION:
@@ -400,10 +398,10 @@ class GameView(FormView):
 def debug_join(request, pk):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.
-    
+
     We want to support real user accounts but also anonymous, which is why
     this is a debug routine for now.
-    
+
     TODO password protection check on join.
     TODO create a game (with no plaers, redirect to join game for game creator).
     """
