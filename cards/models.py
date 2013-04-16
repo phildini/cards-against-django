@@ -208,6 +208,15 @@ class Game(TimeStampedModel):
             'player_avatar': avatar_url(player_name),
         }
 
+    def add_player(self, player_name):
+        if player_name not in self.gamedata['players']:
+            player = self.create_player(player_name)
+            player['hand'] = [
+                self.deal_white_card() for x in xrange(10)
+            ]
+            self.gamedata['players'][player_name] = player
+        # else do nothing, they are already in the game do NOT raise any errors
+
 
 class Player(TimeStampedModel):
 

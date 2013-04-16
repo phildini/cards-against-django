@@ -416,7 +416,7 @@ def debug_join(request, pk):
         existing_game_name = session_details['game']  # FIXME now use this and check it...
         player_name = session_details['name']
     if player_name not in game.gamedata['players']:
-        game.gamedata['players'][player_name] = game.create_player(player_name)
+        game.add_player(player_name)
         game.save()
     #redirect(reverse('game-view'))
     return redirect('.')  # FIXME .. please! :-(
