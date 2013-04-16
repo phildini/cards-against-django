@@ -31,6 +31,6 @@ CACHES = {
         'TIMOUT': 3600,
     }
 }
-STATIC_ROOT= ''
+STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ()
