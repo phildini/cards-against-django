@@ -130,6 +130,10 @@ class Game(TimeStampedModel):
             self.gamedata['black_deck'] = shuffled_black
         """
         return black_card
+    
+    def deal_white_card(self):
+        white_card = self.gamedata['white_deck'].pop()
+        return white_card
 
     def start_new_round(self, czar_name, winner=None, winner_id=None):
         """NOTE this does not reset a game, it resets the cards on the table ready for the next round
@@ -150,7 +154,7 @@ class Game(TimeStampedModel):
             for player_name in self.gamedata['players']:
                 # check we are not the card czar
                 if player_name != czar_name:
-                    self.gamedata['players'][player_name]['hand'].append(self.gamedata['white_deck'].pop())
+                    self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
 
         # check if we draw additional cards based on black card
         # NOTE anyone who joins after this point will not be given the extra draw cards
@@ -159,7 +163,7 @@ class Game(TimeStampedModel):
             for player_name in self.gamedata['players']:
                 # check we are not the card czar
                 if player_name != czar_name:
-                    self.gamedata['players'][player_name]['hand'].append(self.gamedata['white_deck'].pop())
+                    self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
                     
         self.gamedata['filled_in_texts'] = None
         

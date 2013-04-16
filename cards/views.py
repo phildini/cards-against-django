@@ -58,7 +58,7 @@ class PlayerView(FormView):
         # Deal hand if player doesn't have one.
         if not self.player_data['hand']:
             self.player_data['hand'] = [
-                self.game_data['white_deck'].pop() for x in xrange(10)
+                self.game_dbobj.deal_white_card() for x in xrange(10)
             ]
 
         # Deal black card if game doesn't have one.
