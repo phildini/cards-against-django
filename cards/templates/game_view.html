@@ -3,33 +3,27 @@
 {% block content %}
 <div class="container">
 
-    <p>Game ({{game.id}}): {{game.name}}.</p>
-    
-    <p>Round {{game.gamedata.round}}.</p>
-
-    <p>
-    {% if player_name %}
-    You are {{player_name}}. <img src="{{player_avatar}}" alt="Player avatar">
-    {% else %}
-    You are an observer.
-    {% endif %}
-    </p>
-
-    <h3>Current card</h3>
-    
-    {% comment %}
-    {% endcomment %}
-    <div class="btn btn-inverse card">
-    <p class="text_left">{{ black_card|safe }}</p>
-    </div>
-    
-    
-    <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
     {% if is_card_czar %}
     <p>Dude! You are the card czar!</p>
     {% endif %}
-    
-    <p>game_state: {{game.game_state}}.</p>
+
+    <h3>Current card</h3>
+    <div class="btn btn-inverse card">
+    <p class="text_left">{{ black_card|safe }}</p>
+    </div>
+
+    {% if show_form %}
+        <form action="{{ action }}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            {{field.label}}:
+                {{field|safe}}
+            </br>
+            {% endfor %}
+        <input type="submit" value="Submit" />
+        </form>
+    {% endif %}
+
     <p>
         {% comment %}
             <!-- NOTE There are some model/template magic string value dependencies here :-( -->
@@ -43,6 +37,24 @@
             Waiting for card czar, <img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} to pick a winner.
         {% endif %}
     </p>
+
+    <p>Game ({{game.id}}): {{game.name}}.</p>
+    
+    <p>Round {{game.gamedata.round}}.</p>
+
+    <p>
+    {% if player_name %}
+    You are {{player_name}}. <img src="{{player_avatar}}" alt="Player avatar">
+    {% else %}
+    You are an observer.
+    {% endif %}
+    </p>
+
+    
+    
+    <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
+    
+    <p>game_state: {{game.game_state}}.</p>
     
     {% if game.game_state == 'selection' %}
         {% comment %}
@@ -57,18 +69,6 @@
         </br>
     {% endif %}
     
-    {% if show_form %}
-        <form action="{{ action }}" method="post">
-            {% csrf_token %}
-            {% for field in form %}
-            {{field.label}}:
-                {{field|safe}}
-            </br>
-            {% endfor %}
-        <input type="submit" value="Submit" />
-        </form>
-    {% endif %}
-
     {% if player_name %}
     <h3>Your cards</h3>
     <ul>
