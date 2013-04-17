@@ -40,6 +40,12 @@ GAMESTATE_SELECTION = 'selection'
 GAMESTATE_TRANSITION = 'transition'
 
 
+class BaseGameException(Exception):
+    pass
+
+class GameError(BaseGameException):
+    pass
+
 class Game(TimeStampedModel):
 
     name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
@@ -92,14 +98,18 @@ class Game(TimeStampedModel):
         white_card_list - list of white card ids
         
         TODO sanity checks
-            player is in game
-            player is not czar
-            player hasn't already submitted
             player has cards
-        NOTE many of the above is handled in the form.
         
         Currently this is called after form validation.
         """
+        
+        if self.gamedata['card_czar'] == player_id:
+            raise GameError('Player "%s" is card czar and can\'t submit white cards' % player_id)
+        if self.gamedata['submissions'].get(player_id):
+            raise GameError('Player "%s" already submitted a card' % player_id)
+        if player_id not in self.gamedata['players']:
+            raise GameError('Player "%s" not in game "%s"' % (player_id, self.name))
+        
         self.gamedata['submissions'][player_id] = white_card_list
         for card in white_card_list:
             self.gamedata['players'][player_id]['hand'].remove(card)
