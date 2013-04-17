@@ -325,12 +325,6 @@ class GameView(FormView):
         if player_name:
             context['player_avatar'] = game.gamedata['players'][player_name]['player_avatar']
 
-        """TODO determine if user is:
-            observer - show current state of play
-            card czar (show waiting for players OR select winner)
-            white card player (select card(s) OR waiting for other white card players OR all submitted white cards)
-        """
-
         return context
 
     def get_success_url(self):
@@ -403,7 +397,7 @@ def debug_join(request, pk):
     this is a debug routine for now.
 
     TODO password protection check on join.
-    TODO create a game (with no plaers, redirect to join game for game creator).
+    TODO create a game (with no players, redirect to join game for game creator).
     """
     log.logger.debug('request.user %s', request.user)
     game = Game.objects.get(id=pk)
