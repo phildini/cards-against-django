@@ -273,13 +273,16 @@ class GameView(FormView):
         game = Game.objects.get(pk=kwargs['pk'])
 
         player_name = None
-        session_details = self.request.session['session_details']  # hard fail for now on lookup failure, FIXME for observers
+        session_details = self.request.session.get('session_details')
         if self.request.user.is_authenticated():
             player_name = self.request.user.email
             # if player is logged in AND has a session username, the session username is ignored
         else:
             # Assume AnonymousUser
-            player_name = session_details['name']
+            if session_details:
+                player_name = session_details['name']
+            else:
+                player_name = None  # observer
         if player_name and player_name not in game.gamedata['players']:
             player_name = None
 
@@ -292,9 +295,7 @@ class GameView(FormView):
         return super(GameView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
-        session_details = self.request.session['session_details']  # hard fail for now on lookup failure, FIXME for observers
         context = super(GameView, self).get_context_data(*args, **kwargs)
-        log.logger.debug('session_details %r', session_details)
         log.logger.debug('context%r', context)
         game = self.game
         player_name = self.player_name
@@ -406,7 +407,7 @@ def debug_join(request, pk):
     else:
         # Assume AnonymousUser
         # also assume the set a name earlier....
-        session_details = request.session['session_details']
+        session_details = request.session['session_details']  # this will fail if not logged in via session name
         existing_game_name = session_details['game']  # FIXME now use this and check it...
         player_name = session_details['name']
     if player_name not in game.gamedata['players']:
