@@ -91,7 +91,8 @@ class Game(TimeStampedModel):
             is_active = '<font color="green">LIVE</font>'
         else:
             is_active = '<font color="red">DEAD</font>'
-        return mark_safe('%s %s - %s' % (is_active, self.modified, self.name,))
+        modified_str = self.modified.strftime('%Y-%m-%d %H:%M')
+        return mark_safe('%s %s - %s' % (is_active, modified_str, self.name,))
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
