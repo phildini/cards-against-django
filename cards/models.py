@@ -92,7 +92,7 @@ class Game(TimeStampedModel):
         else:
             is_active = '<font color="red">DEAD</font>'
         modified_str = self.modified.strftime('%Y-%m-%d %H:%M')
-        return mark_safe('%s %s - %s' % (is_active, modified_str, self.name,))
+        return mark_safe('%s %s - %s (%d players)' % (is_active, modified_str, self.name, len(self.gamedata['players'])))
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
