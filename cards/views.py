@@ -299,6 +299,7 @@ class GameView(FormView):
         log.logger.debug('context%r', context)
         game = self.game
         player_name = self.player_name
+        is_card_czar = self.is_card_czar
 
         log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
@@ -316,11 +317,15 @@ class GameView(FormView):
         if player_name:
             white_cards_text_list = [mark_safe(card_text) for card_text, in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('text')]
             context['white_cards_text_list'] = white_cards_text_list
+            
+            if game.gamedata['submissions'] and not is_card_czar:
+                player_submission = game.gamedata['submissions'].get(player_name)
+                if player_submission:
+                    context['filled_in_question'] = black_card.replace_blanks(player_submission) 
 
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
 
-        is_card_czar = player_name == card_czar_name  # NOTE dupe logic to above
         context['is_card_czar'] = is_card_czar
         context['player_name'] = player_name
         if player_name:
