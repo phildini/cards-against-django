@@ -382,12 +382,15 @@ class GameView(FormView):
     def can_show_form(self):
         result = False
         
-        if self.player_name and not self.is_card_czar and self.game.game_state == GAMESTATE_SUBMISSION and self.game.gamedata['submissions'].get(self.player_name) is None:
-            # show white card submission form
-            result = True
-        elif self.player_name and self.is_card_czar and self.game.game_state == GAMESTATE_SELECTION:
-            # show czar pick winner submission form
-            result = True
+        if self.player_name:
+            if self.is_card_czar:
+                if self.game.game_state == GAMESTATE_SELECTION:
+                    # show czar pick winner submission form
+                    result = True
+            else:
+                if self.game.game_state == GAMESTATE_SUBMISSION and self.game.gamedata['submissions'].get(self.player_name) is None:
+                    # show white card submission form
+                    result = True
         return result
 
 
