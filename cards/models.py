@@ -7,6 +7,7 @@ import hashlib
 import urllib
 
 from django.db import models
+from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
 
 from jsonfield import JSONField
@@ -43,8 +44,10 @@ GAMESTATE_TRANSITION = 'transition'
 class BaseGameException(Exception):
     pass
 
+
 class GameError(BaseGameException):
     pass
+
 
 class Game(TimeStampedModel):
 
@@ -227,6 +230,15 @@ class Game(TimeStampedModel):
             ]
             self.gamedata['players'][player_name] = player
         # else do nothing, they are already in the game do NOT raise any errors
+
+
+def game_pre_save(sender, **kwargs):
+    game = kwargs['instance']
+    if not game.is_active:
+        # and previously was active; kwargs['update_fields'] ....
+        game.name = 'DONE %s - %s' % (game.modified, game.name)
+
+pre_save.connect(game_pre_save, sender=Game)
 
 
 class Player(TimeStampedModel):
