@@ -8,6 +8,7 @@ import hashlib
 import urllib
 
 from django.db import models
+from django.db.models import F
 from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
 
@@ -105,7 +106,25 @@ class Game(TimeStampedModel):
         """`older_than` datetime to compare against, if not specified now - 2 hours is used.
         """
         older_than = older_than or (datetime.datetime.now() - (ONE_HOUR * 2))
-        cls.objects.filter(is_active=True, modified__lte=older_than).update(is_active=False)
+        #'DONE %s - %s' % (F('modified'), F('name'))
+        """NOTE for update below Django appears to have a bug with sqlite3,
+        it generates bad SQL with the wrong string concat operator, e.g.:
+        
+            UPDATE "cards_game"
+            SET
+                "is_active" = 0,
+                "name" = (('DONE ' + "cards_game"."modified") + ' - ') + "cards_game"."name" 
+            WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
+        
+        wrong query uses "+" when it should use "||"
+        
+            UPDATE "cards_game"
+            SET
+                "is_active" = 0,
+                "name" = (('DONE ' || "cards_game"."modified") || ' - ') || "cards_game"."name" 
+            WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
+        """
+        cls.objects.filter(is_active=True, modified__lte=older_than).update(is_active=False, name='DONE ' + F('modified') + ' - ' + F('name'))
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
