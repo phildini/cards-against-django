@@ -399,6 +399,11 @@ class GameView(FormView):
         return result
 
 
+def debug_deactivate_old_games(request):
+    Game.deactivate_old_games()
+    return redirect('/')  # DEBUG just so it doesn't error out
+
+
 def debug_join(request, pk):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.

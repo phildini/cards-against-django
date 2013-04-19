@@ -2,6 +2,7 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
+import datetime
 import random
 import hashlib
 import urllib
@@ -19,6 +20,8 @@ from django.utils.html import escape
 
 import log
 
+
+ONE_HOUR = datetime.timedelta(seconds=60*60*1)
 
 def gravatar_url(email, size=50, default='monsterid'):
     """Generate url for Gravatar image
@@ -96,6 +99,13 @@ class Game(TimeStampedModel):
             is_active = '<font color="red">DEAD</font>'
         modified_str = self.modified.strftime('%Y-%m-%d %H:%M')
         return mark_safe('%s %s - %s (%d players)' % (is_active, modified_str, self.name, len(self.gamedata['players'])))
+    
+    @classmethod
+    def deactivate_old_games(cls, older_than=None):
+        """`older_than` datetime to compare against, if not specified now - 2 hours is used.
+        """
+        older_than = older_than or (datetime.datetime.now() - (ONE_HOUR * 2))
+        cls.objects.filter(is_active=True, modified__lte=older_than).update(is_active=False)
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
