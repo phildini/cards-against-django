@@ -106,7 +106,6 @@ class Game(TimeStampedModel):
         """`older_than` datetime to compare against, if not specified now - 2 hours is used.
         """
         older_than = older_than or (datetime.datetime.now() - (ONE_HOUR * 2))
-        #'DONE %s - %s' % (F('modified'), F('name'))
         """NOTE for update below Django appears to have a bug with sqlite3,
         it generates bad SQL with the wrong string concat operator, e.g.:
         
