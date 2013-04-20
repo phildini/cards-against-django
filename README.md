@@ -34,7 +34,12 @@ Steps to run:
 
 7. share and enjoy.
 
-Sample manage shell:
+Sample manage shell snippets:
+
+    # drop model tables (but not Django users/permissions)
+    python manage.py sqlclear --settings=cah.settings.local cards | python manage.py dbshell --settings=cah.settings.local 
+    # then syncdb
+
 
     $ python manage.py shell --settings=cah.settings.local
     
@@ -44,4 +49,5 @@ Sample manage shell:
         b = cards.models.BlackCard.objects.get(id=93)
         b.replace_blanks((11, 94, 95))
         b.replace_blanks((11, 94))
+        g = cards.models.Game.objects.get(id=1)
 
