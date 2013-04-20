@@ -276,8 +276,11 @@ class GameView(FormView):
         session_details = self.request.session.get('session_details')
         if self.request.user.is_authenticated():
             player_name = self.request.user.email
-            # if player is logged in AND has a session username, the session username is ignored
-        else:
+            if player_name and player_name not in game.gamedata['players']:
+                # check session name next
+                player_name = None
+        
+        if player_name is None:
             # Assume AnonymousUser
             if session_details:
                 player_name = session_details['name']
