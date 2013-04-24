@@ -99,7 +99,7 @@ class LobbyView(FormView):
                 new_game = tmp_game.create_game()
                 tmp_game.gamedata = new_game
                 tmp_game.add_player(player_name)
-                tmp_game.start_new_round(winner_id = self.player_id)
+                tmp_game.start_new_round(winner_id=self.player_id)
                 tmp_game.save()
                 self.game = tmp_game
         if existing_game:
@@ -310,6 +310,7 @@ class GameJoinView(FormView):
         request = self.request
         game = self.game
 
+#######################
 
 
 def debug_deactivate_old_games(request):
