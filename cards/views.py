@@ -265,12 +265,7 @@ class GameView(FormView):
         return result
 
 
-def debug_deactivate_old_games(request):
-    Game.deactivate_old_games()
-    return redirect('/')  # DEBUG just so it doesn't error out
-
-
-def debug_join(request, pk):
+class GameJoinView(FormView):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.
 
@@ -280,18 +275,44 @@ def debug_join(request, pk):
     TODO password protection check on join.
     TODO create a game (with no players, redirect to join game for game creator).
     """
-    log.logger.debug('request.user %s', request.user)
-    game = Game.objects.get(id=pk)
-    if request.user.is_authenticated():
-        player_name = request.user.email  # or perhaps use name and set avatar to email....
-    else:
-        # Assume AnonymousUser
-        # also assume the set a name earlier....
-        session_details = request.session['session_details']  # this will fail if not logged in via session name
-        existing_game_name = session_details['game']  # FIXME now use this and check it...
-        player_name = session_details['name']
-    if player_name not in game.gamedata['players']:
-        game.add_player(player_name)
-        game.save()
-    #redirect(reverse('game-view'))
-    return redirect('.')  # FIXME .. please! :-(
+
+    template_name = 'lobby.html'
+    form_class = LobbyForm
+
+    def dispatch(self, request, *args, **kwargs):
+        log.logger.debug('%r %r', args, kwargs)
+        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this wil fail to non existent game
+        request = self.request
+        
+        self.request = request
+        self.game = game
+
+        if request.user.is_authenticated():
+            player_name = request.user.email  # or perhaps use name and set avatar to email....
+        else:
+            # Assume AnonymousUser
+            # also assume the set a name earlier....
+            session_details = request.session['session_details']  # this will fail if not logged in via session name
+            existing_game_name = session_details['game']  # FIXME now use this and check it... # setup form logic...
+            player_name = session_details['name']
+        if player_name not in game.gamedata['players']:
+            game.add_player(player_name)
+            game.save()
+        
+        # TODO super
+        # super(PlayerView, self).dispatch(request, *args, **kwargs)
+        log.logger.debug('about to return reverse')
+        return redirect(reverse('game-view', kwargs={'pk': game.id}))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(GameJoinView, self).get_context_data(*args, **kwargs)
+        log.logger.debug('context %r', context)
+        # FIXME if we are here we need a player name (or they need to log in so we can get a player name)
+        request = self.request
+        game = self.game
+
+
+
+def debug_deactivate_old_games(request):
+    Game.deactivate_old_games()
+    return redirect('/')  # DEBUG just so it doesn't error out

@@ -11,7 +11,7 @@ admin.autodiscover()
 from cards.views import (
     GameView,
     LobbyView,
-    debug_join,
+    GameJoinView,
     debug_deactivate_old_games,
 )
 
@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
     url(r'^game/(?P<pk>\d+)/$', GameView.as_view(), name="game-view"),
-    url(r'^game/(?P<pk>\d+)/join$', debug_join),
+    url(r'^game/(?P<pk>\d+)/join$', GameJoinView.as_view(), name="gamejoin-view"),
     url(r'^super_secret_thing$', debug_deactivate_old_games),
     url(r'^admin/', include(admin.site.urls)),
 )
