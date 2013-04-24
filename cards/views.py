@@ -27,7 +27,7 @@ class LobbyView(FormView):
     form_class = LobbyForm
 
     def __init__(self, *args, **kwargs):
-        self.game_list = Game.objects.filter(is_active=True).values_list('name', 'name')
+        self.game_list = Game.objects.filter(is_active=True).values_list('id', 'name')
         self.player_counter = cache.get('player_counter', 0)  # this doesn't really count players, it counts number of lobby views
 
     # def dispatch(self, request, *args, **kwargs):
@@ -42,6 +42,7 @@ class LobbyView(FormView):
         self.player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', self.player_counter)
         context['player_counter'] = self.player_counter
+        context['joinable_game_list'] = self.game_list  # TODO rename?
 
         context['show_form'] = True
 
