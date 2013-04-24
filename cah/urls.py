@@ -9,7 +9,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 from cards.views import (
-    PlayerView,
     GameView,
     LobbyView,
     debug_join,
@@ -26,7 +25,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
-    url(r'^player/', PlayerView.as_view(), name="player-view"),
     url(r'^game/(?P<pk>\d+)/$', GameView.as_view(), name="game-view"),
     url(r'^game/(?P<pk>\d+)/join$', debug_join),
     url(r'^super_secret_thing$', debug_deactivate_old_games),

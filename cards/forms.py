@@ -50,7 +50,10 @@ class CzarForm(forms.Form):
         )
 
 
-class GameForm(forms.Form):
+class LobbyForm(forms.Form):
+    """
+    The form for creating or joining a game from the lobby view
+    """
 
     new_game = forms.CharField(max_length=140, required=False)
     player_name = forms.CharField(max_length=100)
@@ -61,7 +64,7 @@ class GameForm(forms.Form):
         except KeyError:
             self.game_list = []
         self.player_counter = kwargs.pop('player_counter')
-        super(GameForm, self).__init__(*args, **kwargs)
+        super(LobbyForm, self).__init__(*args, **kwargs)
         self.fields["player_name"].initial = 'Player %d' % self.player_counter
         if self.game_list:
             self.fields["new_game"].initial = None

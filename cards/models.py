@@ -177,39 +177,44 @@ class Game(TimeStampedModel):
         white_card = self.gamedata['white_deck'].pop()
         return white_card
 
-    def start_new_round(self, czar_name, winner=None, winner_id=None):
+    def start_new_round(self, czar_name=None, winner=None, winner_id=None):
         """NOTE this does not reset a game, it resets the cards on the table ready for the next round
         """
         self.gamedata['submissions'] = {}
-
-        black_card_id = self.gamedata['current_black_card']
-        temp_black_card = BlackCard.objects.get(id=black_card_id)
-        pick = temp_black_card.pick
-        self.gamedata['current_black_card'] = self.deal_black_card()
-        self.gamedata['players'][winner]['wins'] += 1
         self.gamedata['card_czar'] = winner_id
         self.gamedata['round'] += 1
         self.gamedata['last_round_winner'] = winner
+        self.gamedata['filled_in_texts'] = None
+        self.game_state = GAMESTATE_SUBMISSION
 
-        # replace used white cards
-        for _ in xrange(pick):
-            for player_name in self.gamedata['players']:
-                # check we are not the card czar
-                if player_name != czar_name:
-                    self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
+        if winner:
+            self.gamedata['players'][winner]['wins'] += 1
+
+        # check the pick number of previous black card, deal that many cards
+        prev_black_card_id = self.gamedata['current_black_card']
+        if prev_black_card_id is not None:
+            prev_black_card = BlackCard.objects.get(id=prev_black_card_id)
+            pick = prev_black_card.pick
+
+            # replace used white cards
+            for _ in xrange(pick):
+                for player_name in self.gamedata['players']:
+                    # check we are not the card czar
+                    if player_name != czar_name:
+                        self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
+
+        # deal new black card to game
+        self.gamedata['current_black_card'] = self.deal_black_card()
+        curr_black_card = BlackCard.objects.get(id=self.gamedata['current_black_card'])
 
         # check if we draw additional cards based on black card
         # NOTE anyone who joins after this point will not be given the extra draw cards
-        white_card_draw = temp_black_card.draw
+        white_card_draw = curr_black_card.draw
         for _ in xrange(white_card_draw):
             for player_name in self.gamedata['players']:
                 # check we are not the card czar
                 if player_name != czar_name:
                     self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
-                    
-        self.gamedata['filled_in_texts'] = None
-        
-        self.game_state = GAMESTATE_SUBMISSION
 
     def create_game(self):
         log.logger.debug("New Game called")
@@ -251,6 +256,8 @@ class Game(TimeStampedModel):
         }
 
     def add_player(self, player_name):
+        log.logger.debug(player_name)
+        log.logger.debug(self.gamedata)
         if player_name not in self.gamedata['players']:
             player = self.create_player(player_name)
             player['hand'] = [

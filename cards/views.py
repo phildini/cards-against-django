@@ -15,151 +15,16 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
 
-from forms import PlayerForm, GameForm, CzarForm
+from forms import PlayerForm, LobbyForm, CzarForm
 from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION
 
 import log
 
 
-class PlayerView(FormView):
-
-    template_name = 'player.html'
-    form_class = PlayerForm
-
-    def __init__(self, *args, **kwargs):
-        super(PlayerView, self).__init__(*args, **kwargs)
-
-    def dispatch(self, request, *args, **kwargs):
-        # Setup for game and player
-
-        session_details = self.request.session.get('session_details', {})  # FIXME
-        # FIXME if not a dict, make it a dict (upgrade content)
-        log.logger.debug('session_details %r', session_details)
-        if not session_details:
-            return redirect(reverse('lobby-view'))
-
-        # TODO Player model lookup
-        self.game_name = session_details['game']  # TODO start using game number id (not name)
-        self.player_name = session_details['name']
-        self.player_id = self.player_name  # FIXME needless duplicatation that needs to be refactored, this may become player number
-
-        try:
-            self.game_dbobj = Game.objects.get(name=self.game_name)  # FIXME his name is horrible
-            self.game_data = self.game_dbobj.gamedata
-        except Game.DoesNotExist:
-            return redirect(reverse('lobby-view'))
-        if not self.game_data:
-            return redirect(reverse('lobby-view'))
-        self.is_card_czar = self.game_data['card_czar'] == self.player_id
-        log.logger.debug('id %r name %r game %r', self.player_id, self.player_name, self.game_name)
-        log.logger.debug('self.game_data %r', self.game_data)
-
-        self.player_data = self.game_data['players'].get(self.player_name)
-        # Deal hand if player doesn't have one.
-        if not self.player_data['hand']:
-            self.player_data['hand'] = [
-                self.game_dbobj.deal_white_card() for x in xrange(10)
-            ]
-
-        # Deal black card if game doesn't have one.
-        if self.game_data['current_black_card'] is None:
-            # FIXME call start_new_round, do not manually deal black card here; what if the black card is a "draw 3, pick 2" card.
-            self.game_data['current_black_card'] = self.game_dbobj.deal_black_card()
-        self.write_state()
-
-        if self.is_card_czar:
-            self.form_class = CzarForm
-        return super(PlayerView, self).dispatch(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse('player-view')
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(PlayerView, self).get_context_data(*args, **kwargs)
-        context['game'] = self.game_dbobj
-
-        # FIXME additional db IO :-( TODO cache unnormalized data in game?
-        black_card_id = self.game_data['current_black_card']
-        temp_black_card = BlackCard.objects.get(id=black_card_id)
-
-        context['players'] = self.game_data['players']
-        last_round_winner = self.game_data.get('last_round_winner', '')
-        context['last_round_winner'] = last_round_winner
-        if last_round_winner:
-            context['last_round_winner_avatar'] = self.game_data['players'][last_round_winner]['player_avatar']
-        context['black_card'] = self.black_card.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
-        context['player_name'] = self.player_name
-        context['player_avatar'] = self.game_data['players'][self.player_name]['player_avatar']
-        context['game_name'] = self.game_name
-        context['show_form'] = self.can_show_form()
-        if self.game_data['submissions'] and not self.is_card_czar:
-            # TODO show players white card hand (just like if were playing with real cards)
-            context['filled_in_question'] = 'waiting for other players or card czar'
-        context['action'] = reverse('player-view')
-        return context
-
-    def get_form_kwargs(self):
-        black_card_id = self.game_data['current_black_card']
-        temp_black_card = BlackCard.objects.get(id=black_card_id)
-        black_card_text = temp_black_card.text
-        self.black_card = black_card_text
-        kwargs = super(PlayerView, self).get_form_kwargs()
-        if self.is_card_czar:
-            if self.game_dbobj.game_state == GAMESTATE_SELECTION:
-                czar_selection_options = [
-                    (player_id, mark_safe(filled_in_card)) for player_id, filled_in_card in self.game_dbobj.gamedata['filled_in_texts']
-                ]
-                kwargs['cards'] = czar_selection_options
-        else:
-            kwargs['blanks'] = temp_black_card.pick
-            cards = [(card_id, mark_safe(card_text)) for card_id, card_text in WhiteCard.objects.filter(id__in=self.player_data['hand']).values_list('id', 'text')]
-            kwargs['cards'] = cards
-        return kwargs
-
-    def form_valid(self, form):
-        if self.is_card_czar:
-            winner = form.cleaned_data['card_selection']
-            log.logger.debug(winner)
-            winner_name = winner
-            self.game_dbobj.start_new_round(self.player_name, winner_name, winner)
-
-        else:
-            submitted = form.cleaned_data['card_selection']
-            # The form returns unicode strings. We want ints in our list.
-            white_card_list = [int(card) for card in submitted]
-            self.game_dbobj.submit_white_cards(self.player_id, white_card_list)
-            if self.game_dbobj.gamedata['filled_in_texts']:
-                log.logger.debug('filled_in_texts %r', self.game_dbobj.gamedata['filled_in_texts'])
-            log.logger.debug('%r', form.cleaned_data['card_selection'])
-        self.write_state()
-        return super(PlayerView, self).form_valid(form)
-
-    def write_state(self):
-        self.game_data['players'][self.player_name] = self.player_data
-        self.game_dbobj.save()
-
-    def can_show_form(self):
-        flag = False
-        # import pdb; pdb.set_trace()
-        if self.game_data['card_czar'] == self.player_id:
-            if not self.game_data['submissions']:
-                flag = False
-            elif len(self.game_data['submissions']) == len(self.game_data['players']) - 1:
-                flag = True
-            else:
-                flag = False
-        else:
-            if self.player_id in self.game_data['submissions']:
-                flag = False
-            else:
-                flag = True
-        return flag
-
-
 class LobbyView(FormView):
 
     template_name = 'lobby.html'
-    form_class = GameForm
+    form_class = LobbyForm
 
     def __init__(self, *args, **kwargs):
         self.game_list = Game.objects.filter(is_active=True).values_list('name', 'name')
@@ -169,7 +34,7 @@ class LobbyView(FormView):
         # return super(PlayerView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('player-view')
+        return reverse('game-view', kwargs={'pk': self.game.id})
 
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
@@ -214,12 +79,6 @@ class LobbyView(FormView):
         # FIXME if not a dict, make it a dict (upgrade old content)
         log.logger.debug('session_details %r', session_details)
 
-        """
-        if session_details:
-            # FIXME this will break new game creation.....
-            raise NotImplementedError('attempting to join a game when player is already in a game')
-        """
-
         player_name = form.cleaned_data['player_name']
         self.player_id = player_name  # FIXME needless duplicatation that needs to be refactored, this may become player number
 
@@ -237,10 +96,11 @@ class LobbyView(FormView):
                 # really a new game
                 tmp_game = Game(name=form.cleaned_data['new_game'])
                 new_game = tmp_game.create_game()
-                new_game['players'][player_name] = tmp_game.create_player(player_name)
-                new_game['card_czar'] = self.player_id
                 tmp_game.gamedata = new_game
+                tmp_game.add_player(player_name)
+                tmp_game.start_new_round(winner_id = self.player_id)
                 tmp_game.save()
+                self.game = tmp_game
         if existing_game:
             if not game_name:
                 game_name = form.cleaned_data.get('game_list')
@@ -306,6 +166,8 @@ class GameView(FormView):
 
         log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
+        if black_card_id is None:
+            black_card_id = self.game.deal_black_card()
         black_card = BlackCard.objects.get(id=black_card_id)
         context['show_form'] = self.can_show_form()
         context['refresh_num_secs'] = 20  # something high for debugging
