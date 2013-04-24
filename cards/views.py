@@ -61,7 +61,7 @@ class LobbyView(FormView):
             # TODO this may become player number (not name)
 
             # For now we auto generate a name (setting username needs to be done in a form)
-            self.player_id = 'Auto Player %d' % self.player_counter  # this is currently a NOOP
+            self.player_id = 'Auto Player %d' % self.player_counter  # User hasn't manually set a name, we should offer them the chance to do this...
             session_details['name'] = self.player_id
             self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
         log.logger.debug('self.player_id %r', self.player_id)
@@ -294,8 +294,7 @@ class GameJoinView(FormView):
             # Assume AnonymousUser
             # also assume the set a name earlier....
             session_details = request.session['session_details']  # this will fail if not logged in via session name
-            existing_game_name = session_details['game']  # FIXME now use this and check it... # setup form logic...
-            player_name = session_details['name']
+            player_name = session_details['name']  # TODO detect AUTO generated player name and offer chance to enter a name....
         if player_name not in game.gamedata['players']:
             game.add_player(player_name)
             game.save()
