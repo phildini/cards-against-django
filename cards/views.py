@@ -265,7 +265,6 @@ class GameView(FormView):
         return result
 
 
-#class GameJoinView(DetailView):
 class GameJoinView(FormView):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.
@@ -293,7 +292,7 @@ class GameJoinView(FormView):
         else:
             # Assume AnonymousUser
             # also assume the set a name earlier....
-            session_details = request.session['session_details']  # this will fail if not logged in via session name
+            session_details = request.session['session_details']  # this will fail if not logged in via session name (just visiting lobby view will auto generate a name)
             player_name = session_details['name']  # TODO detect AUTO generated player name and offer chance to enter a name....
         if player_name not in game.gamedata['players']:
             game.add_player(player_name)
@@ -316,5 +315,3 @@ class GameJoinView(FormView):
 def debug_deactivate_old_games(request):
     Game.deactivate_old_games()
     return redirect('/')  # DEBUG just so it doesn't error out
-
-
