@@ -68,22 +68,10 @@ class LobbyForm(forms.Form):
         self.fields["player_name"].initial = 'Player %d' % self.player_counter
         if self.game_list:
             self.fields["new_game"].initial = None
-            self.fields['game_list'] = forms.ChoiceField(
-                widget=RadioSelect,
-                required=False,
-                choices=self.game_list,
-            )
         else:
             self.fields["new_game"].initial = random.choice(['cat', 'dog', 'bird'])  # DEBUG
 
     def clean(self):
-        if self.cleaned_data.get('new_game') and self.cleaned_data.get('game_list'):
-            raise ValidationError("You can't create a new game and join an existing one. Them's the rules.")
         if self.cleaned_data.get('new_game') in self.game_list:
             raise ValidationError("You can't create a game with the same name as an existing one. Them's the rules.")
-        if self.cleaned_data.get('game_list'):
-            game = Game.objects.get(name=self.cleaned_data.get('game_list'))
-            players = game.gamedata['players']
-            if self.cleaned_data.get('player_name') in players.keys():
-                raise ValidationError("This player name already exists in that game.")
         return self.cleaned_data

@@ -71,7 +71,7 @@ class LobbyView(FormView):
     def get_form_kwargs(self):
         kwargs = super(LobbyView, self).get_form_kwargs()
         if self.game_list:
-            kwargs['game_list'] = self.game_list
+            kwargs['game_list'] = [name for _, name in self.game_list]
         kwargs['player_counter'] = self.player_counter
         return kwargs
 
@@ -265,6 +265,7 @@ class GameView(FormView):
         return result
 
 
+#class GameJoinView(DetailView):
 class GameJoinView(FormView):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.
@@ -316,3 +317,5 @@ class GameJoinView(FormView):
 def debug_deactivate_old_games(request):
     Game.deactivate_old_games()
     return redirect('/')  # DEBUG just so it doesn't error out
+
+
