@@ -246,20 +246,23 @@ class Game(TimeStampedModel):
         }
 
     # FIXME should be using a player object
-    def create_player(self, player_name):
+    def create_player(self, player_name, player_image_url=None):
+        """if player_image_url is ommited a default image is generated.
+        """
         log.logger.debug("new player called")
         # Basic data obj for player. Eventually, this will be saved in cache.
+        player_image_url = player_image_url or avatar_url(player_name)
         return {
             'hand': [],
             'wins': 0,
-            'player_avatar': avatar_url(player_name),
+            'player_avatar': player_image_url,
         }
 
-    def add_player(self, player_name):
+    def add_player(self, player_name, player_image_url=None):
         log.logger.debug(player_name)
         log.logger.debug(self.gamedata)
         if player_name not in self.gamedata['players']:
-            player = self.create_player(player_name)
+            player = self.create_player(player_name, player_image_url=player_image_url)
             player['hand'] = [
                 self.deal_white_card() for x in xrange(10)
             ]

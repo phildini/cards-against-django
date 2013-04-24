@@ -16,7 +16,7 @@ from django.shortcuts import redirect
 from django.core.cache import cache
 
 from forms import PlayerForm, LobbyForm, CzarForm
-from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION
+from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
 
 import log
 
@@ -288,14 +288,16 @@ class GameJoinView(FormView):
         self.game = game
 
         if request.user.is_authenticated():
-            player_name = request.user.email  # or perhaps use name and set avatar to email....
+            player_name = request.user.username
+            player_image_url = avatar_url(request.user.email)
         else:
             # Assume AnonymousUser
             # also assume the set a name earlier....
             session_details = request.session['session_details']  # this will fail if not logged in via session name (just visiting lobby view will auto generate a name)
             player_name = session_details['name']  # TODO detect AUTO generated player name and offer chance to enter a name....
+            player_image_url = avatar_url(player_name)
         if player_name not in game.gamedata['players']:
-            game.add_player(player_name)
+            game.add_player(player_name, player_image_url=player_image_url)
             game.save()
         
         # TODO super
