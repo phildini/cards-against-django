@@ -13,7 +13,7 @@
                 <!--  TODO haiku card could be prettier (possibly requires commas adding in replace_blanks) -->
             {% endcomment %}
             {% for _, tmp_text in game.gamedata.filled_in_texts %}
-                <div class="btn btn-inverse card">
+                <div class="btn btn-inverse">
                 {{tmp_text|safe}}
                 </div>
             {% endfor %}
@@ -22,7 +22,7 @@
     {% endif %}
 
     <h3>Current card</h3>
-    <div class="btn btn-inverse card">
+    <div class="btn btn-inverse">
     <p class="text_left">
         {% if filled_in_question %}
             {{filled_in_question|safe}}
