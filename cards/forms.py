@@ -78,3 +78,18 @@ class LobbyForm(forms.Form):
         if new_game in self.game_list:
             raise ValidationError("You can't create a game with the same name as an existing one. Them's the rules.")
         return self.cleaned_data
+
+
+class JoinForm(forms.Form):
+    """The form for setting user name when joining a game
+    TODO password field..
+    """
+
+    player_name = forms.CharField(max_length=100)
+
+    def clean(self):
+        player_name = self.cleaned_data.get('player_name')
+        if not player_name:
+            raise ValidationError("Player needs a non empty name.")
+        # TODO check to make sure we don't have a dupe username in the game
+        return self.cleaned_data

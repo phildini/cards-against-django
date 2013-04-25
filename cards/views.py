@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
 
-from forms import PlayerForm, LobbyForm, CzarForm
+from forms import PlayerForm, LobbyForm, CzarForm, JoinForm
 from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
 
 import log
@@ -269,8 +269,8 @@ class GameJoinView(FormView):
     TODO create a game (with no players, redirect to join game for game creator).
     """
 
-    template_name = 'lobby.html'
-    form_class = LobbyForm
+    template_name = 'game_join.html'
+    form_class = JoinForm
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
@@ -279,31 +279,51 @@ class GameJoinView(FormView):
         
         self.request = request
         self.game = game
-
+        
+        player_name = None
+        
         if request.user.is_authenticated():
             player_name = request.user.username
             player_image_url = avatar_url(request.user.email)
         else:
             # Assume AnonymousUser
             # also assume the set a name earlier....
-            session_details = request.session['session_details']  # this will fail if not logged in via session name (just visiting lobby view will auto generate a name)
-            player_name = session_details['name']  # TODO detect AUTO generated player name and offer chance to enter a name....
-            player_image_url = avatar_url(player_name)
-        if player_name not in game.gamedata['players']:
-            game.add_player(player_name, player_image_url=player_image_url)
-            game.save()
+            session_details = request.session.get('session_details')
+            if session_details:
+                player_name = session_details['name']  # TODO detect AUTO generated player name and offer chance to enter a name....
+                player_image_url = avatar_url(player_name)
         
-        # TODO super
-        # super(PlayerView, self).dispatch(request, *args, **kwargs)
-        log.logger.debug('about to return reverse')
-        return redirect(reverse('game-view', kwargs={'pk': game.id}))
+        if player_name:
+            if player_name not in game.gamedata['players']:
+                game.add_player(player_name, player_image_url=player_image_url)
+                game.save()
+        
+            log.logger.debug('about to return reverse')
+            return redirect(reverse('game-view', kwargs={'pk': game.id}))
+        
+        return super(GameJoinView, self).dispatch(request, *args, **kwargs)
+        
 
     def get_context_data(self, *args, **kwargs):
         context = super(GameJoinView, self).get_context_data(*args, **kwargs)
+        context['show_form'] = True
         log.logger.debug('context %r', context)
-        # FIXME if we are here we need a player name (or they need to log in so we can get a player name)
-        request = self.request
-        game = self.game
+        # if we are here we need a player name (or they need to log in so we can get a player name)
+        # TODO and maybe a password
+        #request = self.request
+        #game = self.game
+        
+        return context
+        
+    def get_success_url(self):
+        return reverse('gamejoin-view', kwargs={'pk': self.game.id})
+
+    def form_valid(self, form):
+        player_name = form.cleaned_data['player_name']
+        session_details = {}
+        session_details['name'] = player_name
+        self.request.session['session_details'] = session_details
+        return super(GameJoinView, self).form_valid(form)
 
 #######################
 
