@@ -63,15 +63,18 @@ class LobbyForm(forms.Form):
             self.game_list = kwargs.pop('game_list')
         except KeyError:
             self.game_list = []
-        self.player_counter = kwargs.pop('player_counter')
+        player_name = kwargs.pop('player_name')
         super(LobbyForm, self).__init__(*args, **kwargs)
-        self.fields["player_name"].initial = 'Player %d' % self.player_counter
+        self.fields["player_name"].initial = player_name
         if self.game_list:
             self.fields["new_game"].initial = None
         else:
             self.fields["new_game"].initial = random.choice(['cat', 'dog', 'bird'])  # DEBUG
 
     def clean(self):
-        if self.cleaned_data.get('new_game') in self.game_list:
+        new_game = self.cleaned_data.get('new_game')
+        if not new_game:
+            raise ValidationError("Create a game needs a non empty name.")
+        if new_game in self.game_list:
             raise ValidationError("You can't create a game with the same name as an existing one. Them's the rules.")
         return self.cleaned_data

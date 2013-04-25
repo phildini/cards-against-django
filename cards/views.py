@@ -28,25 +28,10 @@ class LobbyView(FormView):
         self.game_list = Game.objects.filter(is_active=True).values_list('id', 'name')
         self.player_counter = cache.get('player_counter', 0)  # this doesn't really count players, it counts number of lobby views
 
-    # def dispatch(self, request, *args, **kwargs):
-        # return super(PlayerView, self).dispatch(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse('game-view', kwargs={'pk': self.game.id})
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(LobbyView, self).get_context_data(*args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
         self.player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', self.player_counter)
-        context['player_counter'] = self.player_counter
-        context['joinable_game_list'] = self.game_list  # TODO rename?
-
-        context['show_form'] = True
-
         session_details = self.request.session.get('session_details', {})  # FIXME
-        # FIXME if not a dict, make it a dict (upgrade old content)
-        log.logger.debug('session_details %r', session_details)
-
         self.player_id = session_details.get('name')
         if not self.player_id:
             # TODO this may become player number (not name)
@@ -55,6 +40,22 @@ class LobbyView(FormView):
             self.player_id = 'Auto Player %d' % self.player_counter  # User hasn't manually set a name, we should offer them the chance to do this...
             session_details['name'] = self.player_id
             self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
+        
+        return super(LobbyView, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('game-view', kwargs={'pk': self.game.id})
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LobbyView, self).get_context_data(*args, **kwargs)
+        context['joinable_game_list'] = self.game_list  # TODO rename?
+
+        context['show_form'] = True
+
+        session_details = self.request.session.get('session_details', {})  # FIXME
+        # FIXME if not a dict, make it a dict (upgrade old content)
+        log.logger.debug('session_details %r', session_details)
+
         log.logger.debug('self.player_id %r', self.player_id)
 
         return context
@@ -63,7 +64,7 @@ class LobbyView(FormView):
         kwargs = super(LobbyView, self).get_form_kwargs()
         if self.game_list:
             kwargs['game_list'] = [name for _, name in self.game_list]
-        kwargs['player_counter'] = self.player_counter
+        kwargs['player_name'] = self.player_id
         return kwargs
 
     def form_valid(self, form):
