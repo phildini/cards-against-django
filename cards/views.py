@@ -71,8 +71,15 @@ class LobbyView(FormView):
         # FIXME if not a dict, make it a dict (upgrade old content)
         log.logger.debug('session_details %r', session_details)
 
-        # FIXME check for logged in user name first..... (see GavmeView)
-        player_name = form.cleaned_data['player_name']
+        # check for logged in user name first..... (like GameView and GameJoinView)
+        request = self.request
+        if request.user.is_authenticated():
+            # ignore form supplied username
+            player_name = request.user.username
+            player_image_url = avatar_url(request.user.email)
+        else:
+            player_name = form.cleaned_data['player_name']
+            player_image_url = avatar_url(player_name)
         self.player_id = player_name  # FIXME needless duplicatation that needs to be refactored, this may become player number
 
         existing_game = True
@@ -90,7 +97,7 @@ class LobbyView(FormView):
                 tmp_game = Game(name=form.cleaned_data['new_game'])
                 new_game = tmp_game.create_game()
                 tmp_game.gamedata = new_game
-                tmp_game.add_player(player_name)
+                tmp_game.add_player(player_name, player_image_url=player_image_url)
                 tmp_game.start_new_round(winner_id=self.player_id)
                 tmp_game.save()
                 self.game = tmp_game
