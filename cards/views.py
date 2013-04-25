@@ -127,8 +127,9 @@ class GameView(FormView):
 
         player_name = None
         session_details = self.request.session.get('session_details')
+        # TODO username determination should be a shared function, called by GameView() and GameJoinView()
         if self.request.user.is_authenticated():
-            player_name = self.request.user.email
+            player_name = self.request.user.username
             if player_name and player_name not in game.gamedata['players']:
                 # check session name next
                 player_name = None
@@ -210,6 +211,7 @@ class GameView(FormView):
             submitted = form.cleaned_data['card_selection']
             # The form returns unicode strings. We want ints in our list.
             white_card_list = [int(card) for card in submitted]
+            log.logger.debug("white_card_list; %r", white_card_list)
             game.submit_white_cards(player_name, white_card_list)  # FIXME catch GameError and/or check before hand
             if game.gamedata['filled_in_texts']:
                 log.logger.debug('filled_in_texts %r', game.gamedata['filled_in_texts'])
