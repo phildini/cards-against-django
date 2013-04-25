@@ -2,11 +2,6 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
-# Contract between LobbyView and PlayerView:
-#
-# LobbyView will give PlayerView a named player and a game stored in database.
-# PlayerView will return to LobbyView any request that does not have those things.
-
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse

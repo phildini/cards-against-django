@@ -17,7 +17,7 @@
     FIXME reverse call?<br/>
     {% if joinable_game_list %}
         {% for game_id, game_name in joinable_game_list %}
-            <a class="btn" href="/game/{{game_id}}/join">Join {{game_name}}</a> <a class="btn btn-info" href="/game/{{game_id}}">View {{game_name}}</a><br/>
+            <a class="btn" href="{% url "game-join-view" pk=game_id %}">Join {{game_name}}</a> <a class="btn btn-info" href="{% url "game-view" pk=game_id %}">View {{game_name}}</a><br/>
         {% endfor %}
     {% endif %}
 </div>
