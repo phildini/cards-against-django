@@ -311,6 +311,7 @@ class BlackCard(models.Model):
         db_table = 'black_cards'
 
     def replace_blanks(self, white_card_num_list):
+        log.logger.debug("black card, white_card_num_list %r", white_card_num_list)
         card_text = self.text
         num_blanks = card_text.count(BLANK_MARKER)
         assert self.pick == len(white_card_num_list)
@@ -319,8 +320,10 @@ class BlackCard(models.Model):
             card_text = card_text + '</br> ' + BLANK_MARKER
         
         # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
-        white_card_text_list = WhiteCard.objects.filter(id__in=white_card_num_list).values_list('text')
-        for white_text, in white_card_text_list:
+        white_card_text_dict = dict(WhiteCard.objects.filter(id__in=white_card_num_list).values_list('id', 'text'))
+        log.logger.debug("black card, white_card_text_dict %r", white_card_text_dict)
+        for white_id in white_card_num_list:
+            white_text = white_card_text_dict[white_id]
             white_text = white_text.rstrip('.')
             """We can't change the case of the first letter in case
             it is a real name :-( We'd need to consult a word list,
