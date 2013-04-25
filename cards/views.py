@@ -39,7 +39,6 @@ class LobbyView(FormView):
             # For now we auto generate a name (setting username needs to be done in a form)
             self.player_id = 'Auto Player %d' % self.player_counter  # User hasn't manually set a name, we should offer them the chance to do this...
             session_details['name'] = self.player_id
-            self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
         
         return super(LobbyView, self).dispatch(request, *args, **kwargs)
 

@@ -2,12 +2,15 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
+import random
+
 from django import forms
 from django.forms.widgets import (
     RadioSelect,
 )
 from django.core.exceptions import ValidationError
-import random
+from django.core.cache import cache  # this maybe a bad idea
+
 from cards.models import Game
 
 
@@ -86,6 +89,12 @@ class JoinForm(forms.Form):
     """
 
     player_name = forms.CharField(max_length=100)
+
+    def __init__(self, *args, **kwargs):
+        super(JoinForm, self).__init__(*args, **kwargs)
+        player_counter = cache.get('player_counter', 0) + 1
+        cache.set('player_counter', player_counter)
+        self.fields["player_name"].initial = 'Auto Player %d' % player_counter
 
     def clean(self):
         player_name = self.cleaned_data.get('player_name')
