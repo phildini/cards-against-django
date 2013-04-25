@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 from django.core.cache import cache  # this maybe a bad idea
 
 from cards.models import Game
-
+import log
 
 class PlayerForm(forms.Form):
 
@@ -32,11 +32,14 @@ class PlayerForm(forms.Form):
         answers = []
         for blank in xrange(self.blanks):
             field_name = 'card_selection%d' % (blank,)
-            if self.cleaned_data.get(field_name) in answers:
+            single_answer = self.cleaned_data.get(field_name)
+            if single_answer in answers:
                 raise ValidationError("You can't use the same answer twice")
             else:
-                answers.append(self.cleaned_data.get(field_name))
+                log.logger.debug("player submit white card; %s, %r", field_name, single_answer)
+                answers.append(single_answer)
 
+        log.logger.debug("player submit answers; %r", answers)
         self.cleaned_data['card_selection'] = answers
         return self.cleaned_data
 
