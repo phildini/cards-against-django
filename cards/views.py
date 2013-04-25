@@ -72,6 +72,7 @@ class LobbyView(FormView):
         # FIXME if not a dict, make it a dict (upgrade old content)
         log.logger.debug('session_details %r', session_details)
 
+        # FIXME check for logged in user name first..... (see GavmeView)
         player_name = form.cleaned_data['player_name']
         self.player_id = player_name  # FIXME needless duplicatation that needs to be refactored, this may become player number
 
@@ -163,7 +164,7 @@ class GameView(FormView):
             black_card_id = self.game.deal_black_card()
         black_card = BlackCard.objects.get(id=black_card_id)
         context['show_form'] = self.can_show_form()
-        context['refresh_num_secs'] = 20  # something high for debugging
+        context['refresh_num_secs'] = 20  # something high for debugging FIXME make this either settings variable (or database admin view changeable)
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
 
