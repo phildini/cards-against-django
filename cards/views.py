@@ -7,8 +7,6 @@
 # LobbyView will give PlayerView a named player and a game stored in database.
 # PlayerView will return to LobbyView any request that does not have those things.
 
-import uuid
-
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse
@@ -50,12 +48,6 @@ class LobbyView(FormView):
         log.logger.debug('session_details %r', session_details)
 
         self.player_id = session_details.get('name')
-        if isinstance(self.player_id, uuid.UUID):
-            # NOTE this "fixes" and upgrades session data for old clients
-            # we shouldn't have any of these in the wild so this code should be REMOVED
-            # This is here to help with initial internal testing
-            self.player_id = None
-            # TODO test do we need to explictly set the session entry (dict's don't tend to need this)
         if not self.player_id:
             # TODO this may become player number (not name)
 
