@@ -8,5 +8,10 @@
         {% csrf_token %}
         {{ form.as_p }}
     <input type="submit" value="Submit and join game" />
+
+    {% comment %}
+        <!-- Or if you have a registered account login. TODO login link/form. -->
+    {% endcomment %}
+
 </div>
 {% endblock %}
