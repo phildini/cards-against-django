@@ -85,6 +85,8 @@ class Game(TimeStampedModel):
         card_czar = NOTE this is currently a str of a player name # 'player1',  # int index into 'players'
         black_deck = [ of card black numbers ],
         white_deck = [ of card white numbers ],
+        used_black_deck = [ of card black numbers ],
+        used_white_deck = [ of card white numbers ],
         filled_in_texts = None | [ (player name, filled in black card text), .... ]
     }
 
@@ -161,18 +163,6 @@ class Game(TimeStampedModel):
             random.shuffle(filled_in_texts)
             self.gamedata['filled_in_texts'] = filled_in_texts  # FIXME rename this
     
-    def deal_black_card(self):
-        black_card = self.gamedata['black_deck'].pop()
-        """
-        # FIXME card re-use. This mechanism won't work with cards in database
-        # we need to keep track of used cards (especially if only a subset of cards are used)
-        if len(self.gamedata['black_deck']) == 0:
-            shuffled_black = range(len(black_cards))
-            random.shuffle(shuffled_black)
-            self.gamedata['black_deck'] = shuffled_black
-        """
-        return black_card
-    
     def deal_white_card(self):
         white_card = self.gamedata['white_deck'].pop()
         return white_card
@@ -193,6 +183,7 @@ class Game(TimeStampedModel):
         # check the pick number of previous black card, deal that many cards
         prev_black_card_id = self.gamedata['current_black_card']
         if prev_black_card_id is not None:
+            self.gamedata['used_black_deck'].append(prev_black_card_id)
             prev_black_card = BlackCard.objects.get(id=prev_black_card_id)
             pick = prev_black_card.pick
 
@@ -204,7 +195,13 @@ class Game(TimeStampedModel):
                         self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
 
         # deal new black card to game
-        self.gamedata['current_black_card'] = self.deal_black_card()
+        if len(self.gamedata['black_deck']) == 0:
+            # re-use discard black cards
+            tmp_black_deck = self.gamedata['used_black_deck']
+            self.gamedata['used_black_deck'] = []
+            random.shuffle(tmp_black_deck)
+            self.gamedata['black_deck'] = tmp_black_deck
+        self.gamedata['current_black_card'] = black_card = self.gamedata['black_deck'].pop()
         curr_black_card = BlackCard.objects.get(id=self.gamedata['current_black_card'])
 
         # check if we draw additional cards based on black card
@@ -241,6 +238,8 @@ class Game(TimeStampedModel):
             'card_czar': '',
             'white_deck': shuffled_white,
             'black_deck': shuffled_black,
+            'used_white_deck': [],
+            'used_black_deck': [],
             'mode': 'submitting',
             'filled_in_texts': None,
         }
