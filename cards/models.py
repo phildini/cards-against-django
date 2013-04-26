@@ -164,18 +164,31 @@ class Game(TimeStampedModel):
             self.gamedata['filled_in_texts'] = filled_in_texts  # FIXME rename this
     
     def deal_white_card(self):
+        if len(self.gamedata['white_deck']) == 0:
+            # re-use discard white cards
+            tmp_white_deck = self.gamedata['used_white_deck']
+            self.gamedata['used_white_deck'] = []
+            random.shuffle(tmp_white_deck)
+            self.gamedata['white_deck'] = tmp_white_deck
+
         white_card = self.gamedata['white_deck'].pop()
         return white_card
 
     def start_new_round(self, czar_name=None, winner=None, winner_id=None):
         """NOTE this does not reset a game, it resets the cards on the table ready for the next round
         """
+        white_submissions = self.gamedata['submissions']
+        self.gamedata['submissions'] = {}
         self.gamedata['submissions'] = {}
         self.gamedata['card_czar'] = winner_id
         self.gamedata['round'] += 1
         self.gamedata['last_round_winner'] = winner
         self.gamedata['filled_in_texts'] = None
         self.game_state = GAMESTATE_SUBMISSION
+        
+        for tmp_name in white_submissions:
+            for x in white_submissions[tmp_name]:
+                self.gamedata['used_white_deck'].append(x)
 
         if winner:
             self.gamedata['players'][winner]['wins'] += 1
