@@ -49,6 +49,22 @@
         <input type="submit" class="btn btn-primary" value="Submit" />
         </form>
     {% endif %}
+    
+    
+    <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
+    
+    <p>game_state: {{game.game_state}}.</p>
+    
+    
+    {% if player_name %}
+    <h3>Your cards</h3>
+    <ul>
+    {% for tmp_text in white_cards_text_list %}
+        <li class="btn draggable">{{tmp_text|safe}}</li>
+        </br>
+    {% endfor %}
+    </ul>
+    {% endif %}
 
     <p>
         {% comment %}
@@ -75,23 +91,6 @@
     You are an observer.
     {% endif %}
     </p>
-
-    
-    
-    <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
-    
-    <p>game_state: {{game.game_state}}.</p>
-    
-    
-    {% if player_name %}
-    <h3>Your cards</h3>
-    <ul>
-    {% for tmp_text in white_cards_text_list %}
-        <li class="btn draggable">{{tmp_text|safe}}</li>
-        </br>
-    {% endfor %}
-    </ul>
-    {% endif %}
 
     <h3>Current standings</h3>
 

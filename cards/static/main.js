@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var numFields = $('.field').length;
 
-    // $('.field').hide();
+    $('.field').hide();
 
     for (var i=0; i <numFields; i++) {
         var element = '<div ' + 'id=' + i + ' class="box droppable">This is a box</div>'
@@ -17,7 +17,7 @@ $(document).ready(function(){
             $(ui.draggable).css("color", "green");
             selector = $("label:contains('" + $(ui.draggable).text() + "') > input")
             // debugger;
-            document.getElementById($(selector)[0].id).checked = true;
+            document.getElementById($(selector)[$(this)[0].id].id).checked = true;
 
         }
     });
