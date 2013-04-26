@@ -162,8 +162,6 @@ class GameView(FormView):
 
         log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
-        if black_card_id is None:
-            black_card_id = self.game.deal_black_card()
         black_card = BlackCard.objects.get(id=black_card_id)
         context['show_form'] = self.can_show_form()
         context['refresh_num_secs'] = 20  # something high for debugging FIXME make this either settings variable (or database admin view changeable)
