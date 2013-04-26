@@ -196,7 +196,8 @@ CREATE TABLE card_set (
     active boolean NOT NULL,
     name character varying(255),
     base_deck boolean NOT NULL,
-    description character varying(255)
+    description character varying(255),
+    weight integer DEFAULT 0 NOT NULL
 );
 
 """
