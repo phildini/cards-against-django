@@ -186,10 +186,6 @@ class Game(TimeStampedModel):
         self.gamedata['filled_in_texts'] = None
         self.game_state = GAMESTATE_SUBMISSION
         
-        for tmp_name in white_submissions:
-            for x in white_submissions[tmp_name]:
-                self.gamedata['used_white_deck'].append(x)
-
         if winner:
             self.gamedata['players'][winner]['wins'] += 1
 
@@ -226,6 +222,11 @@ class Game(TimeStampedModel):
                 # check we are not the card czar
                 if player_name != czar_name:
                     self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
+        
+        for tmp_name in white_submissions:
+            for x in white_submissions[tmp_name]:
+                self.gamedata['used_white_deck'].append(x)
+
 
     def create_game(self):
         log.logger.debug("New Game called")
