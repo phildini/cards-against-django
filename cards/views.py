@@ -75,8 +75,6 @@ class LobbyView(FormView):
             existing_game.save()
 
         # Set the player session details
-        session_details = {}
-        #session_details['name'] = player_name
         session_details['game'] = game_name
         self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
 
