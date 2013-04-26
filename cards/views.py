@@ -319,7 +319,7 @@ class GameJoinView(FormView):
         return context
         
     def get_success_url(self):
-        return reverse('gamejoin-view', kwargs={'pk': self.game.id})
+        return reverse('game-join-view', kwargs={'pk': self.game.id})
 
     def form_valid(self, form):
         player_name = form.cleaned_data['player_name']
