@@ -32,6 +32,8 @@
     </p>
     </div>
 
+    <div id="submission-area"></div>
+
     {% if show_form %}
         <form action="{{ action }}" method="post">
             {% csrf_token %}
@@ -39,8 +41,9 @@
             <p class="text-error"><strong>{{field_err2}}</strong></p>
             {% endfor %}
             {% for field in form %}
-            {{field.label}}:
+            <div class="field">{{field.label}}:
                 {{field|safe}}
+            </div>
             </br>
             {% endfor %}
         <input type="submit" class="btn btn-primary" value="Submit" />

@@ -2,3 +2,9 @@
     width: 150px;
     height: 150px;
 }
+
+.box {
+    background-color: #eee;
+    border-radius: 15px;
+    padding: 20px;
+}
