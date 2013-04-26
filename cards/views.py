@@ -263,7 +263,8 @@ class GameJoinView(FormView):
         if player_name:
             if player_name not in game.gamedata['players']:
                 game.add_player(player_name, player_image_url=player_image_url)
-                game.start_new_round(winner_id=player_name)
+                if len(game.gamedata['players']) == 1:
+                    game.start_new_round(winner_id=player_name)
                 game.save()
         
             log.logger.debug('about to return reverse')
