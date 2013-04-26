@@ -183,7 +183,6 @@ class Game(TimeStampedModel):
         # check the pick number of previous black card, deal that many cards
         prev_black_card_id = self.gamedata['current_black_card']
         if prev_black_card_id is not None:
-            self.gamedata['used_black_deck'].append(prev_black_card_id)
             prev_black_card = BlackCard.objects.get(id=prev_black_card_id)
             pick = prev_black_card.pick
 
@@ -203,6 +202,8 @@ class Game(TimeStampedModel):
             self.gamedata['black_deck'] = tmp_black_deck
         self.gamedata['current_black_card'] = black_card = self.gamedata['black_deck'].pop()
         curr_black_card = BlackCard.objects.get(id=self.gamedata['current_black_card'])
+        if prev_black_card_id is not None:
+            self.gamedata['used_black_deck'].append(prev_black_card_id)
 
         # check if we draw additional cards based on black card
         # NOTE anyone who joins after this point will not be given the extra draw cards
