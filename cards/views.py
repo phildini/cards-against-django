@@ -104,7 +104,7 @@ class GameView(FormView):
         if player_name is None:
             # Assume AnonymousUser
             if session_details:
-                player_name = session_details['name']
+                player_name = session_details.get('name')
             else:
                 player_name = None  # observer
         if player_name and player_name not in game.gamedata['players']:
@@ -254,7 +254,7 @@ class GameJoinView(FormView):
         else:
             # Assume AnonymousUser
             # also assume the set a name earlier....
-            session_details = request.session.get('session_details')
+            session_details = request.session.get('session_details', {})
             if session_details:
                 player_name = session_details.get('name')
                 if player_name:
