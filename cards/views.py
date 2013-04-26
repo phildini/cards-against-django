@@ -21,24 +21,13 @@ class LobbyView(FormView):
 
     def __init__(self, *args, **kwargs):
         self.game_list = Game.objects.filter(is_active=True).values_list('id', 'name')
-        self.player_counter = cache.get('player_counter', 0)  # this doesn't really count players, it counts number of lobby views
 
+    # FIXME remove this method
     def dispatch(self, request, *args, **kwargs):
-        self.player_counter = cache.get('player_counter', 0) + 1
-        cache.set('player_counter', self.player_counter)
-        session_details = self.request.session.get('session_details', {})  # FIXME
-        self.player_id = session_details.get('name')
-        if not self.player_id:
-            # TODO this may become player number (not name)
-
-            # For now we auto generate a name (setting username needs to be done in a form)
-            self.player_id = 'Auto Player %d' % self.player_counter  # User hasn't manually set a name, we should offer them the chance to do this...
-            session_details['name'] = self.player_id
-        
         return super(LobbyView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('game-view', kwargs={'pk': self.game.id})
+        return reverse('game-join-view', kwargs={'pk': self.game.id})
 
     def get_context_data(self, *args, **kwargs):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
@@ -46,36 +35,18 @@ class LobbyView(FormView):
 
         context['show_form'] = True
 
-        session_details = self.request.session.get('session_details', {})  # FIXME
-        # FIXME if not a dict, make it a dict (upgrade old content)
-        log.logger.debug('session_details %r', session_details)
-
-        log.logger.debug('self.player_id %r', self.player_id)
-
         return context
 
     def get_form_kwargs(self):
         kwargs = super(LobbyView, self).get_form_kwargs()
         if self.game_list:
             kwargs['game_list'] = [name for _, name in self.game_list]
-        kwargs['player_name'] = self.player_id
         return kwargs
 
     def form_valid(self, form):
         session_details = self.request.session.get('session_details', {})  # FIXME
         # FIXME if not a dict, make it a dict (upgrade old content)
         log.logger.debug('session_details %r', session_details)
-
-        # check for logged in user name first..... (like GameView and GameJoinView)
-        request = self.request
-        if request.user.is_authenticated():
-            # ignore form supplied username
-            player_name = request.user.username
-            player_image_url = avatar_url(request.user.email)
-        else:
-            player_name = form.cleaned_data['player_name']
-            player_image_url = avatar_url(player_name)
-        self.player_id = player_name  # FIXME needless duplicatation that needs to be refactored, this may become player number
 
         existing_game = True
         # Set the game properties in the database and session
@@ -92,8 +63,6 @@ class LobbyView(FormView):
                 tmp_game = Game(name=form.cleaned_data['new_game'])
                 new_game = tmp_game.create_game()
                 tmp_game.gamedata = new_game
-                tmp_game.add_player(player_name, player_image_url=player_image_url)
-                tmp_game.start_new_round(winner_id=self.player_id)
                 tmp_game.save()
                 self.game = tmp_game
         if existing_game:
@@ -103,15 +72,11 @@ class LobbyView(FormView):
             log.logger.debug('existing_game %r', (game_name, player_name,))
             log.logger.debug('existing_game.gamedata %r', (existing_game.gamedata,))
             log.logger.debug('existing_game.gamedata players %r', (existing_game.gamedata['players'],))
-            if not existing_game.gamedata['players'].get(player_name):
-                existing_game.gamedata['players'][player_name] = existing_game.create_player(player_name)
-            else:
-                # FIXME
-                raise NotImplementedError('joining with player names alreaady in same game causes problems')
             existing_game.save()
 
         # Set the player session details
-        session_details['name'] = player_name
+        session_details = {}
+        #session_details['name'] = player_name
         session_details['game'] = game_name
         self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
 
@@ -291,12 +256,14 @@ class GameJoinView(FormView):
             # also assume the set a name earlier....
             session_details = request.session.get('session_details')
             if session_details:
-                player_name = session_details['name']  # TODO detect AUTO generated player name and offer chance to enter a name....
-                player_image_url = avatar_url(player_name)
+                player_name = session_details.get('name')
+                if player_name:
+                    player_image_url = avatar_url(player_name)
         
         if player_name:
             if player_name not in game.gamedata['players']:
                 game.add_player(player_name, player_image_url=player_image_url)
+                game.start_new_round(winner_id=player_name)
                 game.save()
         
             log.logger.debug('about to return reverse')

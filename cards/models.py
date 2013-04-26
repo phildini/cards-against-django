@@ -281,6 +281,7 @@ class Game(TimeStampedModel):
                 self.deal_white_card() for x in xrange(10)
             ]
             self.gamedata['players'][player_name] = player
+            # TODO if no czar make this player the card czar?
         # else do nothing, they are already in the game do NOT raise any errors
 
 
