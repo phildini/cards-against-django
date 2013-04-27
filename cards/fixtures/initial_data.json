@@ -35,7 +35,7 @@
     "fields": {
         "text": "And the Academy Award for \ufffd goes to \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -115,7 +115,7 @@
     "fields": {
         "text": "For my next trick, I will pull \ufffd out of \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -185,7 +185,7 @@
     "fields": {
         "text": "I never truly understood \ufffd until I encountered \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -225,7 +225,7 @@
     "fields": {
         "text": "In M. Night Shyamalan's new movie, Bruce Willis discovers that \ufffd had really been \ufffd all along.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -245,7 +245,7 @@
     "fields": {
         "text": "In a world ravaged by \ufffd, our only solace is \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -295,7 +295,7 @@
     "fields": {
         "text": "Lifetime presents \ufffd, the story of \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -324,8 +324,8 @@
     "model": "cards.blackcard", 
     "fields": {
         "text": "Make a haiku.", 
-        "draw": 0, 
-        "pick": 1, 
+        "draw": 2, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -365,7 +365,7 @@
     "fields": {
         "text": "Rumor has it that Vladimir Putin's favorite dish is \ufffd stuffed with \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -375,7 +375,7 @@
     "fields": {
         "text": "Step 1: \ufffd. Step 2: \ufffd. Step 3: Profit.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -405,7 +405,7 @@
     "fields": {
         "text": "That's right, I killed \ufffd. How, you ask? \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -715,7 +715,7 @@
     "fields": {
         "text": "What's the next superhero/sidekick duo?", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -755,7 +755,7 @@
     "fields": {
         "text": "When I was tripping on acid, \ufffd turned into \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -824,8 +824,8 @@
     "model": "cards.blackcard", 
     "fields": {
         "text": "\ufffd + \ufffd = \ufffd.", 
-        "draw": 0, 
-        "pick": 1, 
+        "draw": 2, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
@@ -835,7 +835,7 @@
     "fields": {
         "text": "\ufffd is a slippery slope that leads to \ufffd.", 
         "draw": 0, 
-        "pick": 1, 
+        "pick": 2, 
         "watermark": "v1.4"
     }
 },
