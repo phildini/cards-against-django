@@ -5,20 +5,19 @@
 
     {% if is_card_czar %}
     <p>Dude! You are the card czar!</p>
-    {% else %}
-        {% if game.game_state == 'selection' %}
-            <h3>Submitted cards</h3>
-            {% comment %}
-                <!--  TODO make me pretty (and then the same for white_cards_text_list) -->
-                <!--  TODO haiku card could be prettier (possibly requires commas adding in replace_blanks) -->
-            {% endcomment %}
-            {% for _, tmp_text in game.gamedata.filled_in_texts %}
-                <div class="btn btn-inverse">
-                {{tmp_text|safe}}
-                </div>
-            {% endfor %}
-            </br>
-        {% endif %}
+    {% endif %}
+    {% if game.game_state == 'selection' %}
+        <h3>Submitted cards</h3>
+        {% comment %}
+            <!--  TODO make me pretty (and then the same for white_cards_text_list) -->
+            <!--  TODO haiku card could be prettier (possibly requires commas adding in replace_blanks) -->
+        {% endcomment %}
+        {% for _, tmp_text in game.gamedata.filled_in_texts %}
+            <div class="btn btn-inverse {{ is_card_czar|yesno:"draggable,nondraggable" }}">
+            {{tmp_text|safe}}
+            </div>
+        {% endfor %}
+        </br>
     {% endif %}
 
     <h3>Current card</h3>
