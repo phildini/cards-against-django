@@ -77,7 +77,7 @@ def simple_select(c, sql_query, bind_params=None):
             row = c.fetchone()
     print ''
 
-def db2data(c, cp, django_data, json_style='django', fix_blank_count=True):
+def db2data(c, cp, django_data, json_style='django', fix_blank_count=True, safe_fail=True):
     # safe_fail=True, restrict_deck=None, 
     if json_style == 'django':
         black_cards_list = django_data
@@ -147,7 +147,7 @@ def db2data(c, cp, django_data, json_style='django', fix_blank_count=True):
     cp.white_cards.sort()
     
 
-def sql2data(filename, safe_fail=True, restrict_deck=None, json_style='django', fix_blank_count=False):
+def sql2data(filename, safe_fail=True, restrict_deck=None, json_style='django', fix_blank_count=False, dbname=':memory:'):
     """Convert PostgresSQL files into json data file.
     
     If json_style == 'django', the json file is suitable for the model in
@@ -162,8 +162,6 @@ def sql2data(filename, safe_fail=True, restrict_deck=None, json_style='django', 
     cp = CardsParser()
     django_data = []
     
-    dbname = ':memory:'
-    #dbname = 'cards.sqlite3'
     db = sqlite3.connect(dbname)
     c = db.cursor()
     
@@ -229,6 +227,7 @@ CREATE TABLE card_set (
             # there appears to be variable length underscores in different rows
             line = line.replace('_____', cp.blank)
             line = line.replace('____', cp.blank)
+            line = line.replace('___', cp.blank)
             #print line_type, line
             c.execute(line)
     f.close()
@@ -299,6 +298,7 @@ def main(argv=None):
         filename = os.path.join(DATA_DIR, sql_filename)
     
     sql2data(filename)
+    #sql2data(filename, dbname='cards.sqlite3')
     
     return 0
 
