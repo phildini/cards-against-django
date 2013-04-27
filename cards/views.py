@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
 
-from forms import PlayerForm, LobbyForm, CzarForm, JoinForm
+from forms import PlayerForm, LobbyForm, JoinForm
 from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
 
 import log
@@ -69,7 +69,6 @@ class LobbyView(FormView):
             if not game_name:
                 game_name = form.cleaned_data.get('game_list')
             existing_game = Game.objects.get(name=game_name)  # existing_game maybe a bool
-            log.logger.debug('existing_game %r', (game_name, player_name,))
             log.logger.debug('existing_game.gamedata %r', (existing_game.gamedata,))
             log.logger.debug('existing_game.gamedata players %r', (existing_game.gamedata['players'],))
             existing_game.save()
@@ -128,9 +127,9 @@ class GameView(FormView):
         black_card = BlackCard.objects.get(id=black_card_id)
         context['show_form'] = self.can_show_form()
         if self.game.game_state == GAMESTATE_SELECTION:
-            context['refresh_num_secs'] = 25  # FIXME make this either settings variable (or database admin view changeable)
+            context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
         else:
-            context['refresh_num_secs'] = 10  # FIXME make this either settings variable (or database admin view changeable)
+            context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
 
@@ -142,7 +141,7 @@ class GameView(FormView):
         if player_name:
             white_cards_text_list = [mark_safe(card_text) for card_text, in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('text')]
             context['white_cards_text_list'] = white_cards_text_list
-            
+
             if game.gamedata['submissions'] and not is_card_czar:
                 player_submission = game.gamedata['submissions'].get(player_name)
                 if player_submission:
@@ -212,7 +211,7 @@ class GameView(FormView):
 
     def can_show_form(self):
         result = False
-        
+
         if self.player_name:
             if self.is_card_czar:
                 if self.game.game_state == GAMESTATE_SELECTION:
@@ -243,12 +242,12 @@ class GameJoinView(FormView):
         log.logger.debug('%r %r', args, kwargs)
         game = Game.objects.get(pk=kwargs['pk'])  # FIXME this wil fail to non existent game
         request = self.request
-        
+
         self.request = request
         self.game = game
-        
+
         player_name = None
-        
+
         if request.user.is_authenticated():
             player_name = request.user.username
             player_image_url = avatar_url(request.user.email)
@@ -260,19 +259,18 @@ class GameJoinView(FormView):
                 player_name = session_details.get('name')
                 if player_name:
                     player_image_url = avatar_url(player_name)
-        
+
         if player_name:
             if player_name not in game.gamedata['players']:
                 game.add_player(player_name, player_image_url=player_image_url)
                 if len(game.gamedata['players']) == 1:
                     game.start_new_round(winner_id=player_name)
                 game.save()
-        
+
             log.logger.debug('about to return reverse')
             return redirect(reverse('game-view', kwargs={'pk': game.id}))
-        
+
         return super(GameJoinView, self).dispatch(request, *args, **kwargs)
-        
 
     def get_context_data(self, *args, **kwargs):
         context = super(GameJoinView, self).get_context_data(*args, **kwargs)
@@ -282,9 +280,9 @@ class GameJoinView(FormView):
         # TODO and maybe a password
         #request = self.request
         #game = self.game
-        
+
         return context
-        
+
     def get_success_url(self):
         return reverse('game-join-view', kwargs={'pk': self.game.id})
 
