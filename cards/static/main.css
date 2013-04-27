@@ -16,3 +16,10 @@
     padding: 5px;
     margin-top: 5px;
 }
+
+.errorlist {
+    background-color: #eee;
+    color: red;
+    border-radius: 15px;
+    padding: 20px;
+}
