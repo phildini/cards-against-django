@@ -325,7 +325,7 @@
     "fields": {
         "text": "Make a haiku.", 
         "draw": 2, 
-        "pick": 2, 
+        "pick": 3, 
         "watermark": "v1.4"
     }
 },
@@ -825,7 +825,7 @@
     "fields": {
         "text": "\ufffd + \ufffd = \ufffd.", 
         "draw": 2, 
-        "pick": 2, 
+        "pick": 3, 
         "watermark": "v1.4"
     }
 },
