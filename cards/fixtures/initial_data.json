@@ -3,3892 +3,4260 @@
     "pk": 1, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Why can't I sleep at night?", 
+        "text": "A romantic, candlelit dinner would be incomplete without \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 2, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "I got 99 problems but \ufffd ain't one.", 
+        "text": "After the earthquake, Sean Penn brought \ufffd to the people of Haiti.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 3, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's a girl's best friend?", 
+        "text": "Alternative medicine is now embracing the curative powers of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 4, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's that smell?", 
+        "text": "And the Academy Award for \ufffd goes to \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 5, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd? There's an app for that.", 
+        "text": "BILLY MAYS HERE FOR \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 6, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "This is the way the world ends / This is the way the world ends / This is the way the world ends / Not with a bang but with \ufffd.", 
+        "text": "But before I kill you, Mr. Bond, I must show you \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 7, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What is Batman's guilty pleasure?", 
+        "text": "Coming to Broadway this season, \ufffd: The Musical.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 8, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "TSA guidelines now prohibit \ufffd on airplanes.", 
+        "text": "Daddy, why is Mommy crying?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 9, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What ended my last relationship?", 
+        "text": "Dear Abby, I'm having some trouble with \ufffd and would like your advice.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 10, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "MTV's new reality show features eight washed-up celebrities living with \ufffd.", 
+        "text": "During his childhood, Salvador Dali produced hundreds of paintings of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 11, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "I drink to forget \ufffd.", 
+        "text": "During sex, I like to think about \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 12, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "I'm sorry, Professor, but I couldn't complete my homework because of \ufffd.", 
+        "text": "For my next trick, I will pull \ufffd out of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 13, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "During Picasso's often-overlooked Brown Period, he produced hundreds of paintings of \ufffd.", 
+        "text": "Here is the church Here is the steeple Open the doors And there is \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 14, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Alternative medicine is now embracing the curative powers of \ufffd.", 
+        "text": "How am I maintaining my relationship status?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 15, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's that sound?", 
+        "text": "How did I lose my virginity?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 16, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I do not know with what weapons World War III will be fought, but World War IV will be fought with \ufffd.", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 17, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's the next Happy Meal&reg; toy?", 
+        "text": "I drink to forget \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 18, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Anthropologists have recently discovered a primitive tribe that worships \ufffd.", 
+        "text": "I got 99 problems but \ufffd ain't one.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 19, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "It's a pity that kids these days are all getting involved with \ufffd.", 
+        "text": "I never truly understood \ufffd until I encountered \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 20, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd. That's how I want to die.", 
+        "text": "I'm sorry, Professor, but I couldn't complete my homework because of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 21, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "In the new Disney Channel Original Movie, Hannah Montana struggles with \ufffd for the first time.", 
+        "text": "In 1,000 years, when paper money is a distant memory, how will we pay for goods and services?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 22, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What does Dick Cheney prefer?", 
+        "text": "In L.A. County Jail, word is you can trade 200 cigarettes for \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 23, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In M. Night Shyamalan's new movie, Bruce Willis discovers that \ufffd had really been \ufffd all along.", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 24, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Instead of coal, Santa now gives the bad children \ufffd.", 
+        "text": "In Michael Jackson's final moments, he thought about \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 25, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's the most emo?", 
+        "text": "In a world ravaged by \ufffd, our only solace is \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 26, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "In 1,000 years, when paper money is but a distant memory, \ufffd will be our currency.", 
+        "text": "In the new Disney Channel Original Movie, Hannah Montana struggles with \ufffd for the first time.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 27, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Instead of coal, Santa now gives the bad children \ufffd.", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 28, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "A romantic, candlelit dinner would be incomplete without \ufffd.", 
+        "text": "It\u2019s a pity that kids these days are all getting involved with \ufffd", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 29, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Next from J.K. Rowling: Harry Potter and the Chamber of \ufffd.", 
+        "text": "Life for American Indians was forever changed when the White Man introduced them to \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 30, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd. Betcha can't have just one!", 
+        "text": "Lifetime presents \ufffd, the story of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 31, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "White people like \ufffd.", 
+        "text": "MTV's new reality show features eight washed-up celebrities living with \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 32, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd. High five, bro.", 
+        "text": "Major League Baseball has banned \ufffd for giving players an unfair advantage.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 33, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "During sex, I like to think about \ufffd.", 
+        "text": "Make a haiku.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 34, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "War! What is it good for?", 
+        "text": "Maybe she's born with it. Maybe it's \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 35, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "BILLY MAYS HERE FOR \ufffd.", 
+        "text": "Next from J.K. Rowling: Harry Potter and the Chamber of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 36, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What will always get you laid?", 
+        "text": "Next on ESPN2, the World Series of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 37, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Rumor has it that Vladimir Putin's favorite dish is \ufffd stuffed with \ufffd.", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 38, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What did I bring back from Mexico?", 
+        "text": "Step 1: \ufffd. Step 2: \ufffd. Step 3: Profit.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 39, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What are my parents hiding from me?", 
+        "text": "Studies show that lab rats navigate mazes 50% faster after being exposed to \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 40, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What helps Obama unwind?", 
+        "text": "TSA guidelines now prohibit \ufffd on airplanes", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 41, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's there a ton of in heaven?", 
+        "text": "That's right, I killed \ufffd. How, you ask? \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 42, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What would grandma find disturbing, yet oddly charming?", 
+        "text": "The Smithsonian Museum of Natural History has just opened an interactive exhibit on \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 43, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What did the U.S. airdrop to the children of Afghanistan?", 
+        "text": "The class field trip was completely ruined by \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 44, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's the new fad diet?", 
+        "text": "This is the way the world ends, not with a bang but with \ufffd", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 45, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "When I am the President of the United States, I will create the Department of \ufffd.", 
+        "text": "War! What is it good for?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 46, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Major League Baseball has banned \ufffd for giving players an unfair advantage.", 
+        "text": "What am I giving up for Lent?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 47, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "When I am a billionare, I shall erect a 50-foot statue to commemorate \ufffd.", 
+        "text": "What are my parents hiding from me?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 48, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What don't you want to find in your Chinese food?", 
+        "text": "What did I bring back from Mexico?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 49, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What will I bring back in time to convince people that I am a powerful wizard?", 
+        "text": "What did Vin Diesel eat for dinner?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 50, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "How am I maintaining my relationship status?", 
+        "text": "What did the U.S. airdrop to the children of Afghanistan?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 51, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd. It's a trap!", 
+        "text": "What do old people smell like?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 52, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Coming to Broadway this season, \ufffd: The Musical.", 
+        "text": "What does Dick Cheney prefer?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 53, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "While the United States raced the Soviet Union to the moon, the Mexican government funneled millions of pesos into research on \ufffd.", 
+        "text": "What don't you want to find in your Kung Pao chicken?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 54, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What ended my last relationship?", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 55, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What gets better with age?", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 56, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What never fails to liven up the party?", 
+        "text": "What gives me uncontrollable gas?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 57, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "But before I kill you, Mr. Bond, I must show you \ufffd.", 
+        "text": "What helps Obama unwind?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 58, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What gives me uncontrollable gas?", 
+        "text": "What is Batman's guilty pleasure?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 59, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's my secret power?", 
+        "text": "What never fails to liven up the party?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 60, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "When Pharaoh remained unmoved, Moses called down a plague of \ufffd.", 
+        "text": "What will I bring back in time to convince people that I am a powerful wizard?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 61, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "The class field trip was completely ruined by \ufffd.", 
+        "text": "What will always get you laid?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 62, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What do old people smell like? ", 
+        "text": "What would grandma find disturbing, yet oddly charming?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 63, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What am I giving up for Lent?", 
+        "text": "What's Teach for America using to inspire inner city students to succeed?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 64, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "In Michael Jackson's final moments, he thought about \ufffd.", 
+        "text": "What's a girl's best friend?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 65, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "In an attempt to reach a wider audience, the Smithsonian Museum of Natural History has opened an interactive exhibit on \ufffd.", 
+        "text": "What's my anti-drug?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 66, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Why do I hurt all over?", 
+        "text": "What's my secret power?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 67, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Studies show that lab rats navigate mazes 50% faster after being exposed to \ufffd.", 
+        "text": "What's that smell?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 68, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "I do not know with which weapons World War III will be fought, but World War IV will be fought with \ufffd.", 
+        "text": "What's that sound?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 69, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What's the most emo?", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 70, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's Teach for America using to inspire inner city students to succeed?", 
+        "text": "What's the new fad diet?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 71, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's the crustiest?", 
+        "text": "What's the next Happy Meal toy?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 72, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd: Good to the last drop.", 
+        "text": "What's the next superhero/sidekick duo?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 73, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What did Vin Diesel eat for dinner?", 
+        "text": "What's there a ton of in heaven?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 74, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd: kid-tested, mother-approved.", 
+        "text": "When I am President of the United States, I will create the Department of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 75, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What gets better with age?", 
+        "text": "When I am a billionare, I shall erect a 50-foot statue to commemorate \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 76, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Why am I sticky?", 
+        "text": "When I was tripping on acid, \ufffd turned into \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 77, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "What's my anti-drug?", 
+        "text": "When Pharaoh remained unmoved, Moses called down a Plague of \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 78, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "And the Academy Award for \ufffd goes to \ufffd.", 
+        "text": "While the United States raced the Soviet Union to the moon, the Mexican government funneled millions of pesos into research on \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 79, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "For my next trick, I will pull \ufffd out of \ufffd.", 
+        "text": "White people like \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 80, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd is a slippery slope that leads to \ufffd.", 
+        "text": "Why am I sticky?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 81, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "In M. Night Shyamalan's new movie, Bruce Willis discovers that \ufffd had really been \ufffd all along.", 
+        "text": "Why can't I sleep at night?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 82, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "In a world ravaged by \ufffd, our only solace is \ufffd.", 
+        "text": "Why do I hurt all over?", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 83, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "\ufffd + \ufffd = \ufffd.", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 84, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Rumor has it that Vladimir Putin's favorite dish is \ufffd stuffed with \ufffd.", 
+        "text": "\ufffd is a slippery slope that leads to \ufffd.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 85, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "I never truly understood \ufffd until I encountered \ufffd.", 
+        "text": "\ufffd. Betcha can't have just one!", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 86, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Make a haiku.", 
-        "draw": 2, 
-        "watermark": null, 
-        "pick": 3
+        "text": "\ufffd. High five, bro.", 
+        "draw": 0, 
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 87, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "Lifetime&reg; presents \ufffd, the story of \ufffd.", 
+        "text": "\ufffd. It's a trap!", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 88, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "When I was tripping on acid, \ufffd turned into \ufffd.", 
+        "text": "\ufffd. That's how I want to die.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 89, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "That's right, I killed \ufffd. How, you ask? \ufffd.", 
+        "text": "\ufffd: Good to the last drop.", 
         "draw": 0, 
-        "watermark": null, 
-        "pick": 2
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 90, 
     "model": "cards.blackcard", 
     "fields": {
-        "text": "\ufffd + \ufffd = \ufffd.", 
-        "draw": 2, 
-        "watermark": null, 
-        "pick": 3
-    }
-},
-{
-    "pk": 91, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "Maybe she's born with it. Maybe it's \ufffd.", 
+        "text": "\ufffd: kid-tested, mother-approved.", 
         "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 1
-    }
-},
-{
-    "pk": 92, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "Dear Abby,<br><br>I'm having some trouble with \ufffd and would like your advice.", 
-        "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 1
-    }
-},
-{
-    "pk": 93, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "What's the next superhero/sidekick duo?", 
-        "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 2
-    }
-},
-{
-    "pk": 94, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "In L.A. County Jail, word is you can trade 200 cigarettes for \ufffd.", 
-        "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 1
-    }
-},
-{
-    "pk": 95, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "After the earthquake, Sean Penn brought \ufffd to the people of Haiti.", 
-        "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 1
-    }
-},
-{
-    "pk": 96, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "Next on ESPN2, the World Series of \ufffd.", 
-        "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 1
-    }
-},
-{
-    "pk": 97, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "Step 1: \ufffd. Step 2: \ufffd. Step 3: Profit.", 
-        "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 2
-    }
-},
-{
-    "pk": 98, 
-    "model": "cards.blackcard", 
-    "fields": {
-        "text": "Life for American Indians was forever changed when the White Man introduced them to \ufffd.", 
-        "draw": 0, 
-        "watermark": "1.2", 
-        "pick": 1
+        "pick": 1, 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 1, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Coat hanger abortions.", 
-        "watermark": null
+        "text": "50,000 volts straight to the nipples.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 2, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Man meat.", 
-        "watermark": null
+        "text": "72 virgins.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 3, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Autocannibalism.", 
-        "watermark": null
+        "text": "8 oz. of sweet Mexican black-tar heroin.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 4, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Vigorous jazz hands.", 
-        "watermark": null
+        "text": "A Bop It\u2122.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 5, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Flightless birds.", 
-        "watermark": null
+        "text": "A Super Soaker\u2122 full of cat pee.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 6, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pictures of boobs.", 
-        "watermark": null
+        "text": "A bag of magic beans.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 7, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Doing the right thing.", 
-        "watermark": null
+        "text": "A balanced breakfast.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 8, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A bitch slap.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 9, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A bleached asshole.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 10, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The violation of our most basic human rights.", 
-        "watermark": null
+        "text": "A brain tumor.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 11, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Viagra&reg;.", 
-        "watermark": null
+        "text": "A bucket of fish heads.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 12, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Self-loathing.", 
-        "watermark": null
+        "text": "A can of whoop-ass.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 13, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Spectacular abs.", 
-        "watermark": null
+        "text": "A cooler full of organs.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 14, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "An honest cop with nothing left to lose.", 
-        "watermark": null
+        "text": "A death ray.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 15, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A defective condom.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 16, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A balanced breakfast.", 
-        "watermark": null
+        "text": "A disappointing birthday party.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 17, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A falcon with a cap on its head.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 18, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Concealing a boner.", 
-        "watermark": null
+        "text": "A fetus.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 19, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Roofies.", 
-        "watermark": null
+        "text": "A foul mouth.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 20, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Glenn Beck convulsively vomiting as a brood of crab spiders hatches in his brain and erupts from his tear ducts.", 
-        "watermark": null
+        "text": "A gassy antelope.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 21, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A gentle caress of the inner thigh.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 22, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Big Bang.", 
-        "watermark": null
+        "text": "A good sniff.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 23, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Amputees.", 
-        "watermark": null
+        "text": "A homoerotic volleyball montage.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 24, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Rev. Dr. Martin Luther King, Jr.", 
-        "watermark": null
+        "text": "A hot mess.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 25, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Former President George W. Bush.", 
-        "watermark": null
+        "text": "A lifetime of sadness.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 26, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Being marginalized.", 
-        "watermark": null
+        "text": "A live studio audience.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 27, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Smegma.", 
-        "watermark": null
+        "text": "A mating display.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 28, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Laying an egg.", 
-        "watermark": null
+        "text": "A micropenis.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 29, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Cuddling.", 
-        "watermark": null
+        "text": "A micropig waring a tiny raincoat and booties.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 30, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Aaron Burr.", 
-        "watermark": null
+        "text": "A middle-aged man on roller skates.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 31, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Pope.", 
-        "watermark": null
+        "text": "A mime having a stroke.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 32, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A bleached asshole.", 
-        "watermark": null
+        "text": "A monkey smoking a cigar.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 33, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Horse meat.", 
-        "watermark": null
+        "text": "A mopey zoo lion.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 34, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Genital piercings.", 
-        "watermark": null
+        "text": "A murder most foul.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 35, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Fingering.", 
-        "watermark": null
+        "text": "A pyramid of severed heads.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 36, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Elderly Japanese men.", 
-        "watermark": null
+        "text": "A really cool hat.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 37, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Stranger danger.", 
-        "watermark": null
+        "text": "A robust mongoloid.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 38, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Fear itself.", 
-        "watermark": null
+        "text": "A sad handjob.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 39, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Science.", 
-        "watermark": null
+        "text": "A salty surprise.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 40, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Praying the gay away.", 
-        "watermark": null
+        "text": "A sassy black woman.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 41, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Same-sex ice dancing.", 
-        "watermark": null
+        "text": "A sausage festival.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 42, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The terrorists.", 
-        "watermark": null
+        "text": "A sea of troubles.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 43, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A snapping turtle biting the tip of your penis.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 44, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "German dungeon porn.", 
-        "watermark": null
+        "text": "A stray pube.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 45, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Bingeing and purging.", 
-        "watermark": null
+        "text": "A subscription to Men's Fitness.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 46, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Ethnic cleansing.", 
-        "watermark": null
+        "text": "A thermonuclear detonation.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 47, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Cheating in the Special Olympics.", 
-        "watermark": null
+        "text": "A time travel paradox.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 48, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Nickelback.", 
-        "watermark": null
+        "text": "A tiny horse.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 49, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Heteronormativity.", 
-        "watermark": null
+        "text": "A tribe of warrior women.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 50, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "William Shatner.", 
-        "watermark": null
+        "text": "A windmill full of corpses.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 51, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Making a pouty face.", 
-        "watermark": null
+        "text": "A zesty breakfast burrito.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 52, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Chainsaws for hands.", 
-        "watermark": null
+        "text": "AIDS.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 53, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The placenta.", 
-        "watermark": null
+        "text": "AXE Body Spray.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 54, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The profoundly handicapped.", 
-        "watermark": null
+        "text": "Aaron Burr.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 55, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Tom Cruise.", 
-        "watermark": null
+        "text": "Active listening.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 56, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Object permanence.", 
-        "watermark": null
+        "text": "Actually taking candy from a baby.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 57, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Goblins.", 
-        "watermark": null
+        "text": "Adderall\u2122.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 58, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "An icepick lobotomy.", 
-        "watermark": null
+        "text": "Advice from a wise, old black man.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 59, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Arnold Schwarzenegger.", 
-        "watermark": null
+        "text": "African children", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 60, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Hormone injections.", 
-        "watermark": null
+        "text": "Agriculture.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 61, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A falcon with a cap on its head.", 
-        "watermark": null
+        "text": "Alcoholism.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 62, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Foreskin.", 
-        "watermark": null
+        "text": "All-you-can-eat shrimp for $4.99.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 63, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dying.", 
-        "watermark": null
+        "text": "Altar boys.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 64, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Amputees.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 65, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The invisible hand.", 
-        "watermark": null
+        "text": "An M. Night Shyamalan plot twist.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 66, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Jew-fros.", 
-        "watermark": null
+        "text": "An M16 assault rifle.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 67, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A really cool hat.", 
-        "watermark": null
+        "text": "An Oedipus complex.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 68, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Flash flooding.", 
-        "watermark": null
+        "text": "An asymmetric boob job.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 69, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An erection that lasts longer than four hours.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 70, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dying of dysentery.", 
-        "watermark": null
+        "text": "An icepick labotomy.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 71, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sexy pillow fights.", 
-        "watermark": null
+        "text": "An oversized lollipop.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 72, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Three-Fifths compromise.", 
-        "watermark": null
+        "text": "An ugly face.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 73, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A sad handjob.", 
-        "watermark": null
+        "text": "An uppercut.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 74, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Men.", 
-        "watermark": null
+        "text": "Anal beads.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 75, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Historically black colleges.", 
-        "watermark": null
+        "text": "Another goddamn vampire movie.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 76, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sean Penn.", 
-        "watermark": null
+        "text": "Arnold Schwarzenegger.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 77, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Heartwarming orphans.", 
-        "watermark": null
+        "text": "Asians who aren't good at math.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 78, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Waterboarding.", 
-        "watermark": null
+        "text": "Assless chaps.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 79, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The clitoris.", 
-        "watermark": null
+        "text": "Attitude.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 80, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Vikings.", 
-        "watermark": null
+        "text": "Auschwitz.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 81, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Friends who eat all the snacks.", 
-        "watermark": null
+        "text": "Authentic Mexican cuisine.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 82, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Underground Railroad.", 
-        "watermark": null
+        "text": "Autocannibalism.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 83, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pretending to care.", 
-        "watermark": null
+        "text": "BATMAN!!!", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 84, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Raptor attacks.", 
-        "watermark": null
+        "text": "Balls.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 85, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A micropenis.", 
-        "watermark": null
+        "text": "Barack Obama.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 86, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A Gypsy curse.", 
-        "watermark": null
+        "text": "Battlefield amputations.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 87, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Agriculture.", 
-        "watermark": null
+        "text": "Becoming a blueberry.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 88, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Bling.", 
-        "watermark": null
+        "text": "Bees?", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 89, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A clandestine butt scratch.", 
-        "watermark": null
+        "text": "Being a dick to children.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 90, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The South.", 
-        "watermark": null
+        "text": "Being a motherfucking sorcerer.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 91, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sniffing glue.", 
-        "watermark": null
+        "text": "Being fabulous.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 92, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Consultants.", 
-        "watermark": null
+        "text": "Being fat and stupid.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 93, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "My humps.", 
-        "watermark": null
+        "text": "Being marginalized.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 94, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Geese.", 
-        "watermark": null
+        "text": "Being on fire.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 95, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Being a dick to children.", 
-        "watermark": null
+        "text": "Being rich.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 96, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Party poopers.", 
-        "watermark": null
+        "text": "Bill Nye the Science Guy.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 97, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sunshine and rainbows.", 
-        "watermark": null
+        "text": "Bingeing and purging.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 98, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "YOU MUST CONSTRUCT ADDITIONAL PYLONS.", 
-        "watermark": null
+        "text": "Bitches.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 99, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Mutually-assured destruction.", 
-        "watermark": null
+        "text": "Black people.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 100, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Bling.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 101, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sexting.", 
-        "watermark": null
+        "text": "Boogers.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 102, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "An Oedipus complex.", 
-        "watermark": null
+        "text": "Breaking out into song and dance.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 103, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Eating all of the cookies before the AIDS bake-sale.", 
-        "watermark": null
+        "text": "Britney Spears at 55.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 104, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A sausage festival.", 
-        "watermark": null
+        "text": "Brown people.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 105, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Michael Jackson.", 
-        "watermark": null
+        "text": "Capturing Newt Gingrich and forcing him to dance in a monkey suit.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 106, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Skeletor.", 
-        "watermark": null
+        "text": "Cards Against Humanity.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 107, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Chivalry.", 
-        "watermark": null
+        "text": "Catapults.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 108, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sharing needles.", 
-        "watermark": null
+        "text": "Centaurs.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 109, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Being rich.", 
-        "watermark": null
+        "text": "Chainsaws for hands.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 110, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Cheating in the Special Olympics.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 111, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Count Chocula.", 
-        "watermark": null
+        "text": "Child abuse.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 112, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Spontaneous human combustion.", 
-        "watermark": null
+        "text": "Child beauty pageants.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 113, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "College.", 
-        "watermark": null
+        "text": "Children on leashes.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 114, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Necrophilia.", 
-        "watermark": null
+        "text": "Christopher Walken.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 115, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Chinese gymnastics team.", 
-        "watermark": null
+        "text": "Chunks of dead prostitute.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 116, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Global warming.", 
-        "watermark": null
+        "text": "Civilian casualties.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 117, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Farting and walking away.", 
-        "watermark": null
+        "text": "Classist undertones.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 118, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Emotions.", 
-        "watermark": null
+        "text": "Coat hanger abortions.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 119, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Uppercuts.", 
-        "watermark": null
+        "text": "Concealing a boner.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 120, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Consensual sex.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 121, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Stifling a giggle at the mention of Hutus and Tutsis.", 
-        "watermark": null
+        "text": "Copping a feel.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 122, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Penis envy.", 
-        "watermark": null
+        "text": "Count Chocula.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 123, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Crippling debt.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 124, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "White people.", 
-        "watermark": null
+        "text": "Crucifixion.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 125, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dick Cheney.", 
-        "watermark": null
+        "text": "Crystal meth.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 126, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Leaving an awkward voicemail.", 
-        "watermark": null
+        "text": "Cuddling.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 127, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Yeast.", 
-        "watermark": null
+        "text": "Cybernetic enhancements.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 128, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Natural selection.", 
-        "watermark": null
+        "text": "Daddy issues.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 129, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Masturbation.", 
-        "watermark": null
+        "text": "Darth Vader.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 130, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dead babies.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 131, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dead parents.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 132, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Opposable thumbs.", 
-        "watermark": null
+        "text": "Dental dams.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 133, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Destroying the evidence.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 134, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Soiling oneself.", 
-        "watermark": null
+        "text": "Dick Cheney", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 135, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A sassy black woman.", 
-        "watermark": null
+        "text": "Dick fingers.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 136, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sperm whales.", 
-        "watermark": null
+        "text": "Doin' it in the butt.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 137, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Teaching a robot to love.", 
-        "watermark": null
+        "text": "Doing the right thing.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 138, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Scrubbing under the folds.", 
-        "watermark": null
+        "text": "Domino's\u2122 Oreo\u2122 Dessert Pizza.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 139, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A drive-by shooting.", 
-        "watermark": null
+        "text": "Drinking alone.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 140, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Whipping it out.", 
-        "watermark": null
+        "text": "Dropping a chandelier on your enemies and riding the rope up.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 141, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Panda sex.", 
-        "watermark": null
+        "text": "Dry heaving.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 142, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Catapults.", 
-        "watermark": null
+        "text": "Dying of dysentery.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 143, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dying.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 144, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Toni Morrison's vagina.", 
-        "watermark": null
+        "text": "Eating all of the cookies before the AIDS bake-sale.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 145, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Five-Dollar Footlongs&trade;.", 
-        "watermark": null
+        "text": "Eating the last known bison.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 146, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Land mines.", 
-        "watermark": null
+        "text": "Edible underpants.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 147, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A sea of troubles.", 
-        "watermark": null
+        "text": "Elderly Japanese men.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 148, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A zesty breakfast burrito.", 
-        "watermark": null
+        "text": "Embryonic stem cells.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 149, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Christopher Walken.", 
-        "watermark": null
+        "text": "Emotions.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 150, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Friction.", 
-        "watermark": null
+        "text": "Erectile dysfunction.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 151, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Balls.", 
-        "watermark": null
+        "text": "Estrogen.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 152, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "AIDS.", 
-        "watermark": null
+        "text": "Ethnic cleansing.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 153, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The KKK.", 
-        "watermark": null
+        "text": "Eugenics.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 154, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Figgy pudding.", 
-        "watermark": null
+        "text": "Exactly what you'd expect.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 155, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Seppuku.", 
-        "watermark": null
+        "text": "Expecting a burp and vomiting on the floor.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 156, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Explosions.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 157, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Gandhi.", 
-        "watermark": null
+        "text": "Extremely tight pants.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 158, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Famine.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 159, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Preteens.", 
-        "watermark": null
+        "text": "Fancy Feast\u00ae.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 160, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The token minority.", 
-        "watermark": null
+        "text": "Farting and walking away.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 161, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Friends with benefits.", 
-        "watermark": null
+        "text": "Fear itself.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 162, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Re-gifting.", 
-        "watermark": null
+        "text": "Feeding Rosie O'Donnell.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 163, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pixelated bukkake.", 
-        "watermark": null
+        "text": "Fiery poops.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 164, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Figgy pudding.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 165, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Take-backsies.", 
-        "watermark": null
+        "text": "Finger painting.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 166, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A thermonuclear detonation.", 
-        "watermark": null
+        "text": "Fingering.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 167, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Tempur-Pedic&reg; Swedish Sleep System&trade;.", 
-        "watermark": null
+        "text": "Firing a rifle into the air while balls deep in a squealing hog.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 168, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Waiting 'til marriage.", 
-        "watermark": null
+        "text": "Five-Dollar Footlongs\u2122.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 169, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A tiny horse.", 
-        "watermark": null
+        "text": "Flesh-eating bacteria.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 170, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A can of whoop-ass.", 
-        "watermark": null
+        "text": "Flightless birds.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 171, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dental dams.", 
-        "watermark": null
+        "text": "Flying sex snakes.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 172, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Feeding Rosie O'Donnell.", 
-        "watermark": null
+        "text": "Foreskin.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 173, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Old-people smell.", 
-        "watermark": null
+        "text": "Former President George W. Bush.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 174, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Genghis Khan.", 
-        "watermark": null
+        "text": "Free samples.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 175, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Authentic Mexican cuisine.", 
-        "watermark": null
+        "text": "Friction.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 176, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Oversized lollipops.", 
-        "watermark": null
+        "text": "Friendly fire.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 177, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Friends with benefits.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 178, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Keanu Reeves.", 
-        "watermark": null
+        "text": "Frolicking.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 179, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Drinking alone.", 
-        "watermark": null
+        "text": "Full frontal nudity.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 180, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The American Dream.", 
-        "watermark": null
+        "text": "Funky fresh rhymes.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 181, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Taking off your shirt.", 
-        "watermark": null
+        "text": "Gandhi.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 182, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Giving 110%.", 
-        "watermark": null
+        "text": "Geese.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 183, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Flesh-eating bacteria.", 
-        "watermark": null
+        "text": "Genghis Khan.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 184, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Child abuse.", 
-        "watermark": null
+        "text": "Genital piercings.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 185, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A cooler full of organs.", 
-        "watermark": null
+        "text": "German dungeon porn.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 186, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A moment of silence.", 
-        "watermark": null
+        "text": "Getting drunk on mouthwash.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 187, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Rapture.", 
-        "watermark": null
+        "text": "Getting married, having a few kids, buying some stuff, retiring to Florida, and dying.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 188, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting naked and watching Nickelodeon.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 189, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "RoboCop.", 
-        "watermark": null
+        "text": "Getting really high.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 190, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting so angry that you pop a boner.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 191, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sweet, sweet vengeance.", 
-        "watermark": null
+        "text": "Ghosts.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 192, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Fancy Feast&reg;.", 
-        "watermark": null
+        "text": "Giving 110%", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 193, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pooping back and forth. Forever.", 
-        "watermark": null
+        "text": "Gloryholes.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 194, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Being a motherfucking sorcerer.", 
-        "watermark": null
+        "text": "GoGurt\u00ae.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 195, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Jewish fraternities.", 
-        "watermark": null
+        "text": "Goblins.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 196, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Edible underpants.", 
-        "watermark": null
+        "text": "God.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 197, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Poor people.", 
-        "watermark": null
+        "text": "Golden showers.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 198, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "All-you-can-eat shrimp for $4.99.", 
-        "watermark": null
+        "text": "Grandma.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 199, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Britney Spears at 55.", 
-        "watermark": null
+        "text": "Grave robbing.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 200, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "That thing that electrocutes your abs.", 
-        "watermark": null
+        "text": "Growing a pair.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 201, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The folly of man.", 
-        "watermark": null
+        "text": "Guys who don't call.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 202, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Fiery poops.", 
-        "watermark": null
+        "text": "Half-assed foreplay.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 203, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Cards Against Humanity.", 
-        "watermark": null
+        "text": "Harry Potter erotica.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 204, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A murder most foul.", 
-        "watermark": null
+        "text": "Heartwarming orphans.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 205, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Me time.", 
-        "watermark": null
+        "text": "Helplessly giggling at the mention of Hutus and Tutsis.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 206, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The inevitable heat death of the universe.", 
-        "watermark": null
+        "text": "Her Majesty, Queen Elizabeth II.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 207, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Nocturnal emissions.", 
-        "watermark": null
+        "text": "Heteronormativity.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 208, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Daddy issues.", 
-        "watermark": null
+        "text": "Historically black colleges.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 209, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The hardworking Mexican.", 
-        "watermark": null
+        "text": "Home video of Oprah sobbing into a Lean Cuisine\u00ae.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 210, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Natalie Portman.", 
-        "watermark": null
+        "text": "Homeless people.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 211, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Waking up half-naked in a Denny's parking lot.", 
-        "watermark": null
+        "text": "Hope.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 212, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Nipple blades.", 
-        "watermark": null
+        "text": "Hormone injections.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 213, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Assless chaps.", 
-        "watermark": null
+        "text": "Horrifying laser hair removal accidents.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 214, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Full frontal nudity.", 
-        "watermark": null
+        "text": "Horse meat.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 215, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Hulk Hogan.", 
-        "watermark": null
+        "text": "Hospice care.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 216, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Hot Pockets\u00ae.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 217, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Ronald Reagan.", 
-        "watermark": null
+        "text": "Hot cheese.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 218, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Vehicular manslaughter.", 
-        "watermark": null
+        "text": "Hot people.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 219, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Menstruation.", 
-        "watermark": null
+        "text": "Hulk Hogan.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 220, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pulling out.", 
-        "watermark": null
+        "text": "Hurricane Katrina.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 221, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Picking up girls at the abortion clinic.", 
-        "watermark": null
+        "text": "Inappropriate yodeling.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 222, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The homosexual agenda.", 
-        "watermark": null
+        "text": "Incest.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 223, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Holy Bible.", 
-        "watermark": null
+        "text": "Italians.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 224, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "World peace.", 
-        "watermark": null
+        "text": "Jerking off into a pool of children's tears.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 225, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dropping a chandelier on your enemies and riding the rope up.", 
-        "watermark": null
+        "text": "Jewish fraternities.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 226, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Testicular torsion.", 
-        "watermark": null
+        "text": "John Wilkes Booth", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 227, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The milk man.", 
-        "watermark": null
+        "text": "Judge Judy.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 228, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A time travel paradox.", 
-        "watermark": null
+        "text": "Justin Bieber.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 229, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Hot Pockets&reg;.", 
-        "watermark": null
+        "text": "Kamikaze pilots.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 230, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Guys who don't call.", 
-        "watermark": null
+        "text": "Kanye West.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 231, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Eating the last known bison.", 
-        "watermark": null
+        "text": "Keanu Reeves.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 232, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Darth Vader.", 
-        "watermark": null
+        "text": "Kids with ass cancer.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 233, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Scalping.", 
-        "watermark": null
+        "text": "Lactation.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 234, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Homeless people.", 
-        "watermark": null
+        "text": "Lady Gaga.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 235, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The World of Warcraft.", 
-        "watermark": null
+        "text": "Lance Armstrong's missing testicle.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 236, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Gloryholes.", 
-        "watermark": null
+        "text": "Land mines.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 237, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Saxophone solos.", 
-        "watermark": null
+        "text": "Laying an egg.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 238, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sean Connery.", 
-        "watermark": null
+        "text": "Leaving an awkward voicemail.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 239, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "God.", 
-        "watermark": null
+        "text": "Leprosy.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 240, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Intelligent design.", 
-        "watermark": null
+        "text": "Licking things to claim them as your own.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 241, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The taint; the grundle; the fleshy fun-bridge.", 
-        "watermark": null
+        "text": "Lockjaw.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 242, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Friendly fire.", 
-        "watermark": null
+        "text": "Lumberjack fantasies.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 243, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Keg stands.", 
-        "watermark": null
+        "text": "Lunchables\u2122.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 244, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Eugenics.", 
-        "watermark": null
+        "text": "Making a pouty face.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 245, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A good sniff.", 
-        "watermark": null
+        "text": "Man meat.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 246, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Lockjaw.", 
-        "watermark": null
+        "text": "Masturbation.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 247, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Me time.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 248, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "MechaHitler.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 249, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Robert Downey, Jr.", 
-        "watermark": null
+        "text": "Men.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 250, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The heart of a child.", 
-        "watermark": null
+        "text": "Menstrual rage.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 251, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Seduction.", 
-        "watermark": null
+        "text": "Michael Jackson.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 252, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Smallpox blankets.", 
-        "watermark": null
+        "text": "Michelle Obama's arms.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 253, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Licking things to claim them as your own.", 
-        "watermark": null
+        "text": "Morgan Freeman's voice.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 254, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A salty surprise.", 
-        "watermark": null
+        "text": "Mouth herpes.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 255, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Poorly-timed Holocaust jokes.", 
-        "watermark": null
+        "text": "Mr. Clean, right behind you.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 256, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "My soul.", 
-        "watermark": null
+        "text": "Muhammad (Praise Be Unto Him).", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 257, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "My sex life.", 
-        "watermark": null
+        "text": "Multiple stab wounds.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 258, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pterodactyl eggs.", 
-        "watermark": null
+        "text": "Mutually-assured destruction.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 259, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Altar boys.", 
-        "watermark": null
+        "text": "My collection of high-tech sex toys.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 260, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Forgetting the Alamo.", 
-        "watermark": null
+        "text": "My genitals.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 261, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "72 virgins.", 
-        "watermark": null
+        "text": "My humps.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 262, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Raping and pillaging.", 
-        "watermark": null
+        "text": "My inner demons.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 263, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pedophiles.", 
-        "watermark": null
+        "text": "My relationship status.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 264, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "My sex life.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 265, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A snapping turtle biting the tip of your penis.", 
-        "watermark": null
+        "text": "My soul.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 266, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Pabst Blue Ribbon.", 
-        "watermark": null
+        "text": "My vagina.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 267, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Domino's&trade; Oreo&trade;\u00a0Dessert Pizza.", 
-        "watermark": null
+        "text": "Natalie Portman.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 268, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "My collection of high-tech sex toys.", 
-        "watermark": null
+        "text": "Natural male enhancement.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 269, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A middle-aged man on roller skates.", 
-        "watermark": null
+        "text": "Natural selection.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 270, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Blood of Christ.", 
-        "watermark": null
+        "text": "Nazis.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 271, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Half-assed foreplay.", 
-        "watermark": null
+        "text": "Necrophilia.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 272, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Free samples.", 
-        "watermark": null
+        "text": "New Age music.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 273, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Nicholas Cage.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 274, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Hurricane Katrina.", 
-        "watermark": null
+        "text": "Nickelback.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 275, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Wearing underwear inside-out to avoid doing laundry.", 
-        "watermark": null
+        "text": "Nipple blades.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 276, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Republicans.", 
-        "watermark": null
+        "text": "Not giving a shit about the Third World.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 277, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The glass ceiling.", 
-        "watermark": null
+        "text": "Not reciprocating oral sex.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 278, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A foul mouth.", 
-        "watermark": null
+        "text": "Not wearing pants.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 279, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Jerking off into a pool of children's tears.", 
-        "watermark": null
+        "text": "Obesity.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 280, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Getting really high.", 
-        "watermark": null
+        "text": "Object permanence.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 281, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Old-people smell.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 282, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Michelle Obama's arms.", 
-        "watermark": null
+        "text": "One trillion dollars.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 283, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Explosions.", 
-        "watermark": null
+        "text": "Oompa-Loompas.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 284, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The &Uuml;bermensch.", 
-        "watermark": null
+        "text": "Opposable thumbs.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 285, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Overcompensation.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 286, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sarah Palin.", 
-        "watermark": null
+        "text": "Pabst Blue Ribbon.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 287, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Attitude.", 
-        "watermark": null
+        "text": "Pac-Man uncontrollably guzzling cum.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 288, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Panda sex.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 289, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Crumpets with the Queen.", 
-        "watermark": null
+        "text": "Parting the Red Sea.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 290, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Frolicking.", 
-        "watermark": null
+        "text": "Passable transvestites.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 291, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Team-building exercises.", 
-        "watermark": null
+        "text": "Passing a kidney stone.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 292, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Repression.", 
-        "watermark": null
+        "text": "Passive-aggressive Post-it notes.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 293, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Road head.", 
-        "watermark": null
+        "text": "Pedophiles.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 294, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A bag of magic beans.", 
-        "watermark": null
+        "text": "Peeing a little bit.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 295, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "An asymmetric boob job.", 
-        "watermark": null
+        "text": "Penis envy.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 296, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dead parents.", 
-        "watermark": null
+        "text": "Picking up girls at the abortion clinic.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 297, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Public ridicule.", 
-        "watermark": null
+        "text": "Pictures of boobs.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 298, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A mating display.", 
-        "watermark": null
+        "text": "Pixelated bukkake.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 299, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A mime having a stroke.", 
-        "watermark": null
+        "text": "Police Brutality.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 300, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Stephen Hawking talking dirty.", 
-        "watermark": null
+        "text": "Pooping back and forth. Forever.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 301, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Poopy diapers.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 302, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Mouth herpes.", 
-        "watermark": null
+        "text": "Poor life choices.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 303, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Overcompensation.", 
-        "watermark": null
+        "text": "Poor people.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 304, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Bill Nye the Science Guy.", 
-        "watermark": null
+        "text": "Poorly-timed Holocaust jokes.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 305, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Bitches.", 
-        "watermark": null
+        "text": "Porn stars.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 306, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Italians.", 
-        "watermark": null
+        "text": "Powerful thighs.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 307, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Prancing.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 308, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A windmill full of corpses.", 
-        "watermark": null
+        "text": "Praying the gay away.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 309, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Her Royal Highness, Queen Elizabeth II.", 
-        "watermark": null
+        "text": "Preteens.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 310, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Pretending to care.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 311, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Adderall&trade;.", 
-        "watermark": null
+        "text": "Puberty.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 312, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A stray pube.", 
-        "watermark": null
+        "text": "Public ridicule.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 313, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Pulling out.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 314, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Passing a kidney stone.", 
-        "watermark": null
+        "text": "Puppies!", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 315, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Prancing.", 
-        "watermark": null
+        "text": "Queefing.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 316, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Leprosy.", 
-        "watermark": null
+        "text": "Racially-biased SAT questions.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 317, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A brain tumor.", 
-        "watermark": null
+        "text": "Racism.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 318, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Bees?", 
-        "watermark": null
+        "text": "Raptor attacks.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 319, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Puppies!", 
-        "watermark": null
+        "text": "Rehab.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 320, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Cockfights.", 
-        "watermark": null
+        "text": "Repression.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 321, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Kim Jong-il.", 
-        "watermark": null
+        "text": "Republicans.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 322, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Hope.", 
-        "watermark": null
+        "text": "Riding off into the sunset.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 323, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "8 oz. of sweet Mexican black-tar heroin.", 
-        "watermark": null
+        "text": "Road head.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 324, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Incest.", 
-        "watermark": null
+        "text": "Robert Downey, Jr.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 325, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Grave robbing.", 
-        "watermark": null
+        "text": "RoboCop.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 326, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Asians who aren't good at math.", 
-        "watermark": null
+        "text": "Ronald Reagan.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 327, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Alcoholism.", 
-        "watermark": null
+        "text": "Roofies.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 328, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Rush Limbaugh's soft, shitty body.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 329, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Justin Bieber.", 
-        "watermark": null
+        "text": "Same-sex ice dancing.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 330, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Jews.", 
-        "watermark": null
+        "text": "Sarah Palin.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 331, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Saxophone solos.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 332, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Winking at old people.", 
-        "watermark": null
+        "text": "Scalping.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 333, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Science.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 334, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Kids with ass cancer.", 
-        "watermark": null
+        "text": "Scientology.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 335, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Loose lips.", 
-        "watermark": null
+        "text": "Scrubbing under the folds.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 336, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Auschwitz.", 
-        "watermark": null
+        "text": "Sean Connery.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 337, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Civilian casualties.", 
-        "watermark": null
+        "text": "Sean Penn.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 338, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Self-loathing.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 339, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Tangled Slinkys.", 
-        "watermark": null
+        "text": "Seppuku.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 340, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Being on fire.", 
-        "watermark": null
+        "text": "Serfdom.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 341, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Sexting.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 342, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Sexual tension.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 343, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Riding off into the sunset.", 
-        "watermark": null
+        "text": "Sexy pillow fights.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 344, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Exchanging pleasantries.", 
-        "watermark": null
+        "text": "Shapeshifters.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 345, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "My relationship status.", 
-        "watermark": null
+        "text": "Shaquille O'Neal's acting career.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 346, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Shaquille O'Neal's acting career.", 
-        "watermark": null
+        "text": "Sharing needles.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 347, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Being fabulous.", 
-        "watermark": null
+        "text": "Shiny objects.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 348, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Lactation.", 
-        "watermark": null
+        "text": "Silence.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 349, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Not reciprocating oral sex.", 
-        "watermark": null
+        "text": "Skeletor.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 350, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Smallpox blankets.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 351, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "My genitals.", 
-        "watermark": null
+        "text": "Smegma.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 352, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Date rape.", 
-        "watermark": null
+        "text": "Sniffing glue.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 353, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Some god-damn peace and quiet.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 354, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "GoGurt&reg;.", 
-        "watermark": null
+        "text": "Soup that is too hot.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 355, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Judge Judy.", 
-        "watermark": null
+        "text": "Spectacular abs.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 356, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Lumberjack fantasies.", 
-        "watermark": null
+        "text": "Sperm whales.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 357, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The gays.", 
-        "watermark": null
+        "text": "Spontaneous human combustion.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 358, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Scientology.", 
-        "watermark": null
+        "text": "Stalin.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 359, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Estrogen.", 
-        "watermark": null
+        "text": "Stephen Hawking talking dirty.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 360, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Police brutality.", 
-        "watermark": null
+        "text": "Stormtroopers.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 361, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Passable transvestites.", 
-        "watermark": null
+        "text": "Stranger danger.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 362, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Virginia Tech Massacre.", 
-        "watermark": null
+        "text": "Sunshine and rainbows.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 363, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Surprise sex!", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 364, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dick fingers.", 
-        "watermark": null
+        "text": "Sweet, sweet vengeance.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 365, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Racism.", 
-        "watermark": null
+        "text": "Switching to Geico\u00ae.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 366, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Glenn Beck being harried by a swarm of buzzards.", 
-        "watermark": null
+        "text": "Swooping.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 367, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Surprise sex!", 
-        "watermark": null
+        "text": "Synergistic management solutions.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 368, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Classist undertones.", 
-        "watermark": null
+        "text": "Take-backsies.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 369, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Booby-trapping the house to foil burglars.", 
-        "watermark": null
+        "text": "Taking off your shirt.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 370, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "New Age music.", 
-        "watermark": null
+        "text": "Tangled Slinkys.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 371, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Tasteful sideboob.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 372, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A lifetime of sadness.", 
-        "watermark": null
+        "text": "Teaching a robot to love.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 373, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Doin' it in the butt.", 
-        "watermark": null
+        "text": "Teenage pregnancy.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 374, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Swooping.", 
-        "watermark": null
+        "text": "Tentacle porn.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 375, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Hamburglar.", 
-        "watermark": null
+        "text": "Testicular torsion.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 376, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Tentacle porn.", 
-        "watermark": null
+        "text": "That thing that electrocutes your abs.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 377, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A hot mess.", 
-        "watermark": null
+        "text": "The American Dream", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 378, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Too much hair gel.", 
-        "watermark": null
+        "text": "The Amish.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 379, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A look-see.", 
-        "watermark": null
+        "text": "The Big Bang.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 380, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Not giving a shit about the Third World.", 
-        "watermark": null
+        "text": "The Blood of Christ.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 381, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "American Gladiators.", 
-        "watermark": null
+        "text": "The Boy Scouts of America.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 382, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Kool-Aid Man.", 
-        "watermark": null
+        "text": "The Care Bear Stare.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 383, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Chinese gymnastics team.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 384, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Barack Obama.", 
-        "watermark": null
+        "text": "The Dance of the Sugar Plum Fairy.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 385, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Golden showers.", 
-        "watermark": null
+        "text": "The Devil Himself.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 386, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Wiping her butt.", 
-        "watermark": null
+        "text": "The Force.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 387, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Queefing.", 
-        "watermark": null
+        "text": "The Great Depression.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 388, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Getting drunk on mouthwash.", 
-        "watermark": null
+        "text": "The Hamburglar.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 389, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "An M. Night Shyamalan plot twist.", 
-        "watermark": null
+        "text": "The Holy Bible.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 390, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A robust mongoloid.", 
-        "watermark": null
+        "text": "The Hustle.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 391, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Nazis.", 
-        "watermark": null
+        "text": "The Jews.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 392, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "White privilege.", 
-        "watermark": null
+        "text": "The KKK", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 393, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "An erection that lasts longer than four hours.", 
-        "watermark": null
+        "text": "The Kool-Aid Man.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 394, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A disappointing birthday party.", 
-        "watermark": null
+        "text": "The Little Engine That Could.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 395, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Puberty.", 
-        "watermark": null
+        "text": "The Make-A-Wish\u00ae Foundation.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 396, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Two midgets shitting into a bucket.", 
-        "watermark": null
+        "text": "The Pope.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 397, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Wifely duties.", 
-        "watermark": null
+        "text": "The Rapture.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 398, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The forbidden fruit.", 
-        "watermark": null
+        "text": "The Rev. Dr. Martin Luther King, Jr.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 399, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Getting so angry that you pop a boner.", 
-        "watermark": null
+        "text": "The South.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 400, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Sexual tension.", 
-        "watermark": null
+        "text": "The Tempur-Pedic\u00ae Swedish Sleep System\u2122.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 401, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Third base.", 
-        "watermark": null
+        "text": "The Three-Fifths compromise.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 402, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A gassy antelope.", 
-        "watermark": null
+        "text": "The Trail of Tears", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 403, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Underground Railroad.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 404, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A Super Soaker&trade; full of cat pee.", 
-        "watermark": null
+        "text": "The Virginia Tech Massacre", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 405, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Muhammed (Praise Be Unto Him).", 
-        "watermark": null
+        "text": "The World of Warcraft.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 406, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Racially-biased SAT questions.", 
-        "watermark": null
+        "text": "The art of seduction.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 407, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Porn stars.", 
-        "watermark": null
+        "text": "The chronic.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 408, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A fetus.", 
-        "watermark": null
+        "text": "The clitoris.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 409, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Obesity.", 
-        "watermark": null
+        "text": "The entire Mormon Tabernacle Choir.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 410, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "When you fart and a little bit comes out.", 
-        "watermark": null
+        "text": "The female orgasm.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 411, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Oompa-Loompas.", 
-        "watermark": null
+        "text": "The folly of man.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 412, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "BATMAN!!!", 
-        "watermark": null
+        "text": "The gays.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 413, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Black people.", 
-        "watermark": null
+        "text": "The glass ceiling.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 414, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Tasteful sideboob.", 
-        "watermark": null
+        "text": "The hardworking Mexican.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 415, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Hot people.", 
-        "watermark": null
+        "text": "The heart of a child.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 416, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Grandma.", 
-        "watermark": null
+        "text": "The homosexual agenda.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 417, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Copping a feel.", 
-        "watermark": null
+        "text": "The inevitable heat death of the universe.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 418, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Trail of Tears.", 
-        "watermark": null
+        "text": "The invisible hand.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 419, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Famine.", 
-        "watermark": null
+        "text": "The light of a billion suns.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 420, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Finger painting.", 
-        "watermark": null
+        "text": "The milk man.", 
+        "watermark": "v1.4"
     }
 },
 {
@@ -3896,679 +4264,319 @@
     "model": "cards.whitecard", 
     "fields": {
         "text": "The miracle of childbirth.", 
-        "watermark": null
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 422, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Goats eating coins.", 
-        "watermark": null
+        "text": "The penny whistle solo from \"My Heart Will Go On\".", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 423, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A monkey smoking a cigar.", 
-        "watermark": null
+        "text": "The placenta.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 424, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The profoundly handicapped.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 425, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Parting the Red Sea.", 
-        "watermark": null
+        "text": "The taint; the grundle; the fleshy fun-bridge.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 426, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dead babies.", 
-        "watermark": null
+        "text": "The terrorists.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 427, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Amish.", 
-        "watermark": null
+        "text": "The token minority.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 428, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The true meaning of Christmas.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 429, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Child beauty pageants.", 
-        "watermark": null
+        "text": "The violation of our most basic human rights.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 430, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Centaurs.", 
-        "watermark": null
+        "text": "The \u00dcbermensch.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 431, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "AXE Body Spray.", 
-        "watermark": null
+        "text": "Third base.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 432, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Kanye West.", 
-        "watermark": null
+        "text": "Throwing a virgin into a volcano.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 433, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Women's suffrage.", 
-        "watermark": null
+        "text": "Tickling Sean Hannity, even after he tells you to stop.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 434, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Children on leashes.", 
-        "watermark": null
+        "text": "Tom Cruise.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 435, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Harry Potter erotica.", 
-        "watermark": null
+        "text": "Toni Morrison's vagina.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 436, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Dance of the Sugar Plum Fairy.", 
-        "watermark": null
+        "text": "Two midgets shitting into a bucket.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 437, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Lance Armstrong's missing testicle.", 
-        "watermark": null
+        "text": "Unfathomable stupidity.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 438, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dwarf tossing.", 
-        "watermark": null
+        "text": "Used panties.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 439, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Mathletes.", 
-        "watermark": null
+        "text": "Vehicular manslaughter.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 440, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Lunchables&trade;.", 
-        "watermark": null
+        "text": "Viagra\u00ae.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 441, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Women in yogurt commercials.", 
-        "watermark": null
+        "text": "Vigilante justice.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 442, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "John Wilkes Booth.", 
-        "watermark": null
+        "text": "Vigorous jazz hands.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 443, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Powerful thighs.", 
-        "watermark": null
+        "text": "Vikings.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 444, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Mr. Clean, right behind you.", 
-        "watermark": null
+        "text": "Waiting 'til marriage.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 445, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Multiple stab wounds.", 
-        "watermark": null
+        "text": "Waking up half-naked in a Denny's parking lot.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 446, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Cybernetic enhancements.", 
-        "watermark": null
+        "text": "Wearing underwear inside-out to avoid doing laundry.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 447, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Serfdom.", 
-        "watermark": null
+        "text": "Wet dreams.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 448, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Another goddamn vampire movie.", 
-        "watermark": null
+        "text": "When you fart and a little bit comes out.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 449, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Glenn Beck catching his scrotum on a curtain hook.", 
-        "watermark": null
+        "text": "Whipping it out.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 450, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A big hoopla about nothing.", 
-        "watermark": null
+        "text": "White people.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 451, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Peeing a little bit.", 
-        "watermark": null
+        "text": "White privilege.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 452, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Hustle.", 
-        "watermark": null
+        "text": "Wifely duties.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 453, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Ghosts.", 
-        "watermark": null
+        "text": "William Shatner.", 
+        "watermark": "v1.4"
+    }
+},
+{
+    "pk": 454, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Winking at old people.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 455, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Active listening.", 
-        "watermark": null
+        "text": "Wiping her butt.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 456, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Dry heaving.", 
-        "watermark": null
+        "text": "Women in yogurt commercials.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 457, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Kamikaze pilots.", 
-        "watermark": null
+        "text": "Women's suffrage.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 458, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Force.", 
-        "watermark": null
+        "text": "World peace.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 459, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "Anal beads.", 
-        "watermark": null
+        "text": "YOU MUST CONSTRUCT ADDITIONAL PYLONS.", 
+        "watermark": "v1.4"
     }
 },
 {
     "pk": 460, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "The Make-A-Wish&reg; Foundation.", 
-        "watermark": null
-    }
-},
-{
-    "pk": 461, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Flying sex snakes.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 462, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "MechaHitler.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 463, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Getting naked and watching Nickelodeon.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 464, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Charisma.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 465, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Morgan Freeman's voice.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 466, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Breaking out into song and dance.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 467, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Soup that is too hot.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 468, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Chutzpah.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 469, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Unfathomable stupidity.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 470, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Horrifying laser hair removal accidents.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 471, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Boogers.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 472, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "A Bop It&trade;.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 473, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Expecting a burp and vomiting on the floor.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 474, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "A defective condom.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 475, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Teenage pregnancy.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 476, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Hot cheese.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 477, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "A mopey zoo lion.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 478, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Shapeshifters.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 479, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "The Care Bear Stare.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 480, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Erectile dysfunction.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 481, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "The chronic.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 482, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Home video of Oprah sobbing into a Lean Cuisine&reg;.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 483, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "\"Tweeting.\"", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 484, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Firing a rifle into the air while balls deep in a squealing hog.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 485, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Nicolas Cage.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 486, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Euphoria&trade; by Calvin Klein.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 487, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Switching to Geico&reg;.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 488, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "A gentle caress of the inner thigh.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 489, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Poor life choices.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 490, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Embryonic stem cells.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 491, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Customer service representatives.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 492, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "The Little Engine That Could.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 493, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Lady Gaga.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 494, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "A death ray.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 495, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Vigilante justice.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 496, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Exactly what you'd expect.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 497, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Natural male enhancement.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 498, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Passive-aggressive Post-it notes.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 499, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Inappropriate yodeling.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 500, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "A homoerotic volleyball montage.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 501, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Actually taking candy from a baby.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 502, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Jibber-jabber.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 503, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Crystal meth.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 504, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "My inner demons.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 505, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "Pac-Man uncontrollably guzzling cum.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 506, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "My vagina.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 507, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "The Donald Trump Seal of Approval&trade;.", 
-        "watermark": "1.2"
-    }
-},
-{
-    "pk": 508, 
-    "model": "cards.whitecard", 
-    "fields": {
-        "text": "The true meaning of Christmas.", 
-        "watermark": "1.2"
+        "text": "Yeast.", 
+        "watermark": "v1.4"
     }
 }
 ]
