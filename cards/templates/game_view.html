@@ -32,6 +32,21 @@
         </br>
     {% endif %}
 
+    <p>
+        {% comment %}
+            <!-- NOTE There are some model/template magic string value dependencies here :-( -->
+        {% endcomment %}
+        {% if game.game_state == 'submission' %}
+            Waiting for players submit to white cards, {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.
+            {% comment %}
+                <!--  TODO dump card count, how many players are we waiting for? -->
+            {% endcomment %}
+        {% elif game.game_state == 'selection' %}
+            Waiting for card czar, <img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} to pick a winner.
+        {% endif %}
+    </p>
+
+
 <div id="submission-area"></div>
 
     {% if show_form %}
@@ -65,20 +80,6 @@
     {% endfor %}
     </ul>
     {% endif %}
-
-    <p>
-        {% comment %}
-            <!-- NOTE There are some model/template magic string value dependencies here :-( -->
-        {% endcomment %}
-        {% if game.game_state == 'submission' %}
-            Waiting for players submit to white cards, {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.
-            {% comment %}
-                <!--  TODO dump card count, how many players are we waiting for? -->
-            {% endcomment %}
-        {% elif game.game_state == 'selection' %}
-            Waiting for card czar, <img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} to pick a winner.
-        {% endif %}
-    </p>
 
     <p>Game ({{game.id}}): {{game.name}}.</p>
     
