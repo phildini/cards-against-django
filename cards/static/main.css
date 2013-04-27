@@ -27,3 +27,7 @@
 .refresh {
     float:right;
 }
+
+.fixed {
+    position: fixed;
+}
