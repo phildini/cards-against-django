@@ -32,6 +32,8 @@
     </p>
     </div>
 
+    <div id="submission-area"></div>
+
     {% if show_form %}
         <form action="{{ action }}" method="post">
             {% csrf_token %}
@@ -39,12 +41,29 @@
             <p class="text-error"><strong>{{field_err2}}</strong></p>
             {% endfor %}
             {% for field in form %}
-            {{field.label}}:
+            <div class="field">{{field.label}}:
                 {{field|safe}}
+            </div>
             </br>
             {% endfor %}
         <input type="submit" class="btn btn-primary" value="Submit" />
         </form>
+    {% endif %}
+    
+    
+    <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
+    
+    <p>game_state: {{game.game_state}}.</p>
+    
+    
+    {% if player_name %}
+    <h3>Your cards</h3>
+    <ul>
+    {% for tmp_text in white_cards_text_list %}
+        <li class="btn draggable">{{tmp_text|safe}}</li>
+        </br>
+    {% endfor %}
+    </ul>
     {% endif %}
 
     <p>
@@ -72,23 +91,6 @@
     You are an observer.
     {% endif %}
     </p>
-
-    
-    
-    <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
-    
-    <p>game_state: {{game.game_state}}.</p>
-    
-    
-    {% if player_name %}
-    <h3>Your cards</h3>
-    <ul>
-    {% for tmp_text in white_cards_text_list %}
-        <li class="btn draggable">{{tmp_text|safe}}</li>
-        </br>
-    {% endfor %}
-    </ul>
-    {% endif %}
 
     <h3>Current standings</h3>
 
