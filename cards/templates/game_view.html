@@ -6,6 +6,18 @@
     {% if is_card_czar %}
     <p>Dude! You are the card czar!</p>
     {% endif %}
+
+    <h3>Current card <a class="btn" href="">Manually refresh this page</a></h3>
+    <div class="btn btn-inverse">
+    <p class="text_left">
+        {% if filled_in_question %}
+            {{filled_in_question|safe}}
+        {% else %}
+            {{black_card|safe}}
+        {% endif %}
+    </p>
+    </div>
+
     {% if game.game_state == 'selection' %}
         <h3>Submitted cards</h3>
         {% comment %}
@@ -20,18 +32,7 @@
         </br>
     {% endif %}
 
-    <h3>Current card</h3>
-    <div class="btn btn-inverse">
-    <p class="text_left">
-        {% if filled_in_question %}
-            {{filled_in_question|safe}}
-        {% else %}
-            {{black_card|safe}}
-        {% endif %}
-    </p>
-    </div>
-
-    <div id="submission-area"></div>
+<div id="submission-area"></div>
 
     {% if show_form %}
         <form action="{{ action }}" method="post">
@@ -48,7 +49,7 @@
         <input type="submit" class="btn btn-primary" value="Submit" />
         </form>
     {% endif %}
-    
+    <br/>
     
     <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>
     
