@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var numFields = $('.field').length;
 
-    $('.field').hide();
+    $('.field li').addClass('choice');
 
     for (var i=0; i <numFields; i++) {
         var element = '<div ' + 'id=' + i + ' class="box droppable">This is a box</div>'

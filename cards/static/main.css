@@ -8,3 +8,11 @@
     border-radius: 15px;
     padding: 20px;
 }
+
+.choice {
+    background-color: #eee;
+    border-radius: 15px;
+    list-style-type: none;
+    padding: 5px;
+    margin-top: 5px;
+}
