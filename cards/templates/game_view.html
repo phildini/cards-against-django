@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="navbar navbar-inverse navbar-fixed-top fixed">
+    <div class="navbar-inner">
+        <div class="container">
+            <p class="brand">{{ black_card|safe }}</p>
+        </div>
+    </div>
+</div>
 <div class="container">
 
     {% if is_card_czar %}
@@ -47,7 +54,7 @@
     </p>
 
 
-<div id="submission-area"></div>
+    <div id="submission-area"></div>
 
     {% if show_form %}
         <form action="{{ action }}" method="post">
@@ -90,32 +97,14 @@
     {% endif %}
     </p>
 
-    <h3>Current standings</h3>
-
-    <table>
-        <tr>
-            <th>Player</th>
-            <th>Wins</th>
-        </tr>
-        
-        {% for player, player_details in game.gamedata.players.items %}
-        <tr>
-            <td>
-                {% comment %}
-                <!--  TODO  css for player name/card div/container. Also sort order (on wins then playername) needs to be added -->
-                {% endcomment %}
-                <img src="{{ player_details.player_avatar }}" alt="Player avatar"></br> {{ player }}
-            </td>
-            <td>
-                {{ player_details.wins }}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% include "stats.html" %}
     
     {% comment %}
     <!--  TODO previous winning cards (filled in) -->
     {% endcomment %}
+
+    <!--  for people who don't know about force refresh (F5 in most browsers) -->
+    <a class="btn" href="">Manually refresh this page</a>
 
 </div>
 {% endblock %}

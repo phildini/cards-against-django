@@ -9,7 +9,7 @@
     padding: 20px;
 }
 
-.choice {
+.field > ul > li {
     background-color: #eee;
     border-radius: 15px;
     list-style-type: none;
@@ -31,3 +31,15 @@
 .fixed {
     position: fixed;
 }
+
+body { 
+    padding-top: 80px;
+}
+
+@media (max-width: 979px){
+    .navbar .brand {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+
