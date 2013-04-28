@@ -178,7 +178,10 @@ class Game(TimeStampedModel):
         """NOTE this does not reset a game, it resets the cards on the table ready for the next round
         """
         white_submissions = self.gamedata['submissions']
-        self.gamedata['submissions'] = {}
+        if self.gamedata['filled_in_texts'] and winner:
+            for player_name, filled_in_text in self.gamedata['filled_in_texts']:
+                if winner == player_name:
+                    self.gamedata['prev_filled_in_question'] = filled_in_text
         self.gamedata['submissions'] = {}
         self.gamedata['card_czar'] = winner_id
         self.gamedata['round'] += 1
@@ -257,6 +260,7 @@ class Game(TimeStampedModel):
             'used_black_deck': [],
             'mode': 'submitting',
             'filled_in_texts': None,
+            'prev_filled_in_question': None,
         }
 
     # FIXME should be using a player object

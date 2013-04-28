@@ -78,7 +78,15 @@
         {% endif %}
     </p>
     
-    <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>    
+    <p>
+        <img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}
+        {% if game.gamedata.prev_filled_in_question %}
+            for the classic;
+            <div class="btn btn-inverse">
+                {{game.gamedata.prev_filled_in_question|safe}}
+            </div>
+        {% endif %}
+    </p>
     
     {% if player_name %}
     <h3>Your cards</h3>
