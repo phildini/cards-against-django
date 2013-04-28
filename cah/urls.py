@@ -12,6 +12,7 @@ from cards.views import (
     GameView,
     LobbyView,
     GameJoinView,
+    GameExitView,
     debug_deactivate_old_games,
 )
 
@@ -27,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
     url(r'^game/(?P<pk>\d+)/$', GameView.as_view(), name="game-view"),
     url(r'^game/(?P<pk>\d+)/join$', GameJoinView.as_view(), name="game-join-view"),
+    url(r'^game/(?P<pk>\d+)/exit$', GameExitView.as_view(), name="game-exit-view"),
     url(r'^super_secret_thing$', debug_deactivate_old_games),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -102,3 +102,10 @@ class JoinForm(forms.Form):
             raise ValidationError("Player needs a non empty name.")
         # TODO check to make sure we don't have a dupe username in the game
         return self.cleaned_data
+
+class ExitForm(forms.Form):
+    really_exit = forms.ChoiceField(
+                widget=RadioSelect,
+                required=True,
+                choices=[('yes', 'yes'), ('no', 'no')],
+            )

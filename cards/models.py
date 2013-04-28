@@ -147,7 +147,9 @@ class Game(TimeStampedModel):
         self.gamedata['submissions'][player_id] = white_card_list
         for card in white_card_list:
             self.gamedata['players'][player_id]['hand'].remove(card)
-        
+        self.check_have_needed_white_cards()
+    
+    def check_have_needed_white_cards(self):
         if len(self.gamedata['submissions']) == len(self.gamedata['players']) - 1:
             # this was the last player to submit, now we are waiting on the card czar to pick a winner
             self.game_state = GAMESTATE_SELECTION
@@ -288,6 +290,31 @@ class Game(TimeStampedModel):
             # TODO if no czar make this player the card czar?
         # else do nothing, they are already in the game do NOT raise any errors
 
+    def del_player(self, player_name):
+        log.logger.debug(player_name)
+        log.logger.debug(self.gamedata)
+        if player_name in self.gamedata['players']:
+            player = self.gamedata['players'][player_name]
+            log.logger.debug('player %r', player)
+            for tmp_card in player['hand']:
+                self.gamedata['white_deck'].append(tmp_card)
+            # cardczar cleanup
+            del self.gamedata['players'][player_name]
+            if self.gamedata['card_czar'] == player_name:
+                if self.gamedata['players']:
+                    self.gamedata['card_czar'] = list(self.gamedata['players'].keys())[0]
+                else:
+                    self.gamedata['card_czar'] = ''
+            
+            # submissions cleanup
+            if player_name in self.gamedata['submissions']:
+                # remove and check if gamestate needs to change?
+                for tmp_card in player['hand']:
+                    self.gamedata['white_deck'].append(tmp_card)
+            self.check_have_needed_white_cards()
+            
+            # last_round_winner cleanup -- FIXME I'm not sure this is used/needed, remove from model/template? appears to only be used in old player template which should also be removed
+            ### unset session name?? probably not a good idea
 
 def game_pre_save(sender, **kwargs):
     game = kwargs['instance']

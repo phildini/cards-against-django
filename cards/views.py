@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.core.cache import cache
 
-from forms import PlayerForm, LobbyForm, JoinForm
+from forms import PlayerForm, LobbyForm, JoinForm, ExitForm
 from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
 
 import log
@@ -224,6 +224,57 @@ class GameView(FormView):
         return result
 
 
+class GameExitView(FormView):
+    template_name = 'game_exit.html'
+    form_class = ExitForm
+
+    def dispatch(self, request, *args, **kwargs):
+        log.logger.debug('%r %r', args, kwargs)
+        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this will fail on non existent game
+        request = self.request
+
+        self.request = request
+        self.game = game
+
+        player_name = None
+
+        if request.user.is_authenticated():
+            player_name = request.user.username
+            player_image_url = avatar_url(request.user.email)
+        else:
+            # Assume AnonymousUser
+            # also assume the set a name earlier....
+            session_details = request.session.get('session_details', {})
+            if session_details:
+                player_name = session_details.get('name')
+
+        if player_name:
+            if player_name in game.gamedata['players']:
+                self.player_name = player_name
+                return super(GameExitView, self).dispatch(request, *args, **kwargs)
+        return redirect(reverse('game-view', kwargs={'pk': game.id}))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(GameExitView, self).get_context_data(*args, **kwargs)
+        context['show_form'] = True
+        return context
+
+    def get_success_url(self):
+        return reverse('game-view', kwargs={'pk': self.game.id})
+
+    def form_valid(self, form):
+        game = self.game
+        player_name = self.player_name
+        really_exit = form.cleaned_data['really_exit']
+        log.logger.debug('view really_exit %r', really_exit)
+        
+        if really_exit == 'yes':  # FIXME use bool via coerce?
+            game.del_player(player_name)
+            game.save()
+        return super(GameExitView, self).form_valid(form)
+        
+        
+
 class GameJoinView(FormView):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.
@@ -240,7 +291,7 @@ class GameJoinView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
-        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this wil fail to non existent game
+        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this will fail on non existent game
         request = self.request
 
         self.request = request
