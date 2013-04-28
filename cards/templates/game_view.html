@@ -4,18 +4,19 @@
 <div class="navbar navbar-inverse navbar-fixed-top fixed">
     <div class="navbar-inner">
         <div class="container">
-            <p class="brand">{{ black_card|safe }}</p>
+            <p class="brand">
+                {% if filled_in_question %}
+                    {{filled_in_question|safe}}
+                {% else %}
+                    {{black_card|safe}}
+                {% endif %}
+            <a class="btn" href="">Refresh</a>
+            </p>
         </div>
     </div>
 </div>
 <div class="container">
-
-    {% if is_card_czar %}
-    <p>Dude! You are the card czar!</p>
-    {% endif %}
-
-    <h3>Current card </h3> <a class="btn refresh" href="">Manually refresh this page</a>
-    <div class="btn btn-inverse">
+    <!-- <div class="btn btn-inverse">
     <p class="text_left">
         {% if filled_in_question %}
             {{filled_in_question|safe}}
@@ -23,7 +24,31 @@
             {{black_card|safe}}
         {% endif %}
     </p>
-    </div>
+    </div> -->
+
+
+    <div id="submission-area"></div>
+
+    {% if show_form %}
+        <form action="{{ action }}" method="post">
+            {% csrf_token %}
+            {% for field_err1, field_err2  in form.errors.items %}
+            <p class="text-error"><strong>{{field_err2}}</strong></p>
+            {% endfor %}
+            {% for field in form %}
+            <div class="field">
+                {% if is_card_czar %}
+                    Select the winner:
+                {% else %}
+                    {{field.label}}:
+                {% endif %}
+                {{field|safe}}
+            </div>
+            </br>
+            {% endfor %}
+        <input type="submit" class="btn btn-primary" value="Submit" />
+        </form>
+    {% endif %}
 
     {% if game.game_state == 'selection' %}
         <h3>Submitted cards</h3>
@@ -52,26 +77,6 @@
             Waiting for card czar, <img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} to pick a winner.
         {% endif %}
     </p>
-
-
-    <div id="submission-area"></div>
-
-    {% if show_form %}
-        <form action="{{ action }}" method="post">
-            {% csrf_token %}
-            {% for field_err1, field_err2  in form.errors.items %}
-            <p class="text-error"><strong>{{field_err2}}</strong></p>
-            {% endfor %}
-            {% for field in form %}
-            <div class="field">{{field.label}}:
-                {{field|safe}}
-            </div>
-            </br>
-            {% endfor %}
-        <input type="submit" class="btn btn-primary" value="Submit" />
-        </form>
-    {% endif %}
-    <br/>
     
     <p><img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}</p>    
     

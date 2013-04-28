@@ -33,13 +33,22 @@
 }
 
 body { 
-    padding-top: 80px;
+    padding-top: 100px;
+}
+
+.inline-info {
+    font-size: 14px;
+    line-height: 20px;
 }
 
 @media (max-width: 979px){
     .navbar .brand {
         padding-left: 25px;
         padding-right: 25px;
+    }
+
+    body { 
+    padding-top: 100px;
     }
 }
 
