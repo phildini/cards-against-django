@@ -150,20 +150,26 @@ class Game(TimeStampedModel):
         self.check_have_needed_white_cards()
     
     def check_have_needed_white_cards(self):
-        if len(self.gamedata['submissions']) == len(self.gamedata['players']) - 1:
-            # this was the last player to submit, now we are waiting on the card czar to pick a winner
-            self.game_state = GAMESTATE_SELECTION
+        if self.gamedata['submissions']:
+            if len(self.gamedata['submissions']) == len(self.gamedata['players']) - 1:
+                # this was the last player to submit, now we are waiting on the card czar to pick a winner
+                self.game_state = GAMESTATE_SELECTION
+                
+                # fill in black card blanks.... and cache in gamedata
+                black_card_id = self.gamedata['current_black_card']
+                temp_black_card = BlackCard.objects.get(id=black_card_id)
+                filled_in_texts = []
+                for player_name in self.gamedata['submissions']:
+                    white_card_list = self.gamedata['submissions'][player_name]
+                    tmp_text = temp_black_card.replace_blanks(white_card_list)
+                    filled_in_texts.append((player_name, tmp_text))
+                random.shuffle(filled_in_texts)
+                self.gamedata['filled_in_texts'] = filled_in_texts  # FIXME rename this
+        else:
+            if self.game_state == GAMESTATE_SELECTION:
+                self.game_state = GAMESTATE_SUBMISSION
+                self.gamedata['filled_in_texts'] = []
             
-            # fill in black card blanks.... and cache in gamedata
-            black_card_id = self.gamedata['current_black_card']
-            temp_black_card = BlackCard.objects.get(id=black_card_id)
-            filled_in_texts = []
-            for player_name in self.gamedata['submissions']:
-                white_card_list = self.gamedata['submissions'][player_name]
-                tmp_text = temp_black_card.replace_blanks(white_card_list)
-                filled_in_texts.append((player_name, tmp_text))
-            random.shuffle(filled_in_texts)
-            self.gamedata['filled_in_texts'] = filled_in_texts  # FIXME rename this
     
     def deal_white_card(self):
         if len(self.gamedata['white_deck']) == 0:
@@ -297,7 +303,7 @@ class Game(TimeStampedModel):
             player = self.gamedata['players'][player_name]
             log.logger.debug('player %r', player)
             for tmp_card in player['hand']:
-                self.gamedata['white_deck'].append(tmp_card)
+                self.gamedata['white_deck'].insert(0, tmp_card)
             # cardczar cleanup
             del self.gamedata['players'][player_name]
             if self.gamedata['card_czar'] == player_name:
@@ -309,8 +315,9 @@ class Game(TimeStampedModel):
             # submissions cleanup
             if player_name in self.gamedata['submissions']:
                 # remove and check if gamestate needs to change?
-                for tmp_card in player['hand']:
-                    self.gamedata['white_deck'].append(tmp_card)
+                for tmp_card in self.gamedata['submissions'][player_name]:
+                    self.gamedata['white_deck'].insert(0, tmp_card)
+                del self.gamedata['submissions'][player_name]
             self.check_have_needed_white_cards()
             
             # last_round_winner cleanup -- FIXME I'm not sure this is used/needed, remove from model/template? appears to only be used in old player template which should also be removed
