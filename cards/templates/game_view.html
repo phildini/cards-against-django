@@ -69,7 +69,7 @@
             <!-- NOTE There are some model/template magic string value dependencies here :-( -->
         {% endcomment %}
         {% if game.game_state == 'submission' %}
-            Waiting for players submit to white cards, {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.
+            Waiting for players to submit white cards, {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.
             {% comment %}
                 <!--  TODO dump card count, how many players are we waiting for? -->
             {% endcomment %}
