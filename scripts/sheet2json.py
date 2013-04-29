@@ -7,6 +7,12 @@
     http://boardgamegeek.com/thread/947849/hopefully-more-than-complete-listing-of-all-offici
 
     https://docs.google.com/spreadsheet/ccc?key=0Ajv9fdKngBJ_dHFvZjBzZDBjTE16T3JwNC0tRlp6Wnc#gid=10
+    
+    https://docs.google.com/spreadsheet/ccc?key=0Ajv9fdKngBJ_dHFvZjBzZDBjTE16T3JwNC0tRlp6Wnc&output=xls
+    
+        mkdir data
+        cd data
+        wget 'https://docs.google.com/spreadsheet/ccc?key=0Ajv9fdKngBJ_dHFvZjBzZDBjTE16T3JwNC0tRlp6Wnc&output=xls' '--output-document=Cards Against Humanity versions.xlsx'
 
 into db
 """
@@ -17,6 +23,7 @@ import sqlite3
 
 import xls2db  # from https://github.com/clach04/xls2db/
 
+from card_fixturegen import DJANGO_CARDS_DATA_DIR
 
 # json support, TODO consider http://pypi.python.org/pypi/omnijson
 try:
@@ -125,7 +132,7 @@ def doit():
     db.commit()
     db.close()
     
-    filename = os.path.join(data_dir, 'data.json')
+    filename = os.path.join(DJANGO_CARDS_DATA_DIR, 'initial_data.json')
     print 'writing %s' % filename
     data = dump_json(all_cards, indent=4)
     # now "fix" indentation to match Djago fixture formatting

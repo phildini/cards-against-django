@@ -1127,7 +1127,7 @@
     "pk": 29, 
     "model": "cards.whitecard", 
     "fields": {
-        "text": "A micropig waring a tiny raincoat and booties.", 
+        "text": "A micropig wearing a tiny raincoat and booties.", 
         "watermark": "v1.4"
     }
 },
