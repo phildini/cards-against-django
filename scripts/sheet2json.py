@@ -20,6 +20,7 @@ into db
 import os
 import sys
 import sqlite3
+import urllib2
 
 import xls2db  # from https://github.com/clach04/xls2db/
 import xlrd
@@ -63,14 +64,31 @@ DEFAULT_BLANK_MARKER = u"\uFFFD"  # u'_'
 
 data_dir = os.path.join(os.path.dirname(__file__), 'data')
 
+
+class MyHTTPRedirectHandler(urllib2.HTTPRedirectHandler):
+    def http_error_302(self, req, fp, code, msg, headers):
+        print "302 redirecting...."
+        return urllib2.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
+
+    http_error_301 = http_error_303 = http_error_307 = http_error_302
+
+def wget(url):
+    print 'opening %s' % url
+    cookieprocessor = urllib2.HTTPCookieProcessor()
+    opener = urllib2.build_opener(MyHTTPRedirectHandler, cookieprocessor)
+    urllib2.install_opener(opener)
+    response = urllib2.urlopen(url)
+    result = response.read()
+    response.close()
+    return result
+
+
 def x2db():
     
     db.commit()
     db.close()
 
 def doit():
-    xls_filename = 'Cards Against Humanity versions.xlsx'
-    xls_filename = os.path.join(data_dir, xls_filename)
     column_name_start_row = 2  # NOTE 0 is the first line (so row number in sheet - 1)
     data_start_row = 4  # NOTE 0 is the first line (so row number in sheet - 1)
     dbname = ':memory:'
@@ -80,9 +98,7 @@ def doit():
     
     do_drop = True
 
-    xf = open(xls_filename, 'rb')
-    xfdata = xf.read()
-    xf.close()
+    xfdata = wget('https://docs.google.com/spreadsheet/ccc?key=0Ajv9fdKngBJ_dHFvZjBzZDBjTE16T3JwNC0tRlp6Wnc&output=xls')
     xf = xlrd.open_workbook(file_contents=xfdata)
     xls2db.xls2db(xf, db, column_name_start_row=column_name_start_row, data_start_row=data_start_row, do_drop=do_drop)
 
