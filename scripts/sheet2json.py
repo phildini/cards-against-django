@@ -22,6 +22,7 @@ import sys
 import sqlite3
 
 import xls2db  # from https://github.com/clach04/xls2db/
+import xlrd
 
 from card_fixturegen import DJANGO_CARDS_DATA_DIR
 
@@ -79,7 +80,8 @@ def doit():
     
     do_drop = True
 
-    xls2db.xls2db(xls_filename, db, column_name_start_row=column_name_start_row, data_start_row=data_start_row, do_drop=do_drop)
+    xf = xlrd.open_workbook(xls_filename)
+    xls2db.xls2db(xf, db, column_name_start_row=column_name_start_row, data_start_row=data_start_row, do_drop=do_drop)
 
     c = db.cursor()
     
