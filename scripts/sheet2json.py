@@ -80,7 +80,10 @@ def doit():
     
     do_drop = True
 
-    xf = xlrd.open_workbook(xls_filename)
+    xf = open(xls_filename, 'rb')
+    xfdata = xf.read()
+    xf.close()
+    xf = xlrd.open_workbook(file_contents=xfdata)
     xls2db.xls2db(xf, db, column_name_start_row=column_name_start_row, data_start_row=data_start_row, do_drop=do_drop)
 
     c = db.cursor()
