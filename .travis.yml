@@ -1,6 +1,7 @@
 language: python
 python:
  - "2.7"
+script: "exit 0"
 notifications:
     email:
         - pjj@philipjohnjames.com
