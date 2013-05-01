@@ -101,7 +101,7 @@ class Game(TimeStampedModel):
         else:
             is_active = '<font color="red">DEAD</font>'
         modified_str = self.modified.strftime('%Y-%m-%d %H:%M')
-        return mark_safe('%s %s - %s (%d players)' % (is_active, modified_str, self.name, len(self.gamedata['players'])))
+        return mark_safe('%s %s - %s' % (is_active, modified_str, self.name))
     
     @classmethod
     def deactivate_old_games(cls, older_than=None):
