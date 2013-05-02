@@ -124,3 +124,15 @@
 
 </div>
 {% endblock %}
+
+{% block scripts %}
+    {% if not show_form %}
+    <script type="text/javascript">
+        var pusher = new Pusher('{{ pusher_key }}');
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            location.reload(true);
+        });
+    </script>
+    {% endif %}
+{% endblock %}

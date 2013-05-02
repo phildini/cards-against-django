@@ -6,12 +6,13 @@ from django.utils.safestring import mark_safe
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
-from django.core.cache import cache
+from django.conf import settings
 
 from forms import PlayerForm, LobbyForm, JoinForm, ExitForm
 from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
 
 import log
+import pusher
 
 
 class LobbyView(FormView):
@@ -155,6 +156,8 @@ class GameView(FormView):
         if player_name:
             context['player_avatar'] = game.gamedata['players'][player_name]['player_avatar']
 
+        context['pusher_key'] = settings.PUSHER_KEY
+
         return context
 
     def get_success_url(self):
@@ -182,6 +185,12 @@ class GameView(FormView):
                 log.logger.debug('filled_in_texts %r', game.gamedata['filled_in_texts'])
             log.logger.debug('%r', form.cleaned_data['card_selection'])
         game.save()
+        instance = pusher.Pusher(
+            app_id=settings.PUSHER_APP_ID,
+            key=settings.PUSHER_KEY,
+            secret=settings.PUSHER_SECRET
+        )
+        instance['my-channel'].trigger('my-event', {'message': 'hello world'})
         return super(GameView, self).form_valid(form)
 
     def get_form_kwargs(self):

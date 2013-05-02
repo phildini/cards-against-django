@@ -50,6 +50,10 @@ DATABASES = {
     }
 }
 
+PUSHER_APP_ID = get_env_variable("PUSHER_APP_ID")
+PUSHER_KEY = get_env_variable("PUSHER_KEY")
+PUSHER_SECRET = get_env_variable("PUSHER_SECRET")
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
