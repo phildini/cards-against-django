@@ -399,3 +399,19 @@ class WhiteCard(models.Model):
 
     def __unicode__(self):
         return self.text
+
+
+class CardSet(models.Model):
+    """
+        class Card_Set(models.Model):  # Using underscore ensures "card_set_id" column name is used
+    """
+    active = models.BooleanField(default=True)
+    name = models.CharField(max_length=255, unique=True)
+    base_deck = models.BooleanField(default=True)
+    description = models.CharField(max_length=255)
+    weight = models.SmallIntegerField(default=0)
+    black_card = models.ManyToManyField(BlackCard, db_table='card_set_black_card')
+    white_card = models.ManyToManyField(WhiteCard, db_table='card_set_white_card')
+
+    class Meta:
+        db_table = 'card_set'
