@@ -415,3 +415,6 @@ class CardSet(models.Model):
 
     class Meta:
         db_table = 'card_set'
+
+    def __unicode__(self):
+        return self.name
