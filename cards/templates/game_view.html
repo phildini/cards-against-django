@@ -126,7 +126,7 @@
 {% endblock %}
 
 {% block scripts %}
-    {% if not show_form %}
+    {% if not show_form and use_pusher %}
     <script type="text/javascript">
         var pusher = new Pusher('{{ pusher_key }}');
         var channel = pusher.subscribe('my-channel');

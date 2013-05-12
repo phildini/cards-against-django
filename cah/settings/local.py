@@ -35,6 +35,8 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ()
 
+USE_PUSHER = False
+
 ############
 SITE_ROOT = '/tmp'  # FIXME loation for log file(s)
 

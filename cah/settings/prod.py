@@ -13,6 +13,11 @@ ALLOWED_HOSTS = ['.thisisnotthatgame.com','.herokuapp.com', 'localhost', '127.0.
 
 STATIC_URL = 'http://philipjohnjames.com/applesanon/static/'
 
+USE_PUSHER = True
+PUSHER_APP_ID = get_env_variable("PUSHER_APP_ID")
+PUSHER_KEY = get_env_variable("PUSHER_KEY")
+PUSHER_SECRET = get_env_variable("PUSHER_SECRET")
+
 INSTALLED_APPS += (
     'gunicorn',
 )

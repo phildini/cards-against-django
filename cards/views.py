@@ -146,7 +146,7 @@ class GameView(FormView):
             if game.gamedata['submissions'] and not is_card_czar:
                 player_submission = game.gamedata['submissions'].get(player_name)
                 if player_submission:
-                    context['filled_in_question'] = black_card.replace_blanks(player_submission) 
+                    context['filled_in_question'] = black_card.replace_blanks(player_submission)
 
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
@@ -155,8 +155,10 @@ class GameView(FormView):
         context['player_name'] = player_name
         if player_name:
             context['player_avatar'] = game.gamedata['players'][player_name]['player_avatar']
+        if settings.USE_PUSHER:
+            context['pusher_key'] = settings.PUSHER_KEY
 
-        context['pusher_key'] = settings.PUSHER_KEY
+        context['use_pusher'] = settings.USE_PUSHER
 
         return context
 
@@ -185,12 +187,14 @@ class GameView(FormView):
                 log.logger.debug('filled_in_texts %r', game.gamedata['filled_in_texts'])
             log.logger.debug('%r', form.cleaned_data['card_selection'])
         game.save()
-        instance = pusher.Pusher(
-            app_id=settings.PUSHER_APP_ID,
-            key=settings.PUSHER_KEY,
-            secret=settings.PUSHER_SECRET
-        )
-        instance['my-channel'].trigger('my-event', {'message': 'hello world'})
+
+        if settings.USE_PUSHER:
+            instance = pusher.Pusher(
+                app_id=settings.PUSHER_APP_ID,
+                key=settings.PUSHER_KEY,
+                secret=settings.PUSHER_SECRET
+            )
+            instance['my-channel'].trigger('my-event', {'message': 'hello world'})
         return super(GameView, self).form_valid(form)
 
     def get_form_kwargs(self):
