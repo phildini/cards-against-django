@@ -239,8 +239,8 @@ class Game(TimeStampedModel):
                 self.gamedata['used_white_deck'].append(x)
 
 
-    def create_game(self, card_set_names=None):
-        """Where `card_set_names` is an iterable of card set names"""
+    def create_game(self, card_sets=None):
+        """Where `card_sets` is an iterable collection of CardSet"""
         
         log.logger.debug("New Game called")
         """Create shuffled decks
@@ -251,13 +251,13 @@ class Game(TimeStampedModel):
         Also take a look at http://code.google.com/p/gcge/
         """
         
-        card_set_names = card_set_names or ('Second Version',)  # default card deck
+        card_sets = card_sets or CardSet.objects.get(name='Second Version')  # default card deck
         # TODO add cardset(s) used to Games model?
 
         shuffled_white = []
         shuffled_black = []
         
-        for card_set_name in card_set_names:
+        for card_set_name in card_sets:
             card_pack = CardSet.objects.get(name=card_set_name)
             shuffled_white += [x[0] for x in card_pack.white_card.values_list('id')]
             shuffled_black += [x[0] for x in card_pack.black_card.values_list('id')]

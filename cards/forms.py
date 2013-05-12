@@ -11,6 +11,7 @@ from django.forms.widgets import (
 from django.core.exceptions import ValidationError
 from django.core.cache import cache  # this maybe a bad idea
 
+from models import CardSet
 import log
 
 
@@ -62,6 +63,7 @@ class LobbyForm(forms.Form):
     """
 
     new_game = forms.CharField(max_length=140, required=False)
+    card_set = forms.ModelMultipleChoiceField(queryset=CardSet.objects.all())
 
     def __init__(self, *args, **kwargs):
         try:
@@ -80,6 +82,7 @@ class LobbyForm(forms.Form):
             raise ValidationError("Create a game needs a non empty name.")
         if new_game in self.game_list:
             raise ValidationError("You can't create a game with the same name as an existing one. Them's the rules.")
+        #card_set = self.cleaned_data.get('card_set')  # check for non-empty cardsets?
         return self.cleaned_data
 
 
