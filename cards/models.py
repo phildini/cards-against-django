@@ -434,4 +434,4 @@ class CardSet(models.Model):
         db_table = 'card_set'
 
     def __unicode__(self):
-        return self.name
+        return mark_safe(self.name)
