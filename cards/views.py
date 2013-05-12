@@ -12,7 +12,8 @@ from forms import PlayerForm, LobbyForm, JoinForm, ExitForm
 from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
 
 import log
-import pusher
+if settings.USE_PUSHER:
+    import pusher
 
 
 class LobbyView(FormView):
