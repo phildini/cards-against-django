@@ -103,11 +103,27 @@ class Game(TimeStampedModel):
         modified_str = self.modified.strftime('%Y-%m-%d %H:%M')
         return mark_safe('%s %s - %s' % (is_active, modified_str, self.name))
     
+    def deactivate_old_game(self, older_than=None):
+        """Check if game should be deactived due to time out, using
+        `older_than` datetime to compare against, if not specified
+        "now - 2 hours" is used.
+        
+        Returns True if the game was timed out and updated.
+        """
+        if self.is_active:
+            now = datetime.datetime.now()
+            older_than = older_than or (now - (ONE_HOUR * 2))  # TODO use a global value for game timeout
+            if self.modified <= older_than:
+                self.is_active = False
+                #self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not needed if game_pre_save() is used
+                self.name = 'TIMEDOUT - %s' % (self.name,)
+                return True
+    
     @classmethod
     def deactivate_old_games(cls, older_than=None):
         """`older_than` datetime to compare against, if not specified now - 2 hours is used.
         """
-        older_than = older_than or (datetime.datetime.now() - (ONE_HOUR * 2))
+        older_than = older_than or (datetime.datetime.now() - (ONE_HOUR * 2))  # TODO use a global value for game timeout
         """NOTE for update below Django appears to have a bug with sqlite3,
         it generates bad SQL with the wrong string concat operator, e.g.:
         

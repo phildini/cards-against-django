@@ -88,6 +88,8 @@ class GameView(FormView):
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
         game = Game.objects.get(pk=kwargs['pk'])
+        if game.deactivate_old_game():
+            game.save()
 
         player_name = None
         session_details = self.request.session.get('session_details')
