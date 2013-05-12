@@ -239,7 +239,9 @@ class Game(TimeStampedModel):
                 self.gamedata['used_white_deck'].append(x)
 
 
-    def create_game(self):
+    def create_game(self, card_set_names=None):
+        """Where `card_set_names` is an iterable of card set names"""
+        
         log.logger.debug("New Game called")
         """Create shuffled decks
         uses built in random, it may be better to plug-in a better
@@ -248,12 +250,24 @@ class Game(TimeStampedModel):
 
         Also take a look at http://code.google.com/p/gcge/
         """
-        card_set_name = 'v1.4'  # hard coded for now
-        card_set_name = 'Second Version'  # hard coded for now
-        card_pack = CardSet.objects.get(name=card_set_name)
-        shuffled_white = [x[0] for x in card_pack.white_card.values_list('id')]
+        
+        card_set_names = card_set_names or ('Second Version',)  # default card deck
+        # TODO add cardset(s) used to Games model?
+
+        shuffled_white = []
+        shuffled_black = []
+        
+        for card_set_name in card_set_names:
+            card_pack = CardSet.objects.get(name=card_set_name)
+            shuffled_white += [x[0] for x in card_pack.white_card.values_list('id')]
+            shuffled_black += [x[0] for x in card_pack.black_card.values_list('id')]
+        
+        # Now remove dupes.. if this was via a direct SQL would simple SELECT DISTINCT..... WHERE .. cardset_name in ()....
+        # TODO check if ORM query look for multiple entries and remove dupes from ManyToMany
+        shuffled_white = list(set(shuffled_white))
+        shuffled_black = list(set(shuffled_black))
+        
         random.shuffle(shuffled_white)
-        shuffled_black = [x[0] for x in card_pack.black_card.values_list('id')]
         random.shuffle(shuffled_black)
 
         self.game_state = GAMESTATE_SUBMISSION  # FIXME remove this and make calls to start_new_round()
