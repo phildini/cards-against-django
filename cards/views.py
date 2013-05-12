@@ -62,7 +62,7 @@ class LobbyView(FormView):
             if not existing_game:
                 # really a new game
                 tmp_game = Game(name=form.cleaned_data['new_game'])
-                new_game = tmp_game.create_game()
+                new_game = tmp_game.create_game(form.cleaned_data['card_set'])
                 tmp_game.gamedata = new_game
                 tmp_game.save()
                 self.game = tmp_game
