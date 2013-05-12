@@ -249,6 +249,7 @@ class Game(TimeStampedModel):
         Also take a look at http://code.google.com/p/gcge/
         """
         card_set_name = 'v1.4'  # hard coded for now
+        card_set_name = 'Second Version'  # hard coded for now
         card_pack = CardSet.objects.get(name=card_set_name)
         shuffled_white = [x[0] for x in card_pack.white_card.values_list('id')]
         random.shuffle(shuffled_white)
