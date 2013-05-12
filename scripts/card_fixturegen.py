@@ -165,6 +165,15 @@ def sql2data(filename, safe_fail=True, restrict_deck=None, json_style='django', 
     db = sqlite3.connect(dbname)
     c = db.cursor()
     
+    """Ideal would be to alter table to rename column after data loading, but sqlite3 does not support renames of columns
+    Simply change the DDL and modify the DML too.
+    
+        cardset_id -> cardset_id
+        blackcard_id -> blackcard_id
+        whitecard_id -> whitecard_id
+
+    """
+    
     all_ddl = """CREATE TABLE black_cards (
     id integer NOT NULL,
     text character varying(255) NOT NULL,
@@ -180,13 +189,15 @@ def sql2data(filename, safe_fail=True, restrict_deck=None, json_style='django', 
 );
 
 CREATE TABLE card_set_black_card (
-    card_set_id integer NOT NULL,
-    black_card_id integer NOT NULL
+"id" integer NOT NULL PRIMARY KEY,
+    cardset_id integer NOT NULL,
+    blackcard_id integer NOT NULL
 );
 
 CREATE TABLE card_set_white_card (
-    card_set_id integer NOT NULL,
-    white_card_id integer NOT NULL
+"id" integer NOT NULL PRIMARY KEY,
+    cardset_id integer NOT NULL,
+    whitecard_id integer NOT NULL
 );
 
 CREATE TABLE card_set (
@@ -214,6 +225,10 @@ CREATE TABLE card_set (
             line = line.strip()
             line_type = 'WHITE'
         elif line.startswith('INSERT INTO card_set_black_card VALUES (') or line.startswith('INSERT INTO card_set_white_card VALUES ('):
+            if line.startswith('INSERT INTO card_set_black_card VALUES ('):
+                line = line.replace('INSERT INTO card_set_black_card VALUES (', 'INSERT INTO card_set_black_card (cardset_id, blackcard_id) VALUES (')
+            elif line.startswith('INSERT INTO card_set_white_card VALUES ('):
+                line = line.replace('INSERT INTO card_set_white_card VALUES (', 'INSERT INTO card_set_white_card (cardset_id, whitecard_id) VALUES (')
             c.execute(line)
         elif line.startswith('INSERT INTO card_set VALUES ('):
             line = line.strip()
@@ -239,17 +254,18 @@ CREATE TABLE card_set (
     simple_select(c, 'select count(*) from card_set_white_card')
     
     # remove cards not in a set (likely to be test cards)
-    c.execute('delete from black_cards where id not in (select black_card_id from card_set_black_card)')
-    c.execute('delete from white_cards where id not in (select white_card_id from card_set_white_card)')
+    c.execute('delete from black_cards where id not in (select blackcard_id from card_set_black_card)')
+    c.execute('delete from white_cards where id not in (select whitecard_id from card_set_white_card)')
     
     restrict_deck = True
+    restrict_deck = False
     if restrict_deck:
         print '  ** Restricting card deck **'
         print ''
         # only use 2nd edition cards
         single_card_set_to_use = 'Second Version'
-        c.execute('delete from black_cards where id not in (select black_card_id from card_set_black_card, card_set where card_set_id = id and name = ?)', (single_card_set_to_use,))
-        c.execute('delete from white_cards where id not in (select white_card_id from card_set_white_card, card_set where card_set_id = id and name = ?)', (single_card_set_to_use,))
+        c.execute('delete from black_cards where id not in (select blackcard_id from card_set_black_card, card_set where cardset_id = id and name = ?)', (single_card_set_to_use,))
+        c.execute('delete from white_cards where id not in (select whitecard_id from card_set_white_card, card_set where cardset_id = id and name = ?)', (single_card_set_to_use,))
     
     simple_select(c, 'select count(*) from black_cards')
     simple_select(c, 'select count(*) from white_cards')
@@ -258,6 +274,8 @@ CREATE TABLE card_set (
     c.close()
     db.commit()
     db.close()
+    
+    return  # bail and and forget json for now :-)
     
     if json_style == 'django':
         filename = os.path.join(DJANGO_CARDS_DATA_DIR, 'initial_data.json')
@@ -297,8 +315,8 @@ def main(argv=None):
         sql_filename = 'cah_cards.sql'  # https://raw.github.com/ajanata/PretendYoureXyzzy/master/cah_cards.sql
         filename = os.path.join(DATA_DIR, sql_filename)
     
-    sql2data(filename)
-    #sql2data(filename, dbname='cards.sqlite3')
+    #sql2data(filename)
+    sql2data(filename, dbname='cards.sqlite3')
     
     return 0
 
