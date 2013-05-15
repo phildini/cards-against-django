@@ -56,56 +56,56 @@ def doit():
     WhiteCard.objects.all().delete()
     CardSet.objects.all().delete()
     
-    card_ver = 'v1.4'
-    
-    cardset = CardSet(name=card_ver, description=card_ver)
-    cardset.save()
-    
-    dumb_restrict = """ where "%s" is not NULL and "%s" <> '' """ % (card_ver, card_ver)
-    print dumb_restrict
+    for card_ver in 'v1.0', 'v1.2', 'v1.3', 'v1.4':
+        # This is dumb and stupid, as we then end up with duplicate card texts in the card tables - but it works
+        cardset = CardSet(name=card_ver, description=card_ver)
+        cardset.save()
+        
+        dumb_restrict = """ where "%s" is not NULL and "%s" <> '' """ % (card_ver, card_ver)
+        print dumb_restrict
 
 
-    c.execute(""" select "Text" as text, "Special" as special from "Main Deck Black" """ + dumb_restrict + 'order by text')
-    print c.description
-    for row_id, row in enumerate(c.fetchall(), 1):
-        draw = 0
+        c.execute(""" select "Text" as text, "Special" as special from "Main Deck Black" """ + dumb_restrict + 'order by text')
+        print c.description
+        for row_id, row in enumerate(c.fetchall(), 1):
+            draw = 0
 
-        print row_id, row
-        card_text = row[0]
-        special = row[1]
-        
-        card_text = card_text.replace('______', DEFAULT_BLANK_MARKER)
-        if '_' in card_text:
-            raise NotImplementedError('found an underscore, this may not be a real problem')
-        
-        pick = card_text.count(DEFAULT_BLANK_MARKER)
-        if pick < 1:
-            pick = 1
-        
-        if special:
-            print row
-            if special == 'PICK 2':
-                pick = 2
-            elif special == 'DRAW 2, PICK 3':
-                draw = 2
-                pick = 3
-            else:
-                raise NotImplementedError('unrecognized special')
-        
-        black_card = BlackCard(text=card_text, draw=draw, pick=pick, watermark=card_ver)
-        print black_card
-        black_card.save()
-        cardset.black_card.add(black_card)
+            print row_id, row
+            card_text = row[0]
+            special = row[1]
+            
+            card_text = card_text.replace('______', DEFAULT_BLANK_MARKER)
+            if '_' in card_text:
+                raise NotImplementedError('found an underscore, this may not be a real problem')
+            
+            pick = card_text.count(DEFAULT_BLANK_MARKER)
+            if pick < 1:
+                pick = 1
+            
+            if special:
+                print row
+                if special == 'PICK 2':
+                    pick = 2
+                elif special == 'DRAW 2, PICK 3':
+                    draw = 2
+                    pick = 3
+                else:
+                    raise NotImplementedError('unrecognized special')
+            
+            black_card = BlackCard(text=card_text, draw=draw, pick=pick, watermark=card_ver)
+            print black_card
+            black_card.save()
+            cardset.black_card.add(black_card)
 
-    c.execute(""" select "Text" as text from "Main Deck White" """ + dumb_restrict + 'order by text')
-    print c.description
-    for row_id, row in enumerate(c.fetchall(), 1):
-        print row_id, row
-        card_text = row[0]
-        white_card = WhiteCard(text=card_text, watermark=card_ver)
-        print white_card
-        white_card.save()
-        cardset.white_card.add(white_card)
+        c.execute(""" select "Text" as text from "Main Deck White" """ + dumb_restrict + 'order by text')
+        print c.description
+        for row_id, row in enumerate(c.fetchall(), 1):
+            print row_id, row
+            card_text = row[0]
+            white_card = WhiteCard(text=card_text, watermark=card_ver)
+            print white_card
+            white_card.save()
+            cardset.white_card.add(white_card)
     cardset.save()
 
     django.db.transaction.commit()
