@@ -31,6 +31,7 @@ import xlrd
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cah.settings.local")  # FIXME
 from django.conf import settings
 import django.db.transaction
+from django.db import connection
 import cards.models
 from cards.models import BlackCard, WhiteCard, CardSet, Game
 from card_fixturegen import DEFAULT_BLANK_MARKER, DATA_DIR
@@ -51,62 +52,97 @@ def doit():
     #django.db.transaction.set_autocommit(False)
     
     
+    """this is a terrible way to delete stuff....
     Game.objects.all().delete()
     BlackCard.objects.all().delete()
     WhiteCard.objects.all().delete()
     CardSet.objects.all().delete()
+    # So instead use raw SQL
+    """
+    dmc = connection.cursor()  # Django Model Database Cursor
+    for tablename in ['card_set_white_card', 'cards_game', 'cards_player', 'black_cards', 'card_set', 'card_set_black_card', 'white_cards']:
+        dmc.execute('DELETE FROM %s' % tablename)
+    dmc.close()
     
+    cardset_dict = {}
     for card_ver in 'v1.0', 'v1.2', 'v1.3', 'v1.4':
-        # This is dumb and stupid, as we then end up with duplicate card texts in the card tables - but it works
         cardset = CardSet(name=card_ver, description=card_ver)
         cardset.save()
+        cardset_dict[card_ver] = cardset
+    
+    #c.execute(""" select b."Text" as text, b."Special" as special, b."v1" as v10, b."v1.2" as v12, b."v1.3" as v13, b."v1.4" as v14 from "Main Deck Black" b order by text LIMIT 3""")
+    c.execute(""" select b."Text" as text, b."Special" as special, b."v1" as v10, b."v1.2" as v12, b."v1.3" as v13, b."v1.4" as v14 from "Main Deck Black" b order by text """)
+    print c.description
+    for row_id, row in enumerate(c.fetchall(), 1):
+        draw = 0
+
+        print row_id, row
+        card_text = row[0]
+        special = row[1]
+        v10 = row[2]
+        v12 = row[3]
+        v13 = row[4]
+        v14 = row[5]
+        if v10:
+            # sync with other naming conventions
+            v10 = 'v1.0'
+        print (card_text, special, v10, v12, v13, v14)
         
-        dumb_restrict = """ where "%s" is not NULL and "%s" <> '' """ % (card_ver, card_ver)
-        print dumb_restrict
+        card_text = card_text.replace('______', DEFAULT_BLANK_MARKER)
+        if '_' in card_text:
+            raise NotImplementedError('found an underscore, this may not be a real problem')
+        
+        pick = card_text.count(DEFAULT_BLANK_MARKER)
+        if pick < 1:
+            pick = 1
+        
+        if special:
+            print row
+            if special == 'PICK 2':
+                pick = 2
+            elif special == 'DRAW 2, PICK 3':
+                draw = 2
+                pick = 3
+            else:
+                raise NotImplementedError('unrecognized special')
+        
+        watermark = v10 or v12 or v13 or v14  # pick the first version it showed up in (or we could leave blank)
+        black_card = BlackCard(text=card_text, draw=draw, pick=pick, watermark=watermark)
+        print black_card
+        black_card.save()
+        tmp_dict = {'v1.0':v10, 'v1.2':v12, 'v1.3':v13, 'v1.4':v14}
+        for card_ver in tmp_dict:
+            #print card_ver, tmp_dict[card_ver]
+            if tmp_dict[card_ver]:
+                cardset = cardset_dict[card_ver]
+                cardset.black_card.add(black_card)
 
-
-        c.execute(""" select "Text" as text, "Special" as special from "Main Deck Black" """ + dumb_restrict + 'order by text')
-        print c.description
-        for row_id, row in enumerate(c.fetchall(), 1):
-            draw = 0
-
-            print row_id, row
-            card_text = row[0]
-            special = row[1]
-            
-            card_text = card_text.replace('______', DEFAULT_BLANK_MARKER)
-            if '_' in card_text:
-                raise NotImplementedError('found an underscore, this may not be a real problem')
-            
-            pick = card_text.count(DEFAULT_BLANK_MARKER)
-            if pick < 1:
-                pick = 1
-            
-            if special:
-                print row
-                if special == 'PICK 2':
-                    pick = 2
-                elif special == 'DRAW 2, PICK 3':
-                    draw = 2
-                    pick = 3
-                else:
-                    raise NotImplementedError('unrecognized special')
-            
-            black_card = BlackCard(text=card_text, draw=draw, pick=pick, watermark=card_ver)
-            print black_card
-            black_card.save()
-            cardset.black_card.add(black_card)
-
-        c.execute(""" select "Text" as text from "Main Deck White" """ + dumb_restrict + 'order by text')
-        print c.description
-        for row_id, row in enumerate(c.fetchall(), 1):
-            print row_id, row
-            card_text = row[0]
-            white_card = WhiteCard(text=card_text, watermark=card_ver)
-            print white_card
-            white_card.save()
-            cardset.white_card.add(white_card)
-    cardset.save()
+    #c.execute(""" select w."Text" as text, w."v1.0" as v10, w."v1.2" as v12, w."v1.3" as v13, w."v1.4" as v14 from "Main Deck White" w order by text LIMIT 5""")
+    c.execute(""" select w."Text" as text, w."v1.0" as v10, w."v1.2" as v12, w."v1.3" as v13, w."v1.4" as v14 from "Main Deck White" w order by text""")
+    print c.description
+    for row_id, row in enumerate(c.fetchall(), 1):
+        print row_id, row
+        card_text = row[0]
+        v10 = row[1]
+        v12 = row[2]
+        v13 = row[3]
+        v14 = row[4]
+        
+        watermark = v10 or v12 or v13 or v14  # pick the first version it showed up in (or we could leave blank)
+        white_card = WhiteCard(text=card_text, watermark=watermark)
+        print white_card
+        white_card.save()
+        tmp_dict = {'v1.0':v10, 'v1.2':v12, 'v1.3':v13, 'v1.4':v14}
+        for card_ver in tmp_dict:
+            #print card_ver, tmp_dict[card_ver]
+            if tmp_dict[card_ver]:
+                cardset = cardset_dict[card_ver]
+                cardset.white_card.add(white_card)
+    
+    # this is probably not needed due to manual commit later
+    for tmp_cardset_name in cardset_dict:
+        cardset = cardset_dict[tmp_cardset_name]
+        cardset.save()
 
     django.db.transaction.commit()
     
