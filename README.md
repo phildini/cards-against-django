@@ -51,3 +51,6 @@ Sample manage shell snippets:
         b.replace_blanks((11, 94))
         g = cards.models.Game.objects.get(id=1)
 
+Dump any cards/cardset that have been created:
+
+    python manage.py dumpdata --settings=cah.settings.local --indent=4 cards > cards/fixtures/initial_data.json
