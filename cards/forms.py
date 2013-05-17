@@ -63,7 +63,7 @@ class LobbyForm(forms.Form):
     """
 
     new_game = forms.CharField(max_length=140, required=False)
-    card_set = forms.ModelMultipleChoiceField(queryset=CardSet.objects.all())
+    card_set = forms.ModelMultipleChoiceField(queryset=CardSet.objects.all().order_by('-name'))
 
     def __init__(self, *args, **kwargs):
         try:
