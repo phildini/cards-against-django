@@ -1070,6 +1070,996 @@
     }
 },
 {
+    "pk": 108, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "A successful job interview begins with a firm handshake and ends with \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 109, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Action stations! Action stations! Set condition one throughout the fleet and brace for \ufffd!", 
+        "draw": 0, 
+        "watermark": "PAX East 2013 Promo Pack B", 
+        "pick": 1
+    }
+},
+{
+    "pk": 110, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "After months of debate, the Occupy Wall Street General Assembly could only agree on \"More \ufffd!\"", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 111, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "After months of practice with \ufffd, I think I\u2019m finally ready for \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 2
+    }
+},
+{
+    "pk": 112, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "After unifying the GST and PST the Government can now afford to provide \ufffd for \ufffd.", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 2
+    }
+},
+{
+    "pk": 113, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Air Canada guidelines now prohibit \ufffd on airplanes.", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 1
+    }
+},
+{
+    "pk": 114, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "An international tribunal has found \ufffd guilty of \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 2
+    }
+},
+{
+    "pk": 115, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "And I would have gotten away with it, too, if it hadn't been for \ufffd!", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 116, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "And what did you bring for show and tell?", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 117, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "As part of his contract, Prince won\u2019t perform without \ufffd in his dressing room.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 118, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "As part of his daily regimen, Anderson Cooper sets aside 15 minutes for \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 119, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Before I run for president, I must destroy all evidence of my involvement with \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 120, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Before \ufffd, all we had was \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 2
+    }
+},
+{
+    "pk": 121, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "CTV presents \ufffd, the story of \ufffd.", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 2
+    }
+},
+{
+    "pk": 122, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Call the law offices of Goldstein & Goldstein, because no one should have to tolerate \ufffd in the workplace.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 123, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Charades was ruined for me forever when my mom had to act out \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 124, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Daddy, why is Mommy crying?", 
+        "draw": 0, 
+        "watermark": "\"Oops\" Kit", 
+        "pick": 1
+    }
+},
+{
+    "pk": 125, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Dear Abby, I'm having some trouble with \ufffd and would like your advice.", 
+        "draw": 0, 
+        "watermark": "\"Oops\" Kit", 
+        "pick": 1
+    }
+},
+{
+    "pk": 126, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Dear Sir or Madam, We regret to inform you that the Office of \ufffd has denied your request for \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 2
+    }
+},
+{
+    "pk": 127, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "During high school I never really fit in until I found \ufffd club.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 128, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "During his midlife crisis, my dad got really into \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 129, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Every Christmas, my uncle gets drunk and tells the story about \ufffd.", 
+        "draw": 0, 
+        "watermark": "Holiday 2012", 
+        "pick": 1
+    }
+},
+{
+    "pk": 130, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Everyone down on the ground! We don't want to hurt anyone. We're just here for \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 131, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Finally! A service that delivers \ufffd right to your door.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 132, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Having problems with \ufffd? Try \ufffd!", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 2
+    }
+},
+{
+    "pk": 133, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "He who controls \ufffd controls the world.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 134, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Hey baby, come back to my place and I\u2019ll show you \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 135, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I don't know exactly how I got the PAX plague, but I suspect it had something to do with \ufffd.", 
+        "draw": 0, 
+        "watermark": "PAX East 2013 Promo Pack C", 
+        "pick": 1
+    }
+},
+{
+    "pk": 136, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I drink to forget \ufffd.", 
+        "draw": 0, 
+        "watermark": "\"Oops\" Kit", 
+        "pick": 1
+    }
+},
+{
+    "pk": 137, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I have an idea even better than Kickstarter, and it's called \ufffdstarter.", 
+        "draw": 0, 
+        "watermark": "PAX East 2013 Promo Pack A", 
+        "pick": 1
+    }
+},
+{
+    "pk": 138, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I learned the hard way that you can't cheer up a grieving friend with \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 139, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I spent my whole life working toward \ufffd, only to have it ruined by \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 2
+    }
+},
+{
+    "pk": 140, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I went from \ufffd to \ufffd, all thanks to \ufffd.", 
+        "draw": 2, 
+        "watermark": "X2", 
+        "pick": 3
+    }
+},
+{
+    "pk": 141, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "If God didn't want us to enjoy \ufffd, he wouldn't have given us \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 2
+    }
+},
+{
+    "pk": 142, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "If \ufffd came in two-fours Canada would be more \ufffd?", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 2
+    }
+},
+{
+    "pk": 143, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In Rome, there are whisperings that the Vatican has a secret room devoted to \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 144, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In Vancouver it is now legal to \ufffd.", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 1
+    }
+},
+{
+    "pk": 145, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In a pinch, \ufffd can be a suitable substitute for \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 2
+    }
+},
+{
+    "pk": 146, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In an attempt to reach a wider audience, the Royal Ontario Museum has opened an interactive exhibit on \ufffd.", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 1
+    }
+},
+{
+    "pk": 147, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In his new self-produced album, Kanye West raps over the sounds of \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 148, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In his newest and most difficult stunt, David Blaine must escape from \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 149, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In its new tourism campaign, Detroit proudly proclaims that it has finally eliminated \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 150, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In the distant future, historians will agree that \ufffd marked the beginning of America's decline.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 151, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In the final round of this year's Omegathon, Omeganauts must face off in a game of \ufffd.", 
+        "draw": 0, 
+        "watermark": "PAX East 2013 Promo Pack B", 
+        "pick": 1
+    }
+},
+{
+    "pk": 152, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In the next Bob and Doug McKenzie adventure, they have to find \ufffd to uncover a sinister plot involving \ufffd and \ufffd.", 
+        "draw": 2, 
+        "watermark": "Canadian", 
+        "pick": 3
+    }
+},
+{
+    "pk": 153, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "In the seventh circle of Hell, sinners must endure \ufffd for all eternity.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 154, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "I\u2019m not like the rest of you. I\u2019m too rich and busy for \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 155, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Jesus is \ufffd.", 
+        "draw": 0, 
+        "watermark": "Holiday 2012", 
+        "pick": 1
+    }
+},
+{
+    "pk": 156, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Listen, son. If you want to get involved with \ufffd, I won\u2019t stop you. Just steer clear of \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 2
+    }
+},
+{
+    "pk": 157, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Little Miss Muffet Sat on a tuffet, Eating her curds and \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 158, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Lovin\u2019 you is easy \u2019cause you\u2019re \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 159, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Members of New York's social elite are paying thousands of dollars just to experience \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 160, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Michael Bay's new three-hour action epic pits \ufffd against \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 2
+    }
+},
+{
+    "pk": 161, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Money can\u2019t buy me love, but it can buy me \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 162, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "My country, 'tis of thee, sweet land of \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 163, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "My gym teacher got fired for adding \ufffd to the obstacle course.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 164, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "My life is ruled by a vicious cycle of \ufffd and \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 2
+    }
+},
+{
+    "pk": 165, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "My mom freaked out when she looked at my browser history and found \ufffd.com/\ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 2
+    }
+},
+{
+    "pk": 166, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "My new favorite porn star is Joey \"\ufffd\" McGee.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 167, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "My plan for world domination begins with \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 168, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Next season on Man vs, Wild, Bear Grylls must survice the depths of the Amazon with only \ufffd and his wits.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 169, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Next time on Dr. Phil: How to talk to your child about \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 170, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "O Canada, we stand on guard for \ufffd.", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 1
+    }
+},
+{
+    "pk": 171, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "On the third day of Christmas, my true love gave to me: three French hens, two turtle doves, and \ufffd.", 
+        "draw": 0, 
+        "watermark": "Holiday 2012", 
+        "pick": 1
+    }
+},
+{
+    "pk": 172, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Only two things in life are certain: death and \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 173, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Press [down arrow] [down arrow] [left arrow] [right arrow] [B] to unleash \ufffd.", 
+        "draw": 0, 
+        "watermark": "PAX East 2013 Promo Pack C", 
+        "pick": 1
+    }
+},
+{
+    "pk": 174, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Science will never explain the origin of \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 175, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "The CIA now interrogates enemy agents by repeatedly subjecting them to \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 176, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "The Five Stages of Grief: denial, anger, bargaining, \ufffd, acceptance.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 177, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "The Royal Ontario Museum has just opened an interactive exhibit on \ufffd", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 1
+    }
+},
+{
+    "pk": 178, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "The blind date was going horribly until we discovered our shared interest in \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 179, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "The healing process began when I joined a support group for victims of \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 180, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "The socialist governments of Scandinavia have declared that access to \ufffd is a basic human right.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 181, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "The votes are in, and the new high school mascot is \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 182, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "This holiday season, Tim Allen must overcome his fear of \ufffd to save Christmas.", 
+        "draw": 0, 
+        "watermark": "Holiday 2012", 
+        "pick": 1
+    }
+},
+{
+    "pk": 183, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "This is your captain speaking. Fasten your seatbelts and prepare for \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 184, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "This month's Cosmo: \"Spice up your sex life by bringing \ufffd into the bedroom.\"", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 185, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "This season on Man vs. Wild, Bear Grylls must survive in the depths of the Amazon with only \ufffd and his wits.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 186, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "To prepare for his upcoming role, Daniel Day-Lewis immersed himself in the world of \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 187, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Tonight on 20/20: What you don't know about \ufffd could kill you.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 1
+    }
+},
+{
+    "pk": 188, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Turns out that \ufffd-Man was neither the hero we needed nor wanted.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 189, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "Wake up, America. Christmas is under attack by secular liberals and their \ufffd.", 
+        "draw": 0, 
+        "watermark": "Holiday 2012", 
+        "pick": 1
+    }
+},
+{
+    "pk": 190, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What brought the orgy to a grinding halt?", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 191, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What has been making life difficult at the nudist colony?", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 192, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What keeps me warm during the cold, cold winter?", 
+        "draw": 0, 
+        "watermark": "Holiday 2012", 
+        "pick": 1
+    }
+},
+{
+    "pk": 193, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What left this stain on my couch?", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 194, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What's the Canadian government using to inspire rural students to succeed?", 
+        "draw": 0, 
+        "watermark": "Canadian", 
+        "pick": 1
+    }
+},
+{
+    "pk": 195, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "What's the gift that keeps on giving?", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 196, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "When I pooped, what came out of my butt?", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 197, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "When all else fails, I can always masturbate to \ufffd.", 
+        "draw": 0, 
+        "watermark": "X1", 
+        "pick": 1
+    }
+},
+{
+    "pk": 198, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "When you get right down to it, \ufffd is just \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 2
+    }
+},
+{
+    "pk": 199, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "White people like \ufffd.", 
+        "draw": 0, 
+        "watermark": "\"Oops\" Kit", 
+        "pick": 1
+    }
+},
+{
+    "pk": 200, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "With enough time and pressure, \ufffd will turn into \ufffd.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 2
+    }
+},
+{
+    "pk": 201, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "You have been waylaid by \ufffd and must defend yourself.", 
+        "draw": 0, 
+        "watermark": "PAX East 2013 Promo Pack A", 
+        "pick": 1
+    }
+},
+{
+    "pk": 202, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "You haven't truly lived until you've experienced \ufffd and \ufffd at the same time.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 2
+    }
+},
+{
+    "pk": 203, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "\ufffd would be woefully incomplete without \ufffd.", 
+        "draw": 0, 
+        "watermark": "X2", 
+        "pick": 2
+    }
+},
+{
+    "pk": 204, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "\ufffd: good to the last drop.", 
+        "draw": 0, 
+        "watermark": "\"Oops\" Kit", 
+        "pick": 1
+    }
+},
+{
+    "pk": 205, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "\ufffd. Awesome in theory, kind of a mess in practice.", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 1
+    }
+},
+{
+    "pk": 206, 
+    "model": "cards.blackcard", 
+    "fields": {
+        "text": "\ufffd: Hours of fun. Easy to use. Perfect for \ufffd!", 
+        "draw": 0, 
+        "watermark": "X3", 
+        "pick": 2
+    }
+},
+{
     "pk": 1, 
     "model": "cards.whitecard", 
     "fields": {
@@ -5958,6 +6948,2694 @@
     }
 },
 {
+    "pk": 612, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A Bitch Slap", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 613, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Chunks of dead prostitute", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 614, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Extremely tight pants", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 615, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "One trillion dollars", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 616, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Stormtroopers", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 617, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Boy Scouts of America", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 618, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The entire Mormon Tabernacle Chior", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 619, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The female orgasm", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 620, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Throwing a virgin into a volcano", 
+        "watermark": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 621, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A Molson muscle.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 622, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A Tim Hortons franchise.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 623, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An icy handjob from an Edmonton hooker.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 624, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Being Canadian.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 625, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Burning down the White House.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 626, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Canada: America's hat.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 627, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Don Cherrys wardrobe.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 628, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Graham Greene playing the same First Nations character on every TV show.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 629, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Heritage minutes.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 630, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Historically black colleges", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 631, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Homo milk.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 632, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Karla Homolka.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 633, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Killing a Moose with your bare hands.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 634, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Mr. Dressup.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 635, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Naked News.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 636, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Newfies.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 637, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Poutine.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 638, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Quintland.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 639, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Schmirler the Curler.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 640, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Snotsicles.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 641, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Stephen Harper.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 642, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Syrupy sex with a maple tree.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 643, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Terry Fox's prosthetic leg.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 644, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The CBC.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 645, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Famous Five.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 646, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Front de Lib\u00e9ration du Qu\u00e9bec.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 647, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Official Languages Act. La Loi sur les langues officielles.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 648, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Royal Canadian Mounted Police.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 649, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Tim Hortons.", 
+        "watermark": "Canadian"
+    }
+},
+{
+    "pk": 650, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A Hungry-Man\u2122 Frozen Christmas Dinner for One.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 651, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A toxic family environment.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 652, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A visually arresting turtleneck.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 653, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Another shitty year.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 654, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Clearing a bloody path through Walmart with a scimitar.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 655, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Eating an entire snowman.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 656, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Elf cum.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 657, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Fucking up \"Silent Night\" in front of 300 parents.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 658, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Gift-wrapping a live hamster.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 659, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Immaculate conception.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 660, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Krampus, the Austrian Christmas monster.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 661, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Mall Santa.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 662, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "My hot cousin.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 663, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Pretending to be happy.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 664, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Santa's heavy sack.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 665, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Several intertwining love stories featuring Hugh Grant.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 666, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Socks.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 667, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Space Jam on VHS.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 668, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Taking down Santa with a surface-to-air missile.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 669, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Star Wars Holiday Special.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 670, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The tiny, calloused hands of the Chinese children that made this card.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 671, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Whatever Kwanzaa is supposed to be about.", 
+        "watermark": "Holiday 2012"
+    }
+},
+{
+    "pk": 672, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An immediately regrettable $9 hot dog from the Boston Convention Center.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 673, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Casting magic missile at a bully.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 674, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Firefly: Season 2.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 675, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting bitch slapped by Dhalsim.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 676, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Jiggle physics.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 677, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Paying the iron price.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 678, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Rotating shapes in mid-air so that they fit into other shapes when they fall.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 679, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Running out of stamina.", 
+        "watermark": "PAX East 2013 Promo Pack A"
+    }
+},
+{
+    "pk": 680, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting inside the Horadric Cube with a hot babe and pressing the transmute button.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 681, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Loading from a previous save.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 682, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Punching a tree to gather wood.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 683, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Sharpening a foam broadsword on a foam whetstone.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 684, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Spending the year's insulin budget on Warhammer 40k figurines.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 685, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The depression that ensues after catching 'em all.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 686, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The rocket launcher.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 687, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Violating the First Law of Robotics.", 
+        "watermark": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 688, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Achieving 500 actions per minute.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 689, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Charging up all the way.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 690, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Forgetting to eat, and consequently dying.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 691, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Judging elves by the color of their skin and not by the content of their character.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 692, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Smashing all the pottery in a Pottery Barn in search of rupees.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 693, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Klobb.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 694, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Vespene gas.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 695, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Wil Wheaton crashing an actual spaceship.", 
+        "watermark": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 696, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "24-hour media coverage", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 697, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A beached whale.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 698, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A big black dick.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 699, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A bloody pacifier.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 700, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A crappy little hand.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 701, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A low standard of living.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 702, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A nuanced critique.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 703, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A panty raid.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 704, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A passionate Latino lover.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 705, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A plunger to the face.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 706, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A rival dojo.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 707, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A web of lies.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 708, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A woman scorned.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 709, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An atomic wedgie.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 710, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Apologizing.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 711, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Ashton Kutcher.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 712, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Beating your wives.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 713, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Being a busy adult with many important things to do.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 714, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Being a dinosaur.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 715, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Blaxploitation.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 716, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Bosnian chicken farmers.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 717, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Breaking nip slip news.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 718, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Carnies.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 719, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Clams.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 720, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Coughing into a vagina.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 721, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Cutting.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 722, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dancing with a broom.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 723, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Deflowering the princess.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 724, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dorito breath.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 725, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Eating an albino.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 726, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Enormous Scandinavian women.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 727, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Fabricating statistics.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 728, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Finding a skeleton.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 729, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Gandalf.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 730, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Genetically engineered super-soldiers.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 731, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "George Clooney's musk.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 732, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting abducted by Peter Pan.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 733, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting in her pants, politely.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 734, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Gladiatorial combat.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 735, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Good grammar.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 736, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Hipsters.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 737, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Historical revisionism.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 738, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Insatiable bloodlust.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 739, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Jafar.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 740, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Jean-Claude Van Damme in slow motion.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 741, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Jean-Claude Van Damme.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 742, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Just the tip.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 743, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Leveling up.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 744, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Literally eating shit.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 745, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Mad hacky-sack skills.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 746, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Making the penises kiss.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 747, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Media coverage.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 748, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Medieval Times\u00ae Dinner & Tournament.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 749, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Mom.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 750, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Moral ambiguity.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 751, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "My machete.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 752, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "NOOOOOOOOO!!!", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 753, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Neil Patrick Harris.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 754, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Nubile slave boys.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 755, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Ominous background music.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 756, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "One thousand Slim Jims.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 757, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Overpowering your father.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 758, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Panty raids.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 759, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Pistol-whipping a hostage.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 760, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Quiche.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 761, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Quivering jowls.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 762, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Revenge fucking.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 763, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Ripping into a man's chest and pulling out his still-beating heart.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 764, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Ryan Gosling riding in on a white horse.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 765, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Santa Claus.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 766, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Scrotum tickling.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 767, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Sexual humiliation.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 768, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Sexy Siamese twins.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 769, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Shaft.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 770, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Slow motion.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 771, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Space muffins.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 772, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Statistically validated stereotypes.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 773, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Sudden Poop Explosion Disease.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 774, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Suicidal thoughts.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 775, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Fanta\u00ae girls.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 776, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Ooze", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 777, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The boners of the elderly.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 778, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The economy.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 779, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The four arms of Vishnu.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 780, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The gulags.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 781, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The harsh light of day.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 782, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The hiccups.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 783, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The shambling corpse of Larry King.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 784, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Tripping balls.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 785, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Words, words, words.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 786, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Zeus's sexual appetites.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 787, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "[Ladle] Ladles.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 788, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "[italic]This[/italic] guy!", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 789, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "a smiling black man, a latina businesswoman, a cool asian, and some whites.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 790, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "clenched butt cheeks.", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 791, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "having a penis", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 792, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "savagely beating a mascot", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 793, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "stockholm syndrome", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 794, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "syphilitic insanity", 
+        "watermark": "X1"
+    }
+},
+{
+    "pk": 795, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A 55-gallon drum of lube.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 796, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A Burmese tiger pit.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 797, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A bigger, blacker dick.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 798, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A dollop of sour cream.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 799, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A magic hippie love cloud.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 800, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A man in yoga pants with a ponytail and feather earrings.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 801, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A pi\u00f1ata full of scorpions", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 802, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A sad fat dragon with no friends.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 803, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A slightly shittier parallel universe.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 804, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A soulful rendition of \"Ol' Man River.\"", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 805, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A squadron of moles wearing aviator goggles.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 806, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A sweaty, panting leather daddy.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 807, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A sweet spaceship.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 808, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "All of this blood.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 809, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An army of skeletons.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 810, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An ether-soaked rag.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 811, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An unhinged ferris wheel rolling toward the sea.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 812, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Another shot of morphine.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 813, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Basic human decency.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 814, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Beefin' over turf.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 815, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Being awesome at sex.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 816, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Boris the Soviet Love Hammer.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 817, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Bullshit.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 818, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Catastrophic urethral trauma.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 819, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Crushing Mr. Peanut's brittle body.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 820, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Daddy's belt", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 821, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Death by Steven Seagal.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 822, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dennis the Menace.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 823, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dining with cardboard cutouts of the cast of \"Friends.\"", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 824, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Double penetration.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 825, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Existing.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 826, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Fetal alcohol syndrome.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 827, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Finding Waldo.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 828, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Fuck Mountain.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 829, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting hilariously gang-banged by the Blue Man Group.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 830, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Grandpa's ashes.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 831, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Graphic violence, adult language, and some sexual content.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 832, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Hillary Clinton's death stare.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 833, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Intimacy problems.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 834, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Jeff Goldblum.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 835, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Living in a trashcan.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 836, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Loki, the trickster god.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 837, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Making a friend.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 838, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Me.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 839, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Mild autism.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 840, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Mooing.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 841, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "My first kill.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 842, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Nunchuck moves.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 843, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Oncoming traffic.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 844, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "One Ring to rule them all.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 845, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Power", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 846, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Pretty Pretty Princess Dress-Up Board Game\u00ae.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 847, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Pumping out a baby every nine months.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 848, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Rising from the grave.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 849, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Scrotal frostbite.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 850, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Some really fucked-up shit.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 851, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Special musical guest, Cher.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 852, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Spring break!", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 853, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Subduing a grizzly bear and making her your wife.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 854, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Survivor's guilt.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 855, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Swiftly achieving orgasm.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 856, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Taking a man's eyes and balls out and putting his eyes where his balls go and then his balls in the eye holes.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 857, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Google.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 858, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The black Power Ranger", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 859, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The corporations.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 860, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The day the birds attacked.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 861, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The grey nutrient broth that sustains Mitt Romney.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 862, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The human body.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 863, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The mere concept of Applebee's\u00ae.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 864, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The mixing of the races.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 865, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The new Radiohead album.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 866, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Tiny nipples.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 867, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Tongue.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 868, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Upgrading homeless people to mobile hotspots.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 869, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Weapons-grade plutonium.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 870, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Wearing an octopus for a hat.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 871, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Whining like a little bitch.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 872, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Whipping a disobedient slave.", 
+        "watermark": "X2"
+    }
+},
+{
+    "pk": 873, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A PowerPoint presentation.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 874, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A black male in his early 20s, last seen wearing a hoodie.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 875, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A boo-boo.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 876, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A botched circumcision.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 877, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A cat video so cute that your eyes roll back and your spine slides out of your anus.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 878, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A cop who is also a dog.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 879, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A greased-up Matthew McConaughey.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 880, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A lamprey swimming up the toilet and latching onto your taint.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 881, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A pile of squirming bodies.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 882, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A spontaneous conga line.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 883, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A surprising amount of hair.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 884, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "A vagina that leads to another dimension.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 885, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Actually getting shot, for real.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 886, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "All my friends dying.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 887, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An all-midget production of Shakespeare\u2019s Richard III.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 888, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An ass disaster.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 889, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "An unstoppable wave of fire ants.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 890, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Bill Clinton, naked on a bearskin rug with a saxophone.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 891, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Blood farts.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 892, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Blowing some dudes in an alley.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 893, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Buying the right pants to be cool.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 894, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Chugging a lava lamp.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 895, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Cock.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 896, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Crying into the pages of Sylvia Plath.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 897, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Demonic possession.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 898, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Disco fever.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 899, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Drinking ten 5-hour ENERGYs\u00ae to get fifty continuous hours of energy.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 900, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Dying alone and in pain.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 901, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Eating Tom Selleck\u2019s mustache to gain his powers.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 902, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Filling every orifice with butterscotch pudding.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 903, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Fisting.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 904, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Flying robots that kill people.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 905, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Gay aliens.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 906, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Getting your dick stuck in a Chinese finger trap with another dick.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 907, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Girls that always be textin\u2019.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 908, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Going around punching people.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 909, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Having sex on top of a pizza.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 910, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Having shotguns for legs.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 911, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Indescribable loneliness.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 912, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Jumping out at people.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 913, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Letting everyone down.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 914, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Mufasa\u2019s death scene.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 915, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "My manservant, Claude.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 916, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Not contributing to society in any meaningful way.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 917, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Not having sex.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 918, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Nothing.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 919, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Putting an entire peanut buter and jelly sandwich into the VCR.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 920, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Reverse cowgirl.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 921, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Roland the Farter, flatulist to the king.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 922, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Running naked through a mall, pissing and shitting everywhere.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 923, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Samuel L. Jackson.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 924, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Screaming like a maniac.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 925, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Self-flagellation.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 926, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Shutting the fuck up.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 927, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Slapping a racist old lady.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 928, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Sneezing, farting, and coming at the same time.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 929, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Some douche with an acoustic guitar.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 930, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Some kind of bird-man.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 931, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Spending lots of money.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 932, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "That ass.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 933, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Harlem Globetrotters.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 934, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Land of Chocolate.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 935, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The Quesadilla Explosion Salad\u2122 from Chili\u2019s.\u00ae", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 936, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The entire Internet.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 937, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The moist, demanding chasm of his mouth.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 938, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The primal, ball-slapping sex your parents are having right now.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 939, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The systematic destruction of an entire people and their way of life.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 940, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The thin veneer of situational causality that underlies porn.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 941, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "The way white people is.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 942, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Three months in the hole.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 943, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Unlimited soup, salad, and breadsticks.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 944, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Velcro\u2122.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 945, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Vietnam flashbacks.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 946, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Vomiting mid-blowjob.", 
+        "watermark": "X3"
+    }
+},
+{
+    "pk": 947, 
+    "model": "cards.whitecard", 
+    "fields": {
+        "text": "Warm, velvety muppet sex.", 
+        "watermark": "X3"
+    }
+},
+{
     "pk": 1, 
     "model": "cards.cardset", 
     "fields": {
@@ -8297,6 +11975,576 @@
         "base_deck": true, 
         "active": true, 
         "description": "v1.4"
+    }
+},
+{
+    "pk": 5, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            108, 
+            111, 
+            116, 
+            117, 
+            118, 
+            122, 
+            127, 
+            131, 
+            132, 
+            134, 
+            153, 
+            154, 
+            156, 
+            158, 
+            161, 
+            163, 
+            164, 
+            178, 
+            186, 
+            188, 
+            193, 
+            198, 
+            200, 
+            205, 
+            206
+        ], 
+        "name": "X3", 
+        "weight": 0, 
+        "white_card": [
+            873, 
+            874, 
+            875, 
+            876, 
+            877, 
+            878, 
+            879, 
+            880, 
+            881, 
+            882, 
+            883, 
+            884, 
+            885, 
+            886, 
+            887, 
+            888, 
+            889, 
+            890, 
+            891, 
+            892, 
+            893, 
+            894, 
+            895, 
+            896, 
+            897, 
+            898, 
+            899, 
+            900, 
+            901, 
+            902, 
+            903, 
+            904, 
+            905, 
+            906, 
+            907, 
+            908, 
+            909, 
+            910, 
+            911, 
+            912, 
+            913, 
+            914, 
+            915, 
+            916, 
+            917, 
+            918, 
+            919, 
+            920, 
+            921, 
+            922, 
+            923, 
+            924, 
+            925, 
+            926, 
+            927, 
+            928, 
+            929, 
+            930, 
+            931, 
+            932, 
+            933, 
+            934, 
+            935, 
+            936, 
+            937, 
+            938, 
+            939, 
+            940, 
+            941, 
+            942, 
+            943, 
+            944, 
+            945, 
+            946, 
+            947
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "X3"
+    }
+},
+{
+    "pk": 6, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            109, 
+            151
+        ], 
+        "name": "PAX East 2013 Promo Pack B", 
+        "weight": 0, 
+        "white_card": [
+            680, 
+            681, 
+            682, 
+            683, 
+            684, 
+            685, 
+            686, 
+            687
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "PAX East 2013 Promo Pack B"
+    }
+},
+{
+    "pk": 7, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            110, 
+            119, 
+            120, 
+            123, 
+            128, 
+            130, 
+            139, 
+            140, 
+            141, 
+            148, 
+            157, 
+            159, 
+            162, 
+            165, 
+            166, 
+            169, 
+            172, 
+            176, 
+            179, 
+            181, 
+            183, 
+            184, 
+            187, 
+            202, 
+            203
+        ], 
+        "name": "X2", 
+        "weight": 0, 
+        "white_card": [
+            795, 
+            796, 
+            797, 
+            798, 
+            799, 
+            800, 
+            801, 
+            802, 
+            803, 
+            804, 
+            805, 
+            806, 
+            807, 
+            808, 
+            809, 
+            810, 
+            811, 
+            812, 
+            813, 
+            814, 
+            815, 
+            816, 
+            817, 
+            818, 
+            819, 
+            820, 
+            821, 
+            822, 
+            823, 
+            824, 
+            825, 
+            826, 
+            827, 
+            828, 
+            829, 
+            830, 
+            831, 
+            832, 
+            833, 
+            834, 
+            835, 
+            836, 
+            837, 
+            838, 
+            839, 
+            840, 
+            841, 
+            842, 
+            843, 
+            844, 
+            845, 
+            846, 
+            847, 
+            848, 
+            849, 
+            850, 
+            851, 
+            852, 
+            853, 
+            854, 
+            855, 
+            856, 
+            857, 
+            858, 
+            859, 
+            860, 
+            861, 
+            862, 
+            863, 
+            864, 
+            865, 
+            866, 
+            867, 
+            868, 
+            869, 
+            870, 
+            871, 
+            872
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "X2"
+    }
+},
+{
+    "pk": 8, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            112, 
+            113, 
+            121, 
+            142, 
+            144, 
+            146, 
+            152, 
+            170, 
+            177, 
+            194
+        ], 
+        "name": "Canadian", 
+        "weight": 0, 
+        "white_card": [
+            621, 
+            622, 
+            623, 
+            624, 
+            625, 
+            626, 
+            627, 
+            628, 
+            629, 
+            630, 
+            631, 
+            632, 
+            633, 
+            634, 
+            635, 
+            636, 
+            637, 
+            638, 
+            639, 
+            640, 
+            641, 
+            642, 
+            643, 
+            644, 
+            645, 
+            646, 
+            647, 
+            648, 
+            649
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "Canadian"
+    }
+},
+{
+    "pk": 9, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            114, 
+            115, 
+            126, 
+            133, 
+            138, 
+            143, 
+            145, 
+            147, 
+            149, 
+            150, 
+            160, 
+            167, 
+            168, 
+            174, 
+            175, 
+            180, 
+            185, 
+            190, 
+            191, 
+            195, 
+            196, 
+            197
+        ], 
+        "name": "X1", 
+        "weight": 0, 
+        "white_card": [
+            696, 
+            697, 
+            698, 
+            699, 
+            700, 
+            701, 
+            702, 
+            703, 
+            704, 
+            705, 
+            706, 
+            707, 
+            708, 
+            709, 
+            710, 
+            711, 
+            712, 
+            713, 
+            714, 
+            715, 
+            716, 
+            717, 
+            718, 
+            719, 
+            720, 
+            721, 
+            722, 
+            723, 
+            724, 
+            725, 
+            726, 
+            727, 
+            728, 
+            729, 
+            730, 
+            731, 
+            732, 
+            733, 
+            734, 
+            735, 
+            736, 
+            737, 
+            738, 
+            739, 
+            740, 
+            741, 
+            742, 
+            743, 
+            744, 
+            745, 
+            746, 
+            747, 
+            748, 
+            749, 
+            750, 
+            751, 
+            752, 
+            753, 
+            754, 
+            755, 
+            756, 
+            757, 
+            758, 
+            759, 
+            760, 
+            761, 
+            762, 
+            763, 
+            764, 
+            765, 
+            766, 
+            767, 
+            768, 
+            769, 
+            770, 
+            771, 
+            772, 
+            773, 
+            774, 
+            775, 
+            776, 
+            777, 
+            778, 
+            779, 
+            780, 
+            781, 
+            782, 
+            783, 
+            784, 
+            785, 
+            786, 
+            787, 
+            788, 
+            789, 
+            790, 
+            791, 
+            792, 
+            793, 
+            794
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "X1"
+    }
+},
+{
+    "pk": 10, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            124, 
+            125, 
+            136, 
+            199, 
+            204
+        ], 
+        "name": "\"Oops\" Kit", 
+        "weight": 0, 
+        "white_card": [
+            612, 
+            613, 
+            614, 
+            615, 
+            616, 
+            617, 
+            618, 
+            619, 
+            620
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "\"Oops\" Kit"
+    }
+},
+{
+    "pk": 11, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            129, 
+            155, 
+            171, 
+            182, 
+            189, 
+            192
+        ], 
+        "name": "Holiday 2012", 
+        "weight": 0, 
+        "white_card": [
+            650, 
+            651, 
+            652, 
+            653, 
+            654, 
+            655, 
+            656, 
+            657, 
+            658, 
+            659, 
+            660, 
+            661, 
+            662, 
+            663, 
+            664, 
+            665, 
+            666, 
+            667, 
+            668, 
+            669, 
+            670, 
+            671
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "Holiday 2012"
+    }
+},
+{
+    "pk": 12, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            135, 
+            173
+        ], 
+        "name": "PAX East 2013 Promo Pack C", 
+        "weight": 0, 
+        "white_card": [
+            688, 
+            689, 
+            690, 
+            691, 
+            692, 
+            693, 
+            694, 
+            695
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "PAX East 2013 Promo Pack C"
+    }
+},
+{
+    "pk": 13, 
+    "model": "cards.cardset", 
+    "fields": {
+        "black_card": [
+            137, 
+            201
+        ], 
+        "name": "PAX East 2013 Promo Pack A", 
+        "weight": 0, 
+        "white_card": [
+            672, 
+            673, 
+            674, 
+            675, 
+            676, 
+            677, 
+            678, 
+            679
+        ], 
+        "base_deck": false, 
+        "active": true, 
+        "description": "PAX East 2013 Promo Pack A"
     }
 }
 ]

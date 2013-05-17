@@ -37,6 +37,14 @@ from cards.models import BlackCard, WhiteCard, CardSet, Game
 from card_fixturegen import DEFAULT_BLANK_MARKER, DATA_DIR
 
 
+def replace_blank(card_text):
+    card_text = card_text.replace('_______', DEFAULT_BLANK_MARKER)
+    card_text = card_text.replace('______', DEFAULT_BLANK_MARKER)
+    if '_' in card_text:
+        print 'GOT:', card_text
+        raise NotImplementedError('found an underscore, this may not be a real problem')
+    return card_text
+
 def doit():
     dbname = ':memory:'
     dbname = os.path.join(DATA_DIR, 'tmpdb.db')
@@ -138,6 +146,69 @@ def doit():
             if tmp_dict[card_ver]:
                 cardset = cardset_dict[card_ver]
                 cardset.white_card.add(white_card)
+    
+    #c.execute(""" select b."col2" as text, b.col3 as special, b.col4 as expansion_name from "Expansions Black" b  where text NOT NULL and text != '' and text != 'Text' and expansion_name NOT NULL and expansion_name != '' order by text LIMIT 15""")
+    c.execute(""" select b."col2" as text, b.col3 as special, b.col4 as expansion_name from "Expansions Black" b  where text NOT NULL and text != '' and text != 'Text' and expansion_name NOT NULL and expansion_name != '' order by text""")
+    print c.description
+    for row_id, row in enumerate(c.fetchall(), 1):
+        draw = 0
+    
+        print row_id, row
+        card_text = row[0]
+        special = row[1]
+        expansion_name = row[2]
+
+        card_text = replace_blank(card_text)
+        
+        pick = card_text.count(DEFAULT_BLANK_MARKER)
+        if pick < 1:
+            pick = 1
+        
+        if special:
+            print row
+            if special == 'PICK 2':
+                pick = 2
+            elif special == 'DRAW 2, PICK 3':
+                draw = 2
+                pick = 3
+            else:
+                raise NotImplementedError('unrecognized special')
+
+        cardset = cardset_dict.get(expansion_name)
+        # This shouldn't be needed, should have created earlier with black card expansion
+        if cardset is None:
+            cardset = CardSet(name=expansion_name, description=expansion_name, base_deck=False)
+            cardset.save()
+            cardset_dict[expansion_name] = cardset
+        
+        watermark = expansion_name  # could leave it blank
+        black_card = BlackCard(text=card_text, draw=draw, pick=pick, watermark=watermark)
+        print black_card
+        black_card.save()
+        cardset.black_card.add(black_card)
+    
+    # TODO handle "[italic]", etc.
+    #c.execute(""" select w."col2" as text, w.col3 as expansion_name from "Expansions White" w where text NOT NULL and text != '' and expansion_name NOT NULL and expansion_name != '' order by expansion_name, text LIMIT 15""")
+    c.execute(""" select w.col2 as text, w.col3 as expansion_name from "Expansions White" w where text NOT NULL and text != '' and text != 'Text' and expansion_name NOT NULL and expansion_name != '' order by expansion_name, text""")
+    print c.description
+    for row_id, row in enumerate(c.fetchall(), 1):
+        print row_id, row
+        card_text = row[0]
+        expansion_name = row[1]
+        
+        cardset = cardset_dict.get(expansion_name)
+        # This shouldn't be needed, should have created earlier with black card expansion
+        if cardset is None:
+            cardset = CardSet(name=expansion_name, description=expansion_name, base_deck=False)
+            cardset.save()
+            cardset_dict[expansion_name] = cardset
+        
+        watermark = expansion_name  # could leave it blank
+        white_card = WhiteCard(text=card_text, watermark=watermark)
+        print white_card
+        white_card.save()
+        cardset.white_card.add(white_card)
+    
     
     # this is probably not needed due to manual commit later
     for tmp_cardset_name in cardset_dict:
