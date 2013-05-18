@@ -391,7 +391,7 @@ class BlackCard(models.Model):
     text = models.CharField(max_length=255)
     draw = models.SmallIntegerField(default=0)
     pick = models.SmallIntegerField(default=1)
-    watermark = models.CharField(max_length=5, null=True)
+    watermark = models.CharField(max_length=100, null=True)
 
     class Meta:
         db_table = 'black_cards'
@@ -425,7 +425,7 @@ class BlackCard(models.Model):
 
 class WhiteCard(models.Model):
     text = models.CharField(max_length=255)
-    watermark = models.CharField(max_length=5, null=True)
+    watermark = models.CharField(max_length=100, null=True)
 
     class Meta:
         db_table = 'white_cards'
