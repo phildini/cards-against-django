@@ -88,14 +88,16 @@
         {% endif %}
     </p>
     
-    {% if player_name %}
-    <h3>Your cards</h3>
-    <ul>
-    {% for tmp_text in white_cards_text_list %}
-        <li class="btn draggable">{{tmp_text|safe}}</li>
-        </br>
-    {% endfor %}
-    </ul>
+    {% if not show_form %}
+        {% if player_name %}
+        <h3>Your cards</h3>
+        <ul>
+        {% for tmp_text in white_cards_text_list %}
+            <li class="btn draggable">{{tmp_text|safe}}</li>
+            </br>
+        {% endfor %}
+        </ul>
+        {% endif %}
     {% endif %}
 
     <p>Game ({{game.id}}): {{game.name}}.</p>
