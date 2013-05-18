@@ -8,8 +8,22 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.conf import settings
 
-from forms import PlayerForm, LobbyForm, JoinForm, ExitForm
-from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
+from forms import (
+    PlayerForm,
+    LobbyForm,
+    JoinForm,
+    ExitForm,
+)
+
+from models import (
+    BlackCard,
+    WhiteCard,
+    Game,
+    BLANK_MARKER,
+    GAMESTATE_SUBMISSION,
+    GAMESTATE_SELECTION,
+    avatar_url,
+)
 
 import log
 if settings.USE_PUSHER:
@@ -22,7 +36,9 @@ class LobbyView(FormView):
     form_class = LobbyForm
 
     def __init__(self, *args, **kwargs):
-        self.game_list = Game.objects.filter(is_active=True).values_list('id', 'name')
+        self.game_list = Game.objects.filter(
+            is_active=True
+        ).values_list('id', 'name')
 
     # FIXME remove this method
     def dispatch(self, request, *args, **kwargs):
@@ -60,6 +76,7 @@ class LobbyView(FormView):
                 existing_game = Game.objects.get(name=game_name)
             except Game.DoesNotExist:
                 existing_game = None
+
             if not existing_game:
                 # really a new game
                 tmp_game = Game(name=form.cleaned_data['new_game'])
@@ -67,12 +84,20 @@ class LobbyView(FormView):
                 tmp_game.gamedata = new_game
                 tmp_game.save()
                 self.game = tmp_game
+
         if existing_game:
             if not game_name:
                 game_name = form.cleaned_data.get('game_list')
+
             existing_game = Game.objects.get(name=game_name)  # existing_game maybe a bool
-            log.logger.debug('existing_game.gamedata %r', (existing_game.gamedata,))
-            log.logger.debug('existing_game.gamedata players %r', (existing_game.gamedata['players'],))
+
+            log.logger.debug('existing_game.gamedata %r',
+                (existing_game.gamedata,)
+            )
+            log.logger.debug('existing_game.gamedata players %r',
+                (existing_game.gamedata['players'],)
+            )
+
             existing_game.save()
 
         # Set the player session details
@@ -101,7 +126,7 @@ class GameView(FormView):
             if player_name and player_name not in game.gamedata['players']:
                 # check session name next
                 player_name = None
-        
+
         if player_name is None:
             # Assume AnonymousUser
             if session_details:
@@ -129,11 +154,13 @@ class GameView(FormView):
         log.logger.debug('game %r', game.gamedata['players'])
         black_card_id = game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
+
         context['show_form'] = self.can_show_form()
         if self.game.game_state == GAMESTATE_SELECTION:
             context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
         else:
             context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
+
         context['game'] = game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
 
@@ -143,13 +170,21 @@ class GameView(FormView):
 
         player_name = self.player_name
         if player_name:
-            white_cards_text_list = [mark_safe(card_text) for card_text, in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('text')]
+            white_cards_text_list = [
+                mark_safe(card_text)
+                for card_text,
+                in WhiteCard.objects.filter(
+                    id__in=game.gamedata['players'][player_name]['hand']
+                ).values_list('text')
+            ]
             context['white_cards_text_list'] = white_cards_text_list
 
             if game.gamedata['submissions'] and not is_card_czar:
                 player_submission = game.gamedata['submissions'].get(player_name)
                 if player_submission:
-                    context['filled_in_question'] = black_card.replace_blanks(player_submission)
+                    context['filled_in_question'] = black_card.replace_blanks(
+                        player_submission
+                    )
 
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
@@ -178,7 +213,12 @@ class GameView(FormView):
             log.logger.debug(winner)
             winner = winner[0]  # for some reason we have a list
             winner_name = winner
-            log.logger.debug('start new round %r %r %r', player_name, winner_name, winner)
+            log.logger.debug(
+                'start new round %r %r %r',
+                player_name,
+                winner_name,
+                winner
+            )
             game.start_new_round(player_name, winner_name, winner)
         else:
             submitted = form.cleaned_data['card_selection']
@@ -186,8 +226,12 @@ class GameView(FormView):
             white_card_list = [int(card) for card in submitted]
             log.logger.debug("white_card_list; %r", white_card_list)
             game.submit_white_cards(player_name, white_card_list)  # FIXME catch GameError and/or check before hand
+
             if game.gamedata['filled_in_texts']:
-                log.logger.debug('filled_in_texts %r', game.gamedata['filled_in_texts'])
+                log.logger.debug(
+                    'filled_in_texts %r',
+                    game.gamedata['filled_in_texts']
+                )
             log.logger.debug('%r', form.cleaned_data['card_selection'])
         game.save()
 
@@ -197,7 +241,12 @@ class GameView(FormView):
                 key=settings.PUSHER_KEY,
                 secret=settings.PUSHER_SECRET
             )
-            instance['my-channel'].trigger('my-event', {'message': 'hello world'})
+            instance['my-channel'].trigger(
+                'my-event',
+                {
+                    'message': 'hello world'
+                }
+            )
         return super(GameView, self).form_valid(form)
 
     def get_form_kwargs(self):
@@ -213,13 +262,21 @@ class GameView(FormView):
             if is_card_czar:
                 if game.game_state == GAMESTATE_SELECTION:
                     czar_selection_options = [
-                        (player_id, mark_safe(filled_in_card)) for player_id, filled_in_card in game.gamedata['filled_in_texts']
+                        (player_id, mark_safe(filled_in_card))
+                        for player_id, filled_in_card
+                        in game.gamedata['filled_in_texts']
                     ]
                     kwargs['cards'] = czar_selection_options
             else:
                 temp_black_card = BlackCard.objects.get(id=black_card_id)
                 kwargs['blanks'] = temp_black_card.pick
-                cards = [(card_id, mark_safe(card_text)) for card_id, card_text in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('id', 'text')]
+                cards = [
+                    (card_id, mark_safe(card_text))
+                    for card_id, card_text
+                    in WhiteCard.objects.filter(
+                        id__in=game.gamedata['players'][player_name]['hand']
+                    ).values_list('id', 'text')
+                ]
                 kwargs['cards'] = cards
         return kwargs
 
@@ -234,7 +291,9 @@ class GameView(FormView):
                     # show czar pick winner submission form
                     result = True
             else:
-                if self.game.game_state == GAMESTATE_SUBMISSION and self.game.gamedata['submissions'].get(self.player_name) is None:
+                if (self.game.game_state == GAMESTATE_SUBMISSION and
+                    not self.game.gamedata['submissions'].get(self.player_name)
+                ):
                     # show white card submission form
                     result = True
         return result
@@ -267,7 +326,11 @@ class GameExitView(FormView):
         if player_name:
             if player_name in game.gamedata['players']:
                 self.player_name = player_name
-                return super(GameExitView, self).dispatch(request, *args, **kwargs)
+                return super(GameExitView, self).dispatch(
+                    request,
+                    *args,
+                    **kwargs
+                )
         return redirect(reverse('game-view', kwargs={'pk': game.id}))
 
     def get_context_data(self, *args, **kwargs):
@@ -283,13 +346,12 @@ class GameExitView(FormView):
         player_name = self.player_name
         really_exit = form.cleaned_data['really_exit']
         log.logger.debug('view really_exit %r', really_exit)
-        
+
         if really_exit == 'yes':  # FIXME use bool via coerce?
             game.del_player(player_name)
             game.save()
         return super(GameExitView, self).form_valid(form)
-        
-        
+
 
 class GameJoinView(FormView):
     """This is a temp function that expects a user already exists and is logged in,
