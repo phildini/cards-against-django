@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
     var numFields = $('.field').length;
 
     $('.field li').addClass('choice');
@@ -30,4 +30,29 @@ $(document).ready(function(){
 
     //     }
     // });
+
+    window.LongPolling = (function($) {
+        var _timeout = null,
+            _options = {},
+            doLongPoll = function() {
+                $.ajax({
+                    url: '/game/' + _options.gameId + '/checkready',
+                    data: {}
+                }).done(function(res) {
+                    if (res.isReady) {
+                        window.location.reload(true);
+                    }
+                });
+            };
+
+        return {
+            startLongPolling: function(options) {
+                _options = $.extend({}, options);
+                _timeout = window.setInterval(doLongPoll, 5000);
+            },
+            stopLongPolling: function() {
+                window.clearInterval(_timeout);
+            }
+        };
+    }(jQuery));
 });

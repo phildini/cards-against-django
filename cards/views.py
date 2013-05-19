@@ -2,8 +2,12 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
+import json
+
+from django.http import Http404, HttpResponse
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
+from django.views.generic.base import View
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.conf import settings
@@ -299,39 +303,41 @@ class GameView(FormView):
         return result
 
 
+class GameCheckReadyView(GameViewMixin, View):
+    def get_context_data(self, *args, **kwargs):
+        context = {
+            'game_id': self.game.id,
+            'isReady': False,
+        }
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        self.game = self.get_game(kwargs['pk'])
+
+        return HttpResponse(
+            json.dumps(self.get_context_data()),
+            mimetype="application/json"
+        )
+
+
 class GameExitView(FormView):
     template_name = 'game_exit.html'
     form_class = ExitForm
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
-        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this will fail on non existent game
-        request = self.request
+        self.game = self.get_game(kwargs['pk'])
+        self.player_name = self.get_player_name()
 
-        self.request = request
-        self.game = game
-
-        player_name = None
-
-        if request.user.is_authenticated():
-            player_name = request.user.username
-            player_image_url = avatar_url(request.user.email)
-        else:
-            # Assume AnonymousUser
-            # also assume the set a name earlier....
-            session_details = request.session.get('session_details', {})
-            if session_details:
-                player_name = session_details.get('name')
-
-        if player_name:
-            if player_name in game.gamedata['players']:
-                self.player_name = player_name
+        if self.player_name:
+            if self.player_name in self.game.gamedata['players']:
                 return super(GameExitView, self).dispatch(
                     request,
                     *args,
                     **kwargs
                 )
-        return redirect(reverse('game-view', kwargs={'pk': game.id}))
+        return redirect(reverse('game-view', kwargs={'pk': self.game.id}))
 
     def get_context_data(self, *args, **kwargs):
         context = super(GameExitView, self).get_context_data(*args, **kwargs)
@@ -342,18 +348,16 @@ class GameExitView(FormView):
         return reverse('game-view', kwargs={'pk': self.game.id})
 
     def form_valid(self, form):
-        game = self.game
-        player_name = self.player_name
         really_exit = form.cleaned_data['really_exit']
         log.logger.debug('view really_exit %r', really_exit)
 
         if really_exit == 'yes':  # FIXME use bool via coerce?
-            game.del_player(player_name)
-            game.save()
+            self.game.del_player(self.player_name)
+            self.game.save()
         return super(GameExitView, self).form_valid(form)
 
 
-class GameJoinView(FormView):
+class GameJoinView(GameViewMixin, FormView):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.
 
@@ -369,35 +373,20 @@ class GameJoinView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
-        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this will fail on non existent game
-        request = self.request
+        self.game = self.get_game(kwargs['pk'])
 
-        self.request = request
-        self.game = game
+        self.player_name = self.get_player_name()
 
-        player_name = None
-
-        if request.user.is_authenticated():
-            player_name = request.user.username
-            player_image_url = avatar_url(request.user.email)
-        else:
-            # Assume AnonymousUser
-            # also assume the set a name earlier....
-            session_details = request.session.get('session_details', {})
-            if session_details:
-                player_name = session_details.get('name')
-                if player_name:
-                    player_image_url = avatar_url(player_name)
-
-        if player_name:
-            if player_name not in game.gamedata['players']:
-                game.add_player(player_name, player_image_url=player_image_url)
-                if len(game.gamedata['players']) == 1:
-                    game.start_new_round(winner_id=player_name)
-                game.save()
+        if self.player_name:
+            player_image_url = avatar_url(self.player_name)
+            if self.player_name not in self.game.gamedata['players']:
+                self.game.add_player(self.player_name, player_image_url=player_image_url)
+                if len(self.game.gamedata['players']) == 1:
+                    self.game.start_new_round(winner_id=self.player_name)
+                self.game.save()
 
             log.logger.debug('about to return reverse')
-            return redirect(reverse('game-view', kwargs={'pk': game.id}))
+            return redirect(reverse('game-view', kwargs={'pk': self.game.id}))
 
         return super(GameJoinView, self).dispatch(request, *args, **kwargs)
 
