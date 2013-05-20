@@ -52,7 +52,7 @@ class GameViewMixin(object):
 
         return self._games[game_id]
 
-    def get_player_name(self):
+    def get_player_name(self, check_game_status=True):
         player_name = None
 
         if self.request.user.is_authenticated():
@@ -66,7 +66,12 @@ class GameViewMixin(object):
             else:
                 player_name = None  # observer
 
-        if player_name and player_name not in self.game.gamedata['players']:
+        # XXX check_game_status shouldn't be necessary, refactor it out somehow!
+        if (
+            check_game_status and
+            player_name and
+            player_name not in self.game.gamedata['players']
+        ):
             player_name = None
 
         return player_name
@@ -379,7 +384,7 @@ class GameJoinView(GameViewMixin, FormView):
         log.logger.debug('%r %r', args, kwargs)
         self.game = self.get_game(kwargs['pk'])
 
-        self.player_name = self.get_player_name()
+        self.player_name = self.get_player_name(check_game_status=False)
 
         if self.player_name:
             player_image_url = avatar_url(self.player_name)
