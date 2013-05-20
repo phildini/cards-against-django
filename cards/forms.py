@@ -19,15 +19,16 @@ class PlayerForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         cards = kwargs.pop('cards', ())
-        blanks = kwargs.pop('blanks', 1)
+        self.blanks = kwargs.pop('blanks', 1)
+
         super(PlayerForm, self).__init__(*args, **kwargs)
-        for blank in xrange(blanks):
+
+        for blank in xrange(self.blanks):
             self.fields['card_selection%d' % (blank,)] = forms.ChoiceField(
                 widget=RadioSelect,
                 required=True,
                 choices=cards,
             )
-        self.blanks = blanks
 
     def clean(self):
         answers = []
@@ -42,6 +43,7 @@ class PlayerForm(forms.Form):
 
         log.logger.debug("player submit answers; %r", answers)
         self.cleaned_data['card_selection'] = answers
+
         return self.cleaned_data
 
 
@@ -49,7 +51,9 @@ class CzarForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         cards = kwargs.pop('cards', ())
+
         super(CzarForm, self).__init__(*args, **kwargs)
+
         self.fields['card_selection'] = forms.ChoiceField(
             widget=RadioSelect,
             required=True,
@@ -62,28 +66,37 @@ class LobbyForm(forms.Form):
     The form for creating or joining a game from the lobby view
     """
 
-    new_game = forms.CharField(max_length=140, required=False)
-    card_set = forms.ModelMultipleChoiceField(queryset=CardSet.objects.all().order_by('-name'))
+    new_game = forms.CharField(
+        max_length=140,
+        required=True
+    )
+    card_set = forms.ModelMultipleChoiceField(
+        queryset=CardSet.objects.all().order_by('-name')
+    )
 
     def __init__(self, *args, **kwargs):
-        try:
-            self.game_list = kwargs.pop('game_list')
-        except KeyError:
-            self.game_list = []
+        self.game_list = kwargs.pop('game_list', [])
+
         super(LobbyForm, self).__init__(*args, **kwargs)
+
         if self.game_list:
             self.fields["new_game"].initial = None
         else:
-            self.fields["new_game"].initial = random.choice(['cat', 'dog', 'bird'])  # DEBUG
+            self.fields["new_game"].initial = random.choice(
+                ['cat', 'dog', 'bird']
+            )  # DEBUG
 
-    def clean(self):
+    def clean_new_game(self):
         new_game = self.cleaned_data.get('new_game')
-        if not new_game:
-            raise ValidationError("Create a game needs a non empty name.")
+
         if new_game in self.game_list:
-            raise ValidationError("You can't create a game with the same name as an existing one. Them's the rules.")
+            raise ValidationError(
+                "You can't create a game with the same name as "
+                "an existing one. Them's the rules."
+            )
         #card_set = self.cleaned_data.get('card_set')  # check for non-empty cardsets?
-        return self.cleaned_data
+
+        return new_game
 
 
 class JoinForm(forms.Form):
@@ -91,20 +104,22 @@ class JoinForm(forms.Form):
     TODO password field..
     """
 
-    player_name = forms.CharField(max_length=100)
+    player_name = forms.CharField(
+        max_length=100,
+        required=True,
+    )
 
     def __init__(self, *args, **kwargs):
         super(JoinForm, self).__init__(*args, **kwargs)
+
         player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', player_counter)
         self.fields["player_name"].initial = 'Auto Player %d' % player_counter
 
-    def clean(self):
-        player_name = self.cleaned_data.get('player_name')
-        if not player_name:
-            raise ValidationError("Player needs a non empty name.")
+    def clean_player_name(self):
         # TODO check to make sure we don't have a dupe username in the game
-        return self.cleaned_data
+        return self.cleaned_data.get('player_name')
+
 
 class ExitForm(forms.Form):
     really_exit = forms.ChoiceField(

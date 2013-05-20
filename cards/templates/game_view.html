@@ -128,13 +128,19 @@
 {% endblock %}
 
 {% block scripts %}
-    {% if not show_form and use_pusher %}
     <script type="text/javascript">
+    {% if not show_form and use_pusher %}
         var pusher = new Pusher('{{ pusher_key }}');
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
             location.reload(true);
         });
-    </script>
+    {% elif not use_pusher %}
+        $(function() {
+            LongPolling.startLongPolling({
+                gameId: {{ game.id }}
+            });
+        });
     {% endif %}
+    </script>
 {% endblock %}
