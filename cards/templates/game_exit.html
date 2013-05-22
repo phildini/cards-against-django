@@ -5,7 +5,9 @@
     <h1>Are you sure?</h1>
 
     <form method="POST">
-        <input type="submit" value="Yes">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btrn-primary" value="Confirm">
     </form>
 </div>
 {% endblock %}
