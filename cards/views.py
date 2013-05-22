@@ -2,18 +2,79 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
+import json
+
+from django.http import Http404, HttpResponse
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
+from django.views.generic.base import View
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.conf import settings
 
-from forms import PlayerForm, LobbyForm, JoinForm, ExitForm
-from models import BlackCard, WhiteCard, Game, BLANK_MARKER, GAMESTATE_SUBMISSION, GAMESTATE_SELECTION, avatar_url
+from forms import (
+    PlayerForm,
+    LobbyForm,
+    JoinForm,
+    ExitForm,
+)
+
+from models import (
+    BlackCard,
+    WhiteCard,
+    Game,
+    BLANK_MARKER,
+    GAMESTATE_SUBMISSION,
+    GAMESTATE_SELECTION,
+    avatar_url,
+)
 
 import log
 if settings.USE_PUSHER:
     import pusher
+
+
+class GameViewMixin(object):
+    def get_game(self, game_id):
+        """Returns a game object for a given id
+
+        Raises Http404 if the game does not exist.
+        """
+
+        if not hasattr(self, '_games'):
+            self._games = {}
+
+        if game_id not in self._games:
+            try:
+                self._games[game_id] = Game.objects.get(pk=game_id)
+            except Game.DoesNotExist:
+                raise Http404
+
+        return self._games[game_id]
+
+    def get_player_name(self, check_game_status=True):
+        player_name = None
+
+        if self.request.user.is_authenticated():
+            player_name = self.request.user.username
+
+        if not player_name:
+            # Assume AnonymousUser
+            session_details = self.request.session.get('session_details')
+            if session_details:
+                player_name = session_details.get('name')
+            else:
+                player_name = None  # observer
+
+        # XXX check_game_status shouldn't be necessary, refactor it out somehow!
+        if (
+            check_game_status and
+            player_name and
+            player_name not in self.game.gamedata['players']
+        ):
+            player_name = None
+
+        return player_name
 
 
 class LobbyView(FormView):
@@ -22,11 +83,9 @@ class LobbyView(FormView):
     form_class = LobbyForm
 
     def __init__(self, *args, **kwargs):
-        self.game_list = Game.objects.filter(is_active=True).values_list('id', 'name')
-
-    # FIXME remove this method
-    def dispatch(self, request, *args, **kwargs):
-        return super(LobbyView, self).dispatch(request, *args, **kwargs)
+        self.game_list = Game.objects.filter(
+            is_active=True
+        ).values_list('id', 'name')
 
     def get_success_url(self):
         return reverse('game-join-view', kwargs={'pk': self.game.id})
@@ -60,6 +119,7 @@ class LobbyView(FormView):
                 existing_game = Game.objects.get(name=game_name)
             except Game.DoesNotExist:
                 existing_game = None
+
             if not existing_game:
                 # really a new game
                 tmp_game = Game(name=form.cleaned_data['new_game'])
@@ -67,12 +127,20 @@ class LobbyView(FormView):
                 tmp_game.gamedata = new_game
                 tmp_game.save()
                 self.game = tmp_game
+
         if existing_game:
             if not game_name:
                 game_name = form.cleaned_data.get('game_list')
+
             existing_game = Game.objects.get(name=game_name)  # existing_game maybe a bool
-            log.logger.debug('existing_game.gamedata %r', (existing_game.gamedata,))
-            log.logger.debug('existing_game.gamedata players %r', (existing_game.gamedata['players'],))
+
+            log.logger.debug('existing_game.gamedata %r',
+                (existing_game.gamedata,)
+            )
+            log.logger.debug('existing_game.gamedata players %r',
+                (existing_game.gamedata['players'],)
+            )
+
             existing_game.save()
 
         # Set the player session details
@@ -82,82 +150,70 @@ class LobbyView(FormView):
         return super(LobbyView, self).form_valid(form)
 
 
-class GameView(FormView):
+class GameView(GameViewMixin, FormView):
 
     template_name = 'game_view.html'
     form_class = PlayerForm
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
-        game = Game.objects.get(pk=kwargs['pk'])
-        if game.deactivate_old_game():
-            game.save()
+        self.game = self.get_game(kwargs['pk'])
 
-        player_name = None
-        session_details = self.request.session.get('session_details')
-        # TODO username determination should be a shared function, called by GameView() and GameJoinView()
-        if self.request.user.is_authenticated():
-            player_name = self.request.user.username
-            if player_name and player_name not in game.gamedata['players']:
-                # check session name next
-                player_name = None
-        
-        if player_name is None:
-            # Assume AnonymousUser
-            if session_details:
-                player_name = session_details.get('name')
-            else:
-                player_name = None  # observer
-        if player_name and player_name not in game.gamedata['players']:
-            player_name = None
+        if self.game.deactivate_old_game():
+            self.game.save()
 
-        card_czar_name = game.gamedata['card_czar']
-        is_card_czar = player_name == card_czar_name
+        self.player_name = self.get_player_name()
 
-        self.player_name = player_name
-        self.game = game
-        self.is_card_czar = is_card_czar
+        card_czar_name = self.game.gamedata['card_czar']
+        self.is_card_czar = self.player_name == card_czar_name
+
         return super(GameView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
         context = super(GameView, self).get_context_data(*args, **kwargs)
         log.logger.debug('context%r', context)
-        game = self.game
-        player_name = self.player_name
-        is_card_czar = self.is_card_czar
 
-        log.logger.debug('game %r', game.gamedata['players'])
-        black_card_id = game.gamedata['current_black_card']
+        log.logger.debug('game %r', self.game.gamedata['players'])
+        black_card_id = self.game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
+
         context['show_form'] = self.can_show_form()
         if self.game.game_state == GAMESTATE_SELECTION:
             context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
         else:
             context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
-        context['game'] = game
+
+        context['game'] = self.game
         context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
 
-        card_czar_name = game.gamedata['card_czar']
+        card_czar_name = self.game.gamedata['card_czar']
         context['card_czar_name'] = card_czar_name
-        context['card_czar_avatar'] = game.gamedata['players'][card_czar_name]['player_avatar']
+        context['card_czar_avatar'] = self.game.gamedata['players'][card_czar_name]['player_avatar']
 
-        player_name = self.player_name
-        if player_name:
-            white_cards_text_list = [mark_safe(card_text) for card_text, in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('text')]
+        if self.player_name:
+            white_cards_text_list = [
+                mark_safe(card_text)
+                for card_text,
+                in WhiteCard.objects.filter(
+                    id__in=self.game.gamedata['players'][self.player_name]['hand']
+                ).values_list('text')
+            ]
             context['white_cards_text_list'] = white_cards_text_list
 
-            if game.gamedata['submissions'] and not is_card_czar:
-                player_submission = game.gamedata['submissions'].get(player_name)
+            if self.game.gamedata['submissions'] and not self.is_card_czar:
+                player_submission = self.game.gamedata['submissions'].get(self.player_name)
                 if player_submission:
-                    context['filled_in_question'] = black_card.replace_blanks(player_submission)
+                    context['filled_in_question'] = black_card.replace_blanks(
+                        player_submission
+                    )
 
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
 
-        context['is_card_czar'] = is_card_czar
-        context['player_name'] = player_name
-        if player_name:
-            context['player_avatar'] = game.gamedata['players'][player_name]['player_avatar']
+        context['is_card_czar'] = self.is_card_czar
+        context['player_name'] = self.player_name
+        if self.player_name:
+            context['player_avatar'] = self.game.gamedata['players'][self.player_name]['player_avatar']
         if settings.USE_PUSHER:
             context['pusher_key'] = settings.PUSHER_KEY
 
@@ -169,27 +225,32 @@ class GameView(FormView):
         return reverse('game-view', kwargs={'pk': self.game.id})
 
     def form_valid(self, form):
-        game = self.game
-        player_name = self.player_name
-        is_card_czar = self.is_card_czar
-
-        if is_card_czar:
+        if self.is_card_czar:
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
             winner = winner[0]  # for some reason we have a list
             winner_name = winner
-            log.logger.debug('start new round %r %r %r', player_name, winner_name, winner)
-            game.start_new_round(player_name, winner_name, winner)
+            log.logger.debug(
+                'start new round %r %r %r',
+                self.player_name,
+                winner_name,
+                winner
+            )
+            self.game.start_new_round(self.player_name, winner_name, winner)
         else:
             submitted = form.cleaned_data['card_selection']
             # The form returns unicode strings. We want ints in our list.
             white_card_list = [int(card) for card in submitted]
             log.logger.debug("white_card_list; %r", white_card_list)
-            game.submit_white_cards(player_name, white_card_list)  # FIXME catch GameError and/or check before hand
-            if game.gamedata['filled_in_texts']:
-                log.logger.debug('filled_in_texts %r', game.gamedata['filled_in_texts'])
+            self.game.submit_white_cards(self.player_name, white_card_list)  # FIXME catch GameError and/or check before hand
+
+            if self.game.gamedata['filled_in_texts']:
+                log.logger.debug(
+                    'filled_in_texts %r',
+                    self.game.gamedata['filled_in_texts']
+                )
             log.logger.debug('%r', form.cleaned_data['card_selection'])
-        game.save()
+        self.game.save()
 
         if settings.USE_PUSHER:
             instance = pusher.Pusher(
@@ -197,29 +258,38 @@ class GameView(FormView):
                 key=settings.PUSHER_KEY,
                 secret=settings.PUSHER_SECRET
             )
-            instance['my-channel'].trigger('my-event', {'message': 'hello world'})
+            instance['my-channel'].trigger(
+                'my-event',
+                {
+                    'message': 'hello world'
+                }
+            )
         return super(GameView, self).form_valid(form)
 
     def get_form_kwargs(self):
-        game = self.game
-        player_name = self.player_name
-        is_card_czar = self.is_card_czar
-
-        black_card_id = game.gamedata['current_black_card']
+        black_card_id = self.game.gamedata['current_black_card']
         kwargs = super(GameView, self).get_form_kwargs()
-        if player_name:
+        if self.player_name:
             # get_form_kwargs() is called all the time even when we don't intend to show form
             # check above could be can_show_form()?
-            if is_card_czar:
-                if game.game_state == GAMESTATE_SELECTION:
+            if self.is_card_czar:
+                if self.game.game_state == GAMESTATE_SELECTION:
                     czar_selection_options = [
-                        (player_id, mark_safe(filled_in_card)) for player_id, filled_in_card in game.gamedata['filled_in_texts']
+                        (player_id, mark_safe(filled_in_card))
+                        for player_id, filled_in_card
+                        in self.game.gamedata['filled_in_texts']
                     ]
                     kwargs['cards'] = czar_selection_options
             else:
                 temp_black_card = BlackCard.objects.get(id=black_card_id)
                 kwargs['blanks'] = temp_black_card.pick
-                cards = [(card_id, mark_safe(card_text)) for card_id, card_text in WhiteCard.objects.filter(id__in=game.gamedata['players'][player_name]['hand']).values_list('id', 'text')]
+                cards = [
+                    (card_id, mark_safe(card_text))
+                    for card_id, card_text
+                    in WhiteCard.objects.filter(
+                        id__in=self.game.gamedata['players'][self.player_name]['hand']
+                    ).values_list('id', 'text')
+                ]
                 kwargs['cards'] = cards
         return kwargs
 
@@ -234,41 +304,49 @@ class GameView(FormView):
                     # show czar pick winner submission form
                     result = True
             else:
-                if self.game.game_state == GAMESTATE_SUBMISSION and self.game.gamedata['submissions'].get(self.player_name) is None:
+                if (self.game.game_state == GAMESTATE_SUBMISSION and
+                    not self.game.gamedata['submissions'].get(self.player_name)
+                ):
                     # show white card submission form
                     result = True
         return result
 
 
-class GameExitView(FormView):
+class GameCheckReadyView(GameViewMixin, View):
+    def get_context_data(self, *args, **kwargs):
+        context = {
+            'game_id': self.game.id,
+            'isReady': False,
+        }
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        self.game = self.get_game(kwargs['pk'])
+
+        return HttpResponse(
+            json.dumps(self.get_context_data()),
+            mimetype="application/json"
+        )
+
+
+class GameExitView(GameViewMixin, FormView):
     template_name = 'game_exit.html'
     form_class = ExitForm
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
-        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this will fail on non existent game
-        request = self.request
+        self.game = self.get_game(kwargs['pk'])
+        self.player_name = self.get_player_name()
 
-        self.request = request
-        self.game = game
-
-        player_name = None
-
-        if request.user.is_authenticated():
-            player_name = request.user.username
-            player_image_url = avatar_url(request.user.email)
-        else:
-            # Assume AnonymousUser
-            # also assume the set a name earlier....
-            session_details = request.session.get('session_details', {})
-            if session_details:
-                player_name = session_details.get('name')
-
-        if player_name:
-            if player_name in game.gamedata['players']:
-                self.player_name = player_name
-                return super(GameExitView, self).dispatch(request, *args, **kwargs)
-        return redirect(reverse('game-view', kwargs={'pk': game.id}))
+        if self.player_name:
+            if self.player_name in self.game.gamedata['players']:
+                return super(GameExitView, self).dispatch(
+                    request,
+                    *args,
+                    **kwargs
+                )
+        return redirect(reverse('game-view', kwargs={'pk': self.game.id}))
 
     def get_context_data(self, *args, **kwargs):
         context = super(GameExitView, self).get_context_data(*args, **kwargs)
@@ -279,19 +357,16 @@ class GameExitView(FormView):
         return reverse('game-view', kwargs={'pk': self.game.id})
 
     def form_valid(self, form):
-        game = self.game
-        player_name = self.player_name
         really_exit = form.cleaned_data['really_exit']
         log.logger.debug('view really_exit %r', really_exit)
-        
-        if really_exit == 'yes':  # FIXME use bool via coerce?
-            game.del_player(player_name)
-            game.save()
-        return super(GameExitView, self).form_valid(form)
-        
-        
 
-class GameJoinView(FormView):
+        if really_exit == 'yes':  # FIXME use bool via coerce?
+            self.game.del_player(self.player_name)
+            self.game.save()
+        return super(GameExitView, self).form_valid(form)
+
+
+class GameJoinView(GameViewMixin, FormView):
     """This is a temp function that expects a user already exists and is logged in,
     then joins them to an existing game.
 
@@ -307,35 +382,20 @@ class GameJoinView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
-        game = Game.objects.get(pk=kwargs['pk'])  # FIXME this will fail on non existent game
-        request = self.request
+        self.game = self.get_game(kwargs['pk'])
 
-        self.request = request
-        self.game = game
+        self.player_name = self.get_player_name(check_game_status=False)
 
-        player_name = None
-
-        if request.user.is_authenticated():
-            player_name = request.user.username
-            player_image_url = avatar_url(request.user.email)
-        else:
-            # Assume AnonymousUser
-            # also assume the set a name earlier....
-            session_details = request.session.get('session_details', {})
-            if session_details:
-                player_name = session_details.get('name')
-                if player_name:
-                    player_image_url = avatar_url(player_name)
-
-        if player_name:
-            if player_name not in game.gamedata['players']:
-                game.add_player(player_name, player_image_url=player_image_url)
-                if len(game.gamedata['players']) == 1:
-                    game.start_new_round(winner_id=player_name)
-                game.save()
+        if self.player_name:
+            player_image_url = avatar_url(self.player_name)
+            if self.player_name not in self.game.gamedata['players']:
+                self.game.add_player(self.player_name, player_image_url=player_image_url)
+                if len(self.game.gamedata['players']) == 1:
+                    self.game.start_new_round(winner_id=self.player_name)
+                self.game.save()
 
             log.logger.debug('about to return reverse')
-            return redirect(reverse('game-view', kwargs={'pk': game.id}))
+            return redirect(reverse('game-view', kwargs={'pk': self.game.id}))
 
         return super(GameJoinView, self).dispatch(request, *args, **kwargs)
 
