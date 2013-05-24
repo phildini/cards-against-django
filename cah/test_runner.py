@@ -1,8 +1,8 @@
-from django.test.simple import DjangoTestSuiteRunner
+from django_nose.runner import NoseTestSuiteRunner
 from django.conf import settings
 
 
-class TestSuiteRunner(DjangoTestSuiteRunner):
+class TestSuiteRunner(NoseTestSuiteRunner):
     def run_tests(self, test_labels, extra_tests=None, **kwargs):
         """Runs local app tests only.
 
