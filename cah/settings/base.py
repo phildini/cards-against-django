@@ -154,8 +154,13 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'south',
+)
+
+LOCAL_APPS = (
     'cards',
 )
+
+INSTALLED_APPS += LOCAL_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -179,3 +184,5 @@ LOGGING = {
         },
     }
 }
+
+TEST_RUNNER = 'cah.test_runner.TestSuiteRunner'

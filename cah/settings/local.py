@@ -6,7 +6,9 @@
 from .base import *
 
 DEBUG = True
-TEAMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = DEBUG
+
+SECRET_KEY = '1234567890'
 
 DATABASES = {
         'default': {
