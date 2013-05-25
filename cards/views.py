@@ -35,10 +35,12 @@ if settings.USE_PUSHER:
 
 
 class GameViewMixin(object):
+
     def get_game(self, game_id):
-        """Returns a game object for a given id
+        """Returns a game object for a given id.
 
         Raises Http404 if the game does not exist.
+
         """
 
         if not hasattr(self, '_games'):
@@ -66,7 +68,8 @@ class GameViewMixin(object):
             else:
                 player_name = None  # observer
 
-        # XXX check_game_status shouldn't be necessary, refactor it out somehow!
+        # XXX check_game_status shouldn't be necessary, refactor it out
+        # somehow!
         if (
             check_game_status and
             player_name and
@@ -105,7 +108,8 @@ class LobbyView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        session_details = self.request.session.get('session_details', {})  # FIXME
+        session_details = self.request.session.get(
+            'session_details', {})  # FIXME
         # FIXME if not a dict, make it a dict (upgrade old content)
         log.logger.debug('session_details %r', session_details)
 
@@ -132,7 +136,8 @@ class LobbyView(FormView):
             if not game_name:
                 game_name = form.cleaned_data.get('game_list')
 
-            existing_game = Game.objects.get(name=game_name)  # existing_game maybe a bool
+            existing_game = Game.objects.get(
+                name=game_name)  # existing_game maybe a bool
 
             log.logger.debug('existing_game.gamedata %r',
                 (existing_game.gamedata,)
@@ -145,7 +150,8 @@ class LobbyView(FormView):
 
         # Set the player session details
         session_details['game'] = game_name
-        self.request.session['session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
+        self.request.session[
+            'session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
 
         return super(LobbyView, self).form_valid(form)
 
@@ -179,29 +185,35 @@ class GameView(GameViewMixin, FormView):
 
         context['show_form'] = self.can_show_form()
         if self.game.game_state == GAMESTATE_SELECTION:
-            context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
+            context[
+                'refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
         else:
-            context['refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
+            context[
+                'refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
 
         context['game'] = self.game
-        context['black_card'] = black_card.text.replace(BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
+        context['black_card'] = black_card.text.replace(
+            BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
 
         card_czar_name = self.game.gamedata['card_czar']
         context['card_czar_name'] = card_czar_name
-        context['card_czar_avatar'] = self.game.gamedata['players'][card_czar_name]['player_avatar']
+        context['card_czar_avatar'] = self.game.gamedata[
+            'players'][card_czar_name]['player_avatar']
 
         if self.player_name:
             white_cards_text_list = [
                 mark_safe(card_text)
                 for card_text,
                 in WhiteCard.objects.filter(
-                    id__in=self.game.gamedata['players'][self.player_name]['hand']
+                    id__in=self.game.gamedata[
+                        'players'][self.player_name]['hand']
                 ).values_list('text')
             ]
             context['white_cards_text_list'] = white_cards_text_list
 
             if self.game.gamedata['submissions'] and not self.is_card_czar:
-                player_submission = self.game.gamedata['submissions'].get(self.player_name)
+                player_submission = self.game.gamedata[
+                    'submissions'].get(self.player_name)
                 if player_submission:
                     context['filled_in_question'] = black_card.replace_blanks(
                         player_submission
@@ -213,7 +225,8 @@ class GameView(GameViewMixin, FormView):
         context['is_card_czar'] = self.is_card_czar
         context['player_name'] = self.player_name
         if self.player_name:
-            context['player_avatar'] = self.game.gamedata['players'][self.player_name]['player_avatar']
+            context['player_avatar'] = self.game.gamedata[
+                'players'][self.player_name]['player_avatar']
         if settings.USE_PUSHER:
             context['pusher_key'] = settings.PUSHER_KEY
 
@@ -241,8 +254,9 @@ class GameView(GameViewMixin, FormView):
             submitted = form.cleaned_data['card_selection']
             # The form returns unicode strings. We want ints in our list.
             white_card_list = [int(card) for card in submitted]
-            log.logger.debug("white_card_list; %r", white_card_list)
-            self.game.submit_white_cards(self.player_name, white_card_list)  # FIXME catch GameError and/or check before hand
+            log.logger.debug('white_card_list; %r', white_card_list)
+            self.game.submit_white_cards(
+                self.player_name, white_card_list)  # FIXME catch GameError and/or check before hand
 
             if self.game.gamedata['filled_in_texts']:
                 log.logger.debug(
@@ -287,7 +301,8 @@ class GameView(GameViewMixin, FormView):
                     (card_id, mark_safe(card_text))
                     for card_id, card_text
                     in WhiteCard.objects.filter(
-                        id__in=self.game.gamedata['players'][self.player_name]['hand']
+                        id__in=self.game.gamedata[
+                            'players'][self.player_name]['hand']
                     ).values_list('id', 'text')
                 ]
                 kwargs['cards'] = cards
@@ -306,13 +321,14 @@ class GameView(GameViewMixin, FormView):
             else:
                 if (self.game.game_state == GAMESTATE_SUBMISSION and
                     not self.game.gamedata['submissions'].get(self.player_name)
-                ):
+                    ):
                     # show white card submission form
                     result = True
         return result
 
 
 class GameCheckReadyView(GameViewMixin, View):
+
     def get_context_data(self, *args, **kwargs):
         context = {
             'game_id': self.game.id,
@@ -326,7 +342,7 @@ class GameCheckReadyView(GameViewMixin, View):
 
         return HttpResponse(
             json.dumps(self.get_context_data()),
-            mimetype="application/json"
+            mimetype='application/json'
         )
 
 
@@ -367,14 +383,16 @@ class GameExitView(GameViewMixin, FormView):
 
 
 class GameJoinView(GameViewMixin, FormView):
-    """This is a temp function that expects a user already exists and is logged in,
-    then joins them to an existing game.
+
+    """This is a temp function that expects a user already exists and is logged
+    in, then joins them to an existing game.
 
     We want to support real user accounts but also anonymous, which is why
     this is a debug routine for now.
 
     TODO password protection check on join.
     TODO create a game (with no players, redirect to join game for game creator).
+
     """
 
     template_name = 'game_join.html'
@@ -389,7 +407,8 @@ class GameJoinView(GameViewMixin, FormView):
         if self.player_name:
             player_image_url = avatar_url(self.player_name)
             if self.player_name not in self.game.gamedata['players']:
-                self.game.add_player(self.player_name, player_image_url=player_image_url)
+                self.game.add_player(
+                    self.player_name, player_image_url=player_image_url)
                 if len(self.game.gamedata['players']) == 1:
                     self.game.start_new_round(winner_id=self.player_name)
                 self.game.save()
@@ -405,8 +424,8 @@ class GameJoinView(GameViewMixin, FormView):
         log.logger.debug('context %r', context)
         # if we are here we need a player name (or they need to log in so we can get a player name)
         # TODO and maybe a password
-        #request = self.request
-        #game = self.game
+        # request = self.request
+        # game = self.game
 
         return context
 
@@ -420,7 +439,7 @@ class GameJoinView(GameViewMixin, FormView):
         self.request.session['session_details'] = session_details
         return super(GameJoinView, self).form_valid(form)
 
-#######################
+#
 
 
 def debug_deactivate_old_games(request):

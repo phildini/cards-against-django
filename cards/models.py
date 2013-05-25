@@ -22,15 +22,15 @@ from django.utils.html import escape
 import log
 
 
-ONE_HOUR = datetime.timedelta(seconds=60*60*1)
+ONE_HOUR = datetime.timedelta(seconds=60 * 60 * 1)
+
 
 def gravatar_url(email, size=50, default='monsterid'):
-    """Generate url for Gravatar image
-    email - email address
-    default = default_image_url or default hash type, for more default
-    options see http://en.gravatar.com/site/implement/images/
-    """
-    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+    """Generate url for Gravatar image email - email address default =
+    default_image_url or default hash type, for more default options see
+    http://en.gravatar.com/site/implement/images/"""
+    gravatar_url = 'http://www.gravatar.com/avatar/' + \
+        hashlib.md5(email.lower()).hexdigest() + '?'
     if default:
         gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
     else:
@@ -55,17 +55,20 @@ class GameError(BaseGameException):
 
 class Game(TimeStampedModel):
 
-    name = models.CharField(max_length=140, unique=True)  # could use pk, but we can use id.
+    name = models.CharField(
+        max_length=140, unique=True)  # could use pk, but we can use id.
     game_state = models.CharField(max_length=140)
     """game states;
         submission - waiting for white cards
         selection - waiting for czar
         transition - where new players get added into active list).
     """
-    
+
     is_active = models.BooleanField(default=True)
-    
-    gamedata = JSONField()  # NOTE character export/import (and this includes Admin editing) screws up json payload....
+
+    gamedata = JSONField()
+                         # NOTE character export/import (and this includes
+                         # Admin editing) screws up json payload....
     """gamedata  is a dict
     {
         players: {
@@ -102,75 +105,79 @@ class Game(TimeStampedModel):
             is_active = '<font color="red">DEAD</font>'
         modified_str = self.modified.strftime('%Y-%m-%d %H:%M')
         return mark_safe('%s %s - %s' % (is_active, modified_str, self.name))
-    
+
     def deactivate_old_game(self, older_than=None):
-        """Check if game should be deactived due to time out, using
+        """Check if game should be deactived due to time out, using.
+
         `older_than` datetime to compare against, if not specified
         "now - 2 hours" is used.
-        
+
         Returns True if the game was timed out and updated.
+
         """
         if self.is_active:
             now = datetime.datetime.now()
-            older_than = older_than or (now - (ONE_HOUR * 2))  # TODO use a global value for game timeout
+            older_than = older_than or (now - (
+                ONE_HOUR * 2))  # TODO use a global value for game timeout
             if self.modified <= older_than:
                 self.is_active = False
-                #self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not needed if game_pre_save() is used
+                # self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not
+                # needed if game_pre_save() is used
                 self.name = 'TIMEDOUT - %s' % (self.name,)
                 return True
-    
+
     @classmethod
     def deactivate_old_games(cls, older_than=None):
-        """`older_than` datetime to compare against, if not specified now - 2 hours is used.
-        """
-        older_than = older_than or (datetime.datetime.now() - (ONE_HOUR * 2))  # TODO use a global value for game timeout
+        """`older_than` datetime to compare against, if not specified now - 2
+        hours is used."""
+        older_than = older_than or (datetime.datetime.now() - (
+            ONE_HOUR * 2))  # TODO use a global value for game timeout
         """NOTE for update below Django appears to have a bug with sqlite3,
         it generates bad SQL with the wrong string concat operator, e.g.:
-        
+
             UPDATE "cards_game"
             SET
                 "is_active" = 0,
-                "name" = (('DONE ' + "cards_game"."modified") + ' - ') + "cards_game"."name" 
+                "name" = (('DONE ' + "cards_game"."modified") + ' - ') + "cards_game"."name"
             WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
-        
+
         wrong query uses "+" when it should use "||"
-        
+
             UPDATE "cards_game"
             SET
                 "is_active" = 0,
-                "name" = (('DONE ' || "cards_game"."modified") || ' - ') || "cards_game"."name" 
+                "name" = (('DONE ' || "cards_game"."modified") || ' - ') || "cards_game"."name"
             WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
         """
-        cls.objects.filter(is_active=True, modified__lte=older_than).update(is_active=False, name='DONE ' + F('modified') + ' - ' + F('name'))
+        cls.objects.filter(is_active=True, modified__lte=older_than).update(
+            is_active=False, name='DONE ' + F('modified') + ' - ' + F('name'))
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
-        white_card_list - list of white card ids
-        
-        TODO sanity checks
-            player has cards
-        
-        Currently this is called after form validation.
-        """
-        
+        white_card_list - list of white card ids TODO sanity checks player has
+        cards Currently this is called after form validation."""
+
         if self.gamedata['card_czar'] == player_id:
-            raise GameError('Player "%s" is card czar and can\'t submit white cards' % player_id)
+            raise GameError(
+                'Player "%s" is card czar and can\'t submit white cards' % player_id)
         if self.gamedata['submissions'].get(player_id):
             raise GameError('Player "%s" already submitted a card' % player_id)
         if player_id not in self.gamedata['players']:
-            raise GameError('Player "%s" not in game "%s"' % (player_id, self.name))
-        
+            raise GameError('Player "%s" not in game "%s"' % (
+                player_id, self.name))
+
         self.gamedata['submissions'][player_id] = white_card_list
         for card in white_card_list:
             self.gamedata['players'][player_id]['hand'].remove(card)
         self.check_have_needed_white_cards()
-    
+
     def check_have_needed_white_cards(self):
         if self.gamedata['submissions']:
             if len(self.gamedata['submissions']) == len(self.gamedata['players']) - 1:
-                # this was the last player to submit, now we are waiting on the card czar to pick a winner
+                # this was the last player to submit, now we are waiting on the
+                # card czar to pick a winner
                 self.game_state = GAMESTATE_SELECTION
-                
+
                 # fill in black card blanks.... and cache in gamedata
                 black_card_id = self.gamedata['current_black_card']
                 temp_black_card = BlackCard.objects.get(id=black_card_id)
@@ -180,13 +187,13 @@ class Game(TimeStampedModel):
                     tmp_text = temp_black_card.replace_blanks(white_card_list)
                     filled_in_texts.append((player_name, tmp_text))
                 random.shuffle(filled_in_texts)
-                self.gamedata['filled_in_texts'] = filled_in_texts  # FIXME rename this
+                self.gamedata[
+                    'filled_in_texts'] = filled_in_texts  # FIXME rename this
         else:
             if self.game_state == GAMESTATE_SELECTION:
                 self.game_state = GAMESTATE_SUBMISSION
                 self.gamedata['filled_in_texts'] = []
-            
-    
+
     def deal_white_card(self):
         if len(self.gamedata['white_deck']) == 0:
             # re-use discard white cards
@@ -199,8 +206,8 @@ class Game(TimeStampedModel):
         return white_card
 
     def start_new_round(self, czar_name=None, winner=None, winner_id=None):
-        """NOTE this does not reset a game, it resets the cards on the table ready for the next round
-        """
+        """NOTE this does not reset a game, it resets the cards on the table
+        ready for the next round."""
         white_submissions = self.gamedata['submissions']
         if self.gamedata['filled_in_texts'] and winner:
             for player_name, filled_in_text in self.gamedata['filled_in_texts']:
@@ -212,7 +219,7 @@ class Game(TimeStampedModel):
         self.gamedata['last_round_winner'] = winner
         self.gamedata['filled_in_texts'] = None
         self.game_state = GAMESTATE_SUBMISSION
-        
+
         if winner:
             self.gamedata['players'][winner]['wins'] += 1
 
@@ -227,7 +234,8 @@ class Game(TimeStampedModel):
                 for player_name in self.gamedata['players']:
                     # check we are not the card czar
                     if player_name != czar_name:
-                        self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
+                        self.gamedata['players'][player_name][
+                            'hand'].append(self.deal_white_card())
 
         # deal new black card to game
         if len(self.gamedata['black_deck']) == 0:
@@ -236,29 +244,32 @@ class Game(TimeStampedModel):
             self.gamedata['used_black_deck'] = []
             random.shuffle(tmp_black_deck)
             self.gamedata['black_deck'] = tmp_black_deck
-        self.gamedata['current_black_card'] = black_card = self.gamedata['black_deck'].pop()
-        curr_black_card = BlackCard.objects.get(id=self.gamedata['current_black_card'])
+        self.gamedata['current_black_card'] = black_card = self.gamedata[
+            'black_deck'].pop()
+        curr_black_card = BlackCard.objects.get(
+            id=self.gamedata['current_black_card'])
         if prev_black_card_id is not None:
             self.gamedata['used_black_deck'].append(prev_black_card_id)
 
         # check if we draw additional cards based on black card
-        # NOTE anyone who joins after this point will not be given the extra draw cards
+        # NOTE anyone who joins after this point will not be given the extra
+        # draw cards
         white_card_draw = curr_black_card.draw
         for _ in xrange(white_card_draw):
             for player_name in self.gamedata['players']:
                 # check we are not the card czar
                 if player_name != czar_name:
-                    self.gamedata['players'][player_name]['hand'].append(self.deal_white_card())
-        
+                    self.gamedata['players'][player_name][
+                        'hand'].append(self.deal_white_card())
+
         for tmp_name in white_submissions:
             for x in white_submissions[tmp_name]:
                 self.gamedata['used_white_deck'].append(x)
 
-
     def create_game(self, card_sets=None):
-        """Where `card_sets` is an iterable collection of CardSet"""
-        
-        log.logger.debug("New Game called")
+        """Where `card_sets` is an iterable collection of CardSet."""
+
+        log.logger.debug('New Game called')
         """Create shuffled decks
         uses built in random, it may be better to plug-in a better
         random init routine and/also consider using
@@ -266,29 +277,34 @@ class Game(TimeStampedModel):
 
         Also take a look at http://code.google.com/p/gcge/
         """
-        
-        card_sets = card_sets or CardSet.objects.get(name='Second Version')  # default card deck
+
+        card_sets = card_sets or CardSet.objects.get(
+            name='Second Version')  # default card deck
         # TODO add cardset(s) used to Games model?
 
         shuffled_white = []
         shuffled_black = []
-        
+
         for card_set_name in card_sets:
             card_pack = CardSet.objects.get(name=card_set_name)
-            shuffled_white += [x[0] for x in card_pack.white_card.values_list('id')]
-            shuffled_black += [x[0] for x in card_pack.black_card.values_list('id')]
-        
+            shuffled_white += [x[0]
+                               for x in card_pack.white_card.values_list('id')]
+            shuffled_black += [x[0]
+                               for x in card_pack.black_card.values_list('id')]
+
         # Now remove dupes.. if this was via a direct SQL would simple SELECT DISTINCT..... WHERE .. cardset_name in ()....
-        # TODO check if ORM query look for multiple entries and remove dupes from ManyToMany
+        # TODO check if ORM query look for multiple entries and remove dupes
+        # from ManyToMany
         shuffled_white = list(set(shuffled_white))
         shuffled_black = list(set(shuffled_black))
-        
+
         random.shuffle(shuffled_white)
         random.shuffle(shuffled_black)
 
         self.game_state = GAMESTATE_SUBMISSION  # FIXME remove this and make calls to start_new_round()
 
-        # Basic data object for a game. Eventually, this will be saved in cache.
+        # Basic data object for a game. Eventually, this will be saved in
+        # cache.
         return {
             'players': {},
             'current_black_card': None,  # get a new one my shuffled_black.pop()
@@ -306,9 +322,8 @@ class Game(TimeStampedModel):
 
     # FIXME should be using a player object
     def create_player(self, player_name, player_image_url=None):
-        """if player_image_url is ommited a default image is generated.
-        """
-        log.logger.debug("new player called")
+        """if player_image_url is ommited a default image is generated."""
+        log.logger.debug('new player called')
         # Basic data obj for player. Eventually, this will be saved in cache.
         player_image_url = player_image_url or avatar_url(player_name)
         return {
@@ -321,7 +336,8 @@ class Game(TimeStampedModel):
         log.logger.debug(player_name)
         log.logger.debug(self.gamedata)
         if player_name not in self.gamedata['players']:
-            player = self.create_player(player_name, player_image_url=player_image_url)
+            player = self.create_player(
+                player_name, player_image_url=player_image_url)
             player['hand'] = [
                 self.deal_white_card() for x in xrange(10)
             ]
@@ -341,10 +357,11 @@ class Game(TimeStampedModel):
             del self.gamedata['players'][player_name]
             if self.gamedata['card_czar'] == player_name:
                 if self.gamedata['players']:
-                    self.gamedata['card_czar'] = list(self.gamedata['players'].keys())[0]
+                    self.gamedata['card_czar'] = list(
+                        self.gamedata['players'].keys())[0]
                 else:
                     self.gamedata['card_czar'] = ''
-            
+
             # submissions cleanup
             if player_name in self.gamedata['submissions']:
                 # remove and check if gamestate needs to change?
@@ -352,9 +369,10 @@ class Game(TimeStampedModel):
                     self.gamedata['white_deck'].insert(0, tmp_card)
                 del self.gamedata['submissions'][player_name]
             self.check_have_needed_white_cards()
-            
+
             # last_round_winner cleanup -- FIXME I'm not sure this is used/needed, remove from model/template? appears to only be used in old player template which should also be removed
-            ### unset session name?? probably not a good idea
+            # unset session name?? probably not a good idea
+
 
 def game_pre_save(sender, **kwargs):
     game = kwargs['instance']
@@ -397,17 +415,21 @@ class BlackCard(models.Model):
         db_table = 'black_cards'
 
     def replace_blanks(self, white_card_num_list):
-        log.logger.debug("black card, white_card_num_list %r", white_card_num_list)
+        log.logger.debug(
+            'black card, white_card_num_list %r', white_card_num_list)
         card_text = self.text
         num_blanks = card_text.count(BLANK_MARKER)
         assert self.pick == len(white_card_num_list)
-        
+
         for tmp_num in range(num_blanks + 1, (self.pick - num_blanks) + 1):
             card_text = card_text + '</br> ' + BLANK_MARKER
-        
-        # assume num_blanks count is valid and len(white_card_num_list) == num_blanks
-        white_card_text_dict = dict(WhiteCard.objects.filter(id__in=white_card_num_list).values_list('id', 'text'))
-        log.logger.debug("black card, white_card_text_dict %r", white_card_text_dict)
+
+        # assume num_blanks count is valid and len(white_card_num_list) ==
+        # num_blanks
+        white_card_text_dict = dict(WhiteCard.objects.filter(
+            id__in=white_card_num_list).values_list('id', 'text'))
+        log.logger.debug(
+            'black card, white_card_text_dict %r', white_card_text_dict)
         for white_id in white_card_num_list:
             white_text = white_card_text_dict[white_id]
             white_text = white_text.rstrip('.')
@@ -435,16 +457,21 @@ class WhiteCard(models.Model):
 
 
 class CardSet(models.Model):
-    """
-        class Card_Set(models.Model):  # Using underscore ensures "card_set_id" column name is used
+
+    """class Card_Set(models.Model):
+
+    # Using underscore ensures "card_set_id" column name is used
+
     """
     active = models.BooleanField(default=True)
     name = models.CharField(max_length=255, unique=True)
     base_deck = models.BooleanField(default=True)
     description = models.CharField(max_length=255)
     weight = models.SmallIntegerField(default=0)
-    black_card = models.ManyToManyField(BlackCard, db_table='card_set_black_card')
-    white_card = models.ManyToManyField(WhiteCard, db_table='card_set_white_card')
+    black_card = models.ManyToManyField(
+        BlackCard, db_table='card_set_black_card')
+    white_card = models.ManyToManyField(
+        WhiteCard, db_table='card_set_white_card')
 
     class Meta:
         db_table = 'card_set'

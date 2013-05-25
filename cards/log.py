@@ -3,4 +3,4 @@
 
 import logging
 
-logger = logging.getLogger("cah")
+logger = logging.getLogger('cah')

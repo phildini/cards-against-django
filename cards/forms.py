@@ -38,10 +38,11 @@ class PlayerForm(forms.Form):
             if single_answer in answers:
                 raise ValidationError("You can't use the same answer twice")
             else:
-                log.logger.debug("player submit white card; %s, %r", field_name, single_answer)
+                log.logger.debug(
+                    'player submit white card; %s, %r', field_name, single_answer)
                 answers.append(single_answer)
 
-        log.logger.debug("player submit answers; %r", answers)
+        log.logger.debug('player submit answers; %r', answers)
         self.cleaned_data['card_selection'] = answers
 
         return self.cleaned_data
@@ -62,9 +63,8 @@ class CzarForm(forms.Form):
 
 
 class LobbyForm(forms.Form):
-    """
-    The form for creating or joining a game from the lobby view
-    """
+
+    """The form for creating or joining a game from the lobby view."""
 
     new_game = forms.CharField(
         max_length=140,
@@ -80,9 +80,9 @@ class LobbyForm(forms.Form):
         super(LobbyForm, self).__init__(*args, **kwargs)
 
         if self.game_list:
-            self.fields["new_game"].initial = None
+            self.fields['new_game'].initial = None
         else:
-            self.fields["new_game"].initial = random.choice(
+            self.fields['new_game'].initial = random.choice(
                 ['cat', 'dog', 'bird']
             )  # DEBUG
 
@@ -94,14 +94,18 @@ class LobbyForm(forms.Form):
                 "You can't create a game with the same name as "
                 "an existing one. Them's the rules."
             )
-        #card_set = self.cleaned_data.get('card_set')  # check for non-empty cardsets?
+        # card_set = self.cleaned_data.get('card_set')  # check for non-empty
+        # cardsets?
 
         return new_game
 
 
 class JoinForm(forms.Form):
-    """The form for setting user name when joining a game
+
+    """The form for setting user name when joining a game.
+
     TODO password field..
+
     """
 
     player_name = forms.CharField(
@@ -114,7 +118,7 @@ class JoinForm(forms.Form):
 
         player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', player_counter)
-        self.fields["player_name"].initial = 'Auto Player %d' % player_counter
+        self.fields['player_name'].initial = 'Auto Player %d' % player_counter
 
     def clean_player_name(self):
         # TODO check to make sure we don't have a dupe username in the game
@@ -123,7 +127,7 @@ class JoinForm(forms.Form):
 
 class ExitForm(forms.Form):
     really_exit = forms.ChoiceField(
-                widget=RadioSelect,
-                required=True,
-                choices=[('yes', 'yes'), ('no', 'no')],
-            )
+        widget=RadioSelect,
+        required=True,
+        choices=[('yes', 'yes'), ('no', 'no')],
+    )

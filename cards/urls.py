@@ -10,8 +10,13 @@ from views import (
 )
 
 urlpatterns = patterns('',
-    url(r'^(?P<pk>\d+)/$', GameView.as_view(), name="game-view"),
-    url(r'^(?P<pk>\d+)/checkready$', GameCheckReadyView.as_view(), name="game-check-ready-view"),
-    url(r'^(?P<pk>\d+)/join$', GameJoinView.as_view(), name="game-join-view"),
-    url(r'^(?P<pk>\d+)/exit$', GameExitView.as_view(), name="game-exit-view"),
-)
+                       url(r'^(?P<pk>\d+)/$',
+                           GameView.as_view(), name='game-view'),
+                       url(r'^(?P<pk>\d+)/checkready$',
+                           GameCheckReadyView.as_view(
+                           ), name='game-check-ready-view'),
+                       url(r'^(?P<pk>\d+)/join$',
+                           GameJoinView.as_view(), name='game-join-view'),
+                       url(r'^(?P<pk>\d+)/exit$',
+                           GameExitView.as_view(), name='game-exit-view'),
+                       )
