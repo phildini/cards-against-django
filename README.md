@@ -20,7 +20,7 @@ Steps to run:
     
         easy_install django-debug-toolbar
 
-4. set secure key:
+4. set secure key if you'd like. a simple one is set on the local settings:
 
         export CAH_KEY='[some crypto-ish key of your choosing]'
 
