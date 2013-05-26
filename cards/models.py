@@ -117,8 +117,8 @@ class Game(TimeStampedModel):
         """
         if self.is_active:
             now = datetime.datetime.now()
-            older_than = older_than or (now - (
-                ONE_HOUR * 2))  # TODO use a global value for game timeout
+            # TODO use a global value for game timeout
+            older_than = older_than or (now - (ONE_HOUR * 2))
             if self.modified <= older_than:
                 self.is_active = False
                 # self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not
@@ -130,8 +130,9 @@ class Game(TimeStampedModel):
     def deactivate_old_games(cls, older_than=None):
         """`older_than` datetime to compare against, if not specified now - 2
         hours is used."""
-        older_than = older_than or (datetime.datetime.now() - (
-            ONE_HOUR * 2))  # TODO use a global value for game timeout
+        now = datetime.datetime.now()
+        # TODO use a global value for game timeout
+        older_than = older_than or (now - (ONE_HOUR * 2))
         """NOTE for update below Django appears to have a bug with sqlite3,
         it generates bad SQL with the wrong string concat operator, e.g.:
 
