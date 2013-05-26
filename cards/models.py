@@ -124,7 +124,7 @@ class Game(TimeStampedModel):
                 self.is_active = False
                 # self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not
                 # needed if game_pre_save() is used
-                self.name = 'TIMEDOUT - %s' % (self.name,)
+                self.name = 'TIMEDOUT(%s) - %s' % (now, self.name)
                 return True
 
     @classmethod
@@ -151,7 +151,7 @@ class Game(TimeStampedModel):
             WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
         """
         cls.objects.filter(is_active=True, modified__lte=older_than).update(
-            is_active=False, name='DONE ' + F('modified') + ' - ' + F('name'))
+            is_active=False, name='TIMEDOUT(' + str(now) + ') - ' + F('name'))
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
