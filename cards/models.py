@@ -24,6 +24,8 @@ import log
 
 ONE_HOUR = datetime.timedelta(seconds=60 * 60 * 1)
 
+DEFAULT_GAME_TIMEOUT = 2 * ONE_HOUR
+
 
 def gravatar_url(email, size=50, default='monsterid'):
     """Generate url for Gravatar image email - email address default =
@@ -85,12 +87,12 @@ class Game(TimeStampedModel):
         current_black_card = None|int,
         submissions = {dict of player name: [list of card numbers]}
         round: int,  # round number where round 1 is the first round
-        card_czar = NOTE this is currently a str of a player name # 'player1',  # int index into 'players'
+        card_czar = string of a player name, e.g. 'player1'
         black_deck = [ of card black numbers ],
         white_deck = [ of card white numbers ],
         used_black_deck = [ of card black numbers ],
         used_white_deck = [ of card white numbers ],
-        filled_in_texts = None | [ (player name, filled in black card text), .... ]
+        filled_in_texts = None | [ (player name, filled in black card text), ]
     }
 
     """
@@ -117,8 +119,7 @@ class Game(TimeStampedModel):
         """
         if self.is_active:
             now = datetime.datetime.now()
-            # TODO use a global value for game timeout
-            older_than = older_than or (now - (ONE_HOUR * 2))
+            older_than = older_than or (now - DEFAULT_GAME_TIMEOUT)
             if self.modified <= older_than:
                 self.is_active = False
                 # self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not
@@ -131,8 +132,7 @@ class Game(TimeStampedModel):
         """`older_than` datetime to compare against, if not specified now - 2
         hours is used."""
         now = datetime.datetime.now()
-        # TODO use a global value for game timeout
-        older_than = older_than or (now - (ONE_HOUR * 2))
+        older_than = older_than or (now - DEFAULT_GAME_TIMEOUT)
         """NOTE for update below Django appears to have a bug with sqlite3,
         it generates bad SQL with the wrong string concat operator, e.g.:
 
