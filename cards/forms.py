@@ -4,6 +4,9 @@
 
 import random
 
+from django.contrib.auth.models import User
+from django.db.models import Q
+
 from django import forms
 from django.forms.widgets import (
     RadioSelect,
@@ -121,8 +124,18 @@ class JoinForm(forms.Form):
         self.fields['player_name'].initial = 'Auto Player %d' % player_counter
 
     def clean_player_name(self):
-        # TODO check to make sure we don't have a dupe username in the game
-        return self.cleaned_data.get('player_name')
+        # check to make sure we don't have an existing registered username/email
+        player_name = self.cleaned_data.get('player_name')
+        existing_users = User.objects.filter(
+                Q(username__iexact=player_name) | Q(email__iexact=player_name)
+            ).values_list('id')
+        if existing_users:
+            raise ValidationError(
+                "There is aleady a registered user with that name. "
+                "Enter a different username."
+            )
+
+        return player_name
 
 
 class ExitForm(forms.Form):
