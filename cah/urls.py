@@ -29,4 +29,5 @@ urlpatterns = patterns('',
     url(r'^game/', include('cards.urls')),
     url(r'^super_secret_thing$', debug_deactivate_old_games),
     url(r'^admin/', include(admin.site.urls)),
+    (r'^accounts/', include('allauth.urls')),
 )
