@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
-    <title> {% block title %} This is totally not that game. {% endblock title %}</title>
+    <title> {% block title %} This is totally not that game. {% endblock %}</title>
     <head>
-        {% block stylsheets %}
+        {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
             <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
             <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}main.css">
@@ -19,9 +19,20 @@
     </head>
 
     <body>
+        {% block account %}
+            {% load socialaccount %}
+            <div class="container">
+            {% if user.is_authenticated %}
+                <p> Welcome, {{ user.email }}</p>
+                <a href="{% url 'account_logout' %}">Log Out</a>
+            {% else %}
+                <a href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
+            {% endif %}
+            </div>
+        {% endblock %}
         {% block content %}
             Hello!
-        {% endblock content%}
+        {% endblock %}
 
         <div class="container">
             
