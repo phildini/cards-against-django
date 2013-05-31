@@ -193,7 +193,7 @@ SOCIALACCOUNT_PROVIDERS = \
 
 ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = "none"  # If set to optional, our django app then attempts an SMTP connection (which may fail), we trust facebook already checked the user out.
 ACCOUNT_PASSWORD_MIN_LENGTH = 6
 
 LOCAL_APPS = (
