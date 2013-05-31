@@ -10,6 +10,8 @@ import urllib
 from django.db import models
 from django.db.models import F
 from django.db.models.signals import pre_save
+import django.db.transaction
+from django.db import connection
 from django.contrib.auth.models import User
 
 from jsonfield import JSONField
@@ -23,6 +25,8 @@ import log
 
 
 ONE_HOUR = datetime.timedelta(seconds=60 * 60 * 1)
+
+DEFAULT_GAME_TIMEOUT = 2 * ONE_HOUR
 
 
 def gravatar_url(email, size=50, default='monsterid'):
@@ -85,12 +89,12 @@ class Game(TimeStampedModel):
         current_black_card = None|int,
         submissions = {dict of player name: [list of card numbers]}
         round: int,  # round number where round 1 is the first round
-        card_czar = NOTE this is currently a str of a player name # 'player1',  # int index into 'players'
+        card_czar = string of a player name, e.g. 'player1'
         black_deck = [ of card black numbers ],
         white_deck = [ of card white numbers ],
         used_black_deck = [ of card black numbers ],
         used_white_deck = [ of card white numbers ],
-        filled_in_texts = None | [ (player name, filled in black card text), .... ]
+        filled_in_texts = None | [ (player name, filled in black card text), ]
     }
 
     """
@@ -117,23 +121,26 @@ class Game(TimeStampedModel):
         """
         if self.is_active:
             now = datetime.datetime.now()
-            older_than = older_than or (now - (
-                ONE_HOUR * 2))  # TODO use a global value for game timeout
+            older_than = older_than or (now - DEFAULT_GAME_TIMEOUT)
             if self.modified <= older_than:
                 self.is_active = False
                 # self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not
                 # needed if game_pre_save() is used
-                self.name = 'TIMEDOUT - %s' % (self.name,)
+                self.name = 'TIMEDOUT(%s) - %s' % (now, self.name)
                 return True
 
     @classmethod
     def deactivate_old_games(cls, older_than=None):
         """`older_than` datetime to compare against, if not specified now - 2
         hours is used."""
-        older_than = older_than or (datetime.datetime.now() - (
-            ONE_HOUR * 2))  # TODO use a global value for game timeout
+        now = datetime.datetime.now()
+        older_than = older_than or (now - DEFAULT_GAME_TIMEOUT)
+
         """NOTE for update below Django appears to have a bug with sqlite3,
         it generates bad SQL with the wrong string concat operator, e.g.:
+
+        cls.objects.filter(is_active=True, modified__lte=older_than).update(
+            is_active=False, name='TIMEDOUT(' + str(now) + ') - ' + F('name'))
 
             UPDATE "cards_game"
             SET
@@ -148,9 +155,30 @@ class Game(TimeStampedModel):
                 "is_active" = 0,
                 "name" = (('DONE ' || "cards_game"."modified") || ' - ') || "cards_game"."name"
             WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
+
+        NOTE can not use django cursor with bind params using normal expected qmark style
         """
-        cls.objects.filter(is_active=True, modified__lte=older_than).update(
-            is_active=False, name='DONE ' + F('modified') + ' - ' + F('name'))
+
+        # Horrible no-bind parms SQL
+        # this is sqlite3 syntax (e.g '||' is string concat)
+        # using ints for bool, and string reprs for timestamps
+        sql = """UPDATE "cards_game"
+            SET
+                "is_active" = ?,
+                "name" = 'TIMEDOUT(' || ? || ')- ' || "cards_game"."name"
+            WHERE "cards_game"."is_active" = ? AND "cards_game"."modified" <= ?;"""
+        sql = """UPDATE "cards_game"
+            SET
+                "is_active" = ?,
+                "name" = ? || "cards_game"."name"
+            WHERE "cards_game"."is_active" = ? AND "cards_game"."modified" <= ?;"""
+        sql = sql.replace('?', '%r')
+        sql = sql % (0, 'TIMEDOUT(%s)- ' % now, 1, str(now))
+        django.db.transaction.commit_manually()
+        c = connection.cursor()  # Django Model Database Cursor
+        c.execute(sql)
+        c.close()
+        django.db.transaction.commit_unless_managed()
 
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions

@@ -402,10 +402,16 @@ class GameJoinView(GameViewMixin, FormView):
         log.logger.debug('%r %r', args, kwargs)
         self.game = self.get_game(kwargs['pk'])
 
+        # FIXME perform anon user name is not a registered username check
+        # (same as in JoinForm) in case the session cookie was set BEFORE a
+        # user was registered.
         self.player_name = self.get_player_name(check_game_status=False)
 
         if self.player_name:
-            player_image_url = avatar_url(self.player_name)
+            if request.user.is_authenticated():
+                player_image_url = avatar_url(request.user.email)
+            else:
+                player_image_url = avatar_url(self.player_name)
             if self.player_name not in self.game.gamedata['players']:
                 self.game.add_player(
                     self.player_name, player_image_url=player_image_url)
