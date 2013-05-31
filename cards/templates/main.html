@@ -23,8 +23,11 @@
             {% load socialaccount %}
             <div class="container">
             {% if user.is_authenticated %}
-                <p> Welcome, {{ user.email }}</p>
-                <a href="{% url 'account_logout' %}">Log Out</a>
+                <a href="{% url 'account_logout' %}">Log Out
+                {% comment %}
+                    {{ user.username }}
+                {% endcomment %}
+                </a>
             {% else %}
                 <a href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
             {% endif %}
