@@ -408,7 +408,10 @@ class GameJoinView(GameViewMixin, FormView):
         self.player_name = self.get_player_name(check_game_status=False)
 
         if self.player_name:
-            player_image_url = avatar_url(self.player_name)
+            if request.user.is_authenticated():
+                player_image_url = avatar_url(request.user.email)
+            else:
+                player_image_url = avatar_url(self.player_name)
             if self.player_name not in self.game.gamedata['players']:
                 self.game.add_player(
                     self.player_name, player_image_url=player_image_url)
