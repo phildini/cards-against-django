@@ -181,7 +181,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
 )
 
-SITE_ID = 2
+SITE_ID = 1
 
 SOCIALACCOUNT_PROVIDERS = \
     { 'facebook':
