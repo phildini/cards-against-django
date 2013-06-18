@@ -73,9 +73,10 @@ class LobbyForm(forms.Form):
         max_length=140,
         required=True
     )
-    card_set = forms.ModelMultipleChoiceField(
-        queryset=CardSet.objects.all().order_by('-name')
-    )
+    # XXX: We should feature-flag this code when we get feature flags working.
+    # card_set = forms.ModelMultipleChoiceField(
+    #     queryset=CardSet.objects.all().order_by('-name')
+    # )
 
     def __init__(self, *args, **kwargs):
         self.game_list = kwargs.pop('game_list', [])
