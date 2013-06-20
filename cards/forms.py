@@ -71,6 +71,7 @@ class LobbyForm(forms.Form):
 
     new_game = forms.CharField(
         max_length=140,
+        label="Create a new game or join one below",
         required=True
     )
     # XXX: We should feature-flag this code when we get feature flags working.
