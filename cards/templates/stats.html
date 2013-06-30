@@ -12,11 +12,17 @@
                 {% comment %}
                 <!--  TODO  css for player name/card div/container. Also sort order (on wins then playername) needs to be added -->
                 {% endcomment %}
-                <img src="{{ player_details.player_avatar }}" alt="Player avatar"></br> {{ player }}
+                <img src="{{ player_details.player_avatar }}" alt="Player avatar"></br>
             </td>
             <td>
-                {{ player_details.wins }}
+                {{ player_details.wins }} wins
             </td>
+            <td>
+            {% if player == player_name %}
+                (You!)
+            {% else %}
+                {{ player }}
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

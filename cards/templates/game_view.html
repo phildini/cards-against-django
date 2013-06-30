@@ -16,16 +16,6 @@
     </div>
 </div>
 <div class="container">
-    <!-- <div class="btn btn-inverse">
-    <p class="text_left">
-        {% if filled_in_question %}
-            {{filled_in_question|safe}}
-        {% else %}
-            {{black_card|safe}}
-        {% endif %}
-    </p>
-    </div> -->
-
 
     <div id="submission-area"></div>
 
@@ -69,7 +59,7 @@
             <!-- NOTE There are some model/template magic string value dependencies here :-( -->
         {% endcomment %}
         {% if game.game_state == 'submission' %}
-            Waiting for players to submit white cards, {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.
+            {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.
             {% comment %}
                 <!--  TODO dump card count, how many players are we waiting for? -->
             {% endcomment %}
@@ -79,7 +69,12 @@
     </p>
     
     <p>
-        <img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} is the card czar, all hail {{card_czar_name}}
+        <img src="{{card_czar_avatar}}" alt="Card czar avatar">
+        {% if card_czar_name == player_name %}
+            You are the Card Czar!
+        {% else %}
+        {{card_czar_name}} is the card czar, all hail {{card_czar_name}}
+        {% endif %}
         {% if game.gamedata.prev_filled_in_question %}
             for the classic;
             <div class="btn btn-inverse">
@@ -100,14 +95,11 @@
         {% endif %}
     {% endif %}
 
-    <p>Game ({{game.id}}): {{game.name}}.</p>
-    
-    <p>Round {{game.gamedata.round}}.</p>
+    <p>Game: {{game.name}}, Round {{game.gamedata.round}}.</p>
+    <p><a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a> so friends can join this game!</p>
 
     <p>
-    {% if player_name %}
-    You are {{player_name}}. <img src="{{player_avatar}}" alt="Player avatar">
-    {% else %}
+    {% if not player_name %}
     You are an observer. <a class="btn" href="join">Join this game</a>
     {% endif %}
     </p>
@@ -142,5 +134,8 @@
             });
         });
     {% endif %}
+    </script>
+    <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
     </script>
 {% endblock %}

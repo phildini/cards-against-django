@@ -3,6 +3,7 @@
 *.pyc
 local_settings.py
 .Python
+tintg.sublime-workspace
 
 *.db
 

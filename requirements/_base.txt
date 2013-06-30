@@ -3,3 +3,10 @@ South==0.7.6
 Unipath==0.2.1
 django-model-utils==1.2.0
 wsgiref==0.1.2
+django-allauth==0.10.1
+httplib2==0.8
+oauth2==1.5.211
+oauthlib==0.4.0
+python-openid==2.2.5
+requests==1.2.0
+requests-oauthlib==0.3.1
