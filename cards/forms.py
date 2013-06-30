@@ -137,6 +137,11 @@ class JoinForm(forms.Form):
                 "Enter a different username."
             )
 
+        if player_name == "You!":
+            raise ValidationError(
+                "You're not me, I'm not you, let's pick a different name, k?"
+            )
+
         return player_name
 
 

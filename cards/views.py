@@ -181,7 +181,6 @@ class GameView(GameViewMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GameView, self).get_context_data(*args, **kwargs)
-        log.logger.debug('context%r', context)
 
         log.logger.debug('game %r', self.game.gamedata['players'])
         black_card_id = self.game.gamedata['current_black_card']
@@ -224,10 +223,10 @@ class GameView(GameViewMixin, FormView):
         if self.player_name:
             context['player_avatar'] = self.game.gamedata[
                 'players'][self.player_name]['player_avatar']
-        if settings.USE_PUSHER:
-            context['pusher_key'] = settings.PUSHER_KEY
 
         context['use_pusher'] = settings.USE_PUSHER
+        if settings.USE_PUSHER:
+            context['pusher_key'] = settings.PUSHER_KEY
 
         return context
 
@@ -240,18 +239,11 @@ class GameView(GameViewMixin, FormView):
             log.logger.debug(winner)
             winner = winner[0]  # for some reason we have a list
             winner_name = winner
-            log.logger.debug(
-                'start new round %r %r %r',
-                self.player_name,
-                winner_name,
-                winner
-            )
             self.game.start_new_round(self.player_name, winner_name, winner)
         else:
             submitted = form.cleaned_data['card_selection']
             # The form returns unicode strings. We want ints in our list.
             white_card_list = [int(card) for card in submitted]
-            log.logger.debug('white_card_list; %r', white_card_list)
             self.game.submit_white_cards(
                 self.player_name, white_card_list)  # FIXME catch GameError and/or check before hand
 
@@ -260,7 +252,6 @@ class GameView(GameViewMixin, FormView):
                     'filled_in_texts %r',
                     self.game.gamedata['filled_in_texts']
                 )
-            log.logger.debug('%r', form.cleaned_data['card_selection'])
         self.game.save()
 
         if settings.USE_PUSHER:
@@ -280,9 +271,7 @@ class GameView(GameViewMixin, FormView):
     def get_form_kwargs(self):
         black_card_id = self.game.gamedata['current_black_card']
         kwargs = super(GameView, self).get_form_kwargs()
-        if self.player_name:
-            # get_form_kwargs() is called all the time even when we don't intend to show form
-            # check above could be can_show_form()?
+        if self.player_name and self.can_show_form():
             if self.is_card_czar:
                 if self.game.game_state == GAMESTATE_SELECTION:
                     czar_selection_options = [
@@ -396,7 +385,6 @@ class GameJoinView(GameViewMixin, FormView):
     form_class = JoinForm
 
     def dispatch(self, request, *args, **kwargs):
-        log.logger.debug('%r %r', args, kwargs)
         self.game = self.get_game(kwargs['pk'])
 
         # FIXME perform anon user name is not a registered username check
@@ -424,11 +412,8 @@ class GameJoinView(GameViewMixin, FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(GameJoinView, self).get_context_data(*args, **kwargs)
         context['show_form'] = True
-        log.logger.debug('context %r', context)
         # if we are here we need a player name (or they need to log in so we can get a player name)
         # TODO and maybe a password
-        # request = self.request
-        # game = self.game
 
         return context
 
@@ -441,8 +426,6 @@ class GameJoinView(GameViewMixin, FormView):
         session_details['name'] = player_name
         self.request.session['session_details'] = session_details
         return super(GameJoinView, self).form_valid(form)
-
-#
 
 
 def debug_deactivate_old_games(request):
