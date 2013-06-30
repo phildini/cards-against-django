@@ -12,3 +12,4 @@ include/
 share/
 build/
 local/
+man/
