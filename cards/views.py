@@ -188,13 +188,6 @@ class GameView(GameViewMixin, FormView):
         black_card = BlackCard.objects.get(id=black_card_id)
 
         context['show_form'] = self.can_show_form()
-        if self.game.game_state == GAMESTATE_SELECTION:
-            context[
-                'refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
-        else:
-            context[
-                'refresh_num_secs'] = 60  # FIXME make this either settings variable (or database admin view changeable)
-
         context['game'] = self.game
         context['black_card'] = black_card.text.replace(
             BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
