@@ -27,7 +27,7 @@ class PlayerForm(forms.Form):
         super(PlayerForm, self).__init__(*args, **kwargs)
 
         for blank in xrange(self.blanks):
-            self.fields['card_selection%d' % (blank,)] = forms.ChoiceField(
+            self.fields['card_selection_%d' % (blank + 1,)] = forms.ChoiceField(
                 widget=RadioSelect,
                 required=True,
                 choices=cards,
