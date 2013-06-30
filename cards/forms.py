@@ -36,7 +36,7 @@ class PlayerForm(forms.Form):
     def clean(self):
         answers = []
         for blank in xrange(self.blanks):
-            field_name = 'card_selection%d' % (blank,)
+            field_name = 'card_selection_%d' % (blank + 1,)
             single_answer = self.cleaned_data.get(field_name)
             if single_answer in answers:
                 raise ValidationError("You can't use the same answer twice")
