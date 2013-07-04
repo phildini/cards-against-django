@@ -8,13 +8,14 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from cards.views import (
-    GameView,
+from cards.views.game_views import (
     LobbyView,
-    GameJoinView,
-    GameExitView,
     debug_deactivate_old_games,
 )
+
+from cards.views.card_views import SubmitCardView
+
+# from cards.views.cards
 
 urlpatterns = patterns('',
     # Examples:
@@ -28,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
     url(r'^game/', include('cards.urls')),
     url(r'^super_secret_thing$', debug_deactivate_old_games),
+    url(r'^submit', SubmitCardView.as_view(), name="submit-card"),
     url(r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('allauth.urls')),
 )

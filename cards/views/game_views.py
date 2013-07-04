@@ -12,14 +12,14 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.conf import settings
 
-from forms import (
+from cards.forms.game_forms import (
     PlayerForm,
     LobbyForm,
     JoinForm,
     ExitForm,
 )
 
-from models import (
+from cards.models import (
     BlackCard,
     WhiteCard,
     Game,
@@ -29,7 +29,7 @@ from models import (
     avatar_url,
 )
 
-import log
+import cards.log as log
 if settings.USE_PUSHER:
     import pusher
 

@@ -14,8 +14,8 @@ from django.forms.widgets import (
 from django.core.exceptions import ValidationError
 from django.core.cache import cache  # this maybe a bad idea
 
-from models import CardSet
-import log
+from cards.models import CardSet
+import cards.log as log
 
 
 class PlayerForm(forms.Form):

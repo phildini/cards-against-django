@@ -506,3 +506,26 @@ class CardSet(models.Model):
 
     def __unicode__(self):
         return mark_safe(self.name)
+
+
+class SubmittedCard(models.Model):
+
+    TYPE_CHOICES = (
+        ('1', 'White Card'),
+        ('2', 'Black Card'),
+    )
+    submitter = models.ForeignKey(
+        User,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+    card_type = models.CharField(
+        max_length=1,
+        choices=TYPE_CHOICES,
+        default='1',
+    )
+    text = models.CharField(max_length = 255)
+
+    def __str__(self):
+        return "%s (Type %s)" % (self.text, self.card_type)
+
