@@ -37,6 +37,10 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ()
 
+TEMPLATE_DIRS = (
+    PROJECT_ROOT.child('templates'),
+)
+
 USE_PUSHER = False
 
 ############
