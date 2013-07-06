@@ -1,41 +1,62 @@
 {% load url from future %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block head_title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
+    {% block stylesheets %}
+    {% endblock %}
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-36515305-3', 'thisisnotthatgame.com');
+        ga('send', 'pageview');
+
+    </script>
   </head>
   <body>
+    <div class="container">
     {% block body %}
 
-    {% if messages %}
+    <!-- {% if messages %}
     <div>
-      <strong>Messages:</strong>
+      <strong></strong>
       <ul>
     {% for message in messages %}
     <li>{{message}}</li>
     {% endfor %}
       </ul>
     </div>
-    {% endif %}
+    {% endif %} -->
 
     <div>
-      <strong>Menu:</strong>
-      <ul>
     {% if user.is_authenticated %}
-    <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-    <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+    <p> Welcome, {{ user.email }}</p>
+    <a class="btn btn-mini" href="{% url 'account_email' %}">Change E-mail</a>
+    <a class="btn btn-mini" href="{% url 'account_logout' %}">Sign Out</a>
     {% else %}
-    <li><a href="{% url 'account_login' %}">Sign In</a></li>
-    <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+    <a class="btn btn-primary btn-mini" href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
+    <a class="btn btn-mini" href="{% url 'account_login' %}">Sign In</a>
+    <a class="btn btn-mini" href="{% url 'account_signup' %}">Sign Up</a>
     {% endif %}
-      </ul>
     </div>
     {% block content %}
     {% endblock %}
     {% endblock %}
+    </div>
     {% block extra_body %}
     {% endblock %}
+    {% block footer %}
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}
+
   </body>
 </html>

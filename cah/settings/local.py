@@ -35,7 +35,9 @@ CACHES = {
 }
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ()
+STATICFILES_DIRS = (
+    PROJECT_ROOT.child('static'),
+)
 
 TEMPLATE_DIRS = (
     PROJECT_ROOT.child('templates'),
