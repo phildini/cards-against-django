@@ -39,12 +39,10 @@
     <div>
     {% if user.is_authenticated %}
     <p> Welcome, {{ user.email }}</p>
-    <a class="btn btn-mini" href="{% url 'account_email' %}">Change E-mail</a>
     <a class="btn btn-mini" href="{% url 'account_logout' %}">Sign Out</a>
     {% else %}
     <a class="btn btn-primary btn-mini" href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
-    <a class="btn btn-mini" href="{% url 'account_login' %}">Sign In</a>
-    <a class="btn btn-mini" href="{% url 'account_signup' %}">Sign Up</a>
+    <a class="btn btn-primary btn-mini" href="{% provider_login_url 'twitter' method='oauth2' next='/'%}">Login with Twitter</a>
     {% endif %}
     </div>
     {% block content %}

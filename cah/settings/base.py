@@ -178,6 +178,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter'
 )
 
 SITE_ID = 1
@@ -192,8 +193,9 @@ SOCIALACCOUNT_PROVIDERS = \
 
 ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_PASSWORD_MIN_LENGTH = 6
+
 
 LOCAL_APPS = (
     'cards',
