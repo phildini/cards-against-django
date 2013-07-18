@@ -126,6 +126,7 @@
         var pusher = new Pusher('{{ pusher_key }}');
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
+            document.title = "This Is Not That Game - {{ game.game_state }}";
             location.reload(true);
         });
     {% elif not use_pusher %}

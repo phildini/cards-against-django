@@ -272,7 +272,7 @@ class Game(TimeStampedModel):
             self.gamedata['used_black_deck'] = []
             random.shuffle(tmp_black_deck)
             self.gamedata['black_deck'] = tmp_black_deck
-        self.gamedata['current_black_card'] = black_card = self.gamedata[
+        self.gamedata['current_black_card'] = self.gamedata[
             'black_deck'].pop()
         curr_black_card = BlackCard.objects.get(
             id=self.gamedata['current_black_card'])

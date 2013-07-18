@@ -33,6 +33,22 @@ import cards.log as log
 if settings.USE_PUSHER:
     import pusher
 
+def push_notification(message=None):
+    if not message:
+        message = 'hello world'
+    if settings.USE_PUSHER:
+        instance = pusher.Pusher(
+            app_id=settings.PUSHER_APP_ID,
+            key=settings.PUSHER_KEY,
+            secret=settings.PUSHER_SECRET
+        )
+        instance['my-channel'].trigger(
+            'my-event',
+            {
+                'message': message
+            }
+        )
+
 
 class GameViewMixin(object):
 
@@ -254,18 +270,8 @@ class GameView(GameViewMixin, FormView):
                 )
         self.game.save()
 
-        if settings.USE_PUSHER:
-            instance = pusher.Pusher(
-                app_id=settings.PUSHER_APP_ID,
-                key=settings.PUSHER_KEY,
-                secret=settings.PUSHER_SECRET
-            )
-            instance['my-channel'].trigger(
-                'my-event',
-                {
-                    'message': 'hello world'
-                }
-            )
+        push_notification()
+        
         return super(GameView, self).form_valid(form)
 
     def get_form_kwargs(self):
