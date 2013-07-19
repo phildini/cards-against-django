@@ -471,6 +471,13 @@ class BlackCard(models.Model):
     def __unicode__(self):
         return self.text
 
+    @property
+    def short_str(self):
+        if len(self.text) > 100:
+            return "%s..." % self.text[:100]
+        else:
+            return str(self)
+
 
 class WhiteCard(models.Model):
     text = models.CharField(max_length=255)
@@ -534,3 +541,6 @@ class StandardSubmission(TimeStampedModel):
     blackcard = models.ForeignKey(BlackCard, null=True)
     submissions = models.ManyToManyField(WhiteCard, null=True)
     winner = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.blackcard.short_str
