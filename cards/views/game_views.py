@@ -27,6 +27,7 @@ from cards.models import (
     GAMESTATE_SUBMISSION,
     GAMESTATE_SELECTION,
     avatar_url,
+    StandardSubmission,
 )
 
 import cards.log as log
@@ -255,6 +256,16 @@ class GameView(GameViewMixin, FormView):
             log.logger.debug(winner)
             winner = winner[0]  # for some reason we have a list
             winner_name = winner
+            for submission in self.game.gamedata['submissions']:
+                saved_submission = StandardSubmission.objects.create(
+                    game=self.game,
+                    blackcard = BlackCard.objects.get(
+                        id=self.game.gamedata['current_black_card']
+                    ),
+                    winner = self.game.gamedata['submissions'][submission] == self.game.gamedata['submissions'][winner]
+                )
+                for white_card in self.game.gamedata['submissions'][submission]:
+                    saved_submission.submissions.add(WhiteCard.objects.get(id=white_card))
             self.game.start_new_round(self.player_name, winner_name, winner)
         else:
             submitted = form.cleaned_data['card_selection']

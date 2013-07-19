@@ -19,7 +19,6 @@ from model_utils.models import TimeStampedModel
 
 # this is so wrong....
 from django.utils.safestring import mark_safe
-from django.utils.html import escape
 
 import log
 
@@ -529,3 +528,9 @@ class SubmittedCard(models.Model):
     def __str__(self):
         return "%s (Type %s)" % (self.text, self.card_type)
 
+class StandardSubmission(TimeStampedModel):
+
+    game = models.ForeignKey(Game, null=True)
+    blackcard = models.ForeignKey(BlackCard, null=True)
+    submissions = models.ManyToManyField(WhiteCard, null=True)
+    winner = models.BooleanField(default=False)
