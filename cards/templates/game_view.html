@@ -120,6 +120,7 @@
 {% block scripts %}
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="http://js.pusher.com/2.0/pusher.min.js"></script>
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}main.js"></script>
     <script type="text/javascript">
     {% if not show_form and use_pusher %}
@@ -129,13 +130,17 @@
             document.title = "This Is Not That Game - {{ game.game_state }}";
             location.reload(true);
         });
-    {% elif not use_pusher %}
-        $(function() {
-            LongPolling.startLongPolling({
-                gameId: {{ game.id }}
-            });
-        });
     {% endif %}
+        var room = '{{ room_name }}'
+        var socket = io.connect('http://localhost:8080');
+        socket.on('connect', function(){
+            console.log('ALIVE');
+            socket.emit('room', room);
+        });
+        socket.on('reload', function (data) {
+            console.log(data);
+            location.reload(true);
+        });
     </script>
     <script>
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

@@ -21,6 +21,9 @@ DATABASES = {
         }
 }
 
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6397
+
 #INSTALLED_APPS += ('debug_toolbar', )
 INTERNAL_IPS = ('127.0.0.1',)
 # MIDDLEWARE_CLASSES += \
