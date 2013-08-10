@@ -21,8 +21,8 @@ DATABASES = {
         }
 }
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6397
+REDIS_HOST = '192.241.228.250'
+REDIS_PORT = 6379
 
 #INSTALLED_APPS += ('debug_toolbar', )
 INTERNAL_IPS = ('127.0.0.1',)
@@ -45,8 +45,6 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     PROJECT_ROOT.child('templates'),
 )
-
-USE_PUSHER = False
 
 ############
 SITE_ROOT = '/tmp'  # FIXME loation for log file(s)

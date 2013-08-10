@@ -33,26 +33,10 @@ from cards.models import (
 )
 
 import cards.log as log
-if settings.USE_PUSHER:
-    import pusher
 
 def push_notification(message='hello'):
-    # if not message:
-    #     message = 'hello world'
-    # if settings.USE_PUSHER:
-    #     instance = pusher.Pusher(
-    #         app_id=settings.PUSHER_APP_ID,
-    #         key=settings.PUSHER_KEY,
-    #         secret=settings.PUSHER_SECRET
-    #     )
-    #     instance['my-channel'].trigger(
-    #         'my-event',
-    #         {
-    #             'message': message
-    #         }
-    #     )
 
-    r = redis.Redis()
+    r = redis.Redis(host=settings.REDIS_HOST)
     r.publish('games', message)
 
 
@@ -246,10 +230,6 @@ class GameView(GameViewMixin, FormView):
         if self.player_name:
             context['player_avatar'] = self.game.gamedata[
                 'players'][self.player_name]['player_avatar']
-
-        context['use_pusher'] = settings.USE_PUSHER
-        if settings.USE_PUSHER:
-            context['pusher_key'] = settings.PUSHER_KEY
 
         return context
 

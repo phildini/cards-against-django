@@ -17,11 +17,6 @@ TEMPLATE_DIRS = (
     PROJECT_ROOT.child('templates'),
 )
 
-USE_PUSHER = True
-PUSHER_APP_ID = get_env_variable("PUSHER_APP_ID")
-PUSHER_KEY = get_env_variable("PUSHER_KEY")
-PUSHER_SECRET = get_env_variable("PUSHER_SECRET")
-
 INSTALLED_APPS += (
     'gunicorn',
 )

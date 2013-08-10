@@ -123,14 +123,6 @@
     <script src="http://localhost:8080/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}main.js"></script>
     <script type="text/javascript">
-    {% if not show_form and use_pusher %}
-        var pusher = new Pusher('{{ pusher_key }}');
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-            document.title = "This Is Not That Game - {{ game.game_state }}";
-            location.reload(true);
-        });
-    {% endif %}
         var room = '{{ room_name }}'
         var socket = io.connect('http://localhost:8080');
         socket.on('connect', function(){
