@@ -7,6 +7,5 @@ language: python
 notifications: 
   email: 
   - pjj@philipjohnjames.com
-script: exit 0
 python: 
 - "2.7"
