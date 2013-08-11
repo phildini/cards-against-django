@@ -1,11 +1,13 @@
-deploy:
-  provider: heroku
-  app: tintg-stage
-  api_key:
-    secure: N3o19GM6W86mcl1aUUCqJEdtNF2HaGmYB7IAg7vLy0FHnyXL1yR2Zgpr9iteMRTRepvpAsVzNNJNQdF0Q5HPV47vgkedOw7z/Z7oNQCHFFhS3avRc64Yhh6kySpNiHPQ8K2AVQ2tfEVUxW4xDehHp1XzNaPOOIYCTohRw44Lpzo=    
-language: python
 notifications: 
   email: 
   - pjj@philipjohnjames.com
+language: python
+deploy: 
+  api_key: 
+    secure: KZoFzs2mMO18aPBLJch7PdGVoTYOxSmXAhrd8SFWNaqVosVGuF6qVymDFXAVW85JaGY9hXofyF+6yx3P35nH35OggcMXr/f4Rkf8JdfWMtfazbqgCsqE3SyNYMerV/6qhYZafnUqFWSgOSnQBQcaxKImdcx5v6Bog/1BARNoyT4=
+  provider: heroku
+  "on": 
+    repo: phildini/cards-against-django
+  app: tintg-stage
 python: 
 - "2.7"
