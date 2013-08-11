@@ -4,6 +4,8 @@
 
 import json
 
+import redis
+
 from django.http import Http404, HttpResponse
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
@@ -31,24 +33,11 @@ from cards.models import (
 )
 
 import cards.log as log
-if settings.USE_PUSHER:
-    import pusher
 
-def push_notification(message=None):
-    if not message:
-        message = 'hello world'
-    if settings.USE_PUSHER:
-        instance = pusher.Pusher(
-            app_id=settings.PUSHER_APP_ID,
-            key=settings.PUSHER_KEY,
-            secret=settings.PUSHER_SECRET
-        )
-        instance['my-channel'].trigger(
-            'my-event',
-            {
-                'message': message
-            }
-        )
+def push_notification(message='hello'):
+
+    r = redis.Redis(host=settings.REDIS_HOST)
+    r.publish('games', message)
 
 
 class GameViewMixin(object):
@@ -212,6 +201,7 @@ class GameView(GameViewMixin, FormView):
         context['card_czar_name'] = card_czar_name
         context['card_czar_avatar'] = self.game.gamedata[
             'players'][card_czar_name]['player_avatar']
+        context['room_name'] = self.game.name
 
         if self.player_name:
             white_cards_text_list = [
@@ -240,10 +230,6 @@ class GameView(GameViewMixin, FormView):
         if self.player_name:
             context['player_avatar'] = self.game.gamedata[
                 'players'][self.player_name]['player_avatar']
-
-        context['use_pusher'] = settings.USE_PUSHER
-        if settings.USE_PUSHER:
-            context['pusher_key'] = settings.PUSHER_KEY
 
         return context
 
@@ -281,7 +267,7 @@ class GameView(GameViewMixin, FormView):
                 )
         self.game.save()
 
-        push_notification()
+        push_notification(str(self.game.name))
         
         return super(GameView, self).form_valid(form)
 
