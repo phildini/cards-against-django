@@ -119,18 +119,15 @@
 
 {% block scripts %}
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="http://js.pusher.com/2.0/pusher.min.js"></script>
     <script src="http://pygents.com:8080/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}main.js"></script>
     <script type="text/javascript">
         var room = '{{ room_name }}'
         var socket = io.connect('http://pygents.com:8080');
         socket.on('connect', function(){
-            console.log('ALIVE');
             socket.emit('room', room);
         });
         socket.on('reload', function (data) {
-            console.log(data);
             location.reload(true);
         });
     </script>
