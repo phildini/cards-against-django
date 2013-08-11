@@ -1,8 +1,11 @@
+# Basic libraries
 Django==1.5.1
-South==0.7.6
 Unipath==0.2.1
 django-model-utils==1.2.0
 wsgiref==0.1.2
+jsonfield==0.9.13
+
+# Authentication & Dependencies
 django-allauth==0.10.1
 httplib2==0.8
 oauth2==1.5.211

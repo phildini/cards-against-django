@@ -1,7 +1,12 @@
+deploy:
+  provider: heroku
+  app: tintg-stage
+  api_key:
+    secure: N3o19GM6W86mcl1aUUCqJEdtNF2HaGmYB7IAg7vLy0FHnyXL1yR2Zgpr9iteMRTRepvpAsVzNNJNQdF0Q5HPV47vgkedOw7z/Z7oNQCHFFhS3avRc64Yhh6kySpNiHPQ8K2AVQ2tfEVUxW4xDehHp1XzNaPOOIYCTohRw44Lpzo=    
 language: python
-python:
- - "2.7"
-script: "exit 0"
-notifications:
-    email:
-        - pjj@philipjohnjames.com
+notifications: 
+  email: 
+  - pjj@philipjohnjames.com
+script: exit 0
+python: 
+- "2.7"
