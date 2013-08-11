@@ -11,3 +11,4 @@ deploy:
   app: tintg-stage
 python: 
 - "2.7"
+script: "exit 0"
