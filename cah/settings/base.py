@@ -50,6 +50,9 @@ DATABASES = {
     }
 }
 
+REDIS_HOST = '192.241.228.250'
+REDIS_PORT = 6379
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
