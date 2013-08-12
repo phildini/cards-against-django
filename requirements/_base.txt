@@ -4,6 +4,7 @@ Unipath==0.2.1
 django-model-utils==1.2.0
 wsgiref==0.1.2
 jsonfield==0.9.13
+redis==2.7.6
 
 # Authentication & Dependencies
 django-allauth==0.10.1
