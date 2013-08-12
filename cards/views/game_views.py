@@ -36,8 +36,12 @@ import cards.log as log
 
 def push_notification(message='hello'):
 
-    r = redis.Redis(host=settings.REDIS_HOST)
-    r.publish('games', message)
+    try:
+        r = redis.Redis(host=settings.REDIS_HOST)
+        r.publish('games', message)
+    except:
+        # FIXME: we should never catch the bare exception.
+        pass
 
 
 class GameViewMixin(object):
