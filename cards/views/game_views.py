@@ -36,13 +36,11 @@ import cards.log as log
 
 def push_notification(message='hello'):
 
-    try:
-        pool = redis.ConnectionPool(host=settings.REDIS_HOST)
-        r = redis.Redis(connection_pool=pool)
-        r.publish('games', message)
-        pool.disconnect()
-    except:
-        pass
+    pool = redis.ConnectionPool(host=settings.REDIS_HOST)
+    r = redis.Redis(connection_pool=pool)
+    r.publish('games', message)
+    pool.disconnect()
+
 
 class GameViewMixin(object):
 
