@@ -10,7 +10,6 @@
                 {% else %}
                     {{black_card|safe}}
                 {% endif %}
-            <a class="btn" href="">Refresh</a>
             </p>
         </div>
     </div>
@@ -80,18 +79,6 @@
             </div>
         {% endif %}
     </p>
-    
-    {% if not show_form %}
-        {% if player_name %}
-        <h3>Your cards</h3>
-        <ul>
-        {% for tmp_text in white_cards_text_list %}
-            <li class="btn draggable">{{tmp_text|safe}}</li>
-            </br>
-        {% endfor %}
-        </ul>
-        {% endif %}
-    {% endif %}
 
     <p>Game: {{game.name}}, Round {{game.gamedata.round}}.</p>
     <p><a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a> so friends can join this game!</p>
@@ -108,8 +95,6 @@
     <!--  TODO previous winning cards (filled in) -->
     {% endcomment %}
 
-    <!--  for people who don't know about force refresh (F5 in most browsers) -->
-    <a class="btn" href="">Manually refresh this page</a>
     {% if player_name %}
     <a class="btn btn-danger pull-right" href="exit">Exit game</a>
     {% endif %}
