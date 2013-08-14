@@ -56,7 +56,13 @@
             <!-- NOTE There are some model/template magic string value dependencies here :-( -->
         {% endcomment %}
         {% if game.game_state == 'submission' %}
-            {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.
+            {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.</br>
+            {% if waiting_on %}
+            Waiting on:
+            {% for player in waiting_on %}
+                {{ player }}, 
+            {% endfor %}
+            {% endif %}
             {% comment %}
                 <!--  TODO dump card count, how many players are we waiting for? -->
             {% endcomment %}
