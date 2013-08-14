@@ -212,7 +212,9 @@ class GameView(GameViewMixin, FormView):
             'players'][card_czar_name]['player_avatar']
         context['room_name'] = self.game.name
         if self.game.gamedata['submissions']:
-            context['waiting_on'] = [name for name in self.game.gamedata['players'] if name not in self.game.gamedata['submissions']]
+            context['waiting_on'] = [
+                name for name in self.game.gamedata['players'] if name not in self.game.gamedata['submissions'] and name != card_czar_name
+            ]
 
         if self.player_name:
             white_cards_text_list = [
