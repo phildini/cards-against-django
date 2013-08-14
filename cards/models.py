@@ -126,6 +126,7 @@ class Game(TimeStampedModel):
                 # self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not
                 # needed if game_pre_save() is used
                 self.name = 'TIMEDOUT(%s) - %s' % (now, self.name)
+                self.save()
                 return True
 
     @classmethod

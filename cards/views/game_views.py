@@ -94,6 +94,11 @@ class LobbyView(FormView):
     form_class = LobbyForm
 
     def __init__(self, *args, **kwargs):
+        game_list = Game.objects.filter(is_active=True)
+
+        for game in game_list:
+            game.deactivate_old_game()
+
         self.game_list = Game.objects.filter(
             is_active=True
         ).values_list('id', 'name')
