@@ -101,6 +101,8 @@ class LobbyView(FormView):
 
         self.game_list = Game.objects.filter(
             is_active=True
+        ).exclude(
+            name__startswith='Private'
         ).values_list('id', 'name')
 
     def get_success_url(self):
