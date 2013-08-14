@@ -180,9 +180,9 @@ class GameView(GameViewMixin, FormView):
         log.logger.debug('%r %r', args, kwargs)
         self.game = self.get_game(kwargs['pk'])
 
-        if self.game.deactivate_old_game():
-            self.game.save()
-        if (self.game.gamedata['players'] < 1) or (self.game.gamedata['card_czar'] is u''):
+        self.game.deactivate_old_game()
+
+        if not self.game.can_be_played():
             return redirect(reverse('lobby-view'))
 
         self.player_name = self.get_player_name()

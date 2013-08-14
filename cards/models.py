@@ -401,6 +401,16 @@ class Game(TimeStampedModel):
             # last_round_winner cleanup -- FIXME I'm not sure this is used/needed, remove from model/template? appears to only be used in old player template which should also be removed
             # unset session name?? probably not a good idea
 
+    def can_be_played(self):
+        if (
+            self.is_active and
+            self.gamedata['players'] > 1 and 
+            not self.gamedata['card_czar'] is u''
+            ):
+            return True
+        else:
+            return False
+
 
 def game_pre_save(sender, **kwargs):
     game = kwargs['instance']
