@@ -1,7 +1,7 @@
 var io = require('socket.io').listen(8080);
 var redis = require('socket.io/node_modules/redis');
 
-var sub = redis.createClient(6379,'192.241.228.250');
+var sub = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST);
 
 sub.subscribe('games');
 

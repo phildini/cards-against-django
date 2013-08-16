@@ -36,7 +36,10 @@ import cards.log as log
 
 def push_notification(message='hello'):
 
-    pool = redis.ConnectionPool(host=settings.REDIS_HOST)
+    pool = redis.ConnectionPool(
+        host=settings.REDIS_HOST,
+        port=settings.REDIS_PORT,
+    )
     r = redis.Redis(connection_pool=pool)
     r.publish('games', message)
     pool.disconnect()
@@ -215,6 +218,8 @@ class GameView(GameViewMixin, FormView):
             context['waiting_on'] = [
                 name for name in self.game.gamedata['players'] if name not in self.game.gamedata['submissions'] and name != card_czar_name
             ]
+
+        context['socketio'] = settings.SOCKETIO_URL
 
         if self.player_name:
             white_cards_text_list = [

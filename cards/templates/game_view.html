@@ -110,11 +110,11 @@
 
 {% block scripts %}
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://pygents.com:8080/socket.io/socket.io.js"></script>
+    <script src="http://{{ socketio }}:8080/socket.io/socket.io.js"></script>
     {% if not show_form %}
     <script type="text/javascript">
         var room = '{{ room_name }}'
-        var socket = io.connect('http://pygents.com:8080');
+        var socket = io.connect('http://{{ socketio }}:8080');
         socket.on('connect', function(){
             socket.emit('room', room);
         });
