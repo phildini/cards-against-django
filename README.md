@@ -3,36 +3,22 @@ cards-against-django
 
 CAH done as a Django web app.
 
-Steps to run:
 
-1. clone the repo
+Vagrant
+=======
 
-2. in the repo dir:
+Install [VirtualBox](https://www.virtualbox.org/)
 
-        virtualenv .  # one time setup
-        . bin/activate
+$ gem install vagrant
 
-3. install dependencies:
+$ vagrant up
 
-        pip install -r requirements/local.txt
+$ vagrant ssh
 
-    Optional dependencies:
-    
-        easy_install django-debug-toolbar
+Start the app, from the Vagrant shell:
+$ rs
 
-4. set secure key if you'd like. a simple one is set on the local settings:
-
-        export CAH_KEY='[some crypto-ish key of your choosing]'
-
-5. one time database setup:
-
-        python manage.py syncdb --settings=cah.settings.local
-
-6. start test/debug server:
-
-        python manage.py runserver --settings=cah.settings.local 0.0.0.0:8000
-
-7. share and enjoy.
+Share and enjoy!
 
 Sample manage shell snippets:
 
