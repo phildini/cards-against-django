@@ -18,4 +18,12 @@ class base {
       mode  => '0644',
       source => 'puppet:///modules/base/bash_aliases';
   }
+
+  file {
+    '/home/vagrant/.bash_env':
+      owner => 'vagrant',
+      group => 'vagrant',
+      mode  => '0644',
+      source => 'puppet:///modules/base/bash_env';
+  }
 }

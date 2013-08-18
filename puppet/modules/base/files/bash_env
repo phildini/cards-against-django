@@ -1,0 +1,6 @@
+export REDIS_HOST=''
+export REDIS_PORT=''
+
+export SOCKETIO_URL=''
+
+export CAH_KEY='aabbccddeeff012345678'
