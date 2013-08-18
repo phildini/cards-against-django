@@ -1,0 +1,1 @@
+alias rs='pushd ~/src ; python manage.py runserver --settings=settings=cah.settings.local ; popd'
