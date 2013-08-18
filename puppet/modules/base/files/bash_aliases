@@ -1,1 +1,3 @@
-alias rs='pushd ~/src ; python manage.py runserver --settings=settings=cah.settings.local ; popd'
+. ~/venv/bin/activate
+
+alias rs='pushd ~/src ; python manage.py runserver --settings=cah.settings.local ; popd'
