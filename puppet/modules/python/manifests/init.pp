@@ -23,6 +23,7 @@ class python {
         cwd => "/tmp",
         creates => "${ venv_dir }/bin/activate",
         user => "vagrant",
+        require => Package['python-virtualenv'],
     }
 
     $base_requirements = "${ src_dir }/requirements/_base.txt"
@@ -40,7 +41,7 @@ class python {
         replace => false,
     }
 
-    exec { "pip":
+    exec { "install-requirements":
         provider => "shell",
         command => "${ venv_dir }/bin/pip install -r $requirements",
         timeout => 1800,
@@ -49,5 +50,6 @@ class python {
             File[$base_requirements],
             File[$requirements],
         ],
+        require => Exec['virtualenv'],
     }
 }

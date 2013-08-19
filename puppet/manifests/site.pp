@@ -1,4 +1,14 @@
+stage { 'prereq':
+    before => Stage['main']
+}
+
+class { 'base':
+    stage => prereq,
+}
+
 
 include base
-include python
+include nginx
 include redis
+include postgres
+include python
