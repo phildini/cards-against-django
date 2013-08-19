@@ -15,6 +15,9 @@ $ vagrant up
 
 $ vagrant ssh
 
+The first time you log in, the database must be initialized:
+$ syncdb
+
 Start the app, from the Vagrant shell:
 $ rs
 

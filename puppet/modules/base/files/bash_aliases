@@ -1,3 +1,4 @@
 . ~/venv/bin/activate
 
 alias rs='pushd ~/src ; python manage.py runserver --settings=cah.settings.local ; popd'
+alias syncdb='pushd ~/src ; python manage.py syncdb --settings=cah.settings.local ; popd'
