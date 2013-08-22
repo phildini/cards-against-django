@@ -1,28 +1,25 @@
 <h3>Current standings</h3>
-
-    <table>
-        <tr>
-            <th>Player</th>
-            <th>Wins</th>
-        </tr>
-        
-        {% for player, player_details in game.gamedata.players.items %}
-        <tr>
-            <td>
-                {% comment %}
-                <!--  TODO  css for player name/card div/container. Also sort order (on wins then playername) needs to be added -->
-                {% endcomment %}
-                <img src="{{ player_details.player_avatar }}" alt="Player avatar"></br>
-            </td>
-            <td>
-                {{ player_details.wins }} wins
-            </td>
-            <td>
-            {% if player == player_name %}
-                (You!)
-            {% else %}
-                ({{ player }})
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </table>
+<table class="table table-condensed">
+    <tr>
+        <th>Player</th>
+        <th>Wins</th>
+    </tr>
+    
+    {% for player, player_details in game.gamedata.players.items %}
+    {% if player == player_name %}
+    <tr class="active">
+    {% else %}
+    <tr>
+    {% endif %}
+        <td>
+            {% comment %}
+            <!--  TODO  css for player name/card div/container. Also sort order (on wins then playername) needs to be added -->
+            {% endcomment %}
+            <img src="{{ player_details.player_avatar }}" alt="Player avatar" class="img-rounded"></br>
+        </td>
+        <td>
+            {{ player_details.wins }} wins
+        </td>
+    </tr>
+    {% endfor %}
+</table>

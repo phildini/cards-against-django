@@ -5,15 +5,17 @@
 
 {% block login %}
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navebar-header">
+    <div class="navbar-header">
+        <a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a><span class="text-primary"> so friends can join this game!</span>
         {% if user.is_authenticated %}
-        <p> Welcome, {{ user.email }}</p>
-        <a class="btn btn-sm navbar-btn navbar-right" href="{% url 'account_logout' %}">Sign Out</a>
+        Welcome, {{ user.email }}
+        <a class="btn btn-sm navbar-btn" href="{% url 'account_logout' %}">Sign Out</a>
         {% else %}
-        <div class="pull-right">
             <a class="btn btn-primary btn-sm navbar-btn " href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
             <a class="btn btn-primary btn-sm navbar-btn " href="{% provider_login_url 'twitter' method='oauth2' next='/'%}">Login with Twitter</a>
-        </div>
+        {% endif %}
+        {% if player_name %}
+        <a class="btn btn-sm btn-danger" href="exit">Exit game</a>
         {% endif %}
     </div>
 </nav>
@@ -116,23 +118,24 @@
     </p>
 
     <p>Game: {{game.name}}, Round {{game.gamedata.round}}.</p>
-    <p><a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a> so friends can join this game!</p>
-
     <p>
     {% if not player_name %}
     You are an observer. <a class="btn" href="join">Join this game</a>
     {% endif %}
     </p>
 
-    {% include "stats.html" %}
+    <div class="row">
+        <div class="col-md-6">
+        {% include "stats.html" %}
+        </div>
+        <div class="col-md-6">
+        {% include "submissions.html" %}
+        </div>
+    </div>
     
     {% comment %}
     <!--  TODO previous winning cards (filled in) -->
     {% endcomment %}
-
-    {% if player_name %}
-    <a class="btn btn-danger pull-right" href="exit">Exit game</a>
-    {% endif %}
 
 </div>
 {% endblock %}

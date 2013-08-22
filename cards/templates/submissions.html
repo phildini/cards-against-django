@@ -1,0 +1,9 @@
+<h3>Past Submissions</h3>
+{% for submission in submissions %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ submission.filled_in | safe }}
+            <span class="label label-success">{{ submission.winner }}</span>
+        </div>
+    </div>
+{% endfor %}

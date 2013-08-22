@@ -8,6 +8,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from django.views.generic.base import RedirectView
+
 from cards.views.game_views import (
     LobbyView,
     debug_deactivate_old_games,
@@ -28,8 +30,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
     url(r'^game/', include('cards.urls')),
-    url(r'^super_secret_thing$', debug_deactivate_old_games),
     url(r'^submit', SubmitCardView.as_view(), name="submit-card"),
     url(r'^admin/', include(admin.site.urls)),
-    (r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/', include('allauth.urls')),
 )

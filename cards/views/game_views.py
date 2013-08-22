@@ -221,6 +221,11 @@ class GameView(GameViewMixin, FormView):
 
         context['socketio'] = settings.SOCKETIO_URL
 
+        submissions = StandardSubmission.objects.filter(game=self.game).order_by('id')[:10]
+        context['submissions'] = [
+            submission.export_for_display() for submission in submissions
+        ]
+
         if self.player_name:
             white_cards_text_list = [
                 mark_safe(card_text)

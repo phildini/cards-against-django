@@ -555,3 +555,11 @@ class StandardSubmission(TimeStampedModel):
 
     def __str__(self):
         return self.blackcard.short_str
+
+    def export_for_display(self):
+        return {
+            'filled_in': self.blackcard.replace_blanks(
+                [whitecard.id for whitecard in self.submissions.all()]
+            ),
+            'winner': 'Winner' if self.winner else '',
+        }
