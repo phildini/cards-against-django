@@ -31,7 +31,20 @@
                 {% endif %}
             </h2>
             <p class="text-muted">
-                <span class="badge">{{game.gamedata.submissions|length}}</span> out of <span class="badge">{{game.gamedata.players|length|add:"-1"}}</span> players have submitted cards.
+            {% if game.game_state == 'submission' %}
+                <span class="badge">{{game.gamedata.submissions|length}}</span> out of <span class="badge">{{game.gamedata.players|length|add:"-1"}}</span> players have submitted.
+                {% if waiting_on %}
+                Waiting on:
+                {% for player in waiting_on %}
+                    {{ player }}, 
+                {% endfor %}
+                {% endif %}
+            {% elif game.game_state == 'selection' %}
+                Waiting for Card Critic to make selection.
+                {% if is_card_czar %}
+                (That's you!)
+                {% endif %}
+            {% endif %}
             </p>
     </div>
 
@@ -53,7 +66,7 @@
         <input type="submit" class="btn btn-primary" value="Submit" />
         </form>
     {% endif %}
-
+</br>
     {% if game.game_state == 'selection' %}
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -78,28 +91,21 @@
         {% comment %}
             <!-- NOTE There are some model/template magic string value dependencies here :-( -->
         {% endcomment %}
-        {% if game.game_state == 'submission' %}
-            {{game.gamedata.submissions|length}} out of {{game.gamedata.players|length|add:"-1"}} players have submitted cards.</br>
-            {% if waiting_on %}
-            Waiting on:
-            {% for player in waiting_on %}
-                {{ player }}, 
-            {% endfor %}
-            {% endif %}
+        
             {% comment %}
                 <!--  TODO dump card count, how many players are we waiting for? -->
             {% endcomment %}
-        {% elif game.game_state == 'selection' %}
-            Waiting for card czar, <img src="{{card_czar_avatar}}" alt="Card czar avatar"> {{card_czar_name}} to pick a winner.
+        {% if game.game_state == 'selection' %}
+            Waiting for card critic, <img src="{{card_czar_avatar}}" alt="Card critic avatar"> {{card_czar_name}} to pick a winner.
         {% endif %}
     </p>
     
     <p>
-        <img src="{{card_czar_avatar}}" alt="Card czar avatar">
+        <img src="{{card_czar_avatar}}" alt="Card critic avatar">
         {% if card_czar_name == player_name %}
-            You are the Card Czar!
+            You are the Card Critic!
         {% else %}
-        {{card_czar_name}} is the card czar, all hail {{card_czar_name}}
+        {{card_czar_name}} is the card critic, all hail {{card_czar_name}}
         {% endif %}
         {% if game.gamedata.prev_filled_in_question %}
             for the classic;
