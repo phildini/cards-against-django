@@ -4,7 +4,7 @@
 {% load socialaccount %}
 
 {% block login %}
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="visible-lg visible-md navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
         <a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a><span class="text-primary"> so friends can join this game!</span>
         {% if user.is_authenticated %}
@@ -136,6 +136,10 @@
     {% comment %}
     <!--  TODO previous winning cards (filled in) -->
     {% endcomment %}
+
+    {% if player_name %}
+    <a class="visible-sm visible-xs btn btn-sm btn-danger" href="exit">Exit game</a>
+    {% endif %}
 
 </div>
 {% endblock %}
