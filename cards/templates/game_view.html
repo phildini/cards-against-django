@@ -1,20 +1,39 @@
 {% extends "main.html" %}
 
+{% load url from future %}
+{% load socialaccount %}
+
+{% block login %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navebar-header">
+        {% if user.is_authenticated %}
+        <p> Welcome, {{ user.email }}</p>
+        <a class="btn btn-sm navbar-btn navbar-right" href="{% url 'account_logout' %}">Sign Out</a>
+        {% else %}
+        <div class="pull-right">
+            <a class="btn btn-primary btn-sm navbar-btn " href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
+            <a class="btn btn-primary btn-sm navbar-btn " href="{% provider_login_url 'twitter' method='oauth2' next='/'%}">Login with Twitter</a>
+        </div>
+        {% endif %}
+    </div>
+</nav>
+{% endblock %}
+
 {% block content %}
-<div class="navbar navbar-inverse navbar-fixed-top fixed">
-    <div class="navbar-inner">
-        <div class="container">
-            <p class="brand">
+<div class="container">
+
+    <div class="page-header">
+            <h2>
                 {% if filled_in_question %}
                     {{filled_in_question|safe}}
                 {% else %}
                     {{black_card|safe}}
                 {% endif %}
+            </h2>
+            <p class="text-muted">
+                <span class="badge">{{game.gamedata.submissions|length}}</span> out of <span class="badge">{{game.gamedata.players|length|add:"-1"}}</span> players have submitted cards.
             </p>
-        </div>
     </div>
-</div>
-<div class="container">
 
     {% if show_form %}
         <form action="{{ action }}" method="post">
@@ -26,8 +45,6 @@
             <div class="field">
                 {% if is_card_czar %}
                     Select the winner:
-                {% else %}
-                    {{field.label}}:
                 {% endif %}
                 {{field|safe}}
             </div>
@@ -38,16 +55,22 @@
     {% endif %}
 
     {% if game.game_state == 'selection' %}
-        <h3>Submitted cards</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Submitted cards</div>
+        </div>
         {% comment %}
             <!--  TODO make me pretty (and then the same for white_cards_text_list) -->
             <!--  TODO haiku card could be prettier (possibly requires commas adding in replace_blanks) -->
         {% endcomment %}
+        <div class="list-group">
         {% for _, tmp_text in game.gamedata.filled_in_texts %}
-            <div class="btn btn-inverse {{ is_card_czar|yesno:"draggable,nondraggable" }}">
+            <div class="list-group-item">
             {{tmp_text|safe}}
             </div>
         {% endfor %}
+        </div>
+    </div>
         </br>
     {% endif %}
 

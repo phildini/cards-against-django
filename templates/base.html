@@ -3,11 +3,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}This Is Not That Game{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     {% block stylesheets %}
     {% endblock %}
     <script>
@@ -36,15 +35,18 @@
     </div>
     {% endif %} -->
 
-    <div>
-    {% if user.is_authenticated %}
-    <p> Welcome, {{ user.email }}</p>
-    <a class="btn btn-mini" href="{% url 'account_logout' %}">Sign Out</a>
-    {% else %}
-    <a class="btn btn-primary btn-mini" href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
-    <a class="btn btn-primary btn-mini" href="{% provider_login_url 'twitter' method='oauth2' next='/'%}">Login with Twitter</a>
-    {% endif %}
+    {% block login %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <p> Welcome, {{ user.email }}</p>
+        <a class="btn btn-mini" href="{% url 'account_logout' %}">Sign Out</a>
+        {% else %}
+        <a class="btn btn-primary btn-sm" href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
+        <a class="btn btn-primary btn-sm" href="{% provider_login_url 'twitter' method='oauth2' next='/'%}">Login with Twitter</a>
+        {% endif %}
+    </br>
     </div>
+    {% endblock %}
     {% block content %}
     {% endblock %}
     {% endblock %}

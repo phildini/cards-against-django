@@ -2,25 +2,36 @@
 
 {% block content %}
 <div class="container">
-    <h3>Welcome to that game. You know the one I mean.</h3>
-    <p> You know. That game where everybody chooses a card to match the card in the middle. That one.</p>
-    <p> Put 'Private' as the first part of the game name to not have it show up on the list.</p>
+    <div class="jumbotron">
+        <h3>Welcome to that game. You know the one I mean.</h3>
+        <p> You know. That game where everybody chooses a card to match the card in the middle. That one.</p>
+        
+    </div>
 
     {% if game_in_progress %}
     </p>It looks like you're already part of {{ game_in_progress }}</p>
     {% endif %}
-
-    <form action="/" method="post">
-    	{% csrf_token %}
-    	{{ form.as_p }}
-    <input type="submit" class="btn btn-primary" value="Create a new game" />
-    
+    <p class="text-muted"> Put 'Private' as the first part of the game name to not have it show up on the list.</p>
+    <form role="form" action="/" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {{field}}
+        {% endfor %}
+    <input type="submit" class="btn btn-success" value="Create a new game" />
     <br/>
     <br/>
     {% if joinable_game_list %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Or join one of these:</div>
+        </div>
+        <div class="list-group">
         {% for game_id, game_name in joinable_game_list %}
-            <a class="btn" href="{% url "game-join-view" pk=game_id %}">Join {{game_name}}</a> <a class="btn btn-info" href="{% url "game-view" pk=game_id %}">View {{game_name}}</a><br/>
+            <div class="list-group-item">
+                <a class="btn btn-primary" href="{% url "game-join-view" pk=game_id %}">Join {{game_name}}</a> <a class="btn btn-info" href="{% url "game-view" pk=game_id %}">View {{game_name}}</a>
+            </div>
         {% endfor %}
+        </div>
     {% endif %}
 </div>
 {% endblock %}
