@@ -1,3 +1,4 @@
+{% if submissions %}
 <h3>Past Submissions</h3>
 {% for submission in submissions %}
     <div class="panel panel-default">
@@ -7,3 +8,4 @@
         </div>
     </div>
 {% endfor %}
+{% endif %}

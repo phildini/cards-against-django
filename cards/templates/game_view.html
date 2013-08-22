@@ -8,7 +8,7 @@
     <div class="navbar-header">
         <a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a><span class="text-primary"> so friends can join this game!</span>
         {% if user.is_authenticated %}
-        Welcome, {{ user.email }}
+        <span class="text-success">Welcome, {{ user.email }}</span>
         <a class="btn btn-sm navbar-btn" href="{% url 'account_logout' %}">Sign Out</a>
         {% else %}
             <a class="btn btn-primary btn-sm navbar-btn " href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
