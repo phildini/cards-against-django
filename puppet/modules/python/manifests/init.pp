@@ -50,6 +50,9 @@ class python {
             File[$base_requirements],
             File[$requirements],
         ],
-        require => Exec['virtualenv'],
+        require => [
+            Exec['virtualenv'],
+            Package['postgresql-server-dev-9.1'],
+        ]
     }
 }

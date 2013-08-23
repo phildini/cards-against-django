@@ -17,6 +17,9 @@ Vagrant::Config.run do |config|
   # config.vm.boot_mode = :gui
 
   config.vm.customize ["modifyvm", :id, "--memory", "1024"]
+  #config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+  config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+
 
 
   # Assign this VM to a host-only network IP, allowing you to access it
