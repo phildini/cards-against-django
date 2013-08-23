@@ -1,0 +1,23 @@
+<form action="{{ action }}" method="post">
+    {% csrf_token %}
+    {% for field_err1, field_err2  in form.errors.items %}
+    <p class="text-error"><strong>{{field_err2}}</strong></p>
+    {% endfor %}
+    <div class="row">
+    {% for field in form %}
+        {% if form.fields|length == 2 %}
+            <div class="field col-md-6 col-sm-12">
+        {% elif form.fields|length == 3 %}
+            <div class="field col-md-4 col-sm-12">
+        {% else %}
+            <div class="field">
+        {% endif %}
+            {% if is_card_czar %}
+                Select the winner:
+            {% endif %}
+            {{field|safe}}
+            </div>
+    {% endfor %}
+    </div>
+<input type="submit" class="btn btn-primary" value="Submit" />
+</form>

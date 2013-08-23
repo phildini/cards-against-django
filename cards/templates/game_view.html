@@ -42,7 +42,7 @@
                 {% endfor %}
                 {% endif %}
             {% elif game.game_state == 'selection' %}
-                Waiting for Card Critic to make selection.
+                Waiting for Card Critic <span class="label label-default">{{ card_czar_name }}</span> to make selection.
                 {% if is_card_czar %}
                 (That's you!)
                 {% endif %}
@@ -51,22 +51,7 @@
     </div>
 
     {% if show_form %}
-        <form action="{{ action }}" method="post">
-            {% csrf_token %}
-            {% for field_err1, field_err2  in form.errors.items %}
-            <p class="text-error"><strong>{{field_err2}}</strong></p>
-            {% endfor %}
-            {% for field in form %}
-            <div class="field">
-                {% if is_card_czar %}
-                    Select the winner:
-                {% endif %}
-                {{field|safe}}
-            </div>
-            </br>
-            {% endfor %}
-        <input type="submit" class="btn btn-primary" value="Submit" />
-        </form>
+        {% include "game_form.html" %}
     {% endif %}
 </br>
     {% if game.game_state == 'selection' %}
@@ -97,30 +82,19 @@
             {% comment %}
                 <!--  TODO dump card count, how many players are we waiting for? -->
             {% endcomment %}
-        {% if game.game_state == 'selection' %}
-            Waiting for card critic, <img src="{{card_czar_avatar}}" alt="Card critic avatar"> {{card_czar_name}} to pick a winner.
-        {% endif %}
     </p>
     
     <p>
-        <img src="{{card_czar_avatar}}" alt="Card critic avatar">
+        <img src="{{card_czar_avatar}}" alt="Card critic avatar" class="img-rounded"/>
         {% if card_czar_name == player_name %}
             You are the Card Critic!
         {% else %}
         {{card_czar_name}} is the card critic, all hail {{card_czar_name}}
         {% endif %}
-        {% if game.gamedata.prev_filled_in_question %}
-            for the classic;
-            <div class="btn btn-inverse">
-                {{game.gamedata.prev_filled_in_question|safe}}
-            </div>
-        {% endif %}
     </p>
 
-    <p>Game: {{game.name}}, Round {{game.gamedata.round}}.</p>
-    <p>
     {% if not player_name %}
-    You are an observer. <a class="btn" href="join">Join this game</a>
+    You are an observer. <a class="btn btn-success" href="join">Join this game</a>
     {% endif %}
     </p>
 

@@ -1,4 +1,4 @@
-<h3>Current standings</h3>
+<h3>Current standings <span class="text-muted">({{game.name}}, round {{game.gamedata.round}})</span></h3>
 <table class="table table-condensed">
     <tr>
         <th>Player</th>
@@ -15,10 +15,10 @@
             {% comment %}
             <!--  TODO  css for player name/card div/container. Also sort order (on wins then playername) needs to be added -->
             {% endcomment %}
-            <img src="{{ player_details.player_avatar }}" alt="Player avatar" class="img-rounded"></br>
+            <img src="{{ player_details.player_avatar }}" alt="Player avatar" class="img-rounded"><span class="label label-default">{{ player }}</span>
         </td>
         <td>
-            {{ player_details.wins }} wins
+            <span class="badge badge-primary">{{ player_details.wins }}</span>
         </td>
     </tr>
     {% endfor %}

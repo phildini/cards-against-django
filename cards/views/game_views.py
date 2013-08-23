@@ -221,7 +221,7 @@ class GameView(GameViewMixin, FormView):
 
         context['socketio'] = settings.SOCKETIO_URL
 
-        submissions = StandardSubmission.objects.filter(game=self.game).order_by('id')[:10]
+        submissions = StandardSubmission.objects.filter(game=self.game).order_by('-id')[:10]
         context['submissions'] = [
             submission.export_for_display() for submission in submissions
         ]
@@ -391,6 +391,7 @@ class GameExitView(GameViewMixin, FormView):
         if really_exit == 'yes':  # FIXME use bool via coerce?
             self.game.del_player(self.player_name)
             self.game.save()
+            push_notification(str(self.game.name))
         return super(GameExitView, self).form_valid(form)
 
 
