@@ -116,10 +116,13 @@
     {% endif %}
 
 </div>
+
+<div class="data" data-game_state="{{ game.game_state }}" data-round="{{ game.gamedata.round }}"></div>
 {% endblock %}
 
 {% block scripts %}
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}main.js"></script>
     <script src="http://{{ socketio }}:8080/socket.io/socket.io.js"></script>
     {% if not show_form %}
     <script type="text/javascript">
@@ -131,6 +134,8 @@
         socket.on('reload', function (data) {
             location.reload(true);
         });
+
+        window.LongPolling.startLongPolling({gameId: '{{ game.id }}'});
     </script>
     {% endif %}
     <script>
