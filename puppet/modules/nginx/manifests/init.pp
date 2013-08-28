@@ -2,8 +2,11 @@
 #
 #
 class nginx {
+    apt::ppa { 'ppa:nginx/stable': }
+
     package { "nginx":
         ensure => 'latest',
+        require => Apt::Ppa['ppa:nginx/stable'],
     }
 
     service { 'nginx':

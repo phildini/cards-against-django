@@ -28,6 +28,7 @@ cp /vagrant/puppet/Puppetfile $PUPPET_DIR
 
 if [ "$(gem search -i librarian-puppet)" = "false" ]; then
   echo 'installing librarian dependencies...'
+  gem install puppet --no-rdoc --no-ri
   gem install librarian-puppet --no-rdoc --no-ri
   cd $PUPPET_DIR && librarian-puppet install --clean
 else

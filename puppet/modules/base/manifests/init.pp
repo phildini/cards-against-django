@@ -3,8 +3,6 @@ class base {
     always_apt_update => true,
   }
 
-  apt::ppa { 'ppa:nginx/stable': }
-
   file {
     '/home/vagrant/.bashrc':
       owner => 'vagrant',
