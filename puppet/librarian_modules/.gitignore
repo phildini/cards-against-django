@@ -1,0 +1,6 @@
+.librarian
+.tmp
+Puppetfile
+Puppetfile.lock
+modules/*
+!modules/README
