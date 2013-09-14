@@ -264,17 +264,14 @@ class GameView(GameViewMixin, FormView):
             winner = form.cleaned_data['card_selection']
             log.logger.debug(winner)
             winner = winner[0]  # for some reason we have a list
-            winner_name = winner
-            for submission in self.game.gamedata['submissions']:
-                saved_submission = StandardSubmission.objects.create(
-                    game=self.game,
-                    blackcard = BlackCard.objects.get(
-                        id=self.game.gamedata['current_black_card']
-                    ),
-                    winner = self.game.gamedata['submissions'][submission] == self.game.gamedata['submissions'][winner]
-                )
-                for white_card in self.game.gamedata['submissions'][submission]:
-                    saved_submission.submissions.add(WhiteCard.objects.get(id=white_card))
+            winner_name = winner 
+
+            winning_submission = StandardSubmission.objects.filter(
+                game=self.game,
+                submissions__in=self.game.gamedata['submissions'][winner]
+            )[0]
+            winning_submission.winner = True
+            winning_submission.save()
             self.game.start_new_round(self.player_name, winner_name, winner)
         else:
             submitted = form.cleaned_data['card_selection']

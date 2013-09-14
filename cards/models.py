@@ -162,6 +162,13 @@ class Game(TimeStampedModel):
                 for player_name in self.gamedata['submissions']:
                     white_card_list = self.gamedata['submissions'][player_name]
                     tmp_text = temp_black_card.replace_blanks(white_card_list)
+                    submission = StandardSubmission.objects.create(
+                        blackcard=BlackCard.objects.get(id=black_card_id),
+                        game=self,
+                        complete_submission=tmp_text,
+                    )
+                    for card in white_card_list:
+                        submission.submissions.add(WhiteCard.objects.get(id=card))
                     filled_in_texts.append((player_name, tmp_text))
                 random.shuffle(filled_in_texts)
                 self.gamedata[
@@ -501,14 +508,13 @@ class StandardSubmission(TimeStampedModel):
     blackcard = models.ForeignKey(BlackCard, null=True)
     submissions = models.ManyToManyField(WhiteCard, null=True)
     winner = models.BooleanField(default=False)
+    complete_submission = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.blackcard.short_str
 
     def export_for_display(self):
         return {
-            'filled_in': self.blackcard.replace_blanks(
-                [whitecard.id for whitecard in self.submissions.all()]
-            ),
+            'filled_in': self.complete_submission,
             'winner': 'Winner' if self.winner else '',
         }
