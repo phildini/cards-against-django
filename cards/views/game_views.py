@@ -453,8 +453,3 @@ class GameJoinView(GameViewMixin, FormView):
         session_details['name'] = player_name
         self.request.session['session_details'] = session_details
         return super(GameJoinView, self).form_valid(form)
-
-
-def debug_deactivate_old_games(request):
-    Game.deactivate_old_games()
-    return redirect('/')  # DEBUG just so it doesn't error out

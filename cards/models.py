@@ -129,57 +129,6 @@ class Game(TimeStampedModel):
                 self.save()
                 return True
 
-    @classmethod
-    def deactivate_old_games(cls, older_than=None):
-        """`older_than` datetime to compare against, if not specified now - 2
-        hours is used."""
-        now = datetime.datetime.now()
-        older_than = older_than or (now - DEFAULT_GAME_TIMEOUT)
-
-        """NOTE for update below Django appears to have a bug with sqlite3,
-        it generates bad SQL with the wrong string concat operator, e.g.:
-
-        cls.objects.filter(is_active=True, modified__lte=older_than).update(
-            is_active=False, name='TIMEDOUT(' + str(now) + ') - ' + F('name'))
-
-            UPDATE "cards_game"
-            SET
-                "is_active" = 0,
-                "name" = (('DONE ' + "cards_game"."modified") + ' - ') + "cards_game"."name"
-            WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
-
-        wrong query uses "+" when it should use "||"
-
-            UPDATE "cards_game"
-            SET
-                "is_active" = 0,
-                "name" = (('DONE ' || "cards_game"."modified") || ' - ') || "cards_game"."name"
-            WHERE ("cards_game"."is_active" = 1 AND "cards_game"."modified" <= '2013-04-18 23:32:48.338546' );
-
-        NOTE can not use django cursor with bind params using normal expected qmark style
-        """
-
-        # Horrible no-bind parms SQL
-        # this is sqlite3 syntax (e.g '||' is string concat)
-        # using ints for bool, and string reprs for timestamps
-        sql = """UPDATE "cards_game"
-            SET
-                "is_active" = ?,
-                "name" = 'TIMEDOUT(' || ? || ')- ' || "cards_game"."name"
-            WHERE "cards_game"."is_active" = ? AND "cards_game"."modified" <= ?;"""
-        sql = """UPDATE "cards_game"
-            SET
-                "is_active" = ?,
-                "name" = ? || "cards_game"."name"
-            WHERE "cards_game"."is_active" = ? AND "cards_game"."modified" <= ?;"""
-        sql = sql.replace('?', '%r')
-        sql = sql % (0, 'TIMEDOUT(%s)- ' % now, 1, str(now))
-        django.db.transaction.commit_manually()
-        c = connection.cursor()  # Django Model Database Cursor
-        c.execute(sql)
-        c.close()
-        django.db.transaction.commit_unless_managed()
-
     def submit_white_cards(self, player_id, white_card_list):
         """player_id is currently name, the index into submissions
         white_card_list - list of white card ids TODO sanity checks player has

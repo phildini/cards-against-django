@@ -12,7 +12,6 @@ from django.views.generic.base import RedirectView
 
 from cards.views.game_views import (
     LobbyView,
-    debug_deactivate_old_games,
 )
 
 from cards.views.card_views import SubmitCardView
