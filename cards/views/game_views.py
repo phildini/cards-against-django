@@ -8,6 +8,7 @@ import redis
 
 from django.http import Http404, HttpResponse
 from django.utils.safestring import mark_safe
+from django.utils.html import strip_tags
 from django.views.generic import FormView
 from django.views.generic.base import View
 from django.core.urlresolvers import reverse
@@ -33,6 +34,8 @@ from cards.models import (
 )
 
 import cards.log as log
+
+TWITTER_SUBMISSION_LENGTH = 120
 
 def push_notification(message='hello'):
 
@@ -241,9 +244,17 @@ class GameView(GameViewMixin, FormView):
                 player_submission = self.game.gamedata[
                     'submissions'].get(self.player_name)
                 if player_submission:
-                    context['filled_in_question'] = black_card.replace_blanks(
+                    submission = black_card.replace_blanks(
                         player_submission
                     )
+                    context['filled_in_question'] = submission
+                    twitter_submission = strip_tags(submission)
+                    if len(twitter_submission) > TWITTER_SUBMISSION_LENGTH:
+                        context['twitter_submission'] = twitter_submission[:TWITTER_SUBMISSION_LENGTH] + '...'
+                    elif len(twitter_submission) < 93:
+                        context['twitter_submission'] = twitter_submission + " http://thisisnotthatgame.com"
+                    else:
+                        context['twitter_submission'] = twitter_submission
 
         # at this point if player_name is None, they are an observer
         # otherwise a (supposedly) active player
