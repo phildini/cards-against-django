@@ -1,5 +1,5 @@
 # Basic libraries
-Django==1.5.1
+Django==1.5.4
 Unipath==0.2.1
 django-model-utils==1.2.0
 wsgiref==0.1.2
