@@ -35,7 +35,7 @@ from cards.models import (
 
 import cards.log as log
 
-TWITTER_SUBMISSION_LENGTH = 120
+TWITTER_SUBMISSION_LENGTH = 93
 
 def push_notification(message='hello'):
 
@@ -207,6 +207,7 @@ class GameView(GameViewMixin, FormView):
         black_card_id = self.game.gamedata['current_black_card']
         black_card = BlackCard.objects.get(id=black_card_id)
 
+        context['tintg_server'] = settings.TINTG_SERVER
         context['show_form'] = self.can_show_form()
         context['game'] = self.game
         context['black_card'] = black_card.text.replace(
@@ -251,8 +252,6 @@ class GameView(GameViewMixin, FormView):
                     twitter_submission = strip_tags(submission)
                     if len(twitter_submission) > TWITTER_SUBMISSION_LENGTH:
                         context['twitter_submission'] = twitter_submission[:TWITTER_SUBMISSION_LENGTH] + '...'
-                    elif len(twitter_submission) < 93:
-                        context['twitter_submission'] = twitter_submission + " http://thisisnotthatgame.com"
                     else:
                         context['twitter_submission'] = twitter_submission
 

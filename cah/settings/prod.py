@@ -11,6 +11,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['.thisisnotthatgame.com','.herokuapp.com', 'localhost', '127.0.0.1']
 
+TINTG_SERVER = 'http://thisisnotthatgame.com'
+
 STATIC_URL = 'http://philipjohnjames.com/applesanon/static/'
 
 TEMPLATE_DIRS = (

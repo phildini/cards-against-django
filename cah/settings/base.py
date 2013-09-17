@@ -39,6 +39,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+TINTG_SERVER = "http://localhost:8000"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.

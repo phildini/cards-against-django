@@ -27,7 +27,7 @@
     <div class="page-header">
             <h2>
                 {% if filled_in_question %}
-                    {{filled_in_question|safe}} <a href="https://twitter.com/share?count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="{{ twitter_submission }}"></a>
+                    {{filled_in_question|safe}} <a href="https://twitter.com/share?url={{ tintg_server }}&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="{{ twitter_submission }}"></a>
                 {% else %}
                     {{black_card|safe}}
                 {% endif %}
