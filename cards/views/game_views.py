@@ -74,13 +74,24 @@ class GameViewMixin(object):
         if self.request.user.is_authenticated():
             player_name = self.request.user.username
 
+        session_details = self.request.session.get('session_details')
+
         if not player_name:
             # Assume AnonymousUser
-            session_details = self.request.session.get('session_details')
             if session_details:
                 player_name = session_details.get('name')
             else:
                 player_name = None  # observer
+
+        # HOLY HELL THIS IS UGLY
+        # But it fixes a bug.
+        if player_name and session_details:
+            if player_name != session_details.get('name'):
+                if self.game.gamedata['players'].get(session_details.get('name')):
+                    self.game.gamedata['players'][player_name] = self.game.gamedata['players'][session_details.get('name')]
+                    self.game.del_player(session_details.get('name'))
+                    if self.game.gamedata['card_czar'] == session_details.get('name'):
+                        self.game.gamedata['card_czar'] = player_name
 
         # XXX check_game_status shouldn't be necessary, refactor it out
         # somehow!
@@ -194,6 +205,7 @@ class GameView(GameViewMixin, FormView):
             return redirect(reverse('lobby-view'))
 
         self.player_name = self.get_player_name()
+        session_details = self.request.session.get('session_details')
 
         card_czar_name = self.game.gamedata['card_czar']
         self.is_card_czar = self.player_name == card_czar_name
