@@ -52,11 +52,6 @@ DATABASES = {
     }
 }
 
-REDIS_HOST = get_env_variable("REDIS_HOST")
-REDIS_PORT = int(get_env_variable("REDIS_PORT"))
-
-SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.

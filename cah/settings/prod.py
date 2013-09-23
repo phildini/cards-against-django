@@ -6,6 +6,11 @@ TEMPLATE_DEBUG = DEBUG
 
 DATABASES['default'] = dj_database_url.config()
 
+REDIS_HOST = get_env_variable("REDIS_HOST")
+REDIS_PORT = int(get_env_variable("REDIS_PORT"))
+
+SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
+
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

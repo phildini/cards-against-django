@@ -21,6 +21,11 @@ DATABASES = {
         }
 }
 
+REDIS_HOST = get_env_variable("REDIS_HOST")
+REDIS_PORT = int(get_env_variable("REDIS_PORT"))
+
+SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
+
 #INSTALLED_APPS += ('debug_toolbar', )
 INTERNAL_IPS = ('127.0.0.1',)
 # MIDDLEWARE_CLASSES += \
