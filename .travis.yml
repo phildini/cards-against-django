@@ -4,6 +4,7 @@ notifications:
 language: python
 python: 
 - "2.7"
+install: "pip install -r requirements/local.txt"
 env:
 - CAH_KEY="shhthisisasecret"
 script: "python manage.py test cards --settings=cah.settings.test"
