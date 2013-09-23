@@ -2,13 +2,6 @@ notifications:
   email: 
   - pjj@philipjohnjames.com
 language: python
-deploy: 
-  api_key: 
-    secure: KZoFzs2mMO18aPBLJch7PdGVoTYOxSmXAhrd8SFWNaqVosVGuF6qVymDFXAVW85JaGY9hXofyF+6yx3P35nH35OggcMXr/f4Rkf8JdfWMtfazbqgCsqE3SyNYMerV/6qhYZafnUqFWSgOSnQBQcaxKImdcx5v6Bog/1BARNoyT4=
-  provider: heroku
-  "on": 
-    repo: phildini/cards-against-django
-  app: tintg-stage
 python: 
 - "2.7"
-script: "exit 0"
+script: "python manage.py test cards --settings=cah.settings.local"

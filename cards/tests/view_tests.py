@@ -10,8 +10,10 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from cards.models import Game
-from cards.views import avatar_url
+from cards.models import (
+    Game,
+    avatar_url,
+)
 
 
 class SimpleTest(TestCase):
