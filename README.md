@@ -1,7 +1,8 @@
+[![Build Status](https://travis-ci.org/phildini/cards-against-django.png?branch=master)](https://travis-ci.org/phildini/cards-against-django)
+
 cards-against-django
 ====================
 
-[![Build Status](https://travis-ci.org/phildini/cards-against-django.png?branch=master)](https://travis-ci.org/phildini/cards-against-django)
 CAH done as a Django web app.
 
 
