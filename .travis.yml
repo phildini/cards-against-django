@@ -4,8 +4,4 @@ notifications:
 language: python
 python: 
 - "2.7"
-env:
-- REDIS_HOST='http://example.com'
-- REDIS_PORT='9000'
-- SOCKETIO_URL='http://example.com'
-script: "python manage.py test cards --settings=cah.settings.local"
+script: "python manage.py test cards --settings=cah.settings.test"
