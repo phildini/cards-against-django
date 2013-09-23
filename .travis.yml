@@ -4,4 +4,6 @@ notifications:
 language: python
 python: 
 - "2.7"
+env:
+- CAH_KEY="shhthisisasecret"
 script: "python manage.py test cards --settings=cah.settings.test"
