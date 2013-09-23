@@ -59,7 +59,7 @@ class GameError(BaseGameException):
 class Game(TimeStampedModel):
 
     name = models.CharField(
-        max_length=140, unique=True)  # could use pk, but we can use id.
+        max_length=140, unique=True)
     game_state = models.CharField(max_length=140)
     """game states;
         submission - waiting for white cards

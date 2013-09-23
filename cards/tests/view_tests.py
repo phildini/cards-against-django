@@ -8,12 +8,16 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
-
+from django.core.urlresolvers import reverse
+from django.test.client import RequestFactory
 from django.test import TestCase
+
+from cards.views.game_views import LobbyView
 from cards.models import (
     Game,
     avatar_url,
 )
+from cards import factories
 
 
 class SimpleTest(TestCase):
@@ -24,18 +28,25 @@ class SimpleTest(TestCase):
 
 
 class LobbyViewTests(TestCase):
-    def test_game_list(self):
-        game_1 = Game.objects.create(name='Test')
-        resp = self.client.get('/')
-        self.assertEqual(resp.status_code, 200)
-        self.assertTrue('joinable_game_list' in resp.context)
-        self.assertEqual(resp.context['joinable_game_list'][0][1], 'Test')
 
-class GameViewTests(TestCase):
     def setUp(self):
-        game = Game.objects.create(name="Test")
-        game.gamedata = game.create_game()
-        game.add_player('Philip', avatar_url('Philip'))
-        game.save()
-        self.game = game
+        self.request_factory = RequestFactory()
+        self.request = self.request_factory.get(reverse('lobby-view'))
 
+    def test_basic_response(self):
+        response = LobbyView.as_view()(self.request)
+        self.assertEqual(response.status_code, 200)
+
+    def test_game_list(self):
+        game = factories.GameFactory.create(name='Test', is_active=True)
+        request = self.request_factory.get(reverse('lobby-view'))
+        response = LobbyView.as_view()(request)
+        self.assertTrue('joinable_game_list' in response.context_data)
+        self.assertEqual(response.context_data['joinable_game_list'][0][1], 'Test')
+
+    def test_private_game_not_shown(self):
+        game = factories.GameFactory.create(name='Private Test', is_active=True)
+        request = self.request_factory.get(reverse('lobby-view'))
+        response = LobbyView.as_view()(request)
+        self.assertTrue('joinable_game_list' in response.context_data)
+        self.assertEqual(list(response.context_data['joinable_game_list']), [])
