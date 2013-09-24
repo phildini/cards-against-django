@@ -12,7 +12,10 @@ from django.core.urlresolvers import reverse
 from django.test.client import RequestFactory
 from django.test import TestCase
 
-from cards.views.game_views import LobbyView
+from cards.views.game_views import (
+    LobbyView,
+    GameView,
+)
 from cards.models import (
     Game,
     avatar_url,
@@ -30,7 +33,10 @@ class SimpleTest(TestCase):
 class LobbyViewTests(TestCase):
 
     def setUp(self):
-        self.game = factories.GameFactory.create(name='Test', is_active=True)
+        self.game = factories.GameFactory.create(
+            name='Test',
+            is_active=True
+        )
         self.request_factory = RequestFactory()
         self.request = self.request_factory.get(reverse('lobby-view'))
 
@@ -59,3 +65,21 @@ class LobbyViewTests(TestCase):
         response = LobbyView.as_view()(request)
         self.assertTrue('joinable_game_list' in response.context_data)
         self.assertEqual(list(response.context_data['joinable_game_list']), [])
+
+
+class GameViewTests(TestCase):
+
+    def setUp(self):
+        self.game = factories.GameFactory.create(
+            name='Test',
+            is_active='True'
+        )
+        self.request_factory = RequestFactory()
+        self.request = self.request_factory.get(
+            reverse('game-view', args=(self.game.id,))
+        )
+
+    def test_get_game(self):
+        game = GameView().get_game(self.game.id)
+        self.assertEqual(game, self.game)
+
