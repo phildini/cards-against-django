@@ -19,6 +19,8 @@ from cards.views.game_views import (
 from cards.models import (
     Game,
     avatar_url,
+    GAMESTATE_SUBMISSION,
+    GAMESTATE_SELECTION,
 )
 from cards import factories
 
@@ -82,4 +84,12 @@ class GameViewTests(TestCase):
     def test_get_game(self):
         game = GameView().get_game(self.game.id)
         self.assertEqual(game, self.game)
+
+    def test_can_show_form_is_czar_selection_state(self):
+        game_view = GameView()
+        game_view.player_name = True
+        game_view.is_card_czar = True
+        self.game.game_state = GAMESTATE_SELECTION
+        game_view.game = self.game
+        self.assertTrue(game_view.can_show_form())
 
