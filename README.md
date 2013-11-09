@@ -5,6 +5,16 @@ cards-against-django
 
 CAH done as a Django web app.
 
+Are you looking for a game that promotes team work, where there are no losers? [This Is Not That Game](http://www.ThisIsNotThatGame.com/).
+
+Are you looking for a game to play with your family that is suitable for young children? [This Is Not That Game](http://www.ThisIsNotThatGame.com/).
+
+Looking for a game to play with Grandma? [This Is Not That Game](http://www.ThisIsNotThatGame.com/).
+
+Perhaps you are looking for a game to play at Church? [This Is Not That Game](http://www.ThisIsNotThatGame.com/).
+
+Do you have a sick and twisted sense of humor (and know how to use a web browser)? You may be the perfect player for [This Is Not That Game](http://www.ThisIsNotThatGame.com/).
+
 
 Vagrant
 =======
