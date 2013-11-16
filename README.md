@@ -28,9 +28,11 @@ Install [VirtualBox](https://www.virtualbox.org/)
     $ vagrant ssh
 
 The first time you log in, the database must be initialized:
+
     $ syncdb
 
 Start the app, from the Vagrant shell:
+
     $ rs
 
 Share and enjoy!
