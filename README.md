@@ -21,17 +21,17 @@ Vagrant
 
 Install [VirtualBox](https://www.virtualbox.org/)
 
-$ gem install vagrant
+    $ gem install vagrant
 
-$ vagrant up
+    $ vagrant up
 
-$ vagrant ssh
+    $ vagrant ssh
 
 The first time you log in, the database must be initialized:
-$ syncdb
+    $ syncdb
 
 Start the app, from the Vagrant shell:
-$ rs
+    $ rs
 
 Share and enjoy!
 
