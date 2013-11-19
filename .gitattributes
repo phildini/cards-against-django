@@ -1,0 +1,3 @@
+# Ensure bash profiles are Unix style, always.
+# needed for bashrc (etc.) files when hosting under Windows with Vagrant
+bash* text eol=lf
