@@ -15,6 +15,7 @@
     <form role="form" action="/" method="post">
         {% csrf_token %}
         {% for field in form %}
+            {{ field.errors }}
             {{field}}
         {% endfor %}
     <input type="submit" class="btn btn-success" value="Create a new game" />
