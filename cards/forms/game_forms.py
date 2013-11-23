@@ -10,6 +10,7 @@ from django.db.models import Q
 from django import forms
 from django.forms.widgets import (
     RadioSelect,
+    HiddenInput,
 )
 from django.core.exceptions import ValidationError
 from django.core.cache import cache  # this maybe a bad idea
@@ -75,12 +76,14 @@ class LobbyForm(forms.Form):
         required=True
     )
     # XXX: We should feature-flag this code when we get feature flags working.
-    # card_set = forms.ModelMultipleChoiceField(
-    #     queryset=CardSet.objects.all().order_by('-name')
-    # )
+    card_set = forms.ModelMultipleChoiceField(
+                queryset=CardSet.objects.all().order_by('-name'),
+                required=False
+            )
 
     def __init__(self, *args, **kwargs):
         self.game_list = kwargs.pop('game_list', [])
+        self.user = kwargs.pop('user', None)
 
         super(LobbyForm, self).__init__(*args, **kwargs)
 
@@ -90,6 +93,12 @@ class LobbyForm(forms.Form):
             self.fields['new_game'].initial = random.choice(
                 ['cat', 'dog', 'bird']
             )  # DEBUG
+
+        # XXX: We should feature-flag this code when we get feature flags working.
+        if not self.user.is_staff:
+            # XXX: We should feature-flag this code when we get feature flags working.
+            # this is not very clever :-(
+            self.fields['card_set'].widget = HiddenInput()
 
     def clean_new_game(self):
         new_game = self.cleaned_data.get('new_game')

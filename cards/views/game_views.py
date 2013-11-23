@@ -137,6 +137,7 @@ class LobbyView(FormView):
         kwargs = super(LobbyView, self).get_form_kwargs()
         if self.game_list:
             kwargs['game_list'] = [name for _, name in self.game_list]
+        kwargs['user'] = self.request.user
         return kwargs
 
     def form_valid(self, form):
@@ -159,9 +160,16 @@ class LobbyView(FormView):
             if not existing_game:
                 # really a new game
                 tmp_game = Game(name=form.cleaned_data['new_game'])
-                new_game = tmp_game.create_game(
-                    ['v1.0', 'v1.2', 'v1.3', 'v1.4']
-                )
+                # XXX: We should feature-flag this code when we get feature flags working.
+                if self.request.user.is_staff:
+                    card_set = form.cleaned_data['card_set']
+                else:
+                    card_set = []
+                if not card_set:
+                    # Are not staff or are staff and didn't select cardset(s)
+                    # Either way they get default
+                    card_set = ['v1.0', 'v1.2', 'v1.3', 'v1.4']
+                new_game = tmp_game.create_game(card_set)
                 tmp_game.gamedata = new_game
                 tmp_game.save()
                 self.game = tmp_game
