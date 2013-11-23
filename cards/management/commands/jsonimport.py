@@ -40,6 +40,10 @@ from cards.models import BlackCard, WhiteCard, CardSet
 
 @transaction.commit_on_success
 def dict2db(d, verbosity=1):
+    """Import complete card sets.
+    Does not allow using existing cards, cardset needs to include the card
+    definitions for all cards it uses."""
+
     for cardset_name in d:
         b_count = w_count = 0
         cs = d[cardset_name]
@@ -83,7 +87,7 @@ def dict2db(d, verbosity=1):
 
 class Command(BaseCommand):
     args = 'json_filename'
-    help = 'Import card sets'
+    help = dict2db.__doc__
 
     def handle(self, *args, **options):
         filename = args[0]  # TODO error handling?
