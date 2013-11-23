@@ -39,35 +39,46 @@ from cards.models import BlackCard, WhiteCard, CardSet
 
 
 @transaction.commit_on_success
-def dict2db(d):
+def dict2db(d, verbosity=1):
     for cardset_name in d:
+        b_count = w_count = 0
         cs = d[cardset_name]
         description = cs.get('description')
         # TODO allow watermark to be shared for a cardset
         cardset = CardSet(name=cardset_name, description=description)
-        print cardset
-        print cardset.description
+        if verbosity > 1:
+            print cardset
+            print cardset.description
         cardset.save()
-        print cardset
+        if verbosity > 1:
+            print cardset
         blackcards = cs.get('blackcards')
         if blackcards:
             for entry in blackcards:
-                print entry
+                if verbosity > 1:
+                    print entry
                 # TODO support tuples/lists as well as dict
                 black_card = BlackCard(**entry)
-                print repr(black_card)
+                if verbosity > 1:
+                    print repr(black_card)
                 black_card.save()
                 cardset.black_card.add(black_card)
-        print '-' * 65
+                b_count += 1
+        if verbosity > 1:
+            print '-' * 65
 
         whitecards = cs.get('whitecards')
         if whitecards:
             for entry in whitecards:
-                print entry
+                if verbosity > 1:
+                    print entry
                 white_card = WhiteCard(**entry)
-                print repr(white_card)
+                if verbosity > 1:
+                    print repr(white_card)
                 white_card.save()
                 cardset.white_card.add(white_card)
+                w_count += 1
+        print cardset_name, b_count + w_count, '=', b_count, '+', w_count
 
 
 class Command(BaseCommand):
@@ -83,4 +94,4 @@ class Command(BaseCommand):
         f.close()
 
         d = load_json(raw_str)
-        dict2db(d)
+        dict2db(d, int(options['verbosity']))
