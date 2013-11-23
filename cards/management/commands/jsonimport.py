@@ -1,4 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
+
 
 # json support, TODO consider http://pypi.python.org/pypi/omnijson
 try:
@@ -36,7 +38,7 @@ else:
 from cards.models import BlackCard, WhiteCard, CardSet
 
 
-
+@transaction.commit_on_success
 def dict2db(d):
     for cardset_name in d:
         cs = d[cardset_name]
@@ -66,7 +68,6 @@ def dict2db(d):
                 print repr(white_card)
                 white_card.save()
                 cardset.white_card.add(white_card)
-
 
 
 class Command(BaseCommand):
