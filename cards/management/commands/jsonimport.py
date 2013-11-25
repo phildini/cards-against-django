@@ -46,6 +46,8 @@ def dict2db(d, verbosity=1):
 
     for cardset_name in d:
         b_count = w_count = 0
+        if verbosity >= 1:
+            print 'cardset_name: %s' % cardset_name
         cs = d[cardset_name]
         description = cs.get('description')
         # TODO allow watermark to be shared for a cardset
@@ -82,7 +84,8 @@ def dict2db(d, verbosity=1):
                 white_card.save()
                 cardset.white_card.add(white_card)
                 w_count += 1
-        print cardset_name, b_count + w_count, '=', b_count, '+', w_count
+        if verbosity >= 1:
+            print cardset_name, b_count + w_count, '=', b_count, '+', w_count
 
 
 class Command(BaseCommand):
@@ -91,11 +94,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         filename = args[0]  # TODO error handling?
-        self.stdout.write('Using %r' % filename)
-        print ('%r' % filename)
+        verbosity = int(options['verbosity'])
+        if verbosity >= 1:
+            self.stdout.write('Using %r' % filename)
         f = open(filename, 'rb')
         raw_str = f.read()
         f.close()
 
         d = load_json(raw_str)
-        dict2db(d, int(options['verbosity']))
+        dict2db(d, verbosity)
