@@ -1,3 +1,4 @@
+import sys
 from optparse import make_option
 
 # json support, TODO consider http://pypi.python.org/pypi/omnijson
@@ -28,14 +29,26 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        filename = args[0]  # TODO error handling?
+        try:
+            filename = args[0]
+            if filename == '-':
+                filename = None
+        except IndexError:
+            filename = None
         verbosity = int(options['verbosity'])
         replace_existing = options['replace_existing']
         if verbosity >= 1:
-            self.stdout.write('Using %r' % filename)
-        f = open(filename, 'rb')
+            if filename:
+                self.stdout.write('Using %r' % filename)
+            else:
+                self.stdout.write('Using STDIN')
+        if filename:
+            f = open(filename, 'rb')
+        else:
+            f = sys.stdin
         raw_str = f.read()
-        f.close()
+        if filename:
+            f.close()
 
         d = load_json(raw_str)
         results = dict2db(d, verbosity, replace_existing)
