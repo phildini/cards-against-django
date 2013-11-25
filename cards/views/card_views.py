@@ -46,7 +46,6 @@ class SubmitCardView(CreateView):
 @staff_member_required
 def import_cards(request):
     raw_json_str = ''
-    raw_json_str = request.GET['json']
     raw_json_str = request.GET.get('json')
     if raw_json_str is None:
         return HttpResponse('Looks like we need a form')
