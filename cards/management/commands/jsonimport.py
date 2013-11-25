@@ -45,6 +45,7 @@ def dict2db(d, verbosity=1, replace_existing=False):
     Does not allow using existing cards, cardset needs to include the card
     definitions for all cards it uses."""
 
+    result = []
     for cardset_name in d:
         b_count = w_count = 0
         if verbosity >= 1:
@@ -93,9 +94,8 @@ def dict2db(d, verbosity=1, replace_existing=False):
                 white_card.save()
                 cardset.white_card.add(white_card)
                 w_count += 1
-        if verbosity >= 1:
-            print cardset_name, b_count + w_count, '=', b_count, '+', w_count
-
+        result.append((cardset_name, b_count, w_count))
+    return result
 
 class Command(BaseCommand):
     args = 'json_filename'
@@ -120,4 +120,7 @@ class Command(BaseCommand):
         f.close()
 
         d = load_json(raw_str)
-        dict2db(d, verbosity, replace_existing)
+        results = dict2db(d, verbosity, replace_existing)
+        for cardset_name, b_count, w_count in results:
+            if verbosity >= 1:
+                print '%s total# %d question# %d answer# %d' % (cardset_name, b_count + w_count, b_count, w_count)
