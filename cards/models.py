@@ -10,8 +10,7 @@ import urllib
 from django.db import models
 from django.db.models import F
 from django.db.models.signals import pre_save
-import django.db.transaction
-from django.db import connection
+from django.db import connection, transaction
 from django.contrib.auth.models import User
 
 from jsonfield import JSONField
@@ -502,6 +501,7 @@ class SubmittedCard(models.Model):
     def __str__(self):
         return "%s (Type %s)" % (self.text, self.card_type)
 
+
 class StandardSubmission(TimeStampedModel):
 
     game = models.ForeignKey(Game, null=True)
@@ -518,3 +518,62 @@ class StandardSubmission(TimeStampedModel):
             'filled_in': self.complete_submission,
             'winner': 'Winner' if self.winner else '',
         }
+
+
+@transaction.commit_on_success
+def dict2db(d, verbosity=1, replace_existing=False):
+    """Import complete card sets.
+    Does not allow using existing cards, cardset needs to include the card
+    definitions for all cards it uses."""
+
+    result = []
+    for cardset_name in d:
+        b_count = w_count = 0
+        if verbosity >= 1:
+            print 'cardset_name: %s' % cardset_name
+        cs = d[cardset_name]
+        description = cs.get('description')
+        # TODO allow watermark to be shared for a cardset
+        if replace_existing:
+            try:
+                cardset = CardSet.objects.get(name=cardset_name)
+                if verbosity >= 1:
+                    print 'deleting cardset: %s' % cardset_name
+                cardset.delete()
+            except CardSet.DoesNotExist:
+                pass
+        cardset = CardSet(name=cardset_name, description=description)
+        if verbosity > 1:
+            print cardset
+            print cardset.description
+        cardset.save()
+        if verbosity > 1:
+            print cardset
+        blackcards = cs.get('blackcards')
+        if blackcards:
+            for entry in blackcards:
+                if verbosity > 1:
+                    print entry
+                # TODO support tuples/lists as well as dict
+                black_card = BlackCard(**entry)
+                if verbosity > 1:
+                    print repr(black_card)
+                black_card.save()
+                cardset.black_card.add(black_card)
+                b_count += 1
+        if verbosity > 1:
+            print '-' * 65
+
+        whitecards = cs.get('whitecards')
+        if whitecards:
+            for entry in whitecards:
+                if verbosity > 1:
+                    print entry
+                white_card = WhiteCard(**entry)
+                if verbosity > 1:
+                    print repr(white_card)
+                white_card.save()
+                cardset.white_card.add(white_card)
+                w_count += 1
+        result.append((cardset_name, b_count, w_count))
+    return result
