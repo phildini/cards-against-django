@@ -1,4 +1,8 @@
+import json
+
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.views.generic import (
@@ -7,9 +11,12 @@ from django.views.generic import (
 
 from cards.models import (
     SubmittedCard,
+    dict2db,
 )
 
 from cards.forms.card_forms import SubmittedCardForm
+
+load_json = json.loads
 
 
 class SubmitCardView(CreateView):
@@ -34,3 +41,20 @@ class SubmitCardView(CreateView):
         context = super(SubmitCardView, self).get_context_data(**kwargs)
         context['action'] = reverse("submit-card")
         return context
+
+
+@staff_member_required
+def import_cards(request):
+    raw_json_str = ''
+    raw_json_str = request.GET['json']
+    raw_json_str = request.GET.get('json')
+    if raw_json_str is None:
+        return HttpResponse('Looks like we need a form')
+    try:
+        d = load_json(raw_json_str)
+    except ValueError, info:
+        return HttpResponse(repr(info))
+    verbosity = 0
+    replace_existing = False
+    results = dict2db(d, verbosity, replace_existing)
+    return HttpResponse(repr(results))

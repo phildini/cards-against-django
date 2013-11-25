@@ -14,7 +14,7 @@ from cards.views.game_views import (
     LobbyView,
 )
 
-from cards.views.card_views import SubmitCardView
+from cards.views.card_views import SubmitCardView, import_cards
 
 # from cards.views.cards
 
@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
     url(r'^game/', include('cards.urls')),
+    url(r'^import', import_cards, name="import-cards"),
     url(r'^submit', SubmitCardView.as_view(), name="submit-card"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
