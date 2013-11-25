@@ -1,3 +1,4 @@
+from optparse import make_option
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
@@ -39,7 +40,7 @@ from cards.models import BlackCard, WhiteCard, CardSet
 
 
 @transaction.commit_on_success
-def dict2db(d, verbosity=1):
+def dict2db(d, verbosity=1, replace_existing=False):
     """Import complete card sets.
     Does not allow using existing cards, cardset needs to include the card
     definitions for all cards it uses."""
@@ -51,6 +52,14 @@ def dict2db(d, verbosity=1):
         cs = d[cardset_name]
         description = cs.get('description')
         # TODO allow watermark to be shared for a cardset
+        if replace_existing:
+            try:
+                cardset = CardSet.objects.get(name=cardset_name)
+                if verbosity >= 1:
+                    print 'deleting cardset: %s' % cardset_name
+                cardset.delete()
+            except CardSet.DoesNotExist:
+                pass
         cardset = CardSet(name=cardset_name, description=description)
         if verbosity > 1:
             print cardset
@@ -91,10 +100,19 @@ def dict2db(d, verbosity=1):
 class Command(BaseCommand):
     args = 'json_filename'
     help = dict2db.__doc__
+    option_list = BaseCommand.option_list + (
+        make_option('--replace_existing',
+            action='store_true',
+            dest='replace_existing',
+            default=False,
+            help='Allow replacement (delete then add) of existing cardsets'),
+        )
+
 
     def handle(self, *args, **options):
         filename = args[0]  # TODO error handling?
         verbosity = int(options['verbosity'])
+        replace_existing = options['replace_existing']
         if verbosity >= 1:
             self.stdout.write('Using %r' % filename)
         f = open(filename, 'rb')
@@ -102,4 +120,4 @@ class Command(BaseCommand):
         f.close()
 
         d = load_json(raw_str)
-        dict2db(d, verbosity)
+        dict2db(d, verbosity, replace_existing)
