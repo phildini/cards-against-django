@@ -40,8 +40,9 @@ TWITTER_SUBMISSION_LENGTH = 93
 def push_notification(message='hello'):
 
     pool = redis.ConnectionPool(
-        host=settings.REDIS_HOST,
-        port=settings.REDIS_PORT,
+        host=settings.REDIS_URL.hostname,
+        port=settings.REDIS_URL.port,
+        password=settings.REDIS_URL.password,
     )
     r = redis.Redis(connection_pool=pool)
     r.publish('games', message)

@@ -1,13 +1,13 @@
 from .base import *
 import dj_database_url
+import urlparse
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DATABASES['default'] = dj_database_url.config()
 
-REDIS_HOST = get_env_variable("REDIS_HOST")
-REDIS_PORT = int(get_env_variable("REDIS_PORT"))
+REDIS_URL = urlparse.urlparse(get_env_variable('REDISCLOUD_URL'))
 
 SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
 
