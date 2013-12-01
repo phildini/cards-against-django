@@ -3,6 +3,8 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
+import urlparse
+
 from .base import *
 
 DEBUG = True
@@ -21,9 +23,7 @@ DATABASES = {
         }
 }
 
-REDIS_HOST = get_env_variable("REDIS_HOST")
-REDIS_PORT = int(get_env_variable("REDIS_PORT"))
-
+REDIS_URL = urlparse.urlparse(get_env_variable('REDISCLOUD_URL'))
 SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
 
 #INSTALLED_APPS += ('debug_toolbar', )
