@@ -524,7 +524,11 @@ class StandardSubmission(TimeStampedModel):
 def dict2db(d, verbosity=1, replace_existing=False):
     """Import complete card sets.
     Does not allow using existing cards, cardset needs to include the card
-    definitions for all cards it uses."""
+    definitions for all cards it uses.
+    
+    replace_existing parameter will DELETE the cardset AND the black and
+    white cards it uses, if those cards are used in other cardsets they
+    will be broken!"""
 
     result = []
     for cardset_name in d:
@@ -538,7 +542,9 @@ def dict2db(d, verbosity=1, replace_existing=False):
             try:
                 cardset = CardSet.objects.get(name=cardset_name)
                 if verbosity >= 1:
-                    print 'deleting cardset: %s' % cardset_name
+                    print 'deleting cards and cardset: %s' % cardset_name
+                cardset.black_card.all().delete()
+                cardset.white_card.all().delete()
                 cardset.delete()
             except CardSet.DoesNotExist:
                 pass
