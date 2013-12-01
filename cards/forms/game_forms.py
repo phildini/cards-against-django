@@ -15,7 +15,7 @@ from django.forms.widgets import (
 from django.core.exceptions import ValidationError
 from django.core.cache import cache  # this maybe a bad idea
 
-from cards.models import CardSet
+from cards.models import CardSet, DEFAULT_HAND_SIZE
 import cards.log as log
 
 
@@ -80,6 +80,11 @@ class LobbyForm(forms.Form):
                 queryset=CardSet.objects.all().order_by('-name'),
                 required=False
             )
+    initial_hand_size = forms.IntegerField(
+                initial = DEFAULT_HAND_SIZE,
+                label="Starting hand size",
+                required=False
+            )
 
     def __init__(self, *args, **kwargs):
         self.game_list = kwargs.pop('game_list', [])
@@ -98,6 +103,7 @@ class LobbyForm(forms.Form):
         if not self.user.is_staff:
             # XXX: We should feature-flag this code when we get feature flags working.
             # this is not very clever :-(
+            self.fields['initial_hand_size'].widget = HiddenInput()
             self.fields['card_set'].widget = HiddenInput()
 
     def clean_new_game(self):

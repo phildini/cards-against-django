@@ -26,6 +26,7 @@ ONE_HOUR = datetime.timedelta(seconds=60 * 60 * 1)
 
 DEFAULT_GAME_TIMEOUT = 2 * ONE_HOUR
 
+DEFAULT_HAND_SIZE = 10
 
 def gravatar_url(email, size=50, default='monsterid'):
     """Generate url for Gravatar image email - email address default =
@@ -84,6 +85,7 @@ class Game(TimeStampedModel):
             player2 {...},
             ...
         },
+        initial_hand_size = int,
         current_black_card = None|int,
         submissions = {dict of player name: [list of card numbers]}
         round: int,  # round number where round 1 is the first round
@@ -249,7 +251,7 @@ class Game(TimeStampedModel):
             for x in white_submissions[tmp_name]:
                 self.gamedata['used_white_deck'].append(x)
 
-    def create_game(self, card_sets=None):
+    def create_game(self, card_sets=None, initial_hand_size=DEFAULT_HAND_SIZE):
         """Where `card_sets` is an iterable collection of CardSet."""
 
         log.logger.debug('New Game called')
@@ -290,6 +292,7 @@ class Game(TimeStampedModel):
         # cache.
         return {
             'players': {},
+            'initial_hand_size': initial_hand_size,
             'current_black_card': None,  # get a new one my shuffled_black.pop()
             'submissions': {},
             'round': 0,
@@ -322,7 +325,7 @@ class Game(TimeStampedModel):
             player = self.create_player(
                 player_name, player_image_url=player_image_url)
             player['hand'] = [
-                self.deal_white_card() for x in xrange(10)
+                self.deal_white_card() for x in xrange(self.gamedata['initial_hand_size'])
             ]
             self.gamedata['players'][player_name] = player
             # TODO if no czar make this player the card czar?

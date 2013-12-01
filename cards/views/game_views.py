@@ -31,6 +31,7 @@ from cards.models import (
     GAMESTATE_SELECTION,
     avatar_url,
     StandardSubmission,
+    DEFAULT_HAND_SIZE,
 )
 
 import cards.log as log
@@ -163,14 +164,16 @@ class LobbyView(FormView):
                 tmp_game = Game(name=form.cleaned_data['new_game'])
                 # XXX: We should feature-flag this code when we get feature flags working.
                 if self.request.user.is_staff:
+                    initial_hand_size = form.cleaned_data['initial_hand_size']
                     card_set = form.cleaned_data['card_set']
                 else:
                     card_set = []
+                    initial_hand_size = DEFAULT_HAND_SIZE
                 if not card_set:
                     # Are not staff or are staff and didn't select cardset(s)
                     # Either way they get default
                     card_set = ['v1.0', 'v1.2', 'v1.3', 'v1.4']
-                new_game = tmp_game.create_game(card_set)
+                new_game = tmp_game.create_game(card_set, initial_hand_size=initial_hand_size)
                 tmp_game.gamedata = new_game
                 tmp_game.save()
                 self.game = tmp_game
