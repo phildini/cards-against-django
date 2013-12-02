@@ -331,7 +331,7 @@ class GameView(GameViewMixin, FormView):
                 temp_black_card = BlackCard.objects.get(id=black_card_id)
                 kwargs['blanks'] = temp_black_card.pick
                 cards = [
-                    (card_id, mark_safe(card_text))
+                    (card_id, mark_safe(card_text.capitalize()))
                     for card_id, card_text
                     in WhiteCard.objects.filter(
                         id__in=self.game.gamedata[
