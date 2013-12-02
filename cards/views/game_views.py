@@ -255,16 +255,6 @@ class GameView(GameViewMixin, FormView):
         ]
 
         if self.player_name:
-            white_cards_text_list = [
-                mark_safe(card_text)
-                for card_text,
-                in WhiteCard.objects.filter(
-                    id__in=self.game.gamedata[
-                        'players'][self.player_name]['hand']
-                ).values_list('text')
-            ]
-            context['white_cards_text_list'] = white_cards_text_list
-
             if self.game.gamedata['submissions'] and not self.is_card_czar:
                 player_submission = self.game.gamedata[
                     'submissions'].get(self.player_name)
