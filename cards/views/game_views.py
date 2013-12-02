@@ -290,9 +290,11 @@ class GameView(GameViewMixin, FormView):
             winner = winner[0]  # for some reason we have a list
             winner_name = winner 
 
+            # NOTE StandardSubmission could benefit from a round number to ensure unique key, this would remove the need for the [0] offset/slice
             winning_submission = StandardSubmission.objects.filter(
                 game=self.game,
-                submissions__in=self.game.gamedata['submissions'][winner]
+                blackcard=self.game.gamedata['current_black_card'],
+                submissions__in=self.game.gamedata['submissions'][winner]  # TODO equality instead of in?; submissions=self.game.gamedata['submissions'][winner][0]
             )[0]
             winning_submission.winner = True
             winning_submission.save()
