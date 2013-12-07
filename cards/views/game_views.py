@@ -3,9 +3,11 @@
 #
 
 import json
+import urllib
 
 import redis
 
+from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponse
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
@@ -67,6 +69,18 @@ class GameViewMixin(object):
                 self._games[game_id] = Game.objects.get(pk=game_id)
             except Game.DoesNotExist:
                 raise Http404
+
+        expected_password = self._games[game_id].gamedata.get('password')
+        if expected_password:
+            session_details = self.request.session.get('session_details', {})
+            session_password = self.request.GET.get('password')
+            if session_password:
+                session_details['password'] = session_password
+                self.request.session['session_details'] = session_details
+            session_password = session_details.get('password')
+            if expected_password != session_password:
+                # TODO show a form
+                raise PermissionDenied()
 
         return self._games[game_id]
 
@@ -166,16 +180,20 @@ class LobbyView(FormView):
                 if self.request.user.is_staff:
                     initial_hand_size = form.cleaned_data['initial_hand_size']
                     card_set = form.cleaned_data['card_set']
+                    password = form.cleaned_data['password'] or None
                 else:
                     card_set = []
                     initial_hand_size = DEFAULT_HAND_SIZE
+                    password = None
                 if not card_set:
                     # Are not staff or are staff and didn't select cardset(s)
                     # Either way they get default
                     card_set = ['v1.0', 'v1.2', 'v1.3', 'v1.4']
-                new_game = tmp_game.create_game(card_set, initial_hand_size=initial_hand_size)
+                new_game = tmp_game.create_game(card_set, initial_hand_size=initial_hand_size, password=password)
                 tmp_game.gamedata = new_game
                 tmp_game.save()
+                if password:
+                    session_details['password'] = password
                 self.game = tmp_game
 
         if existing_game:
@@ -200,6 +218,23 @@ class LobbyView(FormView):
             'session_details'] = session_details  # this is probably kinda dumb.... Previously we used seperate session items for game and user name and that maybe what we need to go back to
 
         return super(LobbyView, self).form_valid(form)
+
+
+
+def gen_qr_url(url, image_size=547):
+    """Construct QR generator google URL with max size, from:
+
+    https://chart.googleapis.com/chart? - All infographic URLs start with this root URL, followed by one or more parameter/value pairs. The required and optional parameters are specific to each image; read your image documentation.
+        chs - Size of the image in pixels, in the format <width>x<height>
+        cht - Type of image: 'qr' means QR code.
+        chl - The data to encode. Must be URL-encoded.
+
+    See https://google-developers.appspot.com/chart/infographics/docs/overview
+    """
+    url = urllib.quote(url)
+    image_size_str = '%dx%d' % (image_size, image_size)
+    result = 'https://chart.googleapis.com/chart?cht=qr&chs=%s&chl=%s' % (image_size_str, url)
+    return result
 
 
 class GameView(GameViewMixin, FormView):
@@ -248,6 +283,12 @@ class GameView(GameViewMixin, FormView):
             ]
 
         context['socketio'] = settings.SOCKETIO_URL
+        tmp_pass = self.game.gamedata.get('password')
+        game_url = reverse('game-view', kwargs={'pk': self.game.id})
+        game_url = self.request.build_absolute_uri(game_url)
+        if tmp_pass:
+            game_url = game_url + '?password=%s' % tmp_pass  # possible injection attack, can reverse() be used?
+        context['qr_code_url'] = gen_qr_url(game_url)
 
         submissions = StandardSubmission.objects.filter(game=self.game).order_by('-id')[:10]
         context['submissions'] = [
@@ -426,7 +467,7 @@ class GameJoinView(GameViewMixin, FormView):
     We want to support real user accounts but also anonymous, which is why
     this is a debug routine for now.
 
-    TODO password protection check on join.
+    TODO password protection check on join. Should this be part of GameViewMixin, a new game mixin, or GameView?
     TODO create a game (with no players, redirect to join game for game creator).
 
     """

@@ -85,6 +85,11 @@ class LobbyForm(forms.Form):
                 label="Starting hand size",
                 required=False
             )
+    password = forms.CharField(
+        max_length=140,
+        label="Optional password protection",
+        required=False
+    )
 
     def __init__(self, *args, **kwargs):
         self.game_list = kwargs.pop('game_list', [])
@@ -105,6 +110,7 @@ class LobbyForm(forms.Form):
             # this is not very clever :-(
             self.fields['initial_hand_size'].widget = HiddenInput()
             self.fields['card_set'].widget = HiddenInput()
+            self.fields['password'].widget = HiddenInput()
 
     def clean_new_game(self):
         new_game = self.cleaned_data.get('new_game')
@@ -138,7 +144,7 @@ class JoinForm(forms.Form):
 
         player_counter = cache.get('player_counter', 0) + 1
         cache.set('player_counter', player_counter)
-        self.fields['player_name'].initial = 'Auto Player %d' % player_counter
+        self.fields['player_name'].initial = 'Auto Player %d' % player_counter  # TODO remove this? Debug tool
 
     def clean_player_name(self):
         # check to make sure we don't have an existing registered username/email
