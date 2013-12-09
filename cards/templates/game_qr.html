@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <p>
+        Friends can scan this to view or join.
+    </p>
+    <img src="{{qr_code_url}}" alt="QR Code for joining this game"/>
+    <p>
+        Copy/pastable URL
+        <a href="{{game_url}}">{{game_url}}</a>
+    </p>
+
+    <p>
+        Need a QR code scanner?
+        <ul>
+            <li>
+                <a href="https://play.google.com/store/apps/details?id=com.google.zxing.client.android" class="btn btn-sm btn-primary">Android</a>
+            </li>
+            <li>
+                <a href="https://itunes.apple.com/sg/app/qr-reader-for-iphone/id368494609" class="btn btn-sm btn-primary">iOS</a>
+            </li>
+        <ul>
+    </p>
+{% endblock %}

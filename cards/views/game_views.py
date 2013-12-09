@@ -11,7 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponse
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 from django.views.generic.base import View
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
@@ -220,7 +220,6 @@ class LobbyView(FormView):
         return super(LobbyView, self).form_valid(form)
 
 
-
 def gen_qr_url(url, image_size=547):
     """Construct QR generator google URL with max size, from:
 
@@ -283,12 +282,7 @@ class GameView(GameViewMixin, FormView):
             ]
 
         context['socketio'] = settings.SOCKETIO_URL
-        tmp_pass = self.game.gamedata.get('password')
-        game_url = reverse('game-view', kwargs={'pk': self.game.id})
-        game_url = self.request.build_absolute_uri(game_url)
-        if tmp_pass:
-            game_url = game_url + '?password=%s' % tmp_pass  # possible injection attack, can reverse() be used?
-        context['qr_code_url'] = gen_qr_url(game_url)
+        context['qr_code_url'] = reverse('game-qrcode-view', kwargs={'pk': self.game.id})
 
         submissions = StandardSubmission.objects.filter(game=self.game).order_by('-id')[:10]
         context['submissions'] = [
@@ -517,3 +511,27 @@ class GameJoinView(GameViewMixin, FormView):
         session_details['name'] = player_name
         self.request.session['session_details'] = session_details
         return super(GameJoinView, self).form_valid(form)
+
+
+class GameQRCodeView(GameViewMixin, TemplateView):
+
+    """Display a page with a QR code for quick/easy game joining
+    """
+
+    template_name = 'game_qr.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(GameQRCodeView, self).get_context_data(*args, **kwargs)
+
+        self.game = self.get_game(kwargs['pk'])  # is this the right place for this?
+
+        context['testy'] = 'pants'
+        tmp_pass = self.game.gamedata.get('password')
+        game_url = reverse('game-view', kwargs={'pk': self.game.id})
+        game_url = self.request.build_absolute_uri(game_url)
+        if tmp_pass:
+            game_url = game_url + '?password=%s' % tmp_pass  # possible html escape issue?
+        context['game_url'] = game_url
+        context['qr_code_url'] = gen_qr_url(game_url)
+
+        return context
