@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>Are you sure?</h1>
+    <h1>Are you sure you want "{{exit_player_name}}" to exit?</h1>
 
     <form method="POST">
         {% csrf_token %}
