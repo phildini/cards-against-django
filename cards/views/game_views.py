@@ -388,7 +388,14 @@ class GameExitView(GameViewMixin, FormView):
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
         self.game = self.get_game(kwargs['pk'])
-        self.player_name = self.get_player_name()
+
+        this_user = self.get_player_name()
+        self.player_name = this_user
+        if request.user.is_staff:  # TODO or if player "owns" game
+            # Only staff can kick other users
+            #player_name = kwargs.get('player_name')  # FIXME setup url dispatcher
+            player_name = request.GET.get('player_name')  # e.g. /game/24/exit?player_name=JohnSmith
+            self.player_name = player_name or this_user
 
         if self.player_name:
             if self.player_name in self.game.gamedata['players']:
@@ -402,6 +409,7 @@ class GameExitView(GameViewMixin, FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(GameExitView, self).get_context_data(*args, **kwargs)
         context['show_form'] = True
+        context['exit_player_name'] = self.player_name
         return context
 
     def get_success_url(self):
