@@ -16,7 +16,6 @@
         {% csrf_token %}
         {% for field in form %}
             {{ field.errors }}
-            {{ field.label }}
             {{field}}
         {% endfor %}
     <input type="submit" class="btn btn-success" value="Create a new game" />
