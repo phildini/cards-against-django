@@ -5,13 +5,16 @@
     {% endfor %}
     <div class="row">
     {% for field in form %}
-        {% if form.fields|length == 2 %}
-            <div class="field col-md-6 col-sm-12">
-        {% elif form.fields|length == 3 %}
-            <div class="field col-md-4 col-sm-12">
-        {% else %}
-            <div class="field">
+            <div class="field 
+        {% if forloop.counter|divisibleby:"2" %}
+            field-alt-color
         {% endif %}
+        {% if form.fields|length == 2 %}
+            col-md-6
+        {% elif form.fields|length == 3 %}
+            col-md-4            
+        {% endif %}
+            ">
             {% if is_card_czar %}
                 Select the winner:
             {% endif %}

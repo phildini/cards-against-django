@@ -114,13 +114,14 @@
     {% if player_name %}
     <a class="visible-sm visible-xs btn btn-sm btn-danger" href="exit">Exit game</a>
     {% endif %}
+    <div>
+    <a class="btn btn-sm btn-primary" href="{{qr_code_url}}">QR code</a>
+    </div>
 
 </div>
 
 <div class="data" data-game_state="{{ game.game_state }}" data-round="{{ game.gamedata.round }}"></div>
-<div>
-    <a class="btn btn-sm btn-primary" href="{{qr_code_url}}">QR code</a>
-</div>
+
 {% endblock %}
 
 {% block scripts %}

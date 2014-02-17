@@ -17,6 +17,14 @@
     margin-top: 5px;
 }
 
+.field {
+    padding-bottom: 15px;
+}
+
+.field-alt-color > ul > li {
+    background-color: lightgrey
+}
+
 .errorlist {
     background-color: #eee;
     color: red;
@@ -33,7 +41,7 @@
 }
 
 body { 
-    padding-top: 100px;
+    padding-top: 70px;
 }
 
 .inline-info {
@@ -45,10 +53,6 @@ body {
     .navbar .brand {
         padding-left: 25px;
         padding-right: 25px;
-    }
-
-    body { 
-    padding-top: 100px;
     }
 }
 
