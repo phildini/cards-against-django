@@ -94,7 +94,8 @@ class Game(TimeStampedModel):
         white_deck = [ of card white numbers ],
         used_black_deck = [ of card black numbers ],
         used_white_deck = [ of card white numbers ],
-        filled_in_texts = None | [ (player name, filled in black card text), ]
+        filled_in_texts = None | [ (player name, filled in black card text), ],
+        password = None|string,  # TODO NOTE probably want a bool/str in model too/instead, for reporting (e.g. listing active games and whether they have a password)
     }
 
     """
@@ -251,7 +252,7 @@ class Game(TimeStampedModel):
             for x in white_submissions[tmp_name]:
                 self.gamedata['used_white_deck'].append(x)
 
-    def create_game(self, card_sets=None, initial_hand_size=DEFAULT_HAND_SIZE):
+    def create_game(self, card_sets=None, initial_hand_size=DEFAULT_HAND_SIZE, password=None):
         """Where `card_sets` is an iterable collection of CardSet."""
 
         log.logger.debug('New Game called')
@@ -304,6 +305,7 @@ class Game(TimeStampedModel):
             'mode': 'submitting',
             'filled_in_texts': None,
             'prev_filled_in_question': None,
+            'password': password,
         }
 
     # FIXME should be using a player object

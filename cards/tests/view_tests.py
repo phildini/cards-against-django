@@ -37,7 +37,8 @@ class LobbyViewTests(TestCase):
     def setUp(self):
         self.game = factories.GameFactory.create(
             name='Test',
-            is_active=True
+            is_active=True,
+            gamedata={}
         )
         self.request_factory = RequestFactory()
         self.request = self.request_factory.get(reverse('lobby-view'))
@@ -72,7 +73,8 @@ class GameViewTests(TestCase):
     def setUp(self):
         self.game = factories.GameFactory.create(
             name='Test',
-            is_active='True'
+            is_active='True',
+            gamedata={}
         )
         self.request_factory = RequestFactory()
         self.request = self.request_factory.get(
