@@ -126,17 +126,18 @@ class LobbyView(FormView):
     template_name = 'lobby.html'
     form_class = LobbyForm
 
-    def __init__(self, *args, **kwargs):
+    def dispatch(self, *args, **kwargs):
         game_list = Game.objects.filter(is_active=True)
 
         for game in game_list:
             game.deactivate_old_game()
 
-        self.game_list = Game.objects.filter(
-            is_active=True
-        ).exclude(
-            name__startswith='Private'
-        ).values_list('id', 'name')
+        if not self.request.user.is_staff:
+            game_list.exclude(name__startswith='Private')
+
+        self.game_list = game_list.values_list('id', 'name')
+
+        return super(LobbyView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
         return reverse('game-join-view', kwargs={'pk': self.game.id})
