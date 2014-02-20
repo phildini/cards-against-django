@@ -16,9 +16,9 @@
         {{ form.errors }}
         {{ form.non_field_errors }}
         <div>
-        {{ form.new_game.errors }}
-        <span class="label label-default"><label for="id_new_game">Game Name</label></span>
-        {{ form.new_game }}
+        {{ form.game_name.errors }}
+        <span class="label label-default"><label for="id_game_name">Game Name</label></span>
+        {{ form.game_name }}
         </div>
         {% if user.is_authenticated %}
         {{ form.initial_hand_size.errors }}

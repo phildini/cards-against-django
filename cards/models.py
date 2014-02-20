@@ -442,6 +442,9 @@ class BlackCard(models.Model):
             card_text = card_text.replace(BLANK_MARKER, white_text, 1)
         return card_text
 
+    def display_text(self):
+        return self.text.replace(BLANK_MARKER, '______')
+
     def __unicode__(self):
         return self.text
 

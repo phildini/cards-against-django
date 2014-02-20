@@ -70,7 +70,7 @@ class LobbyForm(forms.Form):
 
     """The form for creating or joining a game from the lobby view."""
 
-    new_game = forms.CharField(
+    game_name = forms.CharField(
         max_length=140,
         label="Create a new game or join one below",
         required=True
@@ -98,9 +98,9 @@ class LobbyForm(forms.Form):
         super(LobbyForm, self).__init__(*args, **kwargs)
 
         if self.game_list:
-            self.fields['new_game'].initial = None
+            self.fields['game_name'].initial = None
         else:
-            self.fields['new_game'].initial = random.choice(
+            self.fields['game_name'].initial = random.choice(
                 ['cat', 'dog', 'bird']
             )  # DEBUG
 
@@ -112,10 +112,10 @@ class LobbyForm(forms.Form):
             self.fields['card_set'].widget = HiddenInput()
             self.fields['password'].widget = HiddenInput()
 
-    def clean_new_game(self):
-        new_game = self.cleaned_data.get('new_game')
+    def clean_game_name(self):
+        game_name = self.cleaned_data.get('game_name')
 
-        if new_game in self.game_list:
+        if game_name in self.game_list:
             raise ValidationError(
                 "You can't create a game with the same name as "
                 "an existing one. Them's the rules."
@@ -123,7 +123,7 @@ class LobbyForm(forms.Form):
         # card_set = self.cleaned_data.get('card_set')  # check for non-empty
         # cardsets?
 
-        return new_game
+        return game_name
 
 
 class JoinForm(forms.Form):

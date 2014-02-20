@@ -145,8 +145,6 @@ class LobbyView(FormView):
         context = super(LobbyView, self).get_context_data(*args, **kwargs)
         context['joinable_game_list'] = self.game_list  # TODO rename?
 
-        context['show_form'] = True
-
         return context
 
     def get_form_kwargs(self):
@@ -164,7 +162,7 @@ class LobbyView(FormView):
 
         existing_game = True
         # Set the game properties in the database and session
-        game_name = form.cleaned_data['new_game']
+        game_name = form.cleaned_data['game_name']
         if game_name:
             # Attempting to create a new game
             try:
@@ -175,7 +173,7 @@ class LobbyView(FormView):
 
             if not existing_game:
                 # really a new game
-                tmp_game = Game(name=form.cleaned_data['new_game'])
+                tmp_game = Game(name=form.cleaned_data['game_name'])
                 # XXX: We should feature-flag this code when we get feature flags working.
                 if self.request.user.is_staff:
                     initial_hand_size = form.cleaned_data['initial_hand_size']
@@ -189,8 +187,7 @@ class LobbyView(FormView):
                     # Are not staff or are staff and didn't select cardset(s)
                     # Either way they get default
                     card_set = ['v1.0', 'v1.2', 'v1.3', 'v1.4']
-                new_game = tmp_game.create_game(card_set, initial_hand_size=initial_hand_size, password=password)
-                tmp_game.gamedata = new_game
+                tmp_game.gamedata = tmp_game.create_game(card_set, initial_hand_size=initial_hand_size, password=password)
                 tmp_game.save()
                 if password:
                     session_details['password'] = password
@@ -262,14 +259,14 @@ class GameView(GameViewMixin, FormView):
         context = super(GameView, self).get_context_data(*args, **kwargs)
 
         log.logger.debug('game %r', self.game.gamedata['players'])
-        black_card_id = self.game.gamedata['current_black_card']
-        black_card = BlackCard.objects.get(id=black_card_id)
+        black_card = BlackCard.objects.get(
+            id=self.game.gamedata['current_black_card'],
+        )
 
         context['tintg_server'] = settings.TINTG_SERVER
         context['show_form'] = self.can_show_form()
         context['game'] = self.game
-        context['black_card'] = black_card.text.replace(
-            BLANK_MARKER, '______')  # FIXME roll this into BlackCard.replace_blanks()
+        context['black_card'] = black_card.display_text()
 
         card_czar_name = self.game.gamedata['card_czar']
         context['card_czar_name'] = card_czar_name
