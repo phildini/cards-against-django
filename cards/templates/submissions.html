@@ -5,6 +5,7 @@
         <div class="panel-body">
             {{ submission.filled_in | safe }}
             <span class="label label-success">{{ submission.winner }}</span>
+            <a href="https://twitter.com/share?url={{ tintg_server }}&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="{{ submission.twitter_text }}"></a>
         </div>
     </div>
 {% endfor %}

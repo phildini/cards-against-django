@@ -12,6 +12,8 @@ from django.db.models import F
 from django.db.models.signals import pre_save
 from django.db import connection, transaction
 from django.contrib.auth.models import User
+from django.utils.html import strip_tags
+
 
 from jsonfield import JSONField
 from model_utils.models import TimeStampedModel
@@ -21,6 +23,7 @@ from django.utils.safestring import mark_safe
 
 import log
 
+TWITTER_SUBMISSION_LENGTH = 93
 
 ONE_HOUR = datetime.timedelta(seconds=60 * 60 * 1)
 
@@ -522,7 +525,14 @@ class StandardSubmission(TimeStampedModel):
         return {
             'filled_in': self.complete_submission,
             'winner': 'Winner' if self.winner else '',
+            'twitter_text': self.twitter_text,
         }
+
+    def twitter_text(self):
+        text = strip_tags(self.complete_submission)
+        if len(text) > TWITTER_SUBMISSION_LENGTH:
+            text = text[:TWITTER_SUBMISSION_LENGTH] + '...'
+        return text
 
 
 @transaction.commit_on_success
