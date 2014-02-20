@@ -2,22 +2,33 @@
 
 {% block content %}
 <div class="container">
-    <div class="jumbotron">
+    <div class="well">
         <h3>Welcome to that game. You know the one I mean.</h3>
         <p> You know. That game where everybody chooses a card to match the card in the middle. That one.</p>
-        
     </div>
 
     {% if game_in_progress %}
     </p>It looks like you're already part of {{ game_in_progress }}</p>
     {% endif %}
     <p class="text-muted"> Put 'Private' as the first part of the game name to not have it show up on the list.</p>
-    <form role="form" action="/" method="post">
+    <form role="form" action="" method="POST">
         {% csrf_token %}
-        {% for field in form %}
-            {{ field.errors }}
-            {{field}}
-        {% endfor %}
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+        <div>
+        {{ form.new_game.errors }}
+        <span class="label label-default"><label for="id_new_game">Game Name</label></span>
+        {{ form.new_game }}
+        </div>
+        {% if user.is_authenticated %}
+        {{ form.initial_hand_size.errors }}
+        <span class="label label-default"><label for="id_initial_hand_size">Hand size</label></span>
+        {{ form.initial_hand_size }}
+        {{ form.password.errors }}
+        <span class="label label-default"><label for="id_password">Password</label></span>
+        {{ form.password }}
+        {% endif %}
+
     <input type="submit" class="btn btn-success" value="Create a new game" />
     <br/>
     <br/>

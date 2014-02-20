@@ -1,25 +1,6 @@
 {% extends "main.html" %}
 
 {% load url from future %}
-{% load socialaccount %}
-
-{% block login %}
-<nav class="visible-lg visible-md navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-header">
-        <a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a><span class="text-primary"> so friends can join this game!</span>
-        {% if user.is_authenticated %}
-        <span class="text-success">Welcome, {{ user.email }}</span>
-        <a class="btn btn-sm navbar-btn" href="{% url 'account_logout' %}">Sign Out</a>
-        {% else %}
-            <a class="btn btn-primary btn-sm navbar-btn " href="{% provider_login_url 'facebook' method='oauth2' next='/'%}">Login with Facebook</a>
-            <a class="btn btn-primary btn-sm navbar-btn " href="{% provider_login_url 'twitter' method='oauth2' next='/'%}">Login with Twitter</a>
-        {% endif %}
-        {% if player_name %}
-        <a class="btn btn-sm btn-danger" href="exit">Exit game</a>
-        {% endif %}
-    </div>
-</nav>
-{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -48,6 +29,7 @@
                 {% endif %}
             {% endif %}
             </p>
+            <p class="text-muted"><small><a href="https://twitter.com/share?url=http://thisisnotthatgame.com/{{ game.id }}/join&count=none&via=notthatgame" class="twitter-share-button" data-lang="en" data-text="I'm definitely not playing that game. Come join me.">Tweet</a> so friends can join this game!</small></p>
     </div>
 
     {% if show_form %}
@@ -111,11 +93,10 @@
     <!--  TODO previous winning cards (filled in) -->
     {% endcomment %}
 
-    {% if player_name %}
-    <a class="visible-sm visible-xs btn btn-sm btn-danger" href="exit">Exit game</a>
-    {% endif %}
-    <div>
     <a class="btn btn-sm btn-primary" href="{{qr_code_url}}">QR code</a>
+    {% if player_name %}
+        <a class="btn btn-sm btn-danger" href="exit">Exit game</a>
+    {% endif %}
     </div>
 
 </div>

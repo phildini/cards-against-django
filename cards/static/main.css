@@ -41,7 +41,11 @@
 }
 
 body { 
-    padding-top: 70px;
+    padding-top: 20px;
+}
+
+.row-padded {
+    margin: 10px 0;
 }
 
 .inline-info {
