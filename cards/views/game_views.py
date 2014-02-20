@@ -131,9 +131,8 @@ class LobbyView(FormView):
 
         for game in game_list:
             game.deactivate_old_game()
-
         if not self.request.user.is_staff:
-            game_list.exclude(name__startswith='Private')
+            game_list = game_list.exclude(name__startswith='Private')
 
         self.game_list = game_list.values_list('id', 'name')
 
