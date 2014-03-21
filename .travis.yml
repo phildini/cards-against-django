@@ -1,4 +1,5 @@
-notifications: 
+notifications:
+  email: false
   slack: inkpebble:E4ZgOJD6kJyY8JTl0Rrnyhno
 language: python
 python: 
@@ -10,7 +11,7 @@ script: "python manage.py test cards --settings=cah.settings.test"
 deploy:
   provider: heroku
   api_key:
-    secure: KPdJ2AcC5JZYhV+RnqUIzUhYtAoD2I5oXAfm3j0dzifPCzkgF1eBevjVGDfwwj80f6qWSsxBgMeniMsUqWEUTkryM99ifsHS5LlXCzZ9nWkjK1gfFW+3h+X6bog2RkAOp60sdsZmyIiasfFiVo72vuIlDG3km3WO53jMWnrnpD8=
+    secure: "iAblHa9zb7mcNqcz/JV1mtzNfreB7fAtf09ML1NEwzjOieJnQGPZU7eB1qwziUllGVCUT9iExXUc9mJJZ0gDRbwK6HZf5MGa9kjeDAzsy15KORvj2tkv9OASCdTYuappOYAw1EVEdAuaNrkKak4STKeWAICdEjiSYiX5/d+3rVg="
   app: tintg-stage
   strategy: git
   on:
