@@ -12,6 +12,7 @@ from django.db.models import F
 from django.db.models.signals import pre_save
 from django.db import connection, transaction
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils.html import strip_tags
 
 
@@ -26,10 +27,14 @@ import log
 TWITTER_SUBMISSION_LENGTH = 93
 
 ONE_HOUR = datetime.timedelta(seconds=60 * 60 * 1)
-
-DEFAULT_GAME_TIMEOUT = 2 * ONE_HOUR
+ONE_MINUTE = datetime.timedelta(seconds=60)
 
 DEFAULT_HAND_SIZE = 10
+
+def default_game_timeout():
+    if settings.DEBUG:
+        return 5 * ONE_MINUTE
+    return 2 * ONE_HOUR
 
 def gravatar_url(email, size=50, default='monsterid'):
     """Generate url for Gravatar image email - email address default =
@@ -125,7 +130,7 @@ class Game(TimeStampedModel):
         """
         if self.is_active:
             now = datetime.datetime.now()
-            older_than = older_than or (now - DEFAULT_GAME_TIMEOUT)
+            older_than = older_than or (now - default_game_timeout())
             if self.modified <= older_than:
                 self.is_active = False
                 # self.name = 'TIMEDOUT %s - %s' % (now, self.name,)  # not

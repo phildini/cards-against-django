@@ -129,8 +129,6 @@ class LobbyView(FormView):
     def dispatch(self, *args, **kwargs):
         game_list = Game.objects.filter(is_active=True)
 
-        for game in game_list:
-            game.deactivate_old_game()
         if not self.request.user.is_staff:
             game_list = game_list.exclude(name__startswith='Private')
 
@@ -240,8 +238,6 @@ class GameView(GameViewMixin, FormView):
     def dispatch(self, request, *args, **kwargs):
         log.logger.debug('%r %r', args, kwargs)
         self.game = self.get_game(kwargs['pk'])
-
-        self.game.deactivate_old_game()
 
         if not self.game.can_be_played():
             return redirect(reverse('lobby-view'))
