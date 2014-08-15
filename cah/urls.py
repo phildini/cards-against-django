@@ -10,6 +10,8 @@ admin.autodiscover()
 
 from django.views.generic.base import RedirectView
 
+from robots_txt.views import RobotsTextView
+
 from cards.views.game_views import (
     LobbyView,
 )
@@ -26,7 +28,7 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
+    url(r'^robots.txt$', RobotsTextView.as_view()),
     url(r'^$', LobbyView.as_view(), name="lobby-view",),
     url(r'^game/', include('cards.urls')),
     url(r'^import', import_cards, name="import-cards"),

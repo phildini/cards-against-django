@@ -157,7 +157,6 @@ class LobbyView(FormView):
     def form_valid(self, form):
         session_details = self.request.session.get(
             'session_details', {})  # FIXME
-        # FIXME if not a dict, make it a dict (upgrade old content)
         log.logger.debug('session_details %r', session_details)
 
         existing_game = True
