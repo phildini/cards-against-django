@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from views.game_views import (
+from .views.game_views import (
     GameView,
     LobbyView,
     GameJoinView,

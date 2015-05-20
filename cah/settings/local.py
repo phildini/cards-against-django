@@ -3,7 +3,10 @@
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
 
-import urlparse
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 from .base import *
 

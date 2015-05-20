@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import sys
 from optparse import make_option
 
@@ -54,4 +56,4 @@ class Command(BaseCommand):
         results = dict2db(d, verbosity, replace_existing)
         for cardset_name, b_count, w_count in results:
             if verbosity >= 1:
-                print '%s total# %d question# %d answer# %d' % (cardset_name, b_count + w_count, b_count, w_count)
+                print('{} total# {} question# {} answer# {}'.format(cardset_name, b_count + w_count, b_count, w_count))

@@ -6,6 +6,8 @@
 Cards Against Humanity(tm).
 """
 
+"""DELIBERATELY NOT MAKING THIS FILE PY3 COMPATIBLE"""
+
 import os
 import sys
 import random

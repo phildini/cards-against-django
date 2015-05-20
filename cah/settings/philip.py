@@ -1,4 +1,7 @@
-import urlparse
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 from .local import *
 
 KEEN_PROJECT_ID = get_env_variable("KEEN_ID")
@@ -8,5 +11,5 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ()
 
-REDIS_URL = urlparse.urlparse(get_env_variable('REDISCLOUD_URL'))
+REDIS_URL = urlparse(get_env_variable('REDISCLOUD_URL'))
 SOCKETIO_URL = 'localhost'

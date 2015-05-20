@@ -1,13 +1,16 @@
 from .base import *
 import dj_database_url
-import urlparse
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DATABASES['default'] = dj_database_url.config()
 
-REDIS_URL = urlparse.urlparse(get_env_variable('REDISCLOUD_URL'))
+REDIS_URL = urlparse(get_env_variable('REDISCLOUD_URL'))
 
 SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
 

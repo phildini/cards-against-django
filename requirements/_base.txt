@@ -2,17 +2,16 @@
 Django==1.8.2
 Unipath==1.1
 django-model-utils==2.2
-wsgiref==0.1.2
 jsonfield==1.0.3
 redis==2.7.6
 djangorestframework==3.1.2
 psycopg2==2.4.6
 django-robots-txt==0.4
+six==1.9.0
 
 # Authentication & Dependencies
 django-allauth==0.19.1
 httplib2==0.8
-oauth2==1.5.211
 oauthlib==0.7.0
 python-openid==2.2.5
 requests==2.7.0

@@ -1,12 +1,17 @@
 # -*- coding: us-ascii -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 #
+from __future__ import print_function
 
 import datetime
 import random
 import hashlib
-import urllib
+try: 
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
 
+from six.moves import xrange
 from django.db import models
 from django.db.models import F
 from django.db.models.signals import pre_save
@@ -22,7 +27,7 @@ from model_utils.models import TimeStampedModel
 # this is so wrong....
 from django.utils.safestring import mark_safe
 
-import log
+from . import log
 
 TWITTER_SUBMISSION_LENGTH = 93
 
@@ -40,12 +45,15 @@ def gravatar_url(email, size=50, default='monsterid'):
     """Generate url for Gravatar image email - email address default =
     default_image_url or default hash type, for more default options see
     http://en.gravatar.com/site/implement/images/"""
-    gravatar_url = 'http://www.gravatar.com/avatar/' + \
-        hashlib.md5(email.lower()).hexdigest() + '?'
+    gravatar_url = '{}{}{}'.format(
+        'http://www.gravatar.com/avatar/',
+        hashlib.md5(email.lower().encode('utf-8')).hexdigest(),
+        '?'
+    )
     if default:
-        gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
+        gravatar_url += urlencode({'d': default, 's': str(size)})
     else:
-        gravatar_url += urllib.urlencode({'s': str(size)})
+        gravatar_url += urlencode({'s': str(size)})
     return gravatar_url
 
 avatar_url = gravatar_url
@@ -372,7 +380,7 @@ class Game(TimeStampedModel):
     def can_be_played(self):
         if (
             self.is_active and
-            self.gamedata['players'] > 1 and 
+            len(self.gamedata['players']) > 0 and 
             not self.gamedata['card_czar'] is u''
             ):
             return True
@@ -557,7 +565,7 @@ def dict2db(d, verbosity=1, replace_existing=False):
     for cardset_name in d:
         b_count = w_count = 0
         if verbosity >= 1:
-            print 'cardset_name: %s' % cardset_name
+            print('cardset_name: {}'.format(cardset_name))
         cs = d[cardset_name]
         description = cs.get('description')
         # TODO allow watermark to be shared for a cardset
@@ -565,7 +573,7 @@ def dict2db(d, verbosity=1, replace_existing=False):
             try:
                 cardset = CardSet.objects.get(name=cardset_name)
                 if verbosity >= 1:
-                    print 'deleting cards and cardset: %s' % cardset_name
+                    print('deleting cards and cardset: {}'.format(cardset_name))
                 cardset.black_card.all().delete()
                 cardset.white_card.all().delete()
                 cardset.delete()
@@ -573,34 +581,34 @@ def dict2db(d, verbosity=1, replace_existing=False):
                 pass
         cardset = CardSet(name=cardset_name, description=description)
         if verbosity > 1:
-            print cardset
-            print cardset.description
+            print(cardset)
+            print(cardset.description)
         cardset.save()
         if verbosity > 1:
-            print cardset
+            print(cardset)
         blackcards = cs.get('blackcards')
         if blackcards:
             for entry in blackcards:
                 if verbosity > 1:
-                    print entry
+                    print(entry)
                 # TODO support tuples/lists as well as dict
                 black_card = BlackCard(**entry)
                 if verbosity > 1:
-                    print repr(black_card)
+                    print(repr(black_card))
                 black_card.save()
                 cardset.black_card.add(black_card)
                 b_count += 1
         if verbosity > 1:
-            print '-' * 65
+            print('-' * 65)
 
         whitecards = cs.get('whitecards')
         if whitecards:
             for entry in whitecards:
                 if verbosity > 1:
-                    print entry
+                    print(entry)
                 white_card = WhiteCard(**entry)
                 if verbosity > 1:
-                    print repr(white_card)
+                    print(repr(white_card))
                 white_card.save()
                 cardset.white_card.add(white_card)
                 w_count += 1

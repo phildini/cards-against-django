@@ -51,7 +51,7 @@ def import_cards(request):
         return HttpResponse('Looks like we need a form')
     try:
         d = load_json(raw_json_str)
-    except ValueError, info:
+    except ValueError as info:
         return HttpResponse(repr(info))
     verbosity = 0
     replace_existing = False
