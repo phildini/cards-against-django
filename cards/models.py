@@ -543,7 +543,7 @@ class StandardSubmission(TimeStampedModel):
         return text
 
 
-@transaction.commit_on_success
+@transaction.atomic
 def dict2db(d, verbosity=1, replace_existing=False):
     """Import complete card sets.
     Does not allow using existing cards, cardset needs to include the card

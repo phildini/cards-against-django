@@ -8,6 +8,7 @@ from cards.models import SubmittedCard
 class SubmittedCardForm(ModelForm):
     class Meta:
         model = SubmittedCard
+        fields = ['submitter', 'card_type', 'text']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')

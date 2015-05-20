@@ -1,5 +1,5 @@
 # Basic libraries
-Django==1.5.4
+Django==1.8.2
 Unipath==0.2.1
 django-model-utils==1.2.0
 wsgiref==0.1.2
@@ -10,7 +10,7 @@ psycopg2==2.4.6
 django-robots-txt==0.4
 
 # Authentication & Dependencies
-django-allauth==0.10.1
+django-allauth==0.19.1
 httplib2==0.8
 oauth2==1.5.211
 oauthlib==0.4.0
