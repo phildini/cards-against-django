@@ -1,11 +1,11 @@
 # Basic libraries
 Django==1.8.2
-Unipath==0.2.1
-django-model-utils==1.2.0
+Unipath==1.1
+django-model-utils==2.2
 wsgiref==0.1.2
-jsonfield==0.9.13
+jsonfield==1.0.3
 redis==2.7.6
-djangorestframework==2.3.7
+djangorestframework==3.1.2
 psycopg2==2.4.6
 django-robots-txt==0.4
 
@@ -13,7 +13,7 @@ django-robots-txt==0.4
 django-allauth==0.19.1
 httplib2==0.8
 oauth2==1.5.211
-oauthlib==0.4.0
+oauthlib==0.7.0
 python-openid==2.2.5
-requests==1.2.0
-requests-oauthlib==0.3.1
+requests==2.7.0
+requests-oauthlib==0.5.0
