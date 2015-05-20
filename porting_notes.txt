@@ -1,0 +1,107 @@
+(cards-against-django)SensitiveDependence:cards-against-django phildini$ CAH_KEY=12345 python manage.py runserver --settings=cah.settings.local
+Traceback (most recent call last):
+  File "manage.py", line 17, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/core/management/__init__.py", line 338, in execute_from_command_line
+    utility.execute()
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/core/management/__init__.py", line 312, in execute
+    django.setup()
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/__init__.py", line 18, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/apps/registry.py", line 85, in populate
+    app_config = AppConfig.create(entry)
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/apps/config.py", line 86, in create
+    module = import_module(entry)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django_nose/__init__.py", line 4, in <module>
+    from django_nose.runner import *
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django_nose/runner.py", line 20, in <module>
+    from django.db.backends.creation import BaseDatabaseCreation
+ImportError: No module named creation
+
+==========================================
+
+(cards-against-django)SensitiveDependence:cards-against-django phildini$ CAH_KEY=12345 python manage.py runserver --settings=cah.settings.local
+Traceback (most recent call last):
+  File "manage.py", line 17, in <module>
+    execute_from_command_line(sys.argv)
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/core/management/__init__.py", line 338, in execute_from_command_line
+    utility.execute()
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/core/management/__init__.py", line 312, in execute
+    django.setup()
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/__init__.py", line 18, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/apps/registry.py", line 108, in populate
+    app_config.import_models(all_models)
+  File "/Users/phildini/Repos/cards-against-django/lib/python2.7/site-packages/django/apps/config.py", line 198, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/phildini/Repos/cards-against-django/cards/models.py", line 546, in <module>
+    @transaction.commit_on_success
+AttributeError: 'module' object has no attribute 'commit_on_success'
+
+=================
+
+(cards-against-django)SensitiveDependence:cards-against-django phildini$ CAH_KEY=12345 python manage.py runserver --settings=cah.settings.local
+Performing system checks...
+
+System check identified some issues:
+
+WARNINGS:
+cards.StandardSubmission.submissions: (fields.W340) null has no effect on ManyToManyField.
+
+System check identified 1 issue (0 silenced).
+There is no South database module 'south.db.sqlite3' for your database. Please either choose a supported database, check for SOUTH_DATABASE_ADAPTER[S] settings, or remove South from INSTALLED_APPS.
+
+===================
+
+(cards-against-django)SensitiveDependence:cards-against-django phildini$ CAH_KEY=12345 python manage.py runserver --settings=cah.settings.local
+Performing system checks...
+
+System check identified some issues:
+
+WARNINGS:
+cards.StandardSubmission.submissions: (fields.W340) null has no effect on ManyToManyField.
+
+System check identified 1 issue (0 silenced).
+
+You have unapplied migrations; your app may not work properly until they are applied.
+Run 'python manage.py migrate' to apply them.
+
+May 16, 2015 - 13:49:21
+Django version 1.8.1, using settings 'cah.settings.local'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+================
+
+(cards-against-django)SensitiveDependence:cards-against-django phildini$ CAH_KEY=12345 python manage.py migrate --fake --settings=cah.settings.local
+System check identified some issues:
+
+WARNINGS:
+cards.StandardSubmission.submissions: (fields.W340) null has no effect on ManyToManyField.
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, twitter, messages, allauth, facebook, django_nose, cards, rest_framework
+  Apply all migrations: account, sessions, admin, sites, auth, contenttypes, socialaccount
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying auth.0001_initial... FAKED
+  Applying account.0001_initial... FAKED
+  Applying account.0002_auto_20150516_1527... FAKED
+  Applying admin.0001_initial... FAKED
+  Applying auth.0002_alter_permission_name_max_length... FAKED
+  Applying auth.0003_alter_user_email_max_length... FAKED
+  Applying auth.0004_alter_user_username_opts... FAKED
+  Applying auth.0005_alter_user_last_login_null... FAKED
+  Applying auth.0006_require_contenttypes_0002... FAKED
+  Applying sessions.0001_initial... FAKED
+  Applying sites.0001_initial... FAKED
+  Applying socialaccount.0001_initial... FAKED
+  Applying socialaccount.0002_auto_20150516_1527... FAKED
+(cards-against-django)SensitiveDependence:cards-against-django phildini$

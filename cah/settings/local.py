@@ -23,8 +23,8 @@ DATABASES = {
         }
 }
 
-REDIS_URL = urlparse.urlparse(get_env_variable('REDISCLOUD_URL'))
-SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
+# REDIS_URL = urlparse.urlparse(get_env_variable('REDISCLOUD_URL'))
+# SOCKETIO_URL = get_env_variable("SOCKETIO_URL")
 
 #INSTALLED_APPS += ('debug_toolbar', )
 INTERNAL_IPS = ('127.0.0.1',)

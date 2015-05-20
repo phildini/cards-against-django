@@ -273,7 +273,7 @@ class GameView(GameViewMixin, FormView):
                 name for name in self.game.gamedata['players'] if name not in self.game.gamedata['submissions'] and name != card_czar_name
             ]
 
-        context['socketio'] = settings.SOCKETIO_URL
+        # context['socketio'] = settings.SOCKETIO_URL
         context['qr_code_url'] = reverse('game-qrcode-view', kwargs={'pk': self.game.id})
 
         submissions = StandardSubmission.objects.filter(game=self.game).order_by('-id')[:10]
@@ -340,7 +340,7 @@ class GameView(GameViewMixin, FormView):
                 )
         self.game.save()
 
-        push_notification(str(self.game.name))
+        # push_notification(str(self.game.name))
         
         return super(GameView, self).form_valid(form)
 
@@ -449,7 +449,7 @@ class GameExitView(GameViewMixin, FormView):
         if really_exit == 'yes':  # FIXME use bool via coerce?
             self.game.del_player(self.player_name)
             self.game.save()
-            push_notification(str(self.game.name))
+            # push_notification(str(self.game.name))
         return super(GameExitView, self).form_valid(form)
 
 
